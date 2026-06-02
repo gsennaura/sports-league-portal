@@ -1,0 +1,20 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #11111b;
+  color: #cdd6f4;
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Pending memberships table ── */
+.pending-col-hide-mobile { }
+@media (max-width: 600px) {
+  .pending-col-hide-mobile { display: none; }
+  .pending-table td, .pending-table th { padding: .45rem .5rem; font-size: .8rem; }
+  .pending-table .action-btn { width: 26px; height: 26px; font-size: .9rem; }
+}

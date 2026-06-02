@@ -1,0 +1,30 @@
+export interface UpcomingMatch {
+  id: string;
+  match_date: string;
+  round_number: number;
+  home_team_id: string;
+  home_team_name: string;
+  home_team_category: string | null;
+  away_team_id: string;
+  away_team_name: string;
+  away_team_category: string | null;
+  home_score: number | null;
+  away_score: number | null;
+  home_penalty_score: number | null;
+  away_penalty_score: number | null;
+  championship_id: string;
+  championship_name: string;
+  championship_year: number;
+  championship_level: string | null;
+  phase_name: string;
+  phase_type: string;
+  division_name: string | null;
+  league_name: string | null;
+  league_short_name: string | null;
+  city_name: string | null;
+  venue_id: string | null;
+  venue_name: string | null;
+  home_club_logo_url: string | null;
+  away_club_logo_url: string | null;
+  status: string;
+}

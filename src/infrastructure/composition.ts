@@ -1,0 +1,164 @@
+import { ApiChampionshipRepository } from "./repositories/ApiChampionshipRepository";
+import { ListChampionships } from "@application/use_cases/ListChampionships";
+import { GetChampionshipDetail } from "@application/use_cases/GetChampionshipDetail";
+import { CreateChampionship } from "@application/use_cases/CreateChampionship";
+import { UpdateChampionshipPodium } from "@application/use_cases/UpdateChampionshipPodium";
+import { LoadPhaseGroups } from "@application/use_cases/LoadPhaseGroups";
+import { GetEditionTopScorers } from "@application/use_cases/GetEditionTopScorers";
+
+import { ApiTeamRepository } from "./repositories/ApiTeamRepository";
+import { ListTeams } from "@application/use_cases/ListTeams";
+import { GetClubTeams } from "@application/use_cases/GetClubTeams";
+import { CreateTeam } from "@application/use_cases/CreateTeam";
+import { UpdateTeam } from "@application/use_cases/UpdateTeam";
+import { DeleteTeam } from "@application/use_cases/DeleteTeam";
+import { GetTeamMatches } from "@application/use_cases/GetTeamMatches";
+import { GetTeamMatchYears } from "@application/use_cases/GetTeamMatchYears";
+import { GetTeamDetail } from "@application/use_cases/GetTeamDetail";
+import { GetTeamAthleteStats } from "@application/use_cases/GetTeamAthleteStats";
+
+import { ApiLeagueRepository } from "./repositories/ApiLeagueRepository";
+import { ListLeagues, GetLeague } from "@application/use_cases/ListLeagues";
+import { CreateLeague } from "@application/use_cases/CreateLeague";
+import { UpdateLeague } from "@application/use_cases/UpdateLeague";
+import { ManageClubLeagueRegistrations } from "@application/use_cases/ManageClubLeagueRegistrations";
+
+import { ApiClubRepository } from "./repositories/ApiClubRepository";
+import { GetClub } from "@application/use_cases/GetClub";
+import { GetClubMatches } from "@application/use_cases/GetClubMatches";
+import { GetClubTitles } from "@application/use_cases/GetClubTitles";
+import { ListClubs } from "@application/use_cases/ListClubs";
+
+import { ApiMatchRepository } from "./repositories/ApiMatchRepository";
+import { GetUpcomingMatches } from "@application/use_cases/GetUpcomingMatches";
+import { GetRecentMatches } from "@application/use_cases/GetRecentMatches";
+import { GetMatchDetail } from "@application/use_cases/GetMatchDetail";
+import { GetHeadToHead } from "@application/use_cases/GetHeadToHead";
+import { UpdateMatchResult } from "@application/use_cases/UpdateMatchResult";
+import { UpdateMatch } from "@application/use_cases/UpdateMatch";
+import { GetLiveWindowMatches } from "@application/use_cases/GetLiveWindowMatches";
+import { AddMatchEvent, AnnulMatchEvent, UpdateMatchEvent } from "@application/use_cases/MatchEvent";
+
+import { ApiVenueRepository } from "./repositories/ApiVenueRepository";
+import { CreateVenue } from "@application/use_cases/CreateVenue";
+import { ListVenues } from "@application/use_cases/ListVenues";
+import { UpdateVenue } from "@application/use_cases/UpdateVenue";
+import { GetVenueMatches } from "@application/use_cases/GetVenueMatches";
+import { CreateClub } from "@application/use_cases/CreateClub";
+import { UpdateClub } from "@application/use_cases/UpdateClub";
+
+import { ApiCityRepository } from "./repositories/ApiCityRepository";
+import { ApiStateRepository } from "./repositories/ApiStateRepository";
+import { CreateCity } from "@application/use_cases/CreateCity";
+import { ListCities } from "@application/use_cases/ListCities";
+import { ListStates } from "@application/use_cases/ListStates";
+
+import { ApiAthleteRepository } from "./repositories/ApiAthleteRepository";
+import { SearchAthletes } from "@application/use_cases/SearchAthletes";
+import { GetRandomAthletes } from "@application/use_cases/GetRandomAthletes";
+import { GetAthleteDetail } from "@application/use_cases/GetAthleteDetail";
+import { GetAthleteStats } from "@application/use_cases/GetAthleteStats";
+import { CreateAthlete } from "@application/use_cases/CreateAthlete";
+import { UpdateAthlete } from "@application/use_cases/UpdateAthlete";
+import { DeleteAthlete } from "@application/use_cases/DeleteAthlete";
+import { BulkImportAthletes } from "@application/use_cases/BulkImportAthletes";
+import { AddAthleteToTeam, RemoveAthleteFromTeam, GetAthleteTeamHistory, GetTeamAthletes } from "@application/use_cases/AthleteTeam";
+import { ApiChampionshipRegistrationRepository } from "./repositories/ApiChampionshipRegistrationRepository";
+import { GetAthleteChampionshipRegistrations, RegisterAthleteChampionship, UpdateChampionshipRegistration, CancelChampionshipRegistration, ListEditionRegistrations, GetEligibleAthletes, CheckAthleteMatchEvents } from "@application/use_cases/ChampionshipRegistration";
+
+import { ApiRefereeRepository } from "./repositories/ApiRefereeRepository";
+import { ListReferees } from "@application/use_cases/ListReferees";
+import { GetRefereeDetail } from "@application/use_cases/GetRefereeDetail";
+import { CreateReferee } from "@application/use_cases/CreateReferee";
+import { UpdateReferee } from "@application/use_cases/UpdateReferee";
+import { DeleteReferee } from "@application/use_cases/DeleteReferee";
+import { GetRefereeMatches } from "@application/use_cases/GetRefereeMatches";
+
+import { API_BASE } from "./apiBase";
+
+const championshipRepository = new ApiChampionshipRepository(API_BASE);
+const teamRepository = new ApiTeamRepository(API_BASE);
+export const leagueRepository = new ApiLeagueRepository(API_BASE);
+export const clubRepository = new ApiClubRepository(API_BASE);
+const matchRepository = new ApiMatchRepository(API_BASE);
+export const venueRepository = new ApiVenueRepository(API_BASE);
+const cityRepository = new ApiCityRepository(API_BASE);
+const stateRepository = new ApiStateRepository(API_BASE);
+
+export const createCity = new CreateCity(cityRepository);
+export const listCities = new ListCities(cityRepository);
+export const listStates = new ListStates(stateRepository);
+
+export const listChampionships = new ListChampionships(championshipRepository);
+export const getChampionshipDetail = new GetChampionshipDetail(championshipRepository);
+export const createChampionship = new CreateChampionship(championshipRepository);
+export const updateChampionshipPodium = new UpdateChampionshipPodium(championshipRepository);
+export const loadPhaseGroups = new LoadPhaseGroups(championshipRepository);
+export const getEditionTopScorers = new GetEditionTopScorers(championshipRepository);
+export const listTeams = new ListTeams(teamRepository);
+export const getClubTeams = new GetClubTeams(teamRepository);
+export const createTeam = new CreateTeam(teamRepository);
+export const updateTeam = new UpdateTeam(teamRepository);
+export const deleteTeam = new DeleteTeam(teamRepository);
+export const getTeamMatches = new GetTeamMatches(teamRepository);
+export const getTeamMatchYears = new GetTeamMatchYears(teamRepository);
+export const getTeamDetail = new GetTeamDetail(teamRepository);
+export const getTeamAthleteStats = new GetTeamAthleteStats(teamRepository);
+export const listLeagues = new ListLeagues(leagueRepository);
+export const getLeague = new GetLeague(leagueRepository);
+export const createLeague = new CreateLeague(leagueRepository);
+export const updateLeague = new UpdateLeague(leagueRepository);
+export const manageClubLeagueRegistrations = new ManageClubLeagueRegistrations(leagueRepository, clubRepository);
+export const getClub = new GetClub(clubRepository);
+export const getClubMatches = new GetClubMatches(clubRepository);
+export const getClubTitles = new GetClubTitles(clubRepository);
+export const listClubs = new ListClubs(clubRepository);
+export const getUpcomingMatches = new GetUpcomingMatches(matchRepository);
+export const getRecentMatches = new GetRecentMatches(matchRepository);
+export const getMatchDetail = new GetMatchDetail(matchRepository);
+export const getHeadToHead = new GetHeadToHead(matchRepository);
+export const updateMatchResult = new UpdateMatchResult(matchRepository);
+export const updateMatch = new UpdateMatch(matchRepository);
+export const getLiveWindowMatches = new GetLiveWindowMatches(matchRepository);
+export const addMatchEvent = new AddMatchEvent(matchRepository);
+export const annulMatchEvent = new AnnulMatchEvent(matchRepository);
+export const updateMatchEvent = new UpdateMatchEvent(matchRepository);
+export const createVenue = new CreateVenue(venueRepository);
+export const listVenues = new ListVenues(venueRepository);
+export const updateVenue = new UpdateVenue(venueRepository);
+export const getVenueMatches = new GetVenueMatches(venueRepository);
+export const createClub = new CreateClub(clubRepository);
+export const updateClub = new UpdateClub(clubRepository);
+
+const athleteRepository = new ApiAthleteRepository(API_BASE);
+export const searchAthletes = new SearchAthletes(athleteRepository);
+export const getRandomAthletes = new GetRandomAthletes(athleteRepository);
+export const getAthleteDetail = new GetAthleteDetail(athleteRepository);
+export const getAthleteStats = new GetAthleteStats(athleteRepository);
+export const createAthlete = new CreateAthlete(athleteRepository);
+export const updateAthlete = new UpdateAthlete(athleteRepository);
+export const deleteAthlete = new DeleteAthlete(athleteRepository);
+export const bulkImportAthletes = new BulkImportAthletes();
+export const addAthleteToTeam = new AddAthleteToTeam(athleteRepository);
+export const removeAthleteFromTeam = new RemoveAthleteFromTeam(athleteRepository);
+export const getAthleteTeamHistory = new GetAthleteTeamHistory(athleteRepository);
+export const getTeamAthletes = new GetTeamAthletes(athleteRepository);
+export { athleteRepository };
+
+const champRegistrationRepository = new ApiChampionshipRegistrationRepository(API_BASE);
+export const getAthleteChampionshipRegistrations = new GetAthleteChampionshipRegistrations(champRegistrationRepository);
+export const registerAthleteChampionship = new RegisterAthleteChampionship(champRegistrationRepository);
+export const updateChampionshipRegistration = new UpdateChampionshipRegistration(champRegistrationRepository);
+export const cancelChampionshipRegistration = new CancelChampionshipRegistration(champRegistrationRepository);
+export const listEditionRegistrations = new ListEditionRegistrations(champRegistrationRepository);
+export const getEligibleAthletes = new GetEligibleAthletes(champRegistrationRepository);
+export const checkAthleteMatchEvents = new CheckAthleteMatchEvents(champRegistrationRepository);
+
+const refereeRepository = new ApiRefereeRepository(API_BASE);
+export const listReferees = new ListReferees(refereeRepository);
+export const getRefereeDetail = new GetRefereeDetail(refereeRepository);
+export const createReferee = new CreateReferee(refereeRepository);
+export const updateReferee = new UpdateReferee(refereeRepository);
+export const deleteReferee = new DeleteReferee(refereeRepository);
+export const getRefereeMatches = new GetRefereeMatches(refereeRepository);
+export { refereeRepository };
