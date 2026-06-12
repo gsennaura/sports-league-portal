@@ -179,7 +179,7 @@ export function AdminLeagueAdminsPage() {
                         setSearchOpen(false);
                       }}
                     >
-                      <span style={S.dropName}>{u.name ?? <em style={{ color: "#6c7086" }}>sem nome</em>}</span>
+                      <span style={S.dropName}>{u.name ?? <em style={{ color: "#ffffff" }}>sem nome</em>}</span>
                       <span style={S.dropEmail}>{u.email}</span>
                     </button>
                   ))}
@@ -267,7 +267,7 @@ export function AdminLeagueAdminsPage() {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     position: "relative",
     overflow: "hidden",
@@ -280,12 +280,12 @@ const S: Record<string, React.CSSProperties> = {
   },
   heroInner: { maxWidth: "1100px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
-  subtitle: { fontSize: "0.85rem", color: "#6c7086", margin: "4px 0 0" },
+  subtitle: { fontSize: "0.85rem", color: "#ffffff", margin: "4px 0 0" },
 
   page: { maxWidth: "1100px", margin: "0 auto", padding: "1.5rem 1.5rem 4rem" },
 
   card: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: 12,
     padding: "1.25rem",
@@ -297,7 +297,7 @@ const S: Record<string, React.CSSProperties> = {
   select: {
     flex: 1,
     minWidth: 200,
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: 8,
     color: "#cdd6f4",
@@ -309,7 +309,7 @@ const S: Record<string, React.CSSProperties> = {
 
   btnPrimary: {
     background: "#cba6f7",
-    color: "#1e1e2e",
+    color: "#18265b",
     border: "none",
     borderRadius: 8,
     padding: "0.5rem 1.25rem",
@@ -333,16 +333,16 @@ const S: Record<string, React.CSSProperties> = {
   th: {
     textAlign: "left",
     padding: "0.6rem 0.75rem",
-    color: "#6c7086",
+    color: "#ffffff",
     fontSize: "0.8rem",
     fontWeight: 600,
     textTransform: "uppercase",
     letterSpacing: "0.05em",
     borderBottom: "1px solid #313244",
   },
-  td: { padding: "0.75rem", color: "#cdd6f4", fontSize: "0.9rem", borderBottom: "1px solid #181825" },
+  td: { padding: "0.75rem", color: "#cdd6f4", fontSize: "0.9rem", borderBottom: "1px solid #18265b" },
   trRow: { transition: "background 0.15s" },
-  empty: { padding: "2rem", textAlign: "center", color: "#6c7086", fontSize: "0.9rem" },
+  empty: { padding: "2rem", textAlign: "center", color: "#ffffff", fontSize: "0.9rem" },
 
   leagueBadge: {
     display: "inline-block",
@@ -369,14 +369,14 @@ const S: Record<string, React.CSSProperties> = {
     fontSize: "0.8rem",
   },
   muted: { color: "#45475a" },
-  hint: { color: "#6c7086", fontSize: "0.9rem" },
+  hint: { color: "#ffffff", fontSize: "0.9rem" },
   errorText: { color: "#f38ba8", fontSize: "0.9rem" },
 
   // Combobox
   comboWrap: { flex: 1, minWidth: 240, position: "relative" },
   searchInput: {
     width: "100%",
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: 8,
     color: "#cdd6f4",
@@ -389,7 +389,7 @@ const S: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "center",
     gap: "0.5rem",
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #89b4fa",
     borderRadius: 8,
     padding: "0.45rem 0.75rem",
@@ -397,11 +397,11 @@ const S: Record<string, React.CSSProperties> = {
     fontSize: "0.9rem",
   },
   chipText: { flex: 1 },
-  chipEmail: { color: "#6c7086", fontSize: "0.82rem" },
+  chipEmail: { color: "#ffffff", fontSize: "0.82rem" },
   chipClear: {
     background: "none",
     border: "none",
-    color: "#6c7086",
+    color: "#ffffff",
     cursor: "pointer",
     fontSize: "1.1rem",
     lineHeight: 1,
@@ -412,7 +412,7 @@ const S: Record<string, React.CSSProperties> = {
     top: "calc(100% + 4px)",
     left: 0,
     right: 0,
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: 8,
     boxShadow: "0 8px 24px rgba(0,0,0,0.5)",
@@ -438,14 +438,14 @@ const S: Record<string, React.CSSProperties> = {
     top: "calc(100% + 4px)",
     left: 0,
     right: 0,
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: 8,
     padding: "0.75rem 1rem",
-    color: "#6c7086",
+    color: "#ffffff",
     fontSize: "0.85rem",
     zIndex: 100,
   },
   dropName: { color: "#cdd6f4", fontSize: "0.9rem" },
-  dropEmail: { color: "#6c7086", fontSize: "0.8rem" },
+  dropEmail: { color: "#ffffff", fontSize: "0.8rem" },
 };

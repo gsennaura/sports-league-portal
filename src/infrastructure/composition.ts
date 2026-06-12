@@ -162,3 +162,29 @@ export const updateReferee = new UpdateReferee(refereeRepository);
 export const deleteReferee = new DeleteReferee(refereeRepository);
 export const getRefereeMatches = new GetRefereeMatches(refereeRepository);
 export { refereeRepository };
+
+import { ApiPartnerRepository } from "./repositories/ApiPartnerRepository";
+import { ListPartners } from "@application/use_cases/ListPartners";
+
+const partnerRepository = new ApiPartnerRepository(API_BASE);
+export const listPartners = new ListPartners(partnerRepository);
+
+import { ApiNewsRepository } from "./repositories/ApiNewsRepository";
+import { ListNews } from "@application/use_cases/ListNews";
+import { GetNewsDetail } from "@application/use_cases/GetNewsDetail";
+
+const newsRepository = new ApiNewsRepository(API_BASE);
+export const listNews = new ListNews(newsRepository);
+export const getNewsDetail = new GetNewsDetail(newsRepository);
+
+import { ApiDocumentRepository } from "./repositories/ApiDocumentRepository";
+import { ListDocuments } from "@application/use_cases/ListDocuments";
+
+const documentRepository = new ApiDocumentRepository(API_BASE);
+export const listDocuments = new ListDocuments(documentRepository);
+
+import { ApiEmendaRepository } from "./repositories/ApiEmendaRepository";
+import { ListEmendas } from "@application/use_cases/ListEmendas";
+
+const emendaRepository = new ApiEmendaRepository(API_BASE);
+export const listEmendas = new ListEmendas(emendaRepository);

@@ -224,7 +224,7 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
             <p style={S.modalBody}>
               Deseja também marcar esta partida como <strong style={{ color: "#a6e3a1" }}>encerrada</strong>?
               <br />
-              <span style={{ fontSize: "0.82rem", color: "#a6adc8" }}>
+              <span style={{ fontSize: "0.82rem", color: "#ffffff" }}>
                 Se não, o placar será salvo mas o status permanece inalterado.
               </span>
             </p>
@@ -261,7 +261,7 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(135deg, #1e1e2e 0%, #313244 100%)",
+    background: "linear-gradient(135deg, #18265b 0%, #313244 100%)",
     borderBottom: "1px solid #45475a",
     position: "relative",
     overflow: "hidden",
@@ -289,7 +289,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   muted: { color: "#cdd6f4" },
   matchInfo: {
-    background: "#181825", border: "1px solid #313244", borderRadius: "10px",
+    background: "#18265b", border: "1px solid #313244", borderRadius: "10px",
     padding: "1rem 1.25rem", marginBottom: "1.5rem",
     display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.5rem",
   },
@@ -297,7 +297,7 @@ const S: Record<string, React.CSSProperties> = {
   vs: { color: "#cdd6f4", fontWeight: 700 },
   matchMeta: { width: "100%", color: "#cdd6f4", fontSize: "0.82rem" },
   form: {
-    background: "#181825", border: "1px solid #313244", borderRadius: "12px",
+    background: "#18265b", border: "1px solid #313244", borderRadius: "12px",
     padding: "1.5rem",
   },
   fieldset: {
@@ -318,7 +318,7 @@ const S: Record<string, React.CSSProperties> = {
     color: "#cdd6f4", fontSize: "0.82rem", fontWeight: 500,
   },
   scoreInput: {
-    background: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px",
+    background: "#18265b", border: "1px solid #45475a", borderRadius: "8px",
     padding: "0.6rem 0.75rem", color: "#cdd6f4", fontSize: "1.4rem",
     fontWeight: 700, textAlign: "center" as const, width: "100%",
     outline: "none",
@@ -351,7 +351,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   btnSave: {
     background: "#89b4fa", border: "none", borderRadius: "8px",
-    color: "#1e1e2e", padding: "0.55rem 1.4rem", fontSize: "0.88rem",
+    color: "#18265b", padding: "0.55rem 1.4rem", fontSize: "0.88rem",
     fontWeight: 700, cursor: "pointer",
   },
   modalOverlay: {
@@ -361,7 +361,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: "1rem",
   },
   modalCard: {
-    background: "#1e1e2e", border: "1px solid #313244", borderRadius: "14px",
+    background: "#18265b", border: "1px solid #313244", borderRadius: "14px",
     padding: "1.75rem 2rem", maxWidth: "420px", width: "100%",
     boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
   },
@@ -376,7 +376,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   btnModalCancel: {
     background: "none", border: "1px solid #45475a", borderRadius: "8px",
-    color: "#6c7086", padding: "0.5rem 1rem", fontSize: "0.85rem", cursor: "pointer",
+    color: "#ffffff", padding: "0.5rem 1rem", fontSize: "0.85rem", cursor: "pointer",
   },
   btnModalSaveOnly: {
     background: "none", border: "1px solid #89b4fa", borderRadius: "8px",
@@ -385,7 +385,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   btnModalFinish: {
     background: "#a6e3a1", border: "none", borderRadius: "8px",
-    color: "#1e1e2e", padding: "0.5rem 1.2rem", fontSize: "0.85rem",
+    color: "#18265b", padding: "0.5rem 1.2rem", fontSize: "0.85rem",
     fontWeight: 700, cursor: "pointer",
   },
 };

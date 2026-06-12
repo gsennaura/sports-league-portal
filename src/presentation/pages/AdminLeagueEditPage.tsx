@@ -257,7 +257,7 @@ export function AdminLeagueEditPage({ updateLeague }: Props) {
                       {logoPreview ? "Trocar logo" : "Escolher logo"}
                     </label>
                     {logoFile && (
-                      <p style={{ margin: "0.3rem 0 0", fontSize: "0.78rem", color: "#6c7086" }}>{logoFile.name}</p>
+                      <p style={{ margin: "0.3rem 0 0", fontSize: "0.78rem", color: "#ffffff" }}>{logoFile.name}</p>
                     )}
                   </div>
                   <input
@@ -305,7 +305,7 @@ function Field({ label, htmlFor, children, style }: {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #cba6f7, #89b4fa)" },
   heroInner: { maxWidth: "800px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
@@ -317,7 +317,7 @@ const S: Record<string, React.CSSProperties> = {
   legendOpt: { fontWeight: 400, color: "#cdd6f4", textTransform: "none", letterSpacing: "normal", fontSize: "0.8rem" },
   grid2: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1rem", marginTop: "1rem" },
   label: { fontSize: "0.83rem", fontWeight: 600, color: "#cdd6f4", textTransform: "uppercase", letterSpacing: "0.06em" },
-  input: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", boxSizing: "border-box" },
+  input: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", boxSizing: "border-box" },
   select: { cursor: "pointer", appearance: "auto" },
   checkboxLabel: { display: "flex", alignItems: "center", gap: "0.5rem", color: "#cdd6f4", fontSize: "0.9rem", cursor: "pointer", paddingTop: "0.25rem" },
   checkbox: { width: "1rem", height: "1rem", cursor: "pointer", accentColor: "#cba6f7" },
@@ -328,5 +328,5 @@ const S: Record<string, React.CSSProperties> = {
   btnSubmit: { backgroundColor: "#cba6f7", border: "none", borderRadius: "6px", color: "#11111b", fontSize: "0.9rem", fontWeight: 700, padding: "0.6rem 1.5rem", cursor: "pointer" },
   btnUpload: { backgroundColor: "#313244", border: "1px solid #45475a", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.82rem", fontWeight: 600, padding: "0.4rem 0.85rem", cursor: "pointer", display: "inline-block", userSelect: "none" as const },
   photoThumb: { width: 52, height: 52, borderRadius: "8px", objectFit: "cover" as const, border: "2px solid #45475a", flexShrink: 0 },
-  photoPlaceholder: { width: 52, height: 52, borderRadius: "8px", backgroundColor: "#313244", border: "2px solid #45475a", display: "flex", alignItems: "center", justifyContent: "center", color: "#6c7086", fontSize: "1.5rem", flexShrink: 0 },
+  photoPlaceholder: { width: 52, height: 52, borderRadius: "8px", backgroundColor: "#313244", border: "2px solid #45475a", display: "flex", alignItems: "center", justifyContent: "center", color: "#ffffff", fontSize: "1.5rem", flexShrink: 0 },
 };

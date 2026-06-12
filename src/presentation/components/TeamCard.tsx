@@ -20,7 +20,7 @@ export function TeamCard({ team }: TeamCardProps) {
 const styles: Record<string, React.CSSProperties> = {
   card: {
     listStyle: "none",
-    background: "#1e1e2e",
+    background: "#18265b",
     borderRadius: "8px",
     border: "1px solid #313244",
     transition: "border-color 0.15s",

@@ -8,20 +8,20 @@ interface UseRecentMatchesResult {
   error: string | null;
 }
 
-export function useRecentMatches(useCase: GetRecentMatches, days = 7): UseRecentMatchesResult {
+export function useRecentMatches(useCase: GetRecentMatches, days = 7, leagueId?: string): UseRecentMatchesResult {
   const [matches, setMatches] = useState<UpcomingMatch[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     useCase
-      .execute(days)
+      .execute(days, leagueId)
       .then(setMatches)
       .catch((err: unknown) => {
         setError(err instanceof Error ? err.message : "Erro desconhecido.");
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [leagueId]);
 
   return { matches, loading, error };
 }

@@ -258,7 +258,7 @@ function Field({
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     position: "relative",
     overflow: "hidden",
@@ -340,7 +340,7 @@ const S: Record<string, React.CSSProperties> = {
     letterSpacing: "0.06em",
   },
   input: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",

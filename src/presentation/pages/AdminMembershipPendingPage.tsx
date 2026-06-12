@@ -325,7 +325,7 @@ export function AdminMembershipPendingPage() {
             <h2 style={{ ...S.title, margin: 0 }}>Pendências de vínculo</h2>
             <Link
               to="/admin/atletas/novo"
-              style={{ background: "#cba6f7", color: "#1e1e2e", border: "none", borderRadius: 8, padding: "0.45rem 1rem", fontWeight: 700, fontSize: "0.85rem", textDecoration: "none", whiteSpace: "nowrap" }}
+              style={{ background: "#cba6f7", color: "#18265b", border: "none", borderRadius: 8, padding: "0.45rem 1rem", fontWeight: 700, fontSize: "0.85rem", textDecoration: "none", whiteSpace: "nowrap" }}
             >
               + Novo atleta
             </Link>
@@ -387,8 +387,8 @@ export function AdminMembershipPendingPage() {
                   {filtered.map((m) => (
                     <tr key={m.id} style={S.tr}>
                       <td style={S.td}>{m.athlete_name ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#a6adc8" }} className="pending-col-hide-mobile">{m.athlete_nickname ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#a6adc8" }}>{m.athlete_position ?? "—"}</td>
+                      <td style={{ ...S.td, color: "#ffffff" }} className="pending-col-hide-mobile">{m.athlete_nickname ?? "—"}</td>
+                      <td style={{ ...S.td, color: "#ffffff" }}>{m.athlete_position ?? "—"}</td>
                       <td style={S.td}>
                         <span style={S.teamCell}>{m.team_name ?? "—"}</span>
                         {m.team_sport_name && <span style={S.tag}>{m.team_sport_name}</span>}
@@ -635,10 +635,10 @@ export function AdminMembershipPendingPage() {
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const S: Record<string, React.CSSProperties> = {
-  page: { minHeight: "100vh", backgroundColor: "#1e1e2e", color: "#cdd6f4", padding: "40px 16px 80px" },
+  page: { minHeight: "100vh", backgroundColor: "#18265b", color: "#cdd6f4", padding: "40px 16px 80px" },
   container: { maxWidth: 960, margin: "0 auto" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cba6f7", margin: "0 0 6px" },
-  sub: { fontSize: ".9rem", color: "#6c7086", margin: "0 0 20px" },
+  sub: { fontSize: ".9rem", color: "#ffffff", margin: "0 0 20px" },
 
   filters: { display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 20 },
   searchInput: {
@@ -656,40 +656,40 @@ const S: Record<string, React.CSSProperties> = {
   cardTop: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap" },
   info: { display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" },
   athleteName: { fontWeight: 700, color: "#89dceb", fontSize: "1rem" },
-  arrow: { color: "#6c7086" },
+  arrow: { color: "#ffffff" },
   teamName: { fontWeight: 600, color: "#a6e3a1" },
   metaRow: { display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" },
   tag: { background: "#45475a", borderRadius: 20, padding: "2px 8px", fontSize: ".72rem", color: "#cdd6f4" },
-  metaText: { fontSize: ".8rem", color: "#6c7086" },
+  metaText: { fontSize: ".8rem", color: "#ffffff" },
   actions: { display: "flex", gap: 10 },
   tableWrap: { overflowX: "auto", borderRadius: 12, border: "1px solid #313244" },
   table: { width: "100%", borderCollapse: "collapse", fontSize: ".875rem" },
-  th: { background: "#181825", color: "#6c7086", fontWeight: 600, padding: ".55rem .85rem", textAlign: "left", borderBottom: "1px solid #313244", whiteSpace: "nowrap" } as React.CSSProperties,
+  th: { background: "#18265b", color: "#ffffff", fontWeight: 600, padding: ".55rem .85rem", textAlign: "left", borderBottom: "1px solid #313244", whiteSpace: "nowrap" } as React.CSSProperties,
   tr: { borderBottom: "1px solid #313244" },
   td: { padding: ".55rem .85rem", color: "#cdd6f4", verticalAlign: "middle" } as React.CSSProperties,
   teamCell: { fontWeight: 600, color: "#a6e3a1", marginRight: 6 },
   actionGroup: { display: "flex", gap: 6, justifyContent: "center", alignItems: "center" },
   actionSelect: { background: "#313244", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: ".3rem .5rem", fontSize: ".82rem", outline: "none", cursor: "pointer", width: 135 } as React.CSSProperties,
-  btnConfirm: { padding: ".35rem .75rem", background: "#a6e3a1", color: "#1e1e2e", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: ".82rem" } as React.CSSProperties,
+  btnConfirm: { padding: ".35rem .75rem", background: "#a6e3a1", color: "#18265b", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: ".82rem" } as React.CSSProperties,
   btnEdit: { width: 30, height: 30, background: "transparent", color: "#89b4fa", border: "1px solid #89b4fa", borderRadius: 8, fontWeight: 600, cursor: "pointer", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center" } as React.CSSProperties,
 
   error: { color: "#f38ba8", background: "rgba(243,139,168,.1)", border: "1px solid rgba(243,139,168,.3)", borderRadius: 6, padding: ".5rem .75rem", fontSize: ".875rem", marginBottom: 12 },
-  msg: { color: "#6c7086" },
-  empty: { background: "#313244", borderRadius: 12, padding: "32px", textAlign: "center", color: "#6c7086" },
+  msg: { color: "#ffffff" },
+  empty: { background: "#313244", borderRadius: 12, padding: "32px", textAlign: "center", color: "#ffffff" },
 
   overlay: { position: "fixed", inset: 0, background: "rgba(0,0,0,.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: "1rem" },
-  modal: { background: "#1e1e2e", border: "1px solid #313244", borderRadius: 14, padding: "1.75rem", width: "100%", maxWidth: 480, maxHeight: "90vh", overflowY: "auto" },
+  modal: { background: "#18265b", border: "1px solid #313244", borderRadius: 14, padding: "1.75rem", width: "100%", maxWidth: 480, maxHeight: "90vh", overflowY: "auto" },
   modalTitle: { color: "#cba6f7", margin: "0 0 4px", fontSize: "1.1rem", fontWeight: 700 },
-  modalSub: { color: "#6c7086", fontSize: ".85rem", margin: "0 0 1.25rem" },
+  modalSub: { color: "#ffffff", fontSize: ".85rem", margin: "0 0 1.25rem" },
   fieldGroup: { display: "flex", flexDirection: "column", gap: 4, marginBottom: "0.9rem" },
-  label: { color: "#a6adc8", fontSize: ".82rem", fontWeight: 500 },
+  label: { color: "#ffffff", fontSize: ".82rem", fontWeight: 500 },
   input: { background: "#313244", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: ".5rem .7rem", fontSize: ".9rem", outline: "none", width: "100%", boxSizing: "border-box" },
   row2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" },
   modalActions: { display: "flex", gap: 10, justifyContent: "flex-end", marginTop: "1rem" },
-  btnCancel: { padding: ".5rem 1rem", background: "transparent", color: "#a6adc8", border: "1px solid #45475a", borderRadius: 8, cursor: "pointer", fontSize: ".875rem" },
-  btnSave: { padding: ".5rem 1.2rem", background: "#89b4fa", color: "#1e1e2e", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: ".875rem" },
+  btnCancel: { padding: ".5rem 1rem", background: "transparent", color: "#ffffff", border: "1px solid #45475a", borderRadius: 8, cursor: "pointer", fontSize: ".875rem" },
+  btnSave: { padding: ".5rem 1.2rem", background: "#89b4fa", color: "#18265b", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: ".875rem" },
   btnUpload: { display: "inline-block", padding: ".45rem .9rem", background: "#313244", border: "1px solid #45475a", borderRadius: 8, color: "#89b4fa", cursor: "pointer", fontSize: ".85rem", fontWeight: 600 } as React.CSSProperties,
-  teamList: { display: "flex", flexDirection: "column", gap: 2, maxHeight: 160, overflowY: "auto", border: "1px solid #45475a", borderRadius: 8, background: "#181825", padding: 4, marginTop: 4 },
+  teamList: { display: "flex", flexDirection: "column", gap: 2, maxHeight: 160, overflowY: "auto", border: "1px solid #45475a", borderRadius: 8, background: "#18265b", padding: 4, marginTop: 4 },
   teamItem: { background: "none", border: "none", color: "#cdd6f4", padding: ".4rem .75rem", borderRadius: 6, cursor: "pointer", textAlign: "left", fontSize: ".88rem" },
   teamItemSelected: { background: "#313244", color: "#a6e3a1", fontWeight: 700 },
   teamChangeNotice: { margin: "4px 0 0", fontSize: ".8rem", color: "#f9e2af", background: "rgba(249,226,175,.1)", borderRadius: 6, padding: ".35rem .6rem" },

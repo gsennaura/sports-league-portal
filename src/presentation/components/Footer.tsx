@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { useActiveLeague } from "@presentation/context/ActiveLeagueContext";
 import minhaLigaLogo from "../../images/minha_liga.png";
 import seteNosEsportesLogo from "../../images/sete_nos_esportes.png";
 import seteColinasLogo from "../../images/sete_colinas.png";
+
+const _RAW_BASE = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main";
+const NO_LEAGUE_PHOTO = `${_RAW_BASE}/leagues/no_league_photo.png`;
 
 function useMobile(breakpoint = 600) {
   const [mobile, setMobile] = useState(() => window.innerWidth < breakpoint);
@@ -17,6 +21,9 @@ function useMobile(breakpoint = 600) {
 export function Footer() {
   const year = new Date().getFullYear();
   const isMobile = useMobile();
+  const { league } = useActiveLeague();
+  const footerLogo = league?.logo_url ?? minhaLigaLogo;
+  const footerName = league?.name ?? "Portal";
 
   if (isMobile) {
     return (
@@ -29,8 +36,13 @@ export function Footer() {
         </div>
         <div style={S.mobileBottom}>
           <div style={S.brand}>
-            <img src={minhaLigaLogo} alt="Minha Liga" style={S.brandLogoMobile} />
-            <span style={S.brandNameMobile}>Minha Liga</span>
+            <img
+              src={footerLogo}
+              alt={footerName}
+              style={S.brandLogoMobile}
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO; }}
+            />
+            <span style={S.brandNameMobile}>{footerName}</span>
           </div>
           <span style={S.devNameMobile}>SENNA TECH LTDA © {year}</span>
         </div>
@@ -42,8 +54,13 @@ export function Footer() {
     <footer style={S.footer}>
       <div style={S.inner}>
         <div style={S.brand}>
-          <img src={minhaLigaLogo} alt="Minha Liga" style={S.brandLogo} />
-          <span style={S.brandName}>Minha Liga</span>
+          <img
+            src={footerLogo}
+            alt={footerName}
+            style={S.brandLogo}
+            onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO; }}
+          />
+          <span style={S.brandName}>{footerName}</span>
         </div>
         <div style={S.apoioBlock}>
           <span style={S.apoioLabel}>Apoio</span>
@@ -137,7 +154,7 @@ const S: Record<string, React.CSSProperties> = {
     whiteSpace: "nowrap" as const,
   },
   devNameMobile: {
-    color: "#585b70",
+    color: "#ffffff",
     fontSize: "0.58rem",
     fontWeight: 600,
     letterSpacing: "0.03em",
@@ -170,7 +187,7 @@ const S: Record<string, React.CSSProperties> = {
     flexShrink: 0,
   },
   apoioLabel: {
-    color: "#6c7086",
+    color: "#ffffff",
     fontSize: "0.6rem",
     fontWeight: 700,
     textTransform: "uppercase" as const,
@@ -201,13 +218,13 @@ const S: Record<string, React.CSSProperties> = {
     flexShrink: 0,
   },
   devBy: {
-    color: "#585b70",
+    color: "#ffffff",
     fontSize: "0.62rem",
     textTransform: "uppercase" as const,
     letterSpacing: "0.06em",
   },
   devName: {
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.78rem",
     fontWeight: 700,
     letterSpacing: "0.04em",

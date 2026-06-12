@@ -4,7 +4,7 @@ import type { MatchRepository } from "@domain/repositories/MatchRepository";
 export class GetRecentMatches {
   constructor(private readonly matchRepository: MatchRepository) {}
 
-  execute(days = 7): Promise<UpcomingMatch[]> {
-    return this.matchRepository.listRecent(days);
+  execute(days = 7, leagueId?: string): Promise<UpcomingMatch[]> {
+    return this.matchRepository.listRecent(days, leagueId);
   }
 }

@@ -320,7 +320,7 @@ export function AdminGroupMatchesPage() {
               <span key={t.team_id} style={S.teamPill}>{t.team_name}</span>
             ))}
             {teams.length === 0 && (
-              <span style={{ color: "#6c7086", fontSize: "0.8rem", fontStyle: "italic" }}>
+              <span style={{ color: "#ffffff", fontSize: "0.8rem", fontStyle: "italic" }}>
                 Nenhum time neste grupo.
               </span>
             )}
@@ -353,9 +353,9 @@ export function AdminGroupMatchesPage() {
                 {" · "}+{rcIntervalDays}d entre rodadas
               </span>
             ) : (
-              <span style={{ color: "#6c7086", fontSize: "0.78rem" }}>não configurado</span>
+              <span style={{ color: "#ffffff", fontSize: "0.78rem" }}>não configurado</span>
             )}
-            <span style={{ marginLeft: "auto", color: "#6c7086", fontSize: "0.7rem" }}>
+            <span style={{ marginLeft: "auto", color: "#ffffff", fontSize: "0.7rem" }}>
               {showRoundConfig ? "▲" : "▼"}
             </span>
           </button>
@@ -695,16 +695,16 @@ export function AdminGroupMatchesPage() {
 
 const S: Record<string, React.CSSProperties> = {
   // Header
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #a6e3a1, #89b4fa)" },
   heroInner: { maxWidth: "960px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
-  breadcrumb: { margin: "0 0 2px", fontSize: "0.8rem", color: "#6c7086", textTransform: "uppercase", letterSpacing: "0.05em" },
+  breadcrumb: { margin: "0 0 2px", fontSize: "0.8rem", color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.05em" },
   heroRow: { display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: "0 0 0.75rem" },
   headerActions: { display: "flex", gap: "0.6rem", alignItems: "center", flexWrap: "wrap", paddingTop: "0.2rem" },
   pillRow: { display: "flex", flexWrap: "wrap", gap: "0.4rem" },
-  teamPill: { backgroundColor: "#1e1e2e", border: "1px solid #45475a", borderRadius: "20px", color: "#cdd6f4", padding: "0.2rem 0.7rem", fontSize: "0.78rem" },
+  teamPill: { backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "20px", color: "#cdd6f4", padding: "0.2rem 0.7rem", fontSize: "0.78rem" },
 
   // Page
   page: { maxWidth: "960px", margin: "0 auto", padding: "2rem 1.5rem 5rem" },
@@ -726,39 +726,39 @@ const S: Record<string, React.CSSProperties> = {
   btnShare: { background: "none", border: "1px solid #cba6f7", borderRadius: "5px", color: "#cba6f7", fontSize: "0.75rem", fontWeight: 600, cursor: "pointer", padding: "0.2rem 0.65rem", whiteSpace: "nowrap", marginLeft: "auto" },
 
   // Round schedule config panel
-  rcPanel: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "10px", marginBottom: "1.25rem", overflow: "hidden" },
-  rcToggle: { width: "100%", display: "flex", alignItems: "center", gap: "0.65rem", background: "none", border: "none", cursor: "pointer", color: "#a6adc8", fontSize: "0.82rem", fontWeight: 600, padding: "0.65rem 1rem", textAlign: "left" as const },
+  rcPanel: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px", marginBottom: "1.25rem", overflow: "hidden" },
+  rcToggle: { width: "100%", display: "flex", alignItems: "center", gap: "0.65rem", background: "none", border: "none", cursor: "pointer", color: "#ffffff", fontSize: "0.82rem", fontWeight: 600, padding: "0.65rem 1rem", textAlign: "left" as const },
   rcActive: { color: "#f9e2af", fontSize: "0.78rem", backgroundColor: "rgba(249,226,175,0.08)", border: "1px solid rgba(249,226,175,0.25)", borderRadius: "4px", padding: "0.1rem 0.5rem" },
   rcBody: { padding: "0.75rem 1rem 1rem", borderTop: "1px solid #313244" },
-  rcHint: { margin: "0 0 0.75rem", color: "#6c7086", fontSize: "0.8rem", lineHeight: 1.5 },
+  rcHint: { margin: "0 0 0.75rem", color: "#ffffff", fontSize: "0.8rem", lineHeight: 1.5 },
   rcFields: { display: "flex", alignItems: "flex-end", gap: "1rem", flexWrap: "wrap" as const },
 
   // Add form card
-  formCard: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "10px", padding: "1.5rem", marginBottom: "2rem" },
+  formCard: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px", padding: "1.5rem", marginBottom: "2rem" },
   formTitle: { margin: "0 0 1.25rem", fontSize: "1rem", fontWeight: 700, color: "#cba6f7" },
   formGrid: { display: "grid", gridTemplateColumns: "1fr 1fr 100px 1fr 110px", gap: "0.85rem", alignItems: "start" },
 
   // Fields
   field: { display: "flex", flexDirection: "column", gap: "4px" },
-  label: { fontSize: "0.75rem", fontWeight: 700, color: "#a6adc8", textTransform: "uppercase", letterSpacing: "0.05em" },
-  labelSm: { fontSize: "0.7rem", fontWeight: 700, color: "#a6adc8", textTransform: "uppercase", letterSpacing: "0.05em" },
-  input: { backgroundColor: "#1e1e2e", border: "1px solid #45475a", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.5rem 0.75rem", outline: "none", boxSizing: "border-box", width: "100%" },
+  label: { fontSize: "0.75rem", fontWeight: 700, color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.05em" },
+  labelSm: { fontSize: "0.7rem", fontWeight: 700, color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.05em" },
+  input: { backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.5rem 0.75rem", outline: "none", boxSizing: "border-box", width: "100%" },
 
   // Empty state
-  emptyState: { backgroundColor: "#181825", border: "1px dashed #313244", borderRadius: "12px", padding: "3rem 2rem", textAlign: "center", marginBottom: "2rem" },
+  emptyState: { backgroundColor: "#18265b", border: "1px dashed #313244", borderRadius: "12px", padding: "3rem 2rem", textAlign: "center", marginBottom: "2rem" },
   emptyTitle: { margin: "0 0 0.5rem", fontSize: "1rem", fontWeight: 600, color: "#cdd6f4" },
-  emptyHint: { margin: 0, fontSize: "0.875rem", color: "#6c7086", maxWidth: "480px", marginLeft: "auto", marginRight: "auto" },
+  emptyHint: { margin: 0, fontSize: "0.875rem", color: "#ffffff", maxWidth: "480px", marginLeft: "auto", marginRight: "auto" },
 
   // Round section
   roundSection: { marginBottom: "1.5rem" },
   roundHeader: { display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" },
-  roundLabel: { fontSize: "0.78rem", fontWeight: 700, color: "#a6adc8", textTransform: "uppercase", letterSpacing: "0.06em" },
-  roundCount: { fontSize: "0.75rem", color: "#6c7086" },
+  roundLabel: { fontSize: "0.78rem", fontWeight: 700, color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.06em" },
+  roundCount: { fontSize: "0.75rem", color: "#ffffff" },
 
   // Match table
   matchTable: { display: "flex", flexDirection: "column", gap: "0.4rem" },
   matchRow: {
-    backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "8px",
+    backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "8px",
     padding: "0.85rem 1.1rem", display: "flex", alignItems: "center",
     justifyContent: "space-between", gap: "1rem", flexWrap: "wrap",
   },
@@ -766,11 +766,11 @@ const S: Record<string, React.CSSProperties> = {
   // Match content
   matchVsBlock: { display: "flex", alignItems: "center", gap: "0.75rem", flex: 1, minWidth: "240px" },
   homeTeam: { fontSize: "0.95rem", fontWeight: 600, color: "#cdd6f4", textAlign: "right", flex: 1 },
-  vsLabel: { fontSize: "0.9rem", color: "#6c7086", flexShrink: 0 },
+  vsLabel: { fontSize: "0.9rem", color: "#ffffff", flexShrink: 0 },
   awayTeam: { fontSize: "0.95rem", fontWeight: 600, color: "#cdd6f4", textAlign: "left", flex: 1 },
   scoreBlock: { fontSize: "1rem", fontWeight: 800, color: "#a6e3a1", fontFamily: "monospace", flexShrink: 0, padding: "0.1rem 0.5rem", backgroundColor: "rgba(166,227,161,.1)", borderRadius: "4px" },
   matchMeta: { display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" },
-  dateChip: { fontSize: "0.78rem", color: "#cdd6f4", backgroundColor: "#1e1e2e", border: "1px solid #45475a", borderRadius: "4px", padding: "0.15rem 0.5rem" },
+  dateChip: { fontSize: "0.78rem", color: "#cdd6f4", backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "4px", padding: "0.15rem 0.5rem" },
   resultChip: { fontSize: "0.75rem", color: "#a6e3a1", backgroundColor: "rgba(166,227,161,.1)", border: "1px solid rgba(166,227,161,.3)", borderRadius: "4px", padding: "0.15rem 0.5rem" },
   venueChip: { fontSize: "0.78rem", color: "#f9e2af", backgroundColor: "rgba(249,226,175,.08)", border: "1px solid rgba(249,226,175,.25)", borderRadius: "4px", padding: "0.15rem 0.5rem" },
   matchActions: { display: "flex", gap: "0.4rem", alignItems: "center", flexWrap: "wrap" },

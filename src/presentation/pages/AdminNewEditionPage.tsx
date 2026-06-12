@@ -388,7 +388,7 @@ export function AdminNewEditionPage() {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     position: "relative",
     overflow: "hidden",
@@ -403,7 +403,7 @@ const S: Record<string, React.CSSProperties> = {
   heroRow: { display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem", marginTop: "0.5rem" },
   back: { color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
-  subtitle: { margin: "0.25rem 0 0", fontSize: "0.9rem", color: "#6c7086" },
+  subtitle: { margin: "0.25rem 0 0", fontSize: "0.9rem", color: "#ffffff" },
 
   page: { maxWidth: "1100px", margin: "0 auto", padding: "2rem 1.5rem 4rem" },
 
@@ -426,14 +426,14 @@ const S: Record<string, React.CSSProperties> = {
     fontWeight: 400,
     textTransform: "none" as const,
     letterSpacing: 0,
-    color: "#6c7086",
+    color: "#ffffff",
     fontSize: "0.82rem",
   },
 
   input: {
     display: "block",
     width: "100%",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -445,7 +445,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   select: { cursor: "pointer" },
 
-  hint: { color: "#6c7086", fontSize: "0.82rem", margin: "0.5rem 0 0" },
+  hint: { color: "#ffffff", fontSize: "0.82rem", margin: "0.5rem 0 0" },
   errorText: { color: "#f38ba8", fontSize: "0.875rem", margin: 0 },
 
   teamGrid: {
@@ -458,7 +458,7 @@ const S: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "center",
     gap: "0.6rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "0.55rem 0.85rem",
@@ -469,11 +469,11 @@ const S: Record<string, React.CSSProperties> = {
 
   filterRow: { display: "flex", flexWrap: "wrap" as const, gap: "1.25rem", margin: "0.75rem 0 0" },
   filterItem: { display: "flex", flexDirection: "column" as const, gap: "0.25rem" },
-  filterLabel: { fontSize: "0.72rem", fontWeight: 700, color: "#a6adc8", textTransform: "uppercase" as const, letterSpacing: "0.05em" },
-  filterValue: { fontSize: "0.875rem", color: "#cdd6f4", backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "6px", padding: "0.4rem 0.75rem" },
+  filterLabel: { fontSize: "0.72rem", fontWeight: 700, color: "#ffffff", textTransform: "uppercase" as const, letterSpacing: "0.05em" },
+  filterValue: { fontSize: "0.875rem", color: "#cdd6f4", backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", padding: "0.4rem 0.75rem" },
   addRow: { display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" as const, marginTop: "0.75rem" },
   btnSecondary: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #cba6f7",
     borderRadius: "6px",
     color: "#cba6f7",
@@ -501,7 +501,7 @@ const S: Record<string, React.CSSProperties> = {
     paddingTop: "0.5rem",
     borderTop: "1px solid #313244",
   },
-  summaryText: { color: "#a6adc8", fontSize: "0.85rem", margin: 0 },
+  summaryText: { color: "#ffffff", fontSize: "0.85rem", margin: 0 },
   submitRow: { display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" as const },
   btnSubmit: {
     backgroundColor: "#cba6f7",
@@ -514,7 +514,7 @@ const S: Record<string, React.CSSProperties> = {
     cursor: "pointer",
   },
   btnCancel: {
-    color: "#6c7086",
+    color: "#ffffff",
     textDecoration: "none",
     fontSize: "0.875rem",
     padding: "0.65rem 0",

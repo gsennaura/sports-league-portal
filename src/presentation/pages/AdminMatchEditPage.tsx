@@ -468,20 +468,20 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
       {/* ── Modal: encerrar partida? ───────────────────────────────── */}
       {showFinishModal && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}>
-          <div style={{ background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 14, padding: "1.75rem", width: "min(90vw, 400px)", display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <div style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 14, padding: "1.75rem", width: "min(90vw, 400px)", display: "flex", flexDirection: "column", gap: "1rem" }}>
             <span style={{ fontWeight: 700, fontSize: "1.05rem", color: "#cdd6f4" }}>Encerrar partida?</span>
-            <p style={{ color: "#a6adc8", fontSize: "0.88rem", margin: 0 }}>
+            <p style={{ color: "#ffffff", fontSize: "0.88rem", margin: 0 }}>
               Deseja marcar esta partida como <strong style={{ color: "#f38ba8" }}>encerrada</strong> ao salvar?
             </p>
             <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end", marginTop: "0.25rem" }}>
               <button
-                style={{ background: "none", border: "1px solid #45475a", borderRadius: 8, padding: "0.5rem 1rem", color: "#a6adc8", fontSize: "0.875rem", cursor: "pointer" }}
+                style={{ background: "none", border: "1px solid #45475a", borderRadius: 8, padding: "0.5rem 1rem", color: "#ffffff", fontSize: "0.875rem", cursor: "pointer" }}
                 onClick={() => { setShowFinishModal(false); setPendingFinish(false); void doSave(false); }}
               >
                 Não, manter status atual
               </button>
               <button
-                style={{ background: "#f38ba8", border: "none", borderRadius: 8, padding: "0.5rem 1.1rem", color: "#1e1e2e", fontSize: "0.875rem", fontWeight: 700, cursor: "pointer" }}
+                style={{ background: "#f38ba8", border: "none", borderRadius: 8, padding: "0.5rem 1.1rem", color: "#18265b", fontSize: "0.875rem", fontWeight: 700, cursor: "pointer" }}
                 onClick={() => { setShowFinishModal(false); setPendingFinish(true); void doSave(true); }}
               >
                 Sim, encerrar
@@ -498,7 +498,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(135deg, #1e1e2e 0%, #313244 100%)",
+    background: "linear-gradient(135deg, #18265b 0%, #313244 100%)",
     borderBottom: "1px solid #45475a",
     position: "relative",
     overflow: "hidden",
@@ -526,7 +526,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   muted: { color: "#cdd6f4" },
   matchInfo: {
-    background: "#181825", border: "1px solid #313244", borderRadius: "10px",
+    background: "#18265b", border: "1px solid #313244", borderRadius: "10px",
     padding: "1rem 1.25rem", marginBottom: "1.5rem",
     display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.5rem",
   },
@@ -537,7 +537,7 @@ const S: Record<string, React.CSSProperties> = {
     width: "100%", color: "#f38ba8", fontSize: "0.78rem", fontStyle: "italic",
   },
   form: {
-    background: "#181825", border: "1px solid #313244", borderRadius: "12px",
+    background: "#18265b", border: "1px solid #313244", borderRadius: "12px",
     padding: "1.5rem",
   },
   fieldset: {
@@ -558,7 +558,7 @@ const S: Record<string, React.CSSProperties> = {
     color: "#cdd6f4", fontSize: "0.82rem", fontWeight: 500,
   },
   scoreInput: {
-    background: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px",
+    background: "#18265b", border: "1px solid #45475a", borderRadius: "8px",
     padding: "0.6rem 0.75rem", color: "#cdd6f4", fontSize: "1.4rem",
     fontWeight: 700, textAlign: "center" as const, width: "100%",
     outline: "none",
@@ -578,12 +578,12 @@ const S: Record<string, React.CSSProperties> = {
     display: "flex", flexDirection: "column", gap: "0.4rem", flex: 1,
   },
   textInput: {
-    background: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px",
+    background: "#18265b", border: "1px solid #45475a", borderRadius: "8px",
     padding: "0.6rem 0.75rem", color: "#cdd6f4", fontSize: "0.95rem",
     width: "100%", outline: "none",
   },
   selectInput: {
-    background: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px",
+    background: "#18265b", border: "1px solid #45475a", borderRadius: "8px",
     padding: "0.6rem 0.75rem", color: "#cdd6f4", fontSize: "0.95rem",
     width: "100%", outline: "none", cursor: "pointer",
   },
@@ -607,12 +607,12 @@ const S: Record<string, React.CSSProperties> = {
   },
   btnSave: {
     background: "#89b4fa", border: "none", borderRadius: "8px",
-    padding: "0.6rem 1.5rem", color: "#1e1e2e", fontSize: "0.875rem",
+    padding: "0.6rem 1.5rem", color: "#18265b", fontSize: "0.875rem",
     fontWeight: 700, cursor: "pointer",
   },
   refRow: {
     display: "flex", alignItems: "center", gap: "0.75rem",
-    background: "#1e1e2e", border: "1px solid #313244", borderRadius: "8px",
+    background: "#18265b", border: "1px solid #313244", borderRadius: "8px",
     padding: "0.5rem 0.75rem",
   },
   refRemoveBtn: {

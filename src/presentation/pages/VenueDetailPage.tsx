@@ -245,7 +245,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
                   src={currentPhotoUrl ?? NO_VENUE_PHOTO}
                   onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_VENUE_PHOTO; }}
                   alt={`Foto ${venue.name}`}
-                  style={{ width: 260, height: 175, objectFit: "cover", borderRadius: 10, background: "#1e1e2e", display: "block" }}
+                  style={{ width: 260, height: 175, objectFit: "cover", borderRadius: 10, background: "#18265b", display: "block" }}
                 />
                 {isAdmin && venueRepository && (
                   <>
@@ -268,7 +268,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
                         height: "28px",
                         borderRadius: "50%",
                         backgroundColor: photoUploading ? "#45475a" : "#cba6f7",
-                        border: "2px solid #1e1e2e",
+                        border: "2px solid #18265b",
                         cursor: photoUploading ? "not-allowed" : "pointer",
                         display: "flex",
                         alignItems: "center",
@@ -400,7 +400,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "2rem",
     overflow: "hidden",
@@ -453,7 +453,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   infoChip: {
     background: "#313244",
-    color: "#a6adc8",
+    color: "#ffffff",
     borderRadius: "0.4rem",
     padding: "0.2rem 0.65rem",
     fontSize: "0.82rem",
@@ -465,7 +465,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: "2.5rem 2rem 4rem",
   },
   status: {
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.95rem",
   },
   errorText: {
@@ -503,7 +503,7 @@ const S: Record<string, React.CSSProperties> = {
     letterSpacing: "0.06em",
   },
   matchList: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     overflow: "hidden",
@@ -517,7 +517,7 @@ const S: Record<string, React.CSSProperties> = {
     display: "block",
   },
   matchCard: {
-    borderBottom: "1px solid #181825",
+    borderBottom: "1px solid #18265b",
     padding: "0.4rem 0",
   },
   matchCardRow: {
@@ -587,7 +587,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   mPhaseLabel: {
     fontSize: "0.62rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     textAlign: "right" as const,
   },
 
@@ -595,7 +595,7 @@ const S: Record<string, React.CSSProperties> = {
   statsStrip: {
     display: "flex",
     alignItems: "center",
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "10px",
     padding: "1rem 1.5rem",
@@ -618,7 +618,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   statLabel: {
     fontSize: "0.68rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     fontWeight: 600,
     textTransform: "uppercase" as const,
     letterSpacing: "0.06em",
@@ -656,7 +656,7 @@ const S: Record<string, React.CSSProperties> = {
     cursor: "default",
   },
   pageInfo: {
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.88rem",
     fontWeight: 600,
     minWidth: "4rem",
@@ -673,7 +673,7 @@ const S: Record<string, React.CSSProperties> = {
     gap: "0.75rem",
   },
   champCard: {
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "0.75rem 1rem",

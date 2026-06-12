@@ -153,7 +153,7 @@ export function AdminUsersPage() {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     position: "relative",
     overflow: "hidden",
@@ -166,7 +166,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   heroInner: { maxWidth: "1100px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
-  subtitle: { fontSize: "0.85rem", color: "#6c7086", margin: "4px 0 0" },
+  subtitle: { fontSize: "0.85rem", color: "#ffffff", margin: "4px 0 0" },
 
   page: { maxWidth: "1100px", margin: "0 auto", padding: "1.5rem 1.5rem 4rem" },
 
@@ -174,7 +174,7 @@ const S: Record<string, React.CSSProperties> = {
   search: {
     flex: 1,
     minWidth: 200,
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: 8,
     color: "#cdd6f4",
@@ -183,7 +183,7 @@ const S: Record<string, React.CSSProperties> = {
     outline: "none",
   },
   select: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: 8,
     color: "#cdd6f4",
@@ -200,17 +200,17 @@ const S: Record<string, React.CSSProperties> = {
     padding: "0.6rem 0.75rem",
     fontSize: "0.78rem",
     fontWeight: 600,
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase",
     letterSpacing: "0.05em",
     borderBottom: "1px solid #313244",
   },
   trRow: {
-    borderBottom: "1px solid #1e1e2e",
+    borderBottom: "1px solid #18265b",
     transition: "background 0.1s",
   },
   td: { padding: "0.7rem 0.75rem", fontSize: "0.9rem", color: "#cdd6f4", verticalAlign: "middle" },
-  empty: { padding: "2rem", textAlign: "center", color: "#6c7086", fontSize: "0.9rem" },
+  empty: { padding: "2rem", textAlign: "center", color: "#ffffff", fontSize: "0.9rem" },
   muted: { color: "#45475a" },
 
   badge: {
@@ -225,7 +225,7 @@ const S: Record<string, React.CSSProperties> = {
   active: { color: "#a6e3a1", fontSize: "0.85rem", fontWeight: 500 },
   inactive: { color: "#f38ba8", fontSize: "0.85rem", fontWeight: 500 },
 
-  hint: { color: "#6c7086", textAlign: "center", marginTop: "2rem" },
+  hint: { color: "#ffffff", textAlign: "center", marginTop: "2rem" },
   errorText: { color: "#f38ba8", background: "rgba(243,139,168,.1)", border: "1px solid rgba(243,139,168,.3)", borderRadius: 6, padding: "0.5rem 0.75rem" },
-  count: { color: "#6c7086", fontSize: "0.82rem", marginTop: "0.75rem" },
+  count: { color: "#ffffff", fontSize: "0.82rem", marginTop: "0.75rem" },
 };

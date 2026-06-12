@@ -230,7 +230,7 @@ export function MyProfilePage() {
     (m) => m.membership_status === "pendente_aprovacao" || m.membership_status === "ativo"
   );
 
-  if (loading) return <div style={S.page}><p style={{ color: "#6c7086", padding: 40 }}>Carregando…</p></div>;
+  if (loading) return <div style={S.page}><p style={{ color: "#ffffff", padding: 40 }}>Carregando…</p></div>;
   if (pageError) return <div style={S.page}><p style={{ color: "#f38ba8", padding: 40 }}>{pageError}</p></div>;
   if (!profile) return null;
 
@@ -461,7 +461,7 @@ export function MyProfilePage() {
                   }}
                 />
                 {photoFile && (
-                  <span style={{ fontSize: ".75rem", color: "#6c7086", maxWidth: 140, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  <span style={{ fontSize: ".75rem", color: "#ffffff", maxWidth: 140, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                     {photoFile.name}
                   </span>
                 )}
@@ -486,7 +486,7 @@ export function MyProfilePage() {
 function InfoItem({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-      <span style={{ fontSize: ".75rem", fontWeight: 600, color: "#6c7086", textTransform: "uppercase", letterSpacing: ".05em" }}>{label}</span>
+      <span style={{ fontSize: ".75rem", fontWeight: 600, color: "#ffffff", textTransform: "uppercase", letterSpacing: ".05em" }}>{label}</span>
       <span style={{ fontSize: ".95rem", color: "#cdd6f4" }}>{value}</span>
     </div>
   );
@@ -497,7 +497,7 @@ function StatusBadge({ status }: { status: string }) {
     pendente_aprovacao: { label: "⏳ Pendente de aprovação", color: "#f9e2af", bg: "rgba(249,226,175,.15)" },
     ativo: { label: "✓ Aprovado", color: "#a6e3a1", bg: "rgba(166,227,161,.15)" },
     rejeitado: { label: "✗ Rejeitado", color: "#f38ba8", bg: "rgba(243,139,168,.15)" },
-    sem_time: { label: "Sem time", color: "#6c7086", bg: "rgba(108,112,134,.15)" },
+    sem_time: { label: "Sem time", color: "#ffffff", bg: "rgba(108,112,134,.15)" },
   };
   const s = map[status] ?? { label: status, color: "#cdd6f4", bg: "transparent" };
   return (
@@ -510,7 +510,7 @@ function StatusBadge({ status }: { status: string }) {
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const S: Record<string, React.CSSProperties> = {
-  page: { minHeight: "100vh", backgroundColor: "#1e1e2e", color: "#cdd6f4", padding: "32px 16px 80px" },
+  page: { minHeight: "100vh", backgroundColor: "#18265b", color: "#cdd6f4", padding: "32px 16px 80px" },
   container: { maxWidth: 680, margin: "0 auto", display: "flex", flexDirection: "column", gap: "1.5rem" },
 
   // Hero
@@ -528,7 +528,7 @@ const S: Record<string, React.CSSProperties> = {
   heroInfo: { flex: 1, minWidth: 0 },
   heroName: { margin: "0 0 2px", fontSize: "1.4rem", fontWeight: 800, color: "#cdd6f4" },
   heroNickname: { margin: "0 0 4px", color: "#89b4fa", fontSize: "1rem", fontStyle: "italic" },
-  heroEmail: { margin: 0, fontSize: ".82rem", color: "#6c7086" },
+  heroEmail: { margin: 0, fontSize: ".82rem", color: "#ffffff" },
   btnEdit: {
     padding: ".5rem 1.1rem", background: "transparent", color: "#cba6f7",
     border: "1px solid #cba6f7", borderRadius: 8, fontWeight: 600, cursor: "pointer",
@@ -551,16 +551,16 @@ const S: Record<string, React.CSSProperties> = {
   } as React.CSSProperties,
   // Sections
   section: { background: "#313244", borderRadius: 16, padding: "22px 24px", display: "flex", flexDirection: "column", gap: "0.875rem" },
-  sectionTitle: { margin: 0, fontSize: "1rem", fontWeight: 700, color: "#a6adc8" },
-  sectionSub: { margin: 0, fontSize: ".82rem", color: "#6c7086" },
+  sectionTitle: { margin: 0, fontSize: "1rem", fontWeight: 700, color: "#ffffff" },
+  sectionSub: { margin: 0, fontSize: ".82rem", color: "#ffffff" },
 
   // Membership
   membershipCard: {
-    background: "#1e1e2e", borderRadius: 10, padding: "12px 16px",
+    background: "#18265b", borderRadius: 10, padding: "12px 16px",
     display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8,
   },
   membershipTeam: { fontWeight: 700, color: "#89dceb" },
-  membershipSport: { color: "#6c7086", fontSize: ".85rem" },
+  membershipSport: { color: "#ffffff", fontSize: ".85rem" },
 
   // Info grid
   infoGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" },
@@ -569,26 +569,26 @@ const S: Record<string, React.CSSProperties> = {
   teamList: {
     display: "flex", flexDirection: "column", gap: 2,
     maxHeight: 200, overflowY: "auto",
-    border: "1px solid #45475a", borderRadius: 8, background: "#1e1e2e", padding: 4, marginTop: 4,
+    border: "1px solid #45475a", borderRadius: 8, background: "#18265b", padding: 4, marginTop: 4,
   },
   teamItem: { background: "none", border: "none", color: "#cdd6f4", padding: ".4rem .75rem", borderRadius: 6, cursor: "pointer", textAlign: "left", fontSize: ".9rem" },
   teamItemSelected: { background: "#313244", color: "#a6e3a1", fontWeight: 700 },
-  btnPrimary: { padding: ".6rem 1.2rem", background: "#a6e3a1", color: "#1e1e2e", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: ".9rem" },
+  btnPrimary: { padding: ".6rem 1.2rem", background: "#a6e3a1", color: "#18265b", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: ".9rem" },
 
   // Common
-  input: { background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: ".5rem .75rem", fontSize: ".9rem", outline: "none", width: "100%", boxSizing: "border-box" },
+  input: { background: "#18265b", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: ".5rem .75rem", fontSize: ".9rem", outline: "none", width: "100%", boxSizing: "border-box" },
   error: { color: "#f38ba8", background: "rgba(243,139,168,.1)", border: "1px solid rgba(243,139,168,.3)", borderRadius: 6, padding: ".5rem .75rem", fontSize: ".875rem" },
   ok: { color: "#a6e3a1", background: "rgba(166,227,161,.1)", border: "1px solid rgba(166,227,161,.3)", borderRadius: 6, padding: ".5rem .75rem", fontSize: ".875rem" },
 
   // Modal
   overlay: { position: "fixed", inset: 0, background: "rgba(0,0,0,.75)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: "1rem" },
-  modal: { background: "#1e1e2e", border: "1px solid #313244", borderRadius: 14, padding: "1.75rem", width: "100%", maxWidth: 500, maxHeight: "90vh", overflowY: "auto" },
+  modal: { background: "#18265b", border: "1px solid #313244", borderRadius: 14, padding: "1.75rem", width: "100%", maxWidth: 500, maxHeight: "90vh", overflowY: "auto" },
   modalTitle: { color: "#cba6f7", margin: "0 0 4px", fontSize: "1.15rem", fontWeight: 700 },
-  modalSub: { color: "#6c7086", fontSize: ".85rem", margin: "0 0 1.25rem" },
+  modalSub: { color: "#ffffff", fontSize: ".85rem", margin: "0 0 1.25rem" },
   fieldGroup: { display: "flex", flexDirection: "column", gap: 4, marginBottom: "0.9rem" },
-  label: { color: "#a6adc8", fontSize: ".8rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".04em" },
+  label: { color: "#ffffff", fontSize: ".8rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".04em" },
   row2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" },
   modalActions: { display: "flex", gap: 10, justifyContent: "flex-end", marginTop: "1.25rem" },
-  btnCancel: { padding: ".5rem 1rem", background: "transparent", color: "#a6adc8", border: "1px solid #45475a", borderRadius: 8, cursor: "pointer", fontSize: ".875rem" },
-  btnSave: { padding: ".5rem 1.2rem", background: "#89b4fa", color: "#1e1e2e", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: ".875rem" },
+  btnCancel: { padding: ".5rem 1rem", background: "transparent", color: "#ffffff", border: "1px solid #45475a", borderRadius: 8, cursor: "pointer", fontSize: ".875rem" },
+  btnSave: { padding: ".5rem 1.2rem", background: "#89b4fa", color: "#18265b", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: ".875rem" },
 };

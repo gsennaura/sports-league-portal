@@ -8,19 +8,23 @@ import type { MatchRepository, MatchResultPayload, MatchUpdatePayload } from "@d
 export class ApiMatchRepository implements MatchRepository {
   constructor(private readonly baseUrl: string) {}
 
-  async listUpcoming(days = 20): Promise<UpcomingMatch[]> {
-    const response = await fetch(`${this.baseUrl}/matches/upcoming?days=${days}`);
+  async listUpcoming(days = 20, leagueId?: string): Promise<UpcomingMatch[]> {
+    const params = new URLSearchParams({ days: String(days) });
+    if (leagueId) params.set("league_id", leagueId);
+    const response = await fetch(`${this.baseUrl}/matches/upcoming?${params}`);
     if (!response.ok) {
       throw new Error(`Falha ao buscar próximas partidas: ${response.status}`);
     }
     return response.json() as Promise<UpcomingMatch[]>;
   }
 
-  async listRecent(days = 7): Promise<UpcomingMatch[]> {
+  async listRecent(days = 7, leagueId?: string): Promise<UpcomingMatch[]> {
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const untilDate = yesterday.toISOString().split("T")[0];
-    const response = await fetch(`${this.baseUrl}/matches/recent?days=${days}&until_date=${untilDate}`);
+    const params = new URLSearchParams({ days: String(days), until_date: untilDate });
+    if (leagueId) params.set("league_id", leagueId);
+    const response = await fetch(`${this.baseUrl}/matches/recent?${params}`);
     if (!response.ok) {
       throw new Error(`Falha ao buscar últimas partidas: ${response.status}`);
     }

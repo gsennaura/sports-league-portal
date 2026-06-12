@@ -133,7 +133,7 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "2.5rem",
     overflow: "hidden",
@@ -176,7 +176,7 @@ const S: Record<string, React.CSSProperties> = {
     margin: 0,
     marginTop: "0.15rem",
     fontSize: "1rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     lineHeight: 1.6,
   },
   page: {
@@ -194,7 +194,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: "0.6rem 1rem",
     borderRadius: "8px",
     border: "1px solid #313244",
-    background: "#1e1e2e",
+    background: "#18265b",
     color: "#cdd6f4",
     fontSize: "0.95rem",
     outline: "none",
@@ -204,14 +204,14 @@ const S: Record<string, React.CSSProperties> = {
     borderRadius: "8px",
     border: "none",
     background: "#cba6f7",
-    color: "#1e1e2e",
+    color: "#18265b",
     fontWeight: 700,
     fontSize: "0.9rem",
     cursor: "pointer",
     whiteSpace: "nowrap",
   },
   hint: {
-    color: "#6c7086",
+    color: "#ffffff",
     fontSize: "0.9rem",
   },
   error: {
@@ -228,7 +228,7 @@ const S: Record<string, React.CSSProperties> = {
     flexDirection: "row",
     alignItems: "center",
     gap: "0.75rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     overflow: "hidden",
@@ -241,7 +241,7 @@ const S: Record<string, React.CSSProperties> = {
     height: 44,
     flexShrink: 0,
     objectFit: "cover" as const,
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
   },
   cardBody: {
     display: "flex",
@@ -260,7 +260,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   cardMeta: {
     fontSize: "0.72rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     whiteSpace: "nowrap" as const,
     overflow: "hidden",
     textOverflow: "ellipsis",

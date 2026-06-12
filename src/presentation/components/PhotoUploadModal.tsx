@@ -89,7 +89,7 @@ const S: Record<string, React.CSSProperties> = {
     zIndex: 1000,
   },
   modal: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "12px",
     padding: "2rem",
@@ -123,8 +123,8 @@ const S: Record<string, React.CSSProperties> = {
     padding: "0.5rem 1.1rem", cursor: "pointer",
     width: "100%",
   },
-  fileName: { fontSize: "0.78rem", color: "#a6adc8", margin: 0, wordBreak: "break-all", textAlign: "center" },
-  hint: { fontSize: "0.72rem", color: "#6c7086", margin: 0 },
+  fileName: { fontSize: "0.78rem", color: "#ffffff", margin: 0, wordBreak: "break-all", textAlign: "center" },
+  hint: { fontSize: "0.72rem", color: "#ffffff", margin: 0 },
   actions: { display: "flex", gap: "0.75rem", width: "100%", justifyContent: "flex-end", marginTop: "0.25rem" },
   btnCancel: {
     backgroundColor: "transparent", border: "1px solid #313244",

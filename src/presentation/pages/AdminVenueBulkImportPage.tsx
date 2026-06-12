@@ -367,7 +367,7 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                     return (
                       <div key={name} style={{ ...S.cityChip, ...(checked ? (found ? S.cityChipOk : S.cityChipErr) : {}) }}>
                         <span>{name}</span>
-                        {!checked && <span style={{ color: "#6c7086", fontSize: "0.7rem" }}>—</span>}
+                        {!checked && <span style={{ color: "#ffffff", fontSize: "0.7rem" }}>—</span>}
                         {found   && <span style={{ color: "#a6e3a1", fontSize: "0.75rem", fontWeight: 700 }}>✓</span>}
                         {checked && !found && (
                           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
@@ -378,7 +378,7 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                               </span>
                             )}
                             {!suggestion && (
-                              <span style={{ color: "#6c7086", fontSize: "0.65rem" }}>Nenhum nome parecido no sistema</span>
+                              <span style={{ color: "#ffffff", fontSize: "0.65rem" }}>Nenhum nome parecido no sistema</span>
                             )}
                           </div>
                         )}
@@ -450,7 +450,7 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                 <tbody>
                   {rows.map((row, i) => {
                     const cityOk = cityResolved(row.cidade);
-                    const rowBg = i % 2 === 0 ? "#1e1e2e" : "#181825";
+                    const rowBg = i % 2 === 0 ? "#18265b" : "#18265b";
                     return (
                       <tr key={row._id} style={{ backgroundColor: rowBg }}>
                         <td style={S.tdNum}>{i + 1}</td>
@@ -612,36 +612,36 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #89b4fa, #a6e3a1)" },
   heroInner: { maxWidth: "1300px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: "0 0 0.2rem" },
-  subtitle: { color: "#a6adc8", fontSize: "0.875rem", margin: 0 },
+  subtitle: { color: "#ffffff", fontSize: "0.875rem", margin: 0 },
   page: { maxWidth: "1300px", margin: "0 auto", padding: "2rem 1.5rem 4rem" },
 
   uploadSection: { display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" },
   uploadBox: {
     width: "100%", maxWidth: "480px", border: "2px dashed #45475a", borderRadius: "12px",
-    padding: "2.5rem", textAlign: "center", cursor: "pointer", backgroundColor: "#1e1e2e",
+    padding: "2.5rem", textAlign: "center", cursor: "pointer", backgroundColor: "#18265b",
   },
   uploadIcon: { fontSize: "2.5rem", display: "block", marginBottom: "0.5rem" },
   uploadLabel: { color: "#cdd6f4", fontWeight: 600, margin: "0 0 0.25rem" },
-  uploadHint: { color: "#6c7086", fontSize: "0.8rem", margin: 0 },
+  uploadHint: { color: "#ffffff", fontSize: "0.8rem", margin: 0 },
   fileName: { color: "#a6e3a1", fontSize: "0.85rem", marginTop: "0.75rem", margin: "0.75rem 0 0" },
   btnTemplate: {
     background: "none", border: "1px solid #45475a", color: "#cdd6f4",
     padding: "0.4rem 1rem", borderRadius: "6px", cursor: "pointer", fontSize: "0.85rem",
   },
-  hint: { color: "#6c7086", fontSize: "0.8rem", textAlign: "center" },
+  hint: { color: "#ffffff", fontSize: "0.8rem", textAlign: "center" },
 
   resolveCard: {
-    backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px",
+    backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px",
     padding: "1.25rem", marginBottom: "1.25rem",
   },
   resolveHeader: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem", marginBottom: "1rem" },
   resolveTitle: { color: "#cdd6f4", fontSize: "1rem", fontWeight: 700, margin: "0 0 0.25rem" },
-  resolveDesc: { color: "#a6adc8", fontSize: "0.85rem", margin: 0 },
+  resolveDesc: { color: "#ffffff", fontSize: "0.85rem", margin: 0 },
   btnResolve: {
     backgroundColor: "#313244", border: "1px solid #45475a", color: "#cdd6f4",
     padding: "0.5rem 1rem", borderRadius: "7px", cursor: "pointer",
@@ -662,12 +662,12 @@ const S: Record<string, React.CSSProperties> = {
   tableWrap: { overflowX: "auto", borderRadius: "8px", border: "1px solid #313244" },
   table: { width: "100%", borderCollapse: "collapse", fontSize: "0.8rem" },
   th: {
-    padding: "0.6rem 0.6rem", textAlign: "left", color: "#a6adc8",
-    backgroundColor: "#181825", fontWeight: 600, whiteSpace: "nowrap",
+    padding: "0.6rem 0.6rem", textAlign: "left", color: "#ffffff",
+    backgroundColor: "#18265b", fontWeight: 600, whiteSpace: "nowrap",
     borderBottom: "1px solid #313244",
   },
   td: { padding: "0.3rem 0.4rem", color: "#cdd6f4", verticalAlign: "middle" },
-  tdNum: { padding: "0.3rem 0.6rem", color: "#6c7086", fontSize: "0.75rem", textAlign: "center", verticalAlign: "middle" },
+  tdNum: { padding: "0.3rem 0.6rem", color: "#ffffff", fontSize: "0.75rem", textAlign: "center", verticalAlign: "middle" },
 
   cell: {
     background: "#313244", border: "1px solid #45475a", color: "#cdd6f4",
@@ -678,7 +678,7 @@ const S: Record<string, React.CSSProperties> = {
 
   ok: { color: "#a6e3a1", fontSize: "0.75rem", fontWeight: 700 },
   warn: { color: "#f38ba8", fontSize: "0.75rem", fontWeight: 700 },
-  muted: { color: "#6c7086", fontSize: "0.75rem" },
+  muted: { color: "#ffffff", fontSize: "0.75rem" },
 
   btnDel: { background: "none", border: "none", color: "#f38ba8", cursor: "pointer", fontSize: "0.9rem", padding: "0.15rem 0.35rem" },
 
@@ -687,7 +687,7 @@ const S: Record<string, React.CSSProperties> = {
 
   actions: { display: "flex", gap: "1rem", marginTop: "1.5rem", alignItems: "center" },
   btnPrimary: {
-    background: "#89b4fa", color: "#1e1e2e", border: "none",
+    background: "#89b4fa", color: "#18265b", border: "none",
     padding: "0.65rem 1.5rem", borderRadius: "8px", fontWeight: 700,
     cursor: "pointer", fontSize: "0.9rem", textDecoration: "none",
   },

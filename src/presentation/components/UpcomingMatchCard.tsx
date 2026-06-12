@@ -83,7 +83,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: "block",
   },
   card: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     padding: "0.6rem 1rem",

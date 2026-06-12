@@ -423,7 +423,7 @@ const TS: Record<string, React.CSSProperties> = {
   },
   teamHeaderCenter: {
     fontSize: "0.7rem",
-    color: "#585b70",
+    color: "#ffffff",
   },
   periodBlock: {
     borderBottom: "1px solid #313244",
@@ -435,7 +435,7 @@ const TS: Record<string, React.CSSProperties> = {
     letterSpacing: "0.08em",
     color: "#cdd6f4",
     padding: "0.35rem 1rem",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
   },
   periodBody: {
@@ -531,7 +531,7 @@ const TS: Record<string, React.CSSProperties> = {
     zIndex: 1000,
   },
   modal: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "10px",
     width: "min(92vw, 420px)",
@@ -585,7 +585,7 @@ const TS: Record<string, React.CSSProperties> = {
   },
   select: {
     width: "100%",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -594,7 +594,7 @@ const TS: Record<string, React.CSSProperties> = {
   },
   input: {
     width: "100%",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -608,7 +608,7 @@ const TS: Record<string, React.CSSProperties> = {
     gap: "0.4rem",
   },
   seg: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -639,7 +639,7 @@ const TS: Record<string, React.CSSProperties> = {
     backgroundColor: "#89b4fa",
     border: "none",
     borderRadius: "6px",
-    color: "#1e1e2e",
+    color: "#18265b",
     cursor: "pointer",
     fontSize: "0.85rem",
     fontWeight: 700,

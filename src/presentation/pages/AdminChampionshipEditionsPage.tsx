@@ -30,7 +30,7 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 const STATUS_STYLE: Record<string, React.CSSProperties> = {
-  planned:  { color: "#a6adc8", backgroundColor: "#1e1e2e", border: "1px solid #45475a" },
+  planned:  { color: "#ffffff", backgroundColor: "#18265b", border: "1px solid #45475a" },
   ongoing:  { color: "#a6e3a1", backgroundColor: "#1a2e1f", border: "1px solid #2a4a2f" },
   finished: { color: "#89b4fa", backgroundColor: "#1a1f3a", border: "1px solid #2a3a6a" },
 };
@@ -200,7 +200,7 @@ export function AdminChampionshipEditionsPage() {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     position: "relative",
     overflow: "hidden",
@@ -218,7 +218,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   back: { color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
-  subtitle: { margin: "0.25rem 0 0", fontSize: "0.85rem", color: "#6c7086" },
+  subtitle: { margin: "0.25rem 0 0", fontSize: "0.85rem", color: "#ffffff" },
   btnDeleteChamp: {
     marginTop: "0.75rem",
     background: "none",
@@ -242,11 +242,11 @@ const S: Record<string, React.CSSProperties> = {
   },
 
   page: { maxWidth: "1100px", margin: "0 auto", padding: "2rem 1.5rem" },
-  hint: { color: "#6c7086", fontSize: "0.9rem" },
+  hint: { color: "#ffffff", fontSize: "0.9rem" },
   errorText: { color: "#f38ba8", fontSize: "0.9rem" },
 
   emptyState: { display: "flex", flexDirection: "column" as const, alignItems: "center", gap: "1.25rem", paddingTop: "3rem" },
-  emptyText: { color: "#6c7086", fontSize: "0.95rem", margin: 0 },
+  emptyText: { color: "#ffffff", fontSize: "0.95rem", margin: 0 },
   btnNewLarge: {
     backgroundColor: "#a6e3a1",
     borderRadius: "8px",
@@ -260,7 +260,7 @@ const S: Record<string, React.CSSProperties> = {
   tableWrap: { overflowX: "auto" as const, borderRadius: "8px", border: "1px solid #313244" },
   table: { width: "100%", borderCollapse: "collapse" as const, fontSize: "0.9rem" },
   th: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     color: "#cdd6f4",
     fontWeight: 600,
     fontSize: "0.84rem",
@@ -271,9 +271,9 @@ const S: Record<string, React.CSSProperties> = {
     borderBottom: "1px solid #313244",
     whiteSpace: "nowrap" as const,
   },
-  trRow: { borderBottom: "1px solid #1e1e2e" },
+  trRow: { borderBottom: "1px solid #18265b" },
   td: { padding: "0.75rem 1rem", color: "#cdd6f4" },
-  tdMuted: { padding: "0.75rem 1rem", color: "#a6adc8", fontSize: "0.875rem" },
+  tdMuted: { padding: "0.75rem 1rem", color: "#ffffff", fontSize: "0.875rem" },
   tdYear: { padding: "0.75rem 1rem", color: "#cba6f7", fontFamily: "monospace", fontWeight: 700, fontSize: "1rem" },
   tdAction: { padding: "0.75rem 1rem", textAlign: "right" as const },
   statusBadge: {

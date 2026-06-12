@@ -35,32 +35,32 @@ type ResultEntry = { athleteId: string; name: string; action: "register" | "unre
 );
 
 const S: Record<string, React.CSSProperties> = {
-  page: { minHeight: "100vh", background: "#1e1e2e", color: "#cdd6f4" },
+  page: { minHeight: "100vh", background: "#18265b", color: "#cdd6f4" },
   inner: { maxWidth: "1100px", margin: "0 auto", padding: "32px 24px" },
   back: { color: "#89b4fa", textDecoration: "none", fontSize: "14px", display: "inline-block", marginBottom: "16px" },
   title: { fontSize: "22px", fontWeight: 700, color: "#cdd6f4", margin: "0 0 4px" },
-  subtitle: { fontSize: "14px", color: "#a6adc8", margin: "0 0 24px" },
-  card: { background: "#181825", borderRadius: "10px", padding: "20px", marginBottom: "20px" },
-  label: { display: "block", fontSize: "13px", color: "#a6adc8", marginBottom: "6px" },
+  subtitle: { fontSize: "14px", color: "#ffffff", margin: "0 0 24px" },
+  card: { background: "#18265b", borderRadius: "10px", padding: "20px", marginBottom: "20px" },
+  label: { display: "block", fontSize: "13px", color: "#ffffff", marginBottom: "6px" },
   select: { width: "100%", maxWidth: "480px", padding: "8px 12px", background: "#313244", color: "#cdd6f4", border: "1px solid #45475a", borderRadius: "6px", fontSize: "14px" },
   table: { width: "100%", borderCollapse: "collapse" as const, fontSize: "14px" },
-  th: { textAlign: "left" as const, padding: "10px 12px", color: "#a6adc8", borderBottom: "1px solid #313244", fontWeight: 600, fontSize: "12px", textTransform: "uppercase" as const },
+  th: { textAlign: "left" as const, padding: "10px 12px", color: "#ffffff", borderBottom: "1px solid #313244", fontWeight: 600, fontSize: "12px", textTransform: "uppercase" as const },
   td: { padding: "10px 12px", borderBottom: "1px solid #313244", verticalAlign: "middle" as const },
   checkbox: { width: "16px", height: "16px", cursor: "pointer", accentColor: "#89b4fa" },
-  btnPrimary: { padding: "10px 20px", background: "#89b4fa", color: "#1e1e2e", border: "none", borderRadius: "6px", fontWeight: 700, fontSize: "14px", cursor: "pointer" },
-  btnDisabled: { padding: "10px 20px", background: "#45475a", color: "#6c7086", border: "none", borderRadius: "6px", fontWeight: 700, fontSize: "14px", cursor: "not-allowed" },
-  loader: { textAlign: "center" as const, color: "#a6adc8", padding: "40px" },
-  empty: { textAlign: "center" as const, color: "#6c7086", padding: "32px" },
+  btnPrimary: { padding: "10px 20px", background: "#89b4fa", color: "#18265b", border: "none", borderRadius: "6px", fontWeight: 700, fontSize: "14px", cursor: "pointer" },
+  btnDisabled: { padding: "10px 20px", background: "#45475a", color: "#ffffff", border: "none", borderRadius: "6px", fontWeight: 700, fontSize: "14px", cursor: "not-allowed" },
+  loader: { textAlign: "center" as const, color: "#ffffff", padding: "40px" },
+  empty: { textAlign: "center" as const, color: "#ffffff", padding: "32px" },
   resultOk: { color: "#a6e3a1" },
   resultFail: { color: "#f38ba8" },
   selectAll: { fontSize: "12px", color: "#89b4fa", background: "none", border: "none", cursor: "pointer", padding: "4px 0" },
 };
 
 function badgeStyle(status: string): React.CSSProperties {
-  if (status === "approved") return { display: "inline-block", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#a6e3a1", color: "#1e1e2e" };
-  if (status === "rejected") return { display: "inline-block", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#f38ba8", color: "#1e1e2e" };
+  if (status === "approved") return { display: "inline-block", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#a6e3a1", color: "#18265b" };
+  if (status === "rejected") return { display: "inline-block", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#f38ba8", color: "#18265b" };
   if (status === "withdrawn") return { display: "inline-block", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#45475a", color: "#cdd6f4" };
-  return { display: "inline-block", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#f9e2af", color: "#1e1e2e" };
+  return { display: "inline-block", padding: "2px 8px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#f9e2af", color: "#18265b" };
 }
 
 export function AdminTeamBulkRegistrationPage({
@@ -376,13 +376,13 @@ export function AdminTeamBulkRegistrationPage({
             <label style={S.label}>
               Campeonato
               {teamCategory && (
-                <span style={{ color: "#6c7086", fontWeight: 400, marginLeft: "6px" }}>
-                  (categoria: <strong style={{ color: "#a6adc8" }}>{teamCategory}</strong>)
+                <span style={{ color: "#ffffff", fontWeight: 400, marginLeft: "6px" }}>
+                  (categoria: <strong style={{ color: "#ffffff" }}>{teamCategory}</strong>)
                 </span>
               )}
             </label>
             {champsLoading ? (
-              <p style={{ color: "#a6adc8", fontSize: "14px", margin: 0 }}>Carregando campeonatos...</p>
+              <p style={{ color: "#ffffff", fontSize: "14px", margin: 0 }}>Carregando campeonatos...</p>
             ) : (
               <select
                 style={{ ...S.select, opacity: !selectedLeagueId ? 0.5 : 1 }}
@@ -464,9 +464,9 @@ export function AdminTeamBulkRegistrationPage({
                         />
                       </td>
                       <td style={{ ...S.td, fontWeight: 500 }}>{row.name}</td>
-                      <td style={{ ...S.td, color: "#a6adc8" }}>{row.position ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#a6adc8" }}>{row.jerseyNumber ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#a6adc8", fontFamily: "monospace", fontSize: "12px" }}>
+                      <td style={{ ...S.td, color: "#ffffff" }}>{row.position ?? "—"}</td>
+                      <td style={{ ...S.td, color: "#ffffff" }}>{row.jerseyNumber ?? "—"}</td>
+                      <td style={{ ...S.td, color: "#ffffff", fontFamily: "monospace", fontSize: "12px" }}>
                         {row.registration?.registration_number ?? "—"}
                       </td>
                       <td style={S.td}>
@@ -486,7 +486,7 @@ export function AdminTeamBulkRegistrationPage({
                           </span>
                         ) : row.status === "ineligible" ? (
                           <span
-                            style={{ color: "#6c7086", fontSize: "12px" }}
+                            style={{ color: "#ffffff", fontSize: "12px" }}
                             title="Atleta não elegível: clube pode não estar filiado à liga ou o time não participa desta edição."
                           >
                             Não elegível
@@ -519,7 +519,7 @@ export function AdminTeamBulkRegistrationPage({
                     ].filter(Boolean).join(" · ")}
               </button>
               {!submitting && (
-                <span style={{ fontSize: "13px", color: "#a6adc8" }}>
+                <span style={{ fontSize: "13px", color: "#ffffff" }}>
                   {[
                     toRegisterCount > 0 && `${toRegisterCount} para inscrever`,
                     toUnregisterCount > 0 && `${toUnregisterCount} para desinscrever`,
@@ -564,7 +564,7 @@ export function AdminTeamBulkRegistrationPage({
         onClick={() => setConfirmOpen(false)}
       >
         <div
-          style={{ background: "#1e1e2e", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "460px" }}
+          style={{ background: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "460px" }}
           onClick={(e) => e.stopPropagation()}
         >
           <h3 style={{ margin: "0 0 1rem", color: "#cdd6f4", fontSize: "1.1rem" }}>Confirmar alterações</h3>
@@ -599,7 +599,7 @@ export function AdminTeamBulkRegistrationPage({
               Cancelar
             </button>
             <button
-              style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "#89b4fa", color: "#1e1e2e", fontWeight: 700, cursor: "pointer" }}
+              style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "#89b4fa", color: "#18265b", fontWeight: 700, cursor: "pointer" }}
               onClick={() => { setConfirmOpen(false); void handleSubmit(); }}
             >
               Confirmar

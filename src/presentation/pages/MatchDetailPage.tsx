@@ -299,7 +299,7 @@ function RefereesSection({ referees }: { referees: MatchReferee[] }) {
           to={`/arbitros/${ref.referee_id}`}
           style={{
             display: "flex", alignItems: "center", gap: "0.65rem",
-            background: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px",
+            background: "#18265b", border: "1px solid #313244", borderRadius: "10px",
             padding: "0.5rem 0.85rem 0.5rem 0.5rem", textDecoration: "none",
             minWidth: "180px",
           }}
@@ -308,14 +308,14 @@ function RefereesSection({ referees }: { referees: MatchReferee[] }) {
             src={ref.referee_photo_url ?? NO_REFEREE_PHOTO}
             alt={ref.referee_name ?? ""}
             onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_REFEREE_PHOTO; }}
-            style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" as const, flexShrink: 0, backgroundColor: "#181825" }}
+            style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" as const, flexShrink: 0, backgroundColor: "#18265b" }}
           />
           <div style={{ display: "flex", flexDirection: "column" as const, gap: "0.15rem", minWidth: 0 }}>
             <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#cdd6f4", whiteSpace: "nowrap" as const, overflow: "hidden", textOverflow: "ellipsis" }}>
               {ref.referee_nickname ?? ref.referee_name ?? "Árbitro"}
             </span>
             <span style={{
-              fontSize: "0.68rem", fontWeight: 700, color: "#1e1e2e",
+              fontSize: "0.68rem", fontWeight: 700, color: "#18265b",
               background: ROLE_COLORS[ref.role] ?? "#cdd6f4",
               borderRadius: "4px", padding: "0 5px", lineHeight: "1.5",
               alignSelf: "flex-start",
@@ -451,7 +451,7 @@ const RS: Record<string, React.CSSProperties> = {
     border: "none",
     borderBottom: "2px solid transparent",
     marginBottom: "-2px",
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.85rem",
     fontWeight: 600,
     padding: "0.5rem 0.75rem",
@@ -484,7 +484,7 @@ function FormRow({ form }: { form: FormResult[] }) {
             height: 20,
             borderRadius: "4px",
             backgroundColor: FORM_COLORS[r],
-            color: "#1e1e2e",
+            color: "#18265b",
             fontSize: "0.65rem",
             fontWeight: 700,
             display: "flex",
@@ -854,7 +854,7 @@ const QS: Record<string, React.CSSProperties> = {
     padding: "0 0 0.4rem 0",
   },
   popoverInner: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "8px",
     padding: "0.6rem 0.75rem",
@@ -876,7 +876,7 @@ const QS: Record<string, React.CSSProperties> = {
   label: {
     display: "block",
     fontSize: "0.7rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     marginBottom: "0.2rem",
   },
   select: {
@@ -906,7 +906,7 @@ const QS: Record<string, React.CSSProperties> = {
     background: "none",
     border: "1px solid #45475a",
     borderRadius: "5px",
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.75rem",
     padding: "0.25rem 0.6rem",
     cursor: "pointer",
@@ -915,7 +915,7 @@ const QS: Record<string, React.CSSProperties> = {
     background: "#89b4fa",
     border: "none",
     borderRadius: "5px",
-    color: "#1e1e2e",
+    color: "#18265b",
     fontSize: "0.75rem",
     fontWeight: 700,
     padding: "0.25rem 0.75rem",
@@ -930,7 +930,7 @@ const QS: Record<string, React.CSSProperties> = {
 
 const S: Record<string, React.CSSProperties> = {
   header: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     padding: "1rem 1.5rem",
   },
@@ -991,7 +991,7 @@ const S: Record<string, React.CSSProperties> = {
 
   // ── Score card ──
   scoreCard: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "10px",
     padding: "1.5rem 1.5rem",
@@ -1085,7 +1085,7 @@ const S: Record<string, React.CSSProperties> = {
     marginBottom: "0.5rem",
   },
   sectionBody: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     overflow: "hidden",
@@ -1142,7 +1142,7 @@ const S: Record<string, React.CSSProperties> = {
     transition: "width 0.3s",
   },
   winBarDraw: {
-    backgroundColor: "#585b70",
+    backgroundColor: "#ffffff",
     height: "100%",
   },
   winBarAway: {
@@ -1208,7 +1208,7 @@ const S: Record<string, React.CSSProperties> = {
     textTransform: "uppercase",
     letterSpacing: "0.08em",
     padding: "0.5rem 1rem",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
   },
   h2hMatchLink: {
@@ -1222,7 +1222,7 @@ const S: Record<string, React.CSSProperties> = {
     alignItems: "center",
     gap: "0.75rem",
     padding: "0.45rem 1rem",
-    borderBottom: "1px solid #181825",
+    borderBottom: "1px solid #18265b",
   },
   h2hDateCol: {
     display: "flex",
@@ -1305,7 +1305,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   rosterEmpty: {
     fontSize: "0.75rem",
-    color: "#585b70",
+    color: "#ffffff",
     fontStyle: "italic" as const,
   },
   rosterRow: {

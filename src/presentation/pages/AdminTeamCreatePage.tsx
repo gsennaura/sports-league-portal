@@ -340,12 +340,12 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #89b4fa, #a6e3a1)" },
   heroInner: { maxWidth: "860px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: "0 0 0.2rem" },
-  subtitle: { color: "#a6adc8", fontSize: "0.875rem", margin: 0 },
+  subtitle: { color: "#ffffff", fontSize: "0.875rem", margin: 0 },
 
   page: { maxWidth: "860px", margin: "0 auto", padding: "2rem 1.5rem 4rem" },
   form: { display: "flex", flexDirection: "column", gap: "1.25rem" },
@@ -355,15 +355,15 @@ const S: Record<string, React.CSSProperties> = {
 
   fieldset: { border: "1px solid #313244", borderRadius: "10px", padding: "1.25rem 1.5rem", margin: 0 },
   legend: { color: "#cba6f7", fontSize: "0.84rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", padding: "0 0.5rem" },
-  fieldHint: { color: "#a6adc8", fontSize: "0.82rem", margin: "0 0 0.9rem", fontStyle: "italic" },
-  fieldNote: { color: "#6c7086", fontSize: "0.78rem", marginTop: "0.3rem" },
+  fieldHint: { color: "#ffffff", fontSize: "0.82rem", margin: "0 0 0.9rem", fontStyle: "italic" },
+  fieldNote: { color: "#ffffff", fontSize: "0.78rem", marginTop: "0.3rem" },
 
   grid3: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" },
   fieldGroup: { display: "flex", flexDirection: "column", gap: "0.35rem" },
   label: { color: "#cdd6f4", fontSize: "0.825rem", fontWeight: 500 },
   required: { color: "#f38ba8" },
-  input: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.5rem 0.75rem", outline: "none", boxSizing: "border-box", width: "100%" },
-  inputLocked: { backgroundColor: "#1e1e2e", color: "#a6adc8", cursor: "default", borderColor: "#45475a" },
+  input: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.5rem 0.75rem", outline: "none", boxSizing: "border-box", width: "100%" },
+  inputLocked: { backgroundColor: "#18265b", color: "#ffffff", cursor: "default", borderColor: "#45475a" },
   checkLabel: { display: "flex", alignItems: "center", fontSize: "0.8rem", color: "#89b4fa", marginTop: "0.4rem", cursor: "pointer", userSelect: "none" },
   select: { cursor: "pointer", appearance: "auto" },
   clearBtn: { marginTop: "0.4rem", background: "none", border: "1px solid #5a2a30", borderRadius: "5px", color: "#f38ba8", fontSize: "0.78rem", padding: "0.25rem 0.7rem", cursor: "pointer", width: "fit-content" },

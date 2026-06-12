@@ -144,7 +144,7 @@ export function AdminLeaguesPage({ listLeagues }: Props) {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     position: "relative",
     overflow: "hidden",
@@ -181,7 +181,7 @@ const S: Record<string, React.CSSProperties> = {
   searchWrap: { marginTop: "1rem" },
   searchInput: {
     width: "100%",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -200,7 +200,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   table: { width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" },
   th: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     color: "#cdd6f4",
     fontWeight: 600,
     fontSize: "0.84rem",
@@ -211,7 +211,7 @@ const S: Record<string, React.CSSProperties> = {
     borderBottom: "1px solid #313244",
     whiteSpace: "nowrap",
   },
-  trRow: { borderBottom: "1px solid #1e1e2e" },
+  trRow: { borderBottom: "1px solid #18265b" },
   td: { padding: "0.7rem 1rem", color: "#cdd6f4" },
   tdMuted: { padding: "0.7rem 1rem", color: "#cdd6f4" },
   tdMono: { padding: "0.7rem 1rem", color: "#89b4fa", fontFamily: "monospace", fontWeight: 600, fontSize: "0.85rem" },
@@ -229,7 +229,7 @@ const S: Record<string, React.CSSProperties> = {
     whiteSpace: "nowrap",
   },
   badgeGreen: { backgroundColor: "#1a2a1f", color: "#a6e3a1", border: "1px solid #2a5a30", borderRadius: "4px", padding: "0.15rem 0.5rem", fontSize: "0.82rem", fontWeight: 600 },
-  badgeGray: { backgroundColor: "#1e1e2e", color: "#cdd6f4", border: "1px solid #313244", borderRadius: "4px", padding: "0.15rem 0.5rem", fontSize: "0.82rem", fontWeight: 600 },
+  badgeGray: { backgroundColor: "#18265b", color: "#cdd6f4", border: "1px solid #313244", borderRadius: "4px", padding: "0.15rem 0.5rem", fontSize: "0.82rem", fontWeight: 600 },
   footer: {
     display: "flex",
     alignItems: "center",
@@ -241,7 +241,7 @@ const S: Record<string, React.CSSProperties> = {
   count: { color: "#cdd6f4", fontSize: "0.85rem" },
   pagination: { display: "flex", alignItems: "center", gap: "0.5rem" },
   pgBtn: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",

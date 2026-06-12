@@ -202,9 +202,9 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
                 {displayed.map((city, i) => {
                   const state = stateMap[city.state_id];
                   return (
-                    <tr key={city.id} style={{ backgroundColor: i % 2 === 0 ? "#1e1e2e" : "#181825" }}>
+                    <tr key={city.id} style={{ backgroundColor: i % 2 === 0 ? "#18265b" : "#18265b" }}>
                       <td style={S.td}>{city.name}</td>
-                      <td style={{ ...S.td, color: "#a6adc8" }}>{state?.name ?? "—"}</td>
+                      <td style={{ ...S.td, color: "#ffffff" }}>{state?.name ?? "—"}</td>
                       <td style={S.td}>
                         {state ? (
                           <span style={S.badge}>{state.code}</span>
@@ -223,23 +223,23 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #cba6f7, #89b4fa)" },
   heroInner: { maxWidth: "900px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
   heroRow: { display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
-  subtitle: { color: "#a6adc8", fontSize: "0.875rem", margin: "0.25rem 0 0" },
+  subtitle: { color: "#ffffff", fontSize: "0.875rem", margin: "0.25rem 0 0" },
   page: { maxWidth: "900px", margin: "0 auto", padding: "2rem 1.5rem 4rem" },
 
   formCard: {
-    backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px",
+    backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px",
     padding: "1.5rem", marginBottom: "1.5rem",
   },
   formTitle: { color: "#cdd6f4", fontSize: "1rem", fontWeight: 600, margin: "0 0 1rem" },
   form: { display: "flex", flexWrap: "wrap", gap: "1rem", alignItems: "flex-end" },
   fieldGroup: { display: "flex", flexDirection: "column", gap: "0.35rem", flex: "1 1 200px" },
-  label: { color: "#a6adc8", fontSize: "0.8rem", fontWeight: 600 },
+  label: { color: "#ffffff", fontSize: "0.8rem", fontWeight: 600 },
   input: {
     backgroundColor: "#313244", border: "1px solid #45475a", color: "#cdd6f4",
     borderRadius: "6px", padding: "0.5rem 0.75rem", fontSize: "0.9rem", outline: "none",
@@ -257,14 +257,14 @@ const S: Record<string, React.CSSProperties> = {
   },
 
   filterBar: { display: "flex", gap: "0.75rem", alignItems: "center", marginBottom: "1rem" },
-  filterLabel: { color: "#a6adc8", fontSize: "0.85rem" },
-  filterCount: { color: "#6c7086", fontSize: "0.8rem" },
+  filterLabel: { color: "#ffffff", fontSize: "0.85rem" },
+  filterCount: { color: "#ffffff", fontSize: "0.8rem" },
 
   tableWrap: { borderRadius: "8px", border: "1px solid #313244", overflow: "hidden" },
   table: { width: "100%", borderCollapse: "collapse", fontSize: "0.875rem" },
   th: {
-    padding: "0.65rem 0.9rem", textAlign: "left", color: "#a6adc8", fontWeight: 600,
-    backgroundColor: "#181825", borderBottom: "1px solid #313244", whiteSpace: "nowrap",
+    padding: "0.65rem 0.9rem", textAlign: "left", color: "#ffffff", fontWeight: 600,
+    backgroundColor: "#18265b", borderBottom: "1px solid #313244", whiteSpace: "nowrap",
   },
   td: { padding: "0.55rem 0.9rem", color: "#cdd6f4", verticalAlign: "middle" },
   badge: {
@@ -272,13 +272,13 @@ const S: Record<string, React.CSSProperties> = {
     padding: "0.15rem 0.5rem", borderRadius: "4px",
   },
 
-  statusText: { color: "#a6adc8", padding: "2rem 0" },
+  statusText: { color: "#ffffff", padding: "2rem 0" },
   emptyState: { textAlign: "center", padding: "3rem 0" },
-  emptyTitle: { color: "#a6adc8", margin: "0 0 0.5rem" },
-  emptyHint: { color: "#6c7086", fontSize: "0.85rem", margin: 0 },
+  emptyTitle: { color: "#ffffff", margin: "0 0 0.5rem" },
+  emptyHint: { color: "#ffffff", fontSize: "0.85rem", margin: 0 },
 
   btnPrimary: {
-    backgroundColor: "#cba6f7", color: "#1e1e2e", border: "none",
+    backgroundColor: "#cba6f7", color: "#18265b", border: "none",
     padding: "0.55rem 1.25rem", borderRadius: "8px", fontWeight: 700,
     cursor: "pointer", fontSize: "0.875rem",
   },

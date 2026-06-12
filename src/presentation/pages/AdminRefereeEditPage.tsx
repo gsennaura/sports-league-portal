@@ -236,7 +236,7 @@ export function AdminRefereeEditPage({ updateReferee, deleteReferee, refereeRepo
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(135deg, #1e1e2e 0%, #313244 100%)",
+    background: "linear-gradient(135deg, #18265b 0%, #313244 100%)",
     borderBottom: "1px solid #45475a",
     position: "relative", overflow: "hidden",
   },
@@ -256,7 +256,7 @@ const S: Record<string, React.CSSProperties> = {
     background: "#313244", color: "#cdd6f4", textDecoration: "none",
   },
   page: { maxWidth: "720px", margin: "2rem auto", padding: "0 1.5rem 4rem" },
-  form: { background: "#181825", border: "1px solid #313244", borderRadius: "12px", padding: "1.5rem" },
+  form: { background: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.5rem" },
   fieldset: { border: "none", margin: 0, padding: 0 },
   legend: {
     color: "#cba6f7", fontSize: "0.78rem", fontWeight: 600,
@@ -266,15 +266,15 @@ const S: Record<string, React.CSSProperties> = {
   fieldGroup: { display: "flex", flexDirection: "column", gap: "0.4rem" },
   label: { color: "#cdd6f4", fontSize: "0.82rem", fontWeight: 500 },
   input: {
-    background: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px",
+    background: "#18265b", border: "1px solid #45475a", borderRadius: "8px",
     padding: "0.6rem 0.75rem", color: "#cdd6f4", fontSize: "0.95rem",
     width: "100%", outline: "none", boxSizing: "border-box",
   },
   photoPreview: {
     width: 72, height: 72, borderRadius: "50%",
-    objectFit: "cover", border: "2px solid #313244", backgroundColor: "#181825",
+    objectFit: "cover", border: "2px solid #313244", backgroundColor: "#18265b",
   },
-  photoPencil: { position: "absolute", bottom: "-4px", right: "-4px", width: "24px", height: "24px", borderRadius: "50%", backgroundColor: "#cba6f7", border: "2px solid #1e1e2e", color: "#11111b", fontSize: "0.7rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 },
+  photoPencil: { position: "absolute", bottom: "-4px", right: "-4px", width: "24px", height: "24px", borderRadius: "50%", backgroundColor: "#cba6f7", border: "2px solid #18265b", color: "#11111b", fontSize: "0.7rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 },
   errorMsg: { color: "#f38ba8", fontSize: "0.85rem", marginTop: "1rem", marginBottom: 0 },
   successMsg: { color: "#a6e3a1", fontSize: "0.85rem", marginTop: "1rem", marginBottom: 0 },
   actions: {
@@ -291,7 +291,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   btnSave: {
     background: "#cba6f7", border: "none", borderRadius: "8px",
-    padding: "0.6rem 1.5rem", color: "#1e1e2e", fontSize: "0.875rem",
+    padding: "0.6rem 1.5rem", color: "#18265b", fontSize: "0.875rem",
     fontWeight: 700, cursor: "pointer",
   },
 };

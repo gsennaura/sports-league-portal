@@ -175,7 +175,7 @@ export function LiveMatchesPage({ getLiveWindowMatches }: Props) {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(135deg, #1e1e2e 0%, #313244 100%)",
+    background: "linear-gradient(135deg, #18265b 0%, #313244 100%)",
     borderBottom: "1px solid #45475a",
     position: "relative",
     overflow: "hidden",
@@ -221,7 +221,7 @@ const S: Record<string, React.CSSProperties> = {
   emptyMsg: { color: "#7f849c", textAlign: "center", marginTop: "3rem" },
   // Card
   card: {
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "12px",
     padding: "1rem 1.25rem",
@@ -243,7 +243,7 @@ const S: Record<string, React.CSSProperties> = {
     gap: "0.5rem",
   },
   championship: { color: "#7f849c", fontSize: "0.78rem" },
-  round: { color: "#585b70", fontSize: "0.75rem" },
+  round: { color: "#ffffff", fontSize: "0.75rem" },
   matchTime: { color: "#7f849c", fontSize: "0.78rem" },
   liveTag: {
     display: "inline-flex",
@@ -303,14 +303,14 @@ const S: Record<string, React.CSSProperties> = {
     marginTop: "0.1rem",
   },
   vs: {
-    color: "#585b70",
+    color: "#ffffff",
     fontSize: "0.9rem",
     fontWeight: 700,
     letterSpacing: "0.05em",
   },
   venue: {
     marginTop: "0.6rem",
-    color: "#585b70",
+    color: "#ffffff",
     fontSize: "0.75rem",
   },
 };

@@ -187,7 +187,7 @@ const S: Record<string, React.CSSProperties> = {
     marginBottom: "1.25rem",
   },
   navBtn: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -200,7 +200,7 @@ const S: Record<string, React.CSSProperties> = {
   navBtnDisabled: {
     color: "#cdd6f4",
     cursor: "default",
-    borderColor: "#1e1e2e",
+    borderColor: "#18265b",
   },
   dayLabel: {
     flex: 1,
@@ -208,13 +208,13 @@ const S: Record<string, React.CSSProperties> = {
   dayHeading: {
     fontSize: "0.95rem",
     fontWeight: 700,
-    color: "#cdd6f4",
+    color: "#18265b",
     textTransform: "capitalize" as const,
   },
   dayCounter: {
     fontSize: "0.72rem",
     fontWeight: 400,
-    color: "#6c7086",
+    color: "#18265b",
   },
   dateSection: {
     display: "flex",
@@ -234,21 +234,21 @@ const S: Record<string, React.CSSProperties> = {
   champName: {
     fontSize: "0.8rem",
     fontWeight: 600,
-    color: "#cba6f7",
+    color: "#18265b",
   },
   champCity: {
     fontWeight: 400,
-    color: "#cdd6f4",
+    color: "#18265b",
     fontSize: "0.78rem",
   },
   champPhase: {
     fontWeight: 500,
-    color: "#89b4fa",
+    color: "#18265b",
     fontSize: "0.78rem",
   },
   champRound: {
     fontWeight: 400,
-    color: "#cdd6f4",
+    color: "#18265b",
     fontSize: "0.75rem",
   },
   matchList: {

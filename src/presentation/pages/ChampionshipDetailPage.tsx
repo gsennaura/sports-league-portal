@@ -33,20 +33,20 @@ function TopScorersTable({ scorers }: { scorers: TopScorerItem[] }) {
       <table style={{ width: "100%", borderCollapse: "collapse" as const, fontSize: "0.85rem" }}>
         <thead>
           <tr style={{ borderBottom: "2px solid #313244" }}>
-            <th style={{ textAlign: "center" as const, padding: "0.35rem 0.5rem", color: "#6c7086", fontWeight: 600, width: "2rem" }}>#</th>
-            <th style={{ textAlign: "left" as const, padding: "0.35rem 0.5rem", color: "#a6adc8", fontWeight: 600 }}>Atleta</th>
-            <th style={{ textAlign: "left" as const, padding: "0.35rem 0.5rem", color: "#a6adc8", fontWeight: 600 }}>Time</th>
+            <th style={{ textAlign: "center" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600, width: "2rem" }}>#</th>
+            <th style={{ textAlign: "left" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600 }}>Atleta</th>
+            <th style={{ textAlign: "left" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600 }}>Time</th>
             <th style={{ textAlign: "center" as const, padding: "0.35rem 0.5rem", color: "#a6e3a1", fontWeight: 700, width: "3.5rem" }}>Gols</th>
           </tr>
         </thead>
         <tbody>
           {scorers.map((s, i) => (
-            <tr key={s.athlete_id} style={{ borderBottom: "1px solid #1e1e2e", background: i % 2 === 0 ? "transparent" : "#1a1a2e" }}>
-              <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: i === 0 ? "#f9e2af" : "#6c7086", fontWeight: i === 0 ? 900 : 500 }}>{i + 1}</td>
+            <tr key={s.athlete_id} style={{ borderBottom: "1px solid #18265b", background: i % 2 === 0 ? "transparent" : "#1a1a2e" }}>
+              <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: i === 0 ? "#f9e2af" : "#ffffff", fontWeight: i === 0 ? 900 : 500 }}>{i + 1}</td>
               <td style={{ padding: "0.4rem 0.5rem", color: "#cdd6f4", fontWeight: 600 }}>
                 <Link to={`/atletas/${s.athlete_id}`} style={{ color: "inherit", textDecoration: "none" }}>{s.athlete_name}</Link>
               </td>
-              <td style={{ padding: "0.4rem 0.5rem", color: "#a6adc8" }}>{s.team_name}</td>
+              <td style={{ padding: "0.4rem 0.5rem", color: "#ffffff" }}>{s.team_name}</td>
               <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: "#a6e3a1", fontWeight: 900, fontSize: "0.95rem" }}>{s.goals}</td>
             </tr>
           ))}
@@ -136,14 +136,14 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
         <div style={statStyles.highlightCard}>
           <span style={{ ...statStyles.highlightTag, color: "#f9e2af" }}>🏆 Campeão</span>
           {isOngoing ? (
-            <span style={{ fontSize: "0.85rem", color: "#6c7086", fontStyle: "italic" }}>Em andamento</span>
+            <span style={{ fontSize: "0.85rem", color: "#ffffff", fontStyle: "italic" }}>Em andamento</span>
           ) : champion ? (
             <div style={statStyles.highlightTeam}>
               <Shield url={champion.logo} size={28} />
               <span style={statStyles.highlightName}>{champion.name}</span>
             </div>
           ) : (
-            <span style={{ fontSize: "0.85rem", color: "#6c7086", fontStyle: "italic" }}>A confirmar</span>
+            <span style={{ fontSize: "0.85rem", color: "#ffffff", fontStyle: "italic" }}>A confirmar</span>
           )}
         </div>
 
@@ -157,7 +157,7 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
                 <span style={statStyles.highlightName}>{runnerUp.name}</span>
               </div>
             ) : (
-              <span style={{ fontSize: "0.85rem", color: "#6c7086", fontStyle: "italic" }}>A confirmar</span>
+              <span style={{ fontSize: "0.85rem", color: "#ffffff", fontStyle: "italic" }}>A confirmar</span>
             )}
           </div>
         )}
@@ -213,7 +213,7 @@ const statStyles: Record<string, React.CSSProperties> = {
     marginBottom: "0.6rem",
   },
   card: {
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "0.35rem 0.75rem",
@@ -225,7 +225,7 @@ const statStyles: Record<string, React.CSSProperties> = {
   cardLabel: {
     fontSize: "0.65rem",
     fontWeight: 700,
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase" as const,
     letterSpacing: "0.04em",
   },
@@ -236,7 +236,7 @@ const statStyles: Record<string, React.CSSProperties> = {
   },
   cardSub: {
     fontSize: "0.65rem",
-    color: "#6c7086",
+    color: "#ffffff",
   },
   // Highlight row
   highlightRow: {
@@ -245,7 +245,7 @@ const statStyles: Record<string, React.CSSProperties> = {
     gap: "0.5rem",
   },
   highlightCard: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "10px",
     padding: "0.45rem 0.65rem",
@@ -260,7 +260,7 @@ const statStyles: Record<string, React.CSSProperties> = {
     fontWeight: 800,
     textTransform: "uppercase" as const,
     letterSpacing: "0.06em",
-    color: "#6c7086",
+    color: "#ffffff",
   },
   highlightTeam: {
     display: "flex",
@@ -286,7 +286,7 @@ const statStyles: Record<string, React.CSSProperties> = {
   highlightStatLabel: {
     fontSize: "0.65rem",
     fontWeight: 400,
-    color: "#6c7086",
+    color: "#ffffff",
   },
 };
 
@@ -474,11 +474,11 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
             >
               <div
                 onClick={(e) => e.stopPropagation()}
-                style={{ background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", minWidth: 280, maxWidth: 420, width: "100%", maxHeight: "80vh", overflowY: "auto" }}
+                style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", minWidth: 280, maxWidth: 420, width: "100%", maxHeight: "80vh", overflowY: "auto" }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
                   <span style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4" }}>📅 Edições do campeonato</span>
-                  <button onClick={() => setEditionModalOpen(false)} style={{ background: "none", border: "none", color: "#6c7086", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
+                  <button onClick={() => setEditionModalOpen(false)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                   {[...siblings].reverse().map((s) => {
@@ -490,7 +490,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                         style={{ background: isCurrent ? "#313244" : "transparent", border: isCurrent ? "1px solid #89b4fa" : "1px solid #313244", borderRadius: 8, padding: "0.6rem 0.9rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem", textAlign: "left" }}
                       >
                         <span style={{ fontSize: "0.95rem", fontWeight: 700, color: isCurrent ? "#89b4fa" : "#cdd6f4", flexShrink: 0 }}>{s.year}</span>
-                        <span style={{ fontSize: "0.8rem", color: "#a6adc8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        <span style={{ fontSize: "0.8rem", color: "#ffffff", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                           {s.champion_team_name ? `🏆 ${s.champion_team_name}` : "—"}
                         </span>
                         {isCurrent && <span style={{ fontSize: "0.65rem", color: "#89b4fa", fontWeight: 700, flexShrink: 0 }}>atual</span>}
@@ -555,7 +555,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
               <button
                 onClick={handleOpenStandings}
                 disabled={standingsLoading}
-                style={{ background: "#1a1f3a", border: "1px solid #2a3a6a", borderRadius: 8, color: standingsLoading ? "#6c7086" : "#89b4fa", fontWeight: 600, fontSize: "0.85rem", padding: "0.45rem 1rem", cursor: standingsLoading ? "default" : "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+                style={{ background: "#1a1f3a", border: "1px solid #2a3a6a", borderRadius: 8, color: standingsLoading ? "#ffffff" : "#89b4fa", fontWeight: 600, fontSize: "0.85rem", padding: "0.45rem 1rem", cursor: standingsLoading ? "default" : "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
               >
                 {standingsLoading ? "⏳ Carregando..." : "📊 Ver classificação geral"}
               </button>
@@ -570,11 +570,11 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
             >
               <div
                 onClick={(e) => e.stopPropagation()}
-                style={{ background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", width: "100%", maxWidth: 820 }}
+                style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", width: "100%", maxWidth: 820 }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
                   <span style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4" }}>📊 Classificação Geral</span>
-                  <button onClick={() => setStandingsOpen(false)} style={{ background: "none", border: "none", color: "#6c7086", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
+                  <button onClick={() => setStandingsOpen(false)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
                 </div>
                 <OverallStandings standings={detail.overall_standings} phases={detail.phases} />
               </div>
@@ -599,16 +599,16 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
             >
               <div
                 onClick={(e) => e.stopPropagation()}
-                style={{ background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", width: "100%", maxWidth: 820 }}
+                style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", width: "100%", maxWidth: 820 }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
                   <span style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4" }}>⚽ Artilharia</span>
-                  <button onClick={() => setScorersOpen(false)} style={{ background: "none", border: "none", color: "#6c7086", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
+                  <button onClick={() => setScorersOpen(false)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
                 </div>
                 {scorersLoading
                   ? <PageLoader />
                   : scorers && scorers.length === 0
-                    ? <p style={{ color: "#6c7086", fontSize: "0.9rem", textAlign: "center", padding: "1rem 0" }}>Sem dados de artilharia</p>
+                    ? <p style={{ color: "#ffffff", fontSize: "0.9rem", textAlign: "center", padding: "1rem 0" }}>Sem dados de artilharia</p>
                     : <TopScorersTable scorers={scorers ?? []} />}
               </div>
             </div>
@@ -658,14 +658,14 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                 </button>
 
                 {podiumOpen && (
-                  <div style={{ background: "#181825", border: "1px solid #45475a", borderRadius: 12, padding: "1rem 1.2rem", marginTop: "0.6rem" }}>
+                  <div style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 12, padding: "1rem 1.2rem", marginTop: "0.6rem" }}>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "0.75rem" }}>
                       <label style={{ display: "flex", flexDirection: "column", gap: "0.3rem", fontSize: "0.8rem", color: "#cdd6f4" }}>
                         <span>🥇 Campeão</span>
                         <select
                           value={podiumChampId}
                           onChange={(e) => setPodiumChampId(e.target.value)}
-                          style={{ background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 6, color: "#cdd6f4", padding: "0.4rem 0.6rem", fontSize: "0.85rem" }}
+                          style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 6, color: "#cdd6f4", padding: "0.4rem 0.6rem", fontSize: "0.85rem" }}
                         >
                           <option value="">— Selecionar —</option>
                           {teamOptions.map(([tid, t]) => <option key={tid} value={tid}>{t.name}</option>)}
@@ -676,7 +676,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                         <select
                           value={podiumViceId}
                           onChange={(e) => setPodiumViceId(e.target.value)}
-                          style={{ background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 6, color: "#cdd6f4", padding: "0.4rem 0.6rem", fontSize: "0.85rem" }}
+                          style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 6, color: "#cdd6f4", padding: "0.4rem 0.6rem", fontSize: "0.85rem" }}
                         >
                           <option value="">— Selecionar —</option>
                           {teamOptions.map(([tid, t]) => <option key={tid} value={tid}>{t.name}</option>)}
@@ -688,7 +688,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                     <button
                       onClick={handleSave}
                       disabled={podiumSaving}
-                      style={{ background: "#f9e2af", color: "#1e1e2e", border: "none", borderRadius: 8, padding: "0.5rem 1.2rem", fontWeight: 700, fontSize: "0.85rem", cursor: podiumSaving ? "not-allowed" : "pointer", opacity: podiumSaving ? 0.6 : 1 }}
+                      style={{ background: "#f9e2af", color: "#18265b", border: "none", borderRadius: 8, padding: "0.5rem 1.2rem", fontWeight: 700, fontSize: "0.85rem", cursor: podiumSaving ? "not-allowed" : "pointer", opacity: podiumSaving ? 0.6 : 1 }}
                     >
                       {podiumSaving ? "Salvando..." : "Salvar pódio"}
                     </button>
@@ -772,7 +772,7 @@ function Palmares({ siblings, currentYear }: { siblings: SiblingEdition[]; curre
                 {s.runner_up_team_name && (
                   <div style={edStyles.palmVice}>
                     <span style={edStyles.palmSilver}>🥈</span>
-                    <span style={{ ...edStyles.palmTeamName, color: "#a6adc8", opacity: 0.8 }}>{s.runner_up_team_name}</span>
+                    <span style={{ ...edStyles.palmTeamName, color: "#ffffff", opacity: 0.8 }}>{s.runner_up_team_name}</span>
                   </div>
                 )}
               </div>
@@ -930,7 +930,7 @@ function StandingsTable({ standings, teams, showAprov = false, eliminatedTeamIds
       <table style={styles.table}>
         <thead>
           <tr>
-            <th style={{ ...styles.th, color: "#6c7086" }}>#</th>
+            <th style={{ ...styles.th, color: "#ffffff" }}>#</th>
             <th style={{ ...styles.th, textAlign: "left" }}>Time</th>
             <th style={{ ...styles.th, color: "#89b4fa" }} title="Pontos">Pts</th>
             <th style={styles.th} title="Vitórias">V</th>
@@ -946,7 +946,7 @@ function StandingsTable({ standings, teams, showAprov = false, eliminatedTeamIds
         <tbody>
           {rows.map((s, i) => (
             <tr key={s.team_id} style={{ ...(i % 2 === 0 ? styles.rowEven : styles.rowOdd), ...(eliminatedTeamIds?.has(s.team_id) ? { backgroundColor: "rgba(243, 139, 168, 0.10)" } : {}) }}>
-              <td style={{ ...styles.td, color: "#6c7086" }}>{i + 1}</td>
+              <td style={{ ...styles.td, color: "#ffffff" }}>{i + 1}</td>
               <td style={{ ...styles.td, textAlign: "left" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
                   <Shield url={s.club_logo_url} size={16} />
@@ -1005,7 +1005,7 @@ function OverallStandings({ standings, phases }: { standings: StandingEntry[]; p
         <StandingsTable standings={rows} teams={[]} showAprov eliminatedTeamIds={eliminatedTeamIds} />
       </div>
       {hasEliminated && (
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "0.75rem", fontSize: "0.75rem", color: "#6c7086" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "0.75rem", fontSize: "0.75rem", color: "#ffffff" }}>
           <span style={{ display: "inline-block", width: "12px", height: "12px", backgroundColor: "rgba(243, 139, 168, 0.35)", border: "1px solid rgba(243, 139, 168, 0.5)", borderRadius: "2px", flexShrink: 0 }} />
           <span>Time eliminado — não está na última fase do campeonato</span>
         </div>
@@ -1066,7 +1066,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   champFullName: {
     fontSize: "0.85rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     margin: "0.15rem 0 0 0",
   },
   champBadges: {
@@ -1095,7 +1095,7 @@ const styles: Record<string, React.CSSProperties> = {
   scopeBadge: {
     fontSize: "0.7rem",
     color: "#cdd6f4",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "4px",
     padding: "0.2rem 0.6rem",
@@ -1109,7 +1109,7 @@ const styles: Record<string, React.CSSProperties> = {
     marginBottom: "1.5rem",
   },
   navBtn: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "8px",
     color: "#89b4fa",
@@ -1123,7 +1123,7 @@ const styles: Record<string, React.CSSProperties> = {
   navBtnDisabled: {
     color: "#313244",
     cursor: "default",
-    borderColor: "#1e1e2e",
+    borderColor: "#18265b",
     background: "transparent",
   },
   phaseNavCenter: {
@@ -1145,7 +1145,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   phaseNavCounter: {
     fontSize: "0.7rem",
-    color: "#6c7086",
+    color: "#ffffff",
   },
   // Overall standings header
   overallHeader: {
@@ -1190,7 +1190,7 @@ const styles: Record<string, React.CSSProperties> = {
     whiteSpace: "nowrap" as const,
   },
   statusFinalizado: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "4px",
     color: "#cdd6f4",
@@ -1205,7 +1205,7 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "1.5rem",
   },
   groupCard: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "1.25rem 1.5rem",
@@ -1249,7 +1249,7 @@ const styles: Record<string, React.CSSProperties> = {
     marginBottom: "0.375rem",
   },
   matchCard: {
-    borderBottom: "1px solid #181825",
+    borderBottom: "1px solid #18265b",
     padding: "0.4rem 0",
   },
   matchCardRow: {
@@ -1368,7 +1368,7 @@ const styles: Record<string, React.CSSProperties> = {
     backgroundColor: "transparent",
   },
   rowOdd: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
   },
 };
 
@@ -1381,7 +1381,7 @@ const edStyles: Record<string, React.CSSProperties> = {
     gap: "0.5rem",
     marginBottom: "1.5rem",
     padding: "0.6rem 0.75rem",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "12px",
     overflow: "hidden",
@@ -1389,7 +1389,7 @@ const edStyles: Record<string, React.CSSProperties> = {
   edNavLabel: {
     fontSize: "0.63rem",
     fontWeight: 800,
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase" as const,
     letterSpacing: "0.08em",
     flexShrink: 0,
@@ -1424,7 +1424,7 @@ const edStyles: Record<string, React.CSSProperties> = {
     background: "transparent",
     border: "1px solid #45475a",
     borderRadius: "6px",
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.85rem",
     fontWeight: 700,
     padding: "0.4rem 1rem",
@@ -1483,7 +1483,7 @@ const edStyles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     gap: "0.75rem",
     padding: "0.65rem 1rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "10px",
   },

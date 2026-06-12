@@ -30,7 +30,7 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "1rem 1.5rem",
-    background: "#1e1e2e",
+    background: "#18265b",
     textDecoration: "none",
     color: "inherit",
   },
