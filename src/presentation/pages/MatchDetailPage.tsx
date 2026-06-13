@@ -118,29 +118,27 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
 
   return (
     <>
-      {/* ─── Header ─────────────────────────────────────────────────────── */}
-      <header className="toolbar">
-        <div className="toolbar">
-          <div className="toolbar">
-            <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
-            {isAdmin && id && (
-              <Link to={`/admin/partidas/${id}/editar`} className="btn-edit">
-                ✏️ Editar partida
-              </Link>
-            )}
-          </div>
-          {match && (
-            <div className="muted">
-              <span className="muted">
-                {match.championship_name} · {match.championship_year}
-                {match.division_name ? ` · ${match.division_name}` : ""}
-              </span>
-              <span className="muted">
-                {[match.phase_name, `Rodada ${match.round_number}`].join(" · ")}
-              </span>
-            </div>
+      {/* ─── Header ─────────────────────────────────────────────────────────────────── */}
+      <header className="match-header">
+        <div className="match-header__nav">
+          <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
+          {isAdmin && id && (
+            <Link to={`/admin/partidas/${id}/editar`} className="btn-edit">
+              ✏️ Editar partida
+            </Link>
           )}
         </div>
+        {match && (
+          <div className="match-header__context">
+            <span className="match-header__champ">
+              {match.championship_name} · {match.championship_year}
+              {match.division_name ? ` · ${match.division_name}` : ""}
+            </span>
+            <span className="match-header__phase">
+              {[match.phase_name, `Rodada ${match.round_number}`].join(" · ")}
+            </span>
+          </div>
+        )}
       </header>
 
       {/* ─── Content ────────────────────────────────────────────────────── */}
@@ -151,7 +149,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
         {!loading && match && (
           <>
             {match.match_date && (
-              <p className="muted">{formatDateTime(match.match_date)}</p>
+              <p className="match-meta">{formatDateTime(match.match_date)}</p>
             )}
 
             <div className="score-card">
@@ -182,7 +180,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
                 </div>
 
                 {/* Away team */}
-                <div style={{ ...S.teamBlock, textAlign: "right" as const, alignItems: "flex-end" }}>
+                <div className="score-team score-team--away">
                   <Shield url={match.away_club_logo_url} size={48} />
                   <Link to={`/times/${toSlugPath(match.away_team_name, match.away_team_id)}`} className="row-link">{match.away_team_name}</Link>
                   {awayForm.length > 0 && <FormRow form={awayForm} />}
@@ -259,8 +257,8 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
                     homeId={match.home_team_id}
                   />
                   {h2hGroups.map(([key, group]) => (
-                    <div key={key} className="page-section">
-                      <div className="toolbar">
+                    <div key={key} className="h2h-group">
+                      <div className="h2h-group__header">
                         {group[0].championship_name} · {group[0].championship_year}
                       </div>
                       {group.map((m) => (
@@ -285,41 +283,27 @@ const NO_REFEREE_PHOTO = "https://raw.githubusercontent.com/gsennaura/sports-man
 
 // ── RefereesSection ───────────────────────────────────────────────────────────
 function RefereesSection({ referees }: { referees: MatchReferee[] }) {
-  const ROLE_COLORS: Record<string, string> = {
-    main_referee: "#f9e2af",
-    assistant: "#89b4fa",
-    delegate: "#a6e3a1",
+  const ROLE_CLASS: Record<string, string> = {
+    main_referee: "referee-card__role--main",
+    assistant:    "referee-card__role--assistant",
+    delegate:     "referee-card__role--delegate",
   };
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "0.75rem" }}>
+    <div className="referees-grid">
       {referees.map((ref) => (
-        <Link
-          key={ref.id}
-          to={`/arbitros/${ref.referee_id}`}
-          style={{
-            display: "flex", alignItems: "center", gap: "0.65rem",
-            background: "var(--c-brand)", border: "1px solid #313244", borderRadius: "10px",
-            padding: "0.5rem 0.85rem 0.5rem 0.5rem", textDecoration: "none",
-            minWidth: "180px",
-          }}
-        >
+        <Link key={ref.id} to={`/arbitros/${ref.referee_id}`} className="referee-card">
           <img
             src={ref.referee_photo_url ?? NO_REFEREE_PHOTO}
             alt={ref.referee_name ?? ""}
             onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_REFEREE_PHOTO; }}
-            style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" as const, flexShrink: 0, backgroundColor: "var(--c-brand)" }}
+            className="referee-card__photo"
           />
-          <div style={{ display: "flex", flexDirection: "column" as const, gap: "0.15rem", minWidth: 0 }}>
-            <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--c-text)", whiteSpace: "nowrap" as const, overflow: "hidden", textOverflow: "ellipsis" }}>
+          <div className="referee-card__info">
+            <span className="referee-card__name">
               {ref.referee_nickname ?? ref.referee_name ?? "Árbitro"}
             </span>
-            <span style={{
-              fontSize: "0.68rem", fontWeight: 700, color: "var(--c-brand)",
-              background: ROLE_COLORS[ref.role] ?? "var(--c-text)",
-              borderRadius: "4px", padding: "0 5px", lineHeight: "1.5",
-              alignSelf: "flex-start",
-            }}>
+            <span className={`referee-card__role ${ROLE_CLASS[ref.role] ?? "referee-card__role--default"}`}>
               {ROLE_LABELS[ref.role]}
             </span>
           </div>
@@ -393,15 +377,15 @@ function RosterSection({
   return (
     <Section title="Elencos">
       {/* Tab bar */}
-      <div style={RS.tabBar}>
+      <div className="tab-bar">
         <button
-          style={{ ...RS.tab, ...(activeTab === "home" ? RS.tabActive : {}) }}
+          className={`tab-bar__btn${activeTab === "home" ? " tab-bar__btn--active" : ""}`}
           onClick={() => setActiveTab("home")}
         >
           {homeTeamName}
         </button>
         <button
-          style={{ ...RS.tab, ...(activeTab === "away" ? RS.tabActive : {}) }}
+          className={`tab-bar__btn${activeTab === "away" ? " tab-bar__btn--active" : ""}`}
           onClick={() => setActiveTab("away")}
         >
           {awayTeamName}
@@ -438,34 +422,7 @@ function RosterSection({
   );
 }
 
-// Tab styles (mobile roster)
-const RS: Record<string, React.CSSProperties> = {
-  tabBar: {
-    display: "flex",
-    borderBottom: "2px solid #313244",
-    marginBottom: "0.75rem",
-  },
-  tab: {
-    flex: 1,
-    background: "none",
-    border: "none",
-    borderBottom: "2px solid transparent",
-    marginBottom: "-2px",
-    color: "#ffffff",
-    fontSize: "0.85rem",
-    fontWeight: 600,
-    padding: "0.5rem 0.75rem",
-    cursor: "pointer",
-    textAlign: "center" as const,
-    whiteSpace: "nowrap" as const,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  tabActive: {
-    color: "#89b4fa",
-    borderBottomColor: "#89b4fa",
-  },
-};
+// Tab styles migrated to CSS classes (.tab-bar__btn, .tab-bar__btn--active)
 
 const FORM_COLORS: Record<FormResult, string> = {
   V: "#a6e3a1",
@@ -569,7 +526,7 @@ function RosterColumn({
   };
 
   return (
-    <div style={{ ...S.rosterCol, alignItems: align === "right" ? "flex-end" : "flex-start" }}>
+    <div className={`roster-col${align === "right" ? " roster-col--right" : ""}`}>
       {!hideName && <span className="muted">{teamName}</span>}
       {sorted.length === 0 ? (
         <span className="muted">Sem elenco cadastrado</span>
@@ -578,7 +535,7 @@ function RosterColumn({
           const isOpen = popover?.athleteId === a.athlete_id;
           return (
             <div key={a.id} style={{ width: "100%" }}>
-              <div style={{ ...S.rosterRow, flexDirection: align === "right" ? "row-reverse" : "row", cursor: "default" }}>
+              <div className={`roster-row${align === "right" ? " roster-row--right" : ""}`}>
                 <Link
                   to={`/atletas/${a.athlete_id}`}
                   style={{ display: "flex", flexDirection: align === "right" ? "row-reverse" : "row", alignItems: "center", gap: "0.5rem", textDecoration: "none", flex: 1 }}
@@ -589,7 +546,7 @@ function RosterColumn({
                     alt={a.athlete_name ?? "Atleta"}
                     className="avatar"
                   />
-                  <div style={{ ...S.rosterInfo, alignItems: align === "right" ? "flex-end" : "flex-start" }}>
+                  <div className={`roster-info${align === "right" ? " roster-info--right" : ""}`}>
                     <span className="team-name">{a.athlete_nickname ?? a.athlete_name ?? "—"}</span>
                     <div className="muted">
                       {a.jersey_number != null && (
@@ -712,9 +669,9 @@ function H2HStats({
         <span style={{ ...S.statsCount, textAlign: "right" as const }}>{awayWins}V</span>
       </div>
       <div className="win-bar">
-        {homePct > 0 && <div style={{ ...S.winBarHome, width: `${homePct}%` }} />}
-        {drawPct > 0 && <div style={{ ...S.winBarDraw, width: `${drawPct}%` }} />}
-        {awayPct > 0 && <div style={{ ...S.winBarAway, width: `${awayPct}%` }} />}
+        {homePct > 0 && <div className="win-bar__home" style={{ width: `${homePct}%` }} />}
+        {drawPct > 0 && <div className="win-bar__draw" style={{ width: `${drawPct}%` }} />}
+        {awayPct > 0 && <div className="win-bar__away" style={{ width: `${awayPct}%` }} />}
       </div>
       <div className="stats-row">
         <span className="muted">{homePct}%</span>
@@ -742,11 +699,11 @@ function StatBar({ label, homeVal, awayVal }: { label: string; homeVal: number; 
       <div className="stat-bar__header">
         <span className="muted">{homeVal}</span>
         <span className="muted">{label}</span>
-        <span style={{ ...S.statBarVal, textAlign: "right" as const }}>{awayVal}</span>
+        <span className="muted" style={{ textAlign: "right" }}>{awayVal}</span>
       </div>
       <div className="stat-bar__track">
-        {homePct > 0 && <div style={{ ...S.statBarFillHome, width: `${homePct}%` }} />}
-        {awayPct > 0 && <div style={{ ...S.statBarFillAway, width: `${awayPct}%` }} />}
+        {homePct > 0 && <div className="stat-bar__home" style={{ width: `${homePct}%` }} />}
+        {awayPct > 0 && <div className="stat-bar__away" style={{ width: `${awayPct}%` }} />}
       </div>
     </div>
   );
@@ -754,9 +711,9 @@ function StatBar({ label, homeVal, awayVal }: { label: string; homeVal: number; 
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="page-section">
-      <h2 className="section-heading">{title}</h2>
-      <div className="page-container">{children}</div>
+    <section className="match-section">
+      <h2 className="match-section__title">{title}</h2>
+      <div className="match-section__body">{children}</div>
     </section>
   );
 }
@@ -777,36 +734,33 @@ function H2HMatchRow({ match: m }: { match: HeadToHeadMatch }) {
   })();
 
   return (
-    <Link to={`/partidas/${m.id}`} className="row-link">
-      <div className="match-team-row">
-        {/* Col 1 — data */}
-        <div >
-          {dateLabel && <span className="muted">{dateLabel}</span>}
-          {timeLabel && <span className="muted">{timeLabel}</span>}
+    <Link to={`/partidas/${m.id}`} className="match-entry">
+      <div className="match-entry__row">
+        <div className="match-entry__date-col">
+          {dateLabel && <span className="match-entry__date-label">{dateLabel}</span>}
+          {timeLabel && <span className="match-entry__time-label">{timeLabel}</span>}
         </div>
-
-        {/* Col 2 — times + placar */}
-        <div >
-          <div className="match-team-row">
-            <span className="score-big">
+        <div className="match-entry__teams-col">
+          <div className="match-entry__team-row">
+            <span className="match-entry__score">
               {hasScore ? `${m.home_score}${hasPenalty ? ` (${m.home_penalty_score})` : ""}` : ""}
             </span>
             <Shield url={m.home_club_logo_url ?? null} size={16} />
-            <span className="team-name">{m.home_team_name}</span>
+            <span className="match-entry__team-name">{m.home_team_name}</span>
           </div>
-          <div className="match-team-row">
-            <span className="score-big">
+          <div className="match-entry__team-row">
+            <span className="match-entry__score">
               {hasScore ? `${m.away_score}${hasPenalty ? ` (${m.away_penalty_score})` : ""}` : ""}
             </span>
             <Shield url={m.away_club_logo_url ?? null} size={16} />
-            <span className="team-name">{m.away_team_name}</span>
+            <span className="match-entry__team-name">{m.away_team_name}</span>
           </div>
         </div>
-
-        {/* Col 3 — fase */}
-        <div >
-          <span className="muted">{m.phase_name}</span>
-        </div>
+        {m.phase_name && (
+          <div className="match-entry__venue-col">
+            <span className="match-entry__venue-label">{m.phase_name}</span>
+          </div>
+        )}
       </div>
     </Link>
   );

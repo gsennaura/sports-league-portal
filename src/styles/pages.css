@@ -1575,3 +1575,239 @@
   color: var(--c-text-muted);
   font-size: 0.58rem;
 }
+
+/* ─── Match Detail Page ──────────────────────────────────────────── */
+
+.match-header {
+  background: var(--c-brand);
+  border-bottom: 1px solid var(--c-border);
+  padding: 1rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.match-header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--c-action), var(--c-link));
+}
+
+.match-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.match-header__context {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.match-header__champ {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--c-action);
+}
+
+.match-header__phase {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Section panels */
+.match-section {
+  margin-bottom: 1.75rem;
+}
+
+.match-section__title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-brand);
+  margin-bottom: 0.5rem;
+  padding: 0 0.25rem;
+}
+
+.match-section__body {
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.match-section__body .muted {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Match date meta */
+.match-meta {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--c-link);
+  text-transform: capitalize;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+/* Away team right-aligned */
+.score-team--away {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* Win bar segment fills */
+.win-bar__home { background: var(--c-link); height: 100%; }
+.win-bar__draw { background: rgba(255, 255, 255, 0.65); height: 100%; }
+.win-bar__away { background: var(--c-negative); height: 100%; }
+
+/* Stat bar track fills */
+.stat-bar__home { background: var(--c-link); height: 100%; }
+.stat-bar__away { background: var(--c-negative); height: 100%; }
+
+/* Compact match score (H2H rows) */
+.match-score {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--c-positive);
+  text-align: right;
+  min-width: 2.2rem;
+  flex-shrink: 0;
+}
+
+/* Referee cards */
+.referees-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.referee-card {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  padding: 0.5rem 0.85rem 0.5rem 0.5rem;
+  text-decoration: none;
+  min-width: 180px;
+}
+
+.referee-card__photo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.referee-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.referee-card__name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.referee-card__role {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--c-brand);
+  border-radius: 4px;
+  padding: 0 5px;
+  line-height: 1.6;
+  align-self: flex-start;
+}
+
+.referee-card__role--main      { background: var(--c-warning); }
+.referee-card__role--assistant { background: var(--c-link); }
+.referee-card__role--delegate  { background: var(--c-positive); }
+.referee-card__role--default   { background: var(--c-text-muted); color: #ffffff; }
+
+/* H2H groups */
+.h2h-group {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.h2h-group__header {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--c-link);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 1rem;
+  background: rgba(137, 180, 250, 0.08);
+  border-bottom: 1px solid var(--c-border);
+}
+
+/* Roster column */
+.roster-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.75rem;
+}
+
+.roster-col--right { align-items: flex-end; }
+
+.roster-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.25rem;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.roster-row--right { flex-direction: row-reverse; }
+
+.roster-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.roster-info--right { align-items: flex-end; }
+
+/* Mobile roster tab buttons */
+.tab-bar__btn {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-bar__btn--active {
+  color: var(--c-link);
+  border-bottom-color: var(--c-link);
+}
