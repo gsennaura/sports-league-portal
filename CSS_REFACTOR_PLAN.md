@@ -68,6 +68,43 @@ Esses não mudam com o tema — são derivações matemáticas ou semânticas da
 | `#1a1a2e` | ~10x | `var(--c-surface-2)` |
 | outras (`#5a2a30`, `#2a1a1f` etc.) | ~30x | `color-mix` de `--c-negative` com transparência |
 
+### Mapeamento: cores RGB/RGBA inline → `color-mix()`
+
+O projeto também usa ~60 ocorrências de `rgba()` hardcoded — todas são versões com alpha das **mesmas 6 cores base**. Com CSS moderno (`color-mix`), essas também somem do código React.
+
+| rgba hardcoded (exemplos) | Cor base | → Substituir por |
+|---|---|---|
+| `rgba(243,139,168,.1)` | `--c-negative` (#f38ba8) | `color-mix(in srgb, var(--c-negative) 10%, transparent)` |
+| `rgba(243,139,168,.3)` | `--c-negative` | `color-mix(in srgb, var(--c-negative) 30%, transparent)` |
+| `rgba(243,139,168,0.5)` | `--c-negative` | `color-mix(in srgb, var(--c-negative) 50%, transparent)` |
+| `rgba(137,180,250,0.07)` | `--c-link` (#89b4fa) | `color-mix(in srgb, var(--c-link) 7%, transparent)` |
+| `rgba(137,180,250,0.25)` | `--c-link` | `color-mix(in srgb, var(--c-link) 25%, transparent)` |
+| `rgba(137,180,250,0.3)` | `--c-link` | `color-mix(in srgb, var(--c-link) 30%, transparent)` |
+| `rgba(166,227,161,.1)` | `--c-positive` (#a6e3a1) | `color-mix(in srgb, var(--c-positive) 10%, transparent)` |
+| `rgba(166,227,161,.3)` | `--c-positive` | `color-mix(in srgb, var(--c-positive) 30%, transparent)` |
+| `rgba(166,227,161,0.4)` | `--c-positive` | `color-mix(in srgb, var(--c-positive) 40%, transparent)` |
+| `rgba(203,166,247,0.08)` | `--c-action` (#cba6f7) | `color-mix(in srgb, var(--c-action) 8%, transparent)` |
+| `rgba(249,226,175,.1)` | `--c-warning` (#f9e2af) | `color-mix(in srgb, var(--c-warning) 10%, transparent)` |
+| `rgba(249,226,175,0.25)` | `--c-warning` | `color-mix(in srgb, var(--c-warning) 25%, transparent)` |
+| `rgba(0,0,0,0.5)` a `rgba(0,0,0,0.8)` | black overlay | `color-mix(in srgb, black XX%, transparent)` |
+| `rgba(255,255,255,0.08)` | white overlay | `color-mix(in srgb, white 8%, transparent)` |
+
+> Na prática, essas `rgba` aparecem em `background`, `boxShadow` e `border` de elementos com efeito de transparência (hover states, overlays, badges). Ao mover para classes CSS, elas viram `color-mix()` referenciando as variáveis — assim também respondem à troca de tema.
+
+**Convenção de nomenclatura para alpha tokens** (opcional, para os mais usados):
+```css
+:root {
+  --c-negative-10: color-mix(in srgb, var(--c-negative) 10%, transparent);
+  --c-negative-30: color-mix(in srgb, var(--c-negative) 30%, transparent);
+  --c-positive-10: color-mix(in srgb, var(--c-positive) 10%, transparent);
+  --c-positive-30: color-mix(in srgb, var(--c-positive) 30%, transparent);
+  --c-link-10:     color-mix(in srgb, var(--c-link) 10%, transparent);
+  --c-link-25:     color-mix(in srgb, var(--c-link) 25%, transparent);
+  --c-action-10:   color-mix(in srgb, var(--c-action) 10%, transparent);
+  --c-black-60:    color-mix(in srgb, black 60%, transparent);
+}
+```
+
 ---
 
 ## 3. Hierarquia tipográfica padronizada
@@ -409,7 +446,8 @@ const S = {
 | | Antes | Depois |
 |---|---|---|
 | Propriedades CSS inline | 5.146 | ~600 |
-| Cores hardcoded | 14 | **0** |
+| Cores hardcoded (hex) | 14 | **0** |
+| Cores hardcoded (rgba) | ~60 ocorrências | **0** (viram `color-mix()`) |
 | Para mudar cor primária | editar 428 linhas | editar **1 linha** |
 | Para criar tema alternativo | impossível | **6 linhas** em novo arquivo |
 | Escala tipográfica | 19 valores | **7 steps** |
