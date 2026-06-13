@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "@presentation/context/AuthContext";
-import minhaLigaLogo from "../../images/minha_liga.png";
 
 type NavChildLink = { label: string; href: string };
 type NavChildSep  = { sep: true; label: string };
@@ -11,8 +10,10 @@ type NavItem =
   | { label: string; href?: undefined; exact?: undefined; children: NavChild[] };
 
 const BASE_NAV_ITEMS: NavItem[] = [
-  { label: "Início", href: "/", exact: true },
-  { label: "Ao Vivo", href: "/ao-vivo" },
+  { label: "Notícias",   href: "/noticias" },
+  { label: "Documentos", href: "/documentos" },
+  { label: "Emendas",    href: "/emendas" },
+  { label: "Ao Vivo",    href: "/ao-vivo" },
   {
     label: "Competições",
     children: [
@@ -127,11 +128,7 @@ export function TopNav() {
   return (
     <nav style={S.nav}>
       <div style={S.inner}>
-        {/* Logo / brand */}
-        <NavLink to="/" style={S.brand} onClick={closeAll}>
-          <img src={minhaLigaLogo} alt="Minha Liga" style={S.brandLogo} />
-          Minha Liga
-        </NavLink>
+
 
         {/* Desktop links */}
         {!isMobile && (
@@ -195,7 +192,6 @@ export function TopNav() {
               </div>
             : <div style={{ display: "flex", gap: 8 }}>
                 <NavLink to="/login" style={S.authBtn} onClick={closeAll}>Entrar</NavLink>
-                <NavLink to="/cadastro" style={{ ...S.authBtn, background: "#89b4fa", color: "#1e1e2e" }} onClick={closeAll}>Cadastrar-se</NavLink>
               </div>
         )}
 
@@ -268,10 +264,7 @@ export function TopNav() {
           {/* Auth button — mobile */}
           {isLoggedIn
             ? <button style={{ ...S.mobileLink, background: "none", border: "none", cursor: "pointer", textAlign: "left" as const }} onClick={() => { logout(); navigate("/"); closeAll(); }}>Sair</button>
-            : <>
-                <NavLink to="/login" style={S.mobileLink} onClick={closeAll}>Entrar</NavLink>
-                <NavLink to="/cadastro" style={{ ...S.mobileLink, color: "#89b4fa", fontWeight: 700 }} onClick={closeAll}>Cadastrar-se</NavLink>
-              </>
+            : <NavLink to="/login" style={S.mobileLink} onClick={closeAll}>Entrar</NavLink>
           }
         </div>
       )}
@@ -281,11 +274,8 @@ export function TopNav() {
 
 const S: Record<string, React.CSSProperties> = {
   nav: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
-    position: "sticky",
-    top: 0,
-    zIndex: 100,
   },
   inner: {
     maxWidth: "1100px",
@@ -356,7 +346,7 @@ const S: Record<string, React.CSSProperties> = {
     position: "absolute",
     top: "calc(100% + 6px)",
     left: 0,
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "0.375rem",
@@ -393,7 +383,7 @@ const S: Record<string, React.CSSProperties> = {
     display: "block",
     width: "22px",
     height: "2px",
-    backgroundColor: "#a6adc8",
+    backgroundColor: "#ffffff",
     borderRadius: "2px",
     transition: "transform 0.2s, opacity 0.2s",
   },
@@ -449,7 +439,7 @@ const S: Record<string, React.CSSProperties> = {
   dropSepLabel: {
     fontSize: "0.6rem",
     fontWeight: 700,
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase" as const,
     letterSpacing: "0.1em",
     padding: "0.55rem 0.75rem 0.2rem",
@@ -462,7 +452,7 @@ const S: Record<string, React.CSSProperties> = {
   mobileSepLabel: {
     fontSize: "0.58rem",
     fontWeight: 700,
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase" as const,
     letterSpacing: "0.1em",
     padding: "0.6rem 1.25rem 0.1rem",
@@ -516,6 +506,6 @@ const S: Record<string, React.CSSProperties> = {
   },
   mobileUserEmail: {
     fontSize: "0.75rem",
-    color: "#6c7086",
+    color: "#ffffff",
   },
 };

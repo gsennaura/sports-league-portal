@@ -929,7 +929,7 @@ export function AdminChampionshipManagePage() {
                       type="button"
                       onClick={handleResetPodium}
                       disabled={resetingPodium}
-                      style={{ background: "none", border: "1px solid #45475a", borderRadius: "4px", color: "#6c7086", fontSize: "0.75rem", cursor: "pointer", padding: "0.15rem 0.5rem", marginLeft: "0.25rem" }}
+                      style={{ background: "none", border: "1px solid #45475a", borderRadius: "4px", color: "#ffffff", fontSize: "0.75rem", cursor: "pointer", padding: "0.15rem 0.5rem", marginLeft: "0.25rem" }}
                       title="Resetar campeão e vice-campeão"
                     >
                       {resetingPodium ? "…" : "↺ Resetar"}
@@ -939,7 +939,7 @@ export function AdminChampionshipManagePage() {
               </div>
               {editionClubs.length > 0 && (
                 <div style={{ marginTop: "1rem", paddingTop: "0.75rem", borderTop: "1px solid #313244" }}>
-                  <p style={{ fontSize: "0.8rem", color: "#6c7086", marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                  <p style={{ fontSize: "0.8rem", color: "#ffffff", marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                     Clubes participantes ({editionClubs.length})
                   </p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
@@ -1188,7 +1188,7 @@ export function AdminChampionshipManagePage() {
                           <div style={S.matchSectionHeader}>
                             <span style={S.matchSectionTitle}>Partidas</span>
                             {group.matches.length > 0 && (
-                              <span style={{ color: "#6c7086", fontSize: "0.72rem" }}>
+                              <span style={{ color: "#ffffff", fontSize: "0.72rem" }}>
                                 {group.matches.length}
                               </span>
                             )}
@@ -1303,11 +1303,11 @@ export function AdminChampionshipManagePage() {
                           <React.Fragment key={r.id}>
                             <tr style={{ borderBottom: "1px solid #313244" }}>
                               <td style={S.regTd}>{r.athlete_name}</td>
-                              <td style={{ ...S.regTd, color: "#a6adc8" }}>{r.team_name}</td>
-                              <td style={{ ...S.regTd, fontFamily: "monospace", color: "#a6adc8" }}>
+                              <td style={{ ...S.regTd, color: "#ffffff" }}>{r.team_name}</td>
+                              <td style={{ ...S.regTd, fontFamily: "monospace", color: "#ffffff" }}>
                                 {r.registration_number ?? "—"}
                               </td>
-                              <td style={{ ...S.regTd, color: "#a6adc8" }}>
+                              <td style={{ ...S.regTd, color: "#ffffff" }}>
                                 {r.registered_at ? fmtDate(r.registered_at) : "—"}
                               </td>
                               <td style={S.regTd}>
@@ -1355,7 +1355,7 @@ export function AdminChampionshipManagePage() {
                                       autoFocus
                                     />
                                     <button
-                                      style={{ ...S.btnSaveSmall, backgroundColor: "#f38ba8", color: "#1e1e2e", fontSize: "0.8rem" }}
+                                      style={{ ...S.btnSaveSmall, backgroundColor: "#f38ba8", color: "#18265b", fontSize: "0.8rem" }}
                                       onClick={() => void handleRejectReg(r.id)}
                                       disabled={!!regBusy[r.id]}
                                     >
@@ -1384,7 +1384,7 @@ export function AdminChampionshipManagePage() {
                       disabled={regPage === 0}
                       onClick={() => setRegPage(p => p - 1)}
                     >←</button>
-                    <span style={{ color: "#a6adc8", fontSize: "0.82rem" }}>
+                    <span style={{ color: "#ffffff", fontSize: "0.82rem" }}>
                       {regPage + 1} / {regPageCount} ({filteredRegs.length} atletas)
                     </span>
                     <button
@@ -1416,7 +1416,7 @@ export function AdminChampionshipManagePage() {
             {/* Fase + Grupo */}
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "1rem" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-                <label style={{ color: "#a6adc8", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Fase</label>
+                <label style={{ color: "#ffffff", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Fase</label>
                 <select
                   value={roundPhaseId}
                   onChange={e => { setRoundPhaseId(e.target.value); setRoundGroupId(""); setRoundRows([{ home_team_id: "", away_team_id: "", match_date: "", venue_id: "" }]); setRoundResult(null); }}
@@ -1429,7 +1429,7 @@ export function AdminChampionshipManagePage() {
                 </select>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-                <label style={{ color: "#a6adc8", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Grupo</label>
+                <label style={{ color: "#ffffff", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Grupo</label>
                 <select
                   value={roundGroupId}
                   onChange={e => { setRoundGroupId(e.target.value); setRoundRows([{ home_team_id: "", away_team_id: "", match_date: "", venue_id: "" }]); setRoundResult(null); }}
@@ -1443,7 +1443,7 @@ export function AdminChampionshipManagePage() {
                 </select>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-                <label style={{ color: "#a6adc8", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Nº da Rodada</label>
+                <label style={{ color: "#ffffff", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Nº da Rodada</label>
                 <input
                   type="number"
                   min="1"
@@ -1453,7 +1453,7 @@ export function AdminChampionshipManagePage() {
                 />
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-                <label style={{ color: "#a6adc8", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Data/Hora Padrão</label>
+                <label style={{ color: "#ffffff", fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Data/Hora Padrão</label>
                 <input
                   type="datetime-local"
                   value={roundDefaultDate}
@@ -1482,8 +1482,8 @@ export function AdminChampionshipManagePage() {
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {roundRows.map((row, idx) => (
-                      <div key={idx} style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap", backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", padding: "0.6rem 0.75rem" }}>
-                        <span style={{ color: "#6c7086", fontSize: "0.75rem", fontFamily: "monospace", minWidth: "1.5rem" }}>#{idx + 1}</span>
+                      <div key={idx} style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap", backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", padding: "0.6rem 0.75rem" }}>
+                        <span style={{ color: "#ffffff", fontSize: "0.75rem", fontFamily: "monospace", minWidth: "1.5rem" }}>#{idx + 1}</span>
                         <select
                           value={row.home_team_id}
                           onChange={e => setRoundRows(prev => prev.map((r, i) => i === idx ? { ...r, home_team_id: e.target.value } : r))}
@@ -1492,7 +1492,7 @@ export function AdminChampionshipManagePage() {
                           <option value="">Mandante</option>
                           {groupTeams.map(t => <option key={t.team_id} value={t.team_id}>{t.team_name}</option>)}
                         </select>
-                        <span style={{ color: "#6c7086", fontSize: "0.8rem" }}>×</span>
+                        <span style={{ color: "#ffffff", fontSize: "0.8rem" }}>×</span>
                         <select
                           value={row.away_team_id}
                           onChange={e => setRoundRows(prev => prev.map((r, i) => i === idx ? { ...r, away_team_id: e.target.value } : r))}
@@ -1540,17 +1540,17 @@ export function AdminChampionshipManagePage() {
 
             {/* Resultado */}
             {roundResult && (
-              <div style={{ backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "8px", padding: "1rem", marginTop: "1rem" }}>
+              <div style={{ backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "8px", padding: "1rem", marginTop: "1rem" }}>
                 <div style={{ display: "flex", gap: "1.5rem", marginBottom: "0.75rem" }}>
                   <span style={{ color: "#a6e3a1", fontWeight: 700, fontSize: "0.875rem" }}>✓ {roundResult.created} criadas</span>
                   {roundResult.errors > 0 && <span style={{ color: "#f38ba8", fontWeight: 700, fontSize: "0.875rem" }}>✗ {roundResult.errors} erros</span>}
-                  <span style={{ color: "#a6adc8", fontSize: "0.875rem" }}>Total: {roundResult.total}</span>
+                  <span style={{ color: "#ffffff", fontSize: "0.875rem" }}>Total: {roundResult.total}</span>
                 </div>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.8rem" }}>
                   <thead>
                     <tr>
                       {["#", "Mandante", "Visitante", "Status"].map(h => (
-                        <th key={h} style={{ padding: "0.4rem 0.75rem", textAlign: "left", color: "#a6adc8", fontWeight: 700, textTransform: "uppercase", fontSize: "0.72rem", borderBottom: "1px solid #313244" }}>{h}</th>
+                        <th key={h} style={{ padding: "0.4rem 0.75rem", textAlign: "left", color: "#ffffff", fontWeight: 700, textTransform: "uppercase", fontSize: "0.72rem", borderBottom: "1px solid #313244" }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -1560,7 +1560,7 @@ export function AdminChampionshipManagePage() {
                       const teamName = (id: string) => group?.teams.find(t => t.team_id === id)?.team_name ?? id.slice(0, 8);
                       return (
                         <tr key={r.row} style={{ backgroundColor: r.success ? "#1a2e1f" : "#2a1a1f" }}>
-                          <td style={{ padding: "0.4rem 0.75rem", color: "#6c7086" }}>{r.row + 1}</td>
+                          <td style={{ padding: "0.4rem 0.75rem", color: "#ffffff" }}>{r.row + 1}</td>
                           <td style={{ padding: "0.4rem 0.75rem", color: "#cdd6f4" }}>{teamName(r.home_team_id)}</td>
                           <td style={{ padding: "0.4rem 0.75rem", color: "#cdd6f4" }}>{teamName(r.away_team_id)}</td>
                           <td style={{ padding: "0.4rem 0.75rem" }}>
@@ -1586,7 +1586,7 @@ export function AdminChampionshipManagePage() {
 
 const S: Record<string, React.CSSProperties> = {
   // Header
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #cba6f7, #89b4fa)" },
   heroInner: { maxWidth: "1100px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
@@ -1594,7 +1594,7 @@ const S: Record<string, React.CSSProperties> = {
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
   subtitle: { color: "#cdd6f4", fontSize: "0.875rem", display: "block", marginTop: "0.2rem" },
   champMeta: { display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center" },
-  metaBadge: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "4px", color: "#89b4fa", padding: "0.25rem 0.6rem", fontSize: "0.8rem", fontWeight: 600 },
+  metaBadge: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "4px", color: "#89b4fa", padding: "0.25rem 0.6rem", fontSize: "0.8rem", fontWeight: 600 },
   metaTag: { backgroundColor: "#201a2a", border: "1px solid #4a2a6a", borderRadius: "4px", color: "#cba6f7", padding: "0.25rem 0.6rem", fontSize: "0.8rem", fontWeight: 600 },
 
   // Layout
@@ -1615,23 +1615,23 @@ const S: Record<string, React.CSSProperties> = {
   btnDanger: { backgroundColor: "#f38ba8", border: "none", borderRadius: "6px", color: "#11111b", fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" } as React.CSSProperties,
   btnCancel: { backgroundColor: "transparent", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.45rem 0.85rem", cursor: "pointer", whiteSpace: "nowrap" },
   btnCancelSmall: { backgroundColor: "transparent", border: "1px solid #313244", borderRadius: "4px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.35rem 0.5rem", cursor: "pointer" },
-  btnAddTeam: { background: "none", border: "1px dashed #6c7086", borderRadius: "4px", color: "#cdd6f4", fontSize: "0.82rem", padding: "0.3rem 0.5rem", cursor: "pointer", marginTop: "0.5rem", width: "100%" },
+  btnAddTeam: { background: "none", border: "1px dashed #ffffff", borderRadius: "4px", color: "#cdd6f4", fontSize: "0.82rem", padding: "0.3rem 0.5rem", cursor: "pointer", marginTop: "0.5rem", width: "100%" },
   btnAddTeamDisabled: { opacity: 0.4, cursor: "default" },
 
   // Forms
   inlineForm: { display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" },
-  inlineFormCard: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "8px", padding: "1rem", marginBottom: "0.75rem" },
+  inlineFormCard: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "8px", padding: "1rem", marginBottom: "0.75rem" },
   inlineFormRow: { display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" },
   addTeamForm: { display: "flex", flexDirection: "column" as const, gap: "0.4rem", marginTop: "0.5rem" },
   addTeamFilters: { display: "flex", gap: "0.75rem", flexWrap: "wrap" as const },
   addTeamFilterItem: { display: "flex", flexDirection: "column" as const, gap: "0.15rem" },
-  addTeamFilterLabel: { fontSize: "0.65rem", fontWeight: 700, color: "#a6adc8", textTransform: "uppercase" as const, letterSpacing: "0.04em" },
-  addTeamFilterValue: { fontSize: "0.78rem", color: "#cdd6f4", backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "4px", padding: "0.2rem 0.5rem" },
+  addTeamFilterLabel: { fontSize: "0.65rem", fontWeight: 700, color: "#ffffff", textTransform: "uppercase" as const, letterSpacing: "0.04em" },
+  addTeamFilterValue: { fontSize: "0.78rem", color: "#cdd6f4", backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "4px", padding: "0.2rem 0.5rem" },
   addTeamRow: { display: "flex", alignItems: "center", gap: "0.3rem" },
 
   // Inputs
-  input: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.5rem 0.75rem", outline: "none", boxSizing: "border-box" },
-  inputSmall: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.8rem", padding: "0.35rem 0.55rem", outline: "none", boxSizing: "border-box" },
+  input: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.5rem 0.75rem", outline: "none", boxSizing: "border-box" },
+  inputSmall: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.8rem", padding: "0.35rem 0.55rem", outline: "none", boxSizing: "border-box" },
   select: { cursor: "pointer", appearance: "auto" },
 
   // Misc
@@ -1639,11 +1639,11 @@ const S: Record<string, React.CSSProperties> = {
 
   // Divisions strip
   chipRow: { display: "flex", flexWrap: "wrap", gap: "0.5rem" },
-  divChip: { backgroundColor: "#1e1e2e", border: "1px solid #cba6f7", borderRadius: "20px", color: "#cba6f7", padding: "0.3rem 0.9rem", fontSize: "0.85rem", fontWeight: 500, display: "inline-flex", alignItems: "center", gap: "0.4rem" },
+  divChip: { backgroundColor: "#18265b", border: "1px solid #cba6f7", borderRadius: "20px", color: "#cba6f7", padding: "0.3rem 0.9rem", fontSize: "0.85rem", fontWeight: 500, display: "inline-flex", alignItems: "center", gap: "0.4rem" },
   chipOrder: { color: "#cdd6f4", fontSize: "0.72rem" },
 
   // Phase cards
-  phaseCard: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px", marginBottom: "1rem", overflow: "hidden" },
+  phaseCard: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px", marginBottom: "1rem", overflow: "hidden" },
   phaseHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.7rem 1rem", borderBottom: "1px solid #313244" },
   phaseHeaderRR: { backgroundColor: "#161b2a" },
   phaseHeaderKO: { backgroundColor: "#211419" },
@@ -1655,20 +1655,20 @@ const S: Record<string, React.CSSProperties> = {
   phaseBadgeKO: { backgroundColor: "#2a1a1f", color: "#f38ba8", border: "1px solid #5a2a30" },
 
   phaseStatusEmAndamento: { borderRadius: "4px", padding: "0.15rem 0.5rem", fontSize: "0.72rem", fontWeight: 600, backgroundColor: "#1a2e1f", color: "#a6e3a1", border: "1px solid #2a4a2f", cursor: "pointer" },
-  phaseStatusFinalizado: { borderRadius: "4px", padding: "0.15rem 0.5rem", fontSize: "0.8rem", fontWeight: 600, backgroundColor: "#1e1e2e", color: "#cdd6f4", border: "1px solid #45475a", cursor: "pointer" },
+  phaseStatusFinalizado: { borderRadius: "4px", padding: "0.15rem 0.5rem", fontSize: "0.8rem", fontWeight: 600, backgroundColor: "#18265b", color: "#cdd6f4", border: "1px solid #45475a", cursor: "pointer" },
 
   phaseBody: { padding: "0.85rem 1rem" },
 
   // Groups grid
   groupsGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "0.65rem" },
-  groupCard: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "8px", padding: "0.7rem" },
+  groupCard: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "8px", padding: "0.7rem" },
   groupHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem" },
   groupName: { color: "#cdd6f4", fontWeight: 600, fontSize: "0.875rem" },
   groupCount: { color: "#cdd6f4", fontSize: "0.72rem" },
 
   // Teams
   teamsList: { display: "flex", flexWrap: "wrap", gap: "0.3rem", minHeight: "1.5rem" },
-  teamChip: { backgroundColor: "#1e1e2e", border: "1px solid #45475a", borderRadius: "4px", color: "#cdd6f4", padding: "0.15rem 0.45rem", fontSize: "0.75rem" },
+  teamChip: { backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "4px", color: "#cdd6f4", padding: "0.15rem 0.45rem", fontSize: "0.75rem" },
   emptyTeams: { color: "#cdd6f4", fontSize: "0.75rem", fontStyle: "italic" },
 
   // Matches
@@ -1686,21 +1686,21 @@ const S: Record<string, React.CSSProperties> = {
   matchDateLabel: { color: "#cdd6f4", fontSize: "0.68rem", flexShrink: 0 },
   matchForm: { marginTop: "0.4rem" },
   // Tabs
-  editionCard: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "8px", padding: "1rem 1.25rem" },
+  editionCard: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "8px", padding: "1rem 1.25rem" },
   editionRow: { display: "flex", flexWrap: "wrap" as const, gap: "1.25rem", marginBottom: "1rem" },
   editionField: { display: "flex", flexDirection: "column" as const, gap: "0.4rem", flex: 1, minWidth: "180px" },
   editionLabel: { fontSize: "0.78rem", fontWeight: 700, color: "#cdd6f4", textTransform: "uppercase" as const, letterSpacing: "0.05em" },
   editionActions: { display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" as const },
   tabBar: { display: "flex", gap: "0", marginTop: "1.25rem", borderBottom: "1px solid #313244" },
-  tab: { background: "none", border: "none", color: "#a6adc8", fontSize: "0.875rem", fontWeight: 500, padding: "0.5rem 1.1rem 0.6rem", cursor: "pointer", borderBottom: "2px solid transparent", marginBottom: "-1px" },
+  tab: { background: "none", border: "none", color: "#ffffff", fontSize: "0.875rem", fontWeight: 500, padding: "0.5rem 1.1rem 0.6rem", cursor: "pointer", borderBottom: "2px solid transparent", marginBottom: "-1px" },
   tabActive: { color: "#cba6f7", borderBottom: "2px solid #cba6f7", fontWeight: 700 },
   // Registration table
-  regTh: { padding: "0.6rem 1rem", textAlign: "left", color: "#a6adc8", fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", borderBottom: "1px solid #313244", backgroundColor: "#181825", whiteSpace: "nowrap" } as React.CSSProperties,
+  regTh: { padding: "0.6rem 1rem", textAlign: "left", color: "#ffffff", fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", borderBottom: "1px solid #313244", backgroundColor: "#18265b", whiteSpace: "nowrap" } as React.CSSProperties,
   regTd: { padding: "0.65rem 1rem", color: "#cdd6f4", fontSize: "0.875rem", verticalAlign: "middle" } as React.CSSProperties,
 };
 
 function regBadgeStyle(status: string): React.CSSProperties {
   const bg = status === "approved" ? "#a6e3a1" : status === "rejected" ? "#f38ba8" : "#f9e2af";
   return { display: "inline-block", padding: "0.15rem 0.5rem", borderRadius: "4px",
-    fontSize: "0.75rem", fontWeight: 600, backgroundColor: bg, color: "#1e1e2e" };
+    fontSize: "0.75rem", fontWeight: 600, backgroundColor: bg, color: "#18265b" };
 }

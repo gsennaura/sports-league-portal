@@ -22,26 +22,26 @@ interface MatchItem {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  page:     { minHeight: "100vh", background: "#1e1e2e", color: "#cdd6f4" },
+  page:     { minHeight: "100vh", background: "#18265b", color: "#cdd6f4" },
   inner:    { maxWidth: "1100px", margin: "0 auto", padding: "32px 24px" },
   title:    { fontSize: "22px", fontWeight: 700, color: "#cdd6f4", margin: "0 0 4px" },
-  subtitle: { fontSize: "14px", color: "#a6adc8", margin: "0 0 24px" },
-  card:     { background: "#181825", borderRadius: "10px", padding: "20px", marginBottom: "20px" },
+  subtitle: { fontSize: "14px", color: "#ffffff", margin: "0 0 24px" },
+  card:     { background: "#18265b", borderRadius: "10px", padding: "20px", marginBottom: "20px" },
   filters:  { display: "flex", gap: "16px", flexWrap: "wrap" as const, alignItems: "flex-end", marginBottom: "20px" },
   field:    { display: "flex", flexDirection: "column" as const },
-  label:    { fontSize: "12px", color: "#a6adc8", marginBottom: "5px" },
+  label:    { fontSize: "12px", color: "#ffffff", marginBottom: "5px" },
   input:    { padding: "8px 12px", background: "#313244", color: "#cdd6f4", border: "1px solid #45475a", borderRadius: "6px", fontSize: "14px" },
   table:    { width: "100%", borderCollapse: "collapse" as const, fontSize: "14px" },
-  th:       { textAlign: "left" as const, padding: "10px 12px", color: "#a6adc8", borderBottom: "1px solid #313244", fontWeight: 600, fontSize: "12px", textTransform: "uppercase" as const },
+  th:       { textAlign: "left" as const, padding: "10px 12px", color: "#ffffff", borderBottom: "1px solid #313244", fontWeight: 600, fontSize: "12px", textTransform: "uppercase" as const },
   td:       { padding: "10px 12px", borderBottom: "1px solid #313244", verticalAlign: "middle" as const, color: "#cdd6f4" },
-  tdMuted:  { padding: "10px 12px", borderBottom: "1px solid #313244", verticalAlign: "middle" as const, color: "#a6adc8", fontSize: "13px" },
+  tdMuted:  { padding: "10px 12px", borderBottom: "1px solid #313244", verticalAlign: "middle" as const, color: "#ffffff", fontSize: "13px" },
   scoreCell:{ padding: "10px 12px", borderBottom: "1px solid #313244", verticalAlign: "middle" as const, fontWeight: 700, color: "#f9e2af", fontFamily: "monospace", fontSize: "15px" },
   actionLink: { padding: "4px 10px", borderRadius: "5px", fontSize: "12px", fontWeight: 600, textDecoration: "none", marginRight: "6px" },
   tabRow:   { display: "flex", gap: "0", marginBottom: "20px", borderBottom: "1px solid #313244" },
-  tab:      { padding: "10px 20px", cursor: "pointer", fontSize: "14px", fontWeight: 600, borderBottom: "2px solid transparent", color: "#a6adc8", background: "transparent", border: "none" },
+  tab:      { padding: "10px 20px", cursor: "pointer", fontSize: "14px", fontWeight: 600, borderBottom: "2px solid transparent", color: "#ffffff", background: "transparent", border: "none" },
   tabActive:{ padding: "10px 20px", cursor: "pointer", fontSize: "14px", fontWeight: 600, borderBottom: "2px solid #89b4fa", color: "#89b4fa", background: "transparent", border: "none" },
-  empty:    { textAlign: "center" as const, color: "#6c7086", padding: "40px", fontSize: "14px" },
-  loader:   { textAlign: "center" as const, color: "#a6adc8", padding: "40px", fontSize: "14px" },
+  empty:    { textAlign: "center" as const, color: "#ffffff", padding: "40px", fontSize: "14px" },
+  loader:   { textAlign: "center" as const, color: "#ffffff", padding: "40px", fontSize: "14px" },
 };
 
 function formatDate(d: string | null): string {
@@ -51,8 +51,8 @@ function formatDate(d: string | null): string {
 }
 
 function statusBadge(status: string | null, hasScore: boolean): React.ReactNode {
-  if (hasScore) return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#a6e3a1", color: "#1e1e2e" }}>Finalizada</span>;
-  if (status === "live") return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#f38ba8", color: "#1e1e2e" }}>Ao vivo</span>;
+  if (hasScore) return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#a6e3a1", color: "#18265b" }}>Finalizada</span>;
+  if (status === "live") return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#f38ba8", color: "#18265b" }}>Ao vivo</span>;
   return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#313244", color: "#cdd6f4" }}>Agendada</span>;
 }
 
@@ -192,7 +192,7 @@ export function AdminMatchesPage() {
                       <td style={S.tdMuted}>{formatDate(m.match_date)}</td>
                       <td style={S.td}>
                         <span style={{ fontWeight: 600 }}>{m.home_team_name}</span>
-                        <span style={{ color: "#6c7086", margin: "0 6px" }}>vs</span>
+                        <span style={{ color: "#ffffff", margin: "0 6px" }}>vs</span>
                         <span style={{ fontWeight: 600 }}>{m.away_team_name}</span>
                       </td>
                       <td style={{ ...S.scoreCell, textAlign: "center" as const }}>
@@ -200,7 +200,7 @@ export function AdminMatchesPage() {
                       </td>
                       <td style={S.tdMuted}>
                         {m.championship_name}{m.championship_year ? ` ${m.championship_year}` : ""}
-                        {m.phase_name ? <><br /><span style={{ fontSize: "12px", color: "#6c7086" }}>{m.phase_name}</span></> : null}
+                        {m.phase_name ? <><br /><span style={{ fontSize: "12px", color: "#ffffff" }}>{m.phase_name}</span></> : null}
                       </td>
                       <td style={S.tdMuted}>{m.venue_name ?? "—"}</td>
                       <td style={S.td}>{statusBadge(m.status, hasScore)}</td>
@@ -208,7 +208,7 @@ export function AdminMatchesPage() {
                         {!hasScore && (
                           <Link
                             to={`/admin/partidas/${m.id}/resultado`}
-                            style={{ ...S.actionLink, background: "#89b4fa", color: "#1e1e2e" }}
+                            style={{ ...S.actionLink, background: "#89b4fa", color: "#18265b" }}
                           >
                             Resultado
                           </Link>
@@ -221,7 +221,7 @@ export function AdminMatchesPage() {
                         </Link>
                         <Link
                           to={`/partidas/${m.id}`}
-                          style={{ ...S.actionLink, background: "transparent", color: "#a6adc8", border: "1px solid #45475a" }}
+                          style={{ ...S.actionLink, background: "transparent", color: "#ffffff", border: "1px solid #45475a" }}
                         >
                           Ver
                         </Link>

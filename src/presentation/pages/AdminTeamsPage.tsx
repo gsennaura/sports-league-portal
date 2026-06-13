@@ -281,7 +281,7 @@ export function AdminTeamsPage({ listTeams, deleteTeam }: Props) {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #89b4fa, #a6e3a1)" },
   heroInner: { maxWidth: "1100px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   heroRow: { display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" },
@@ -291,14 +291,14 @@ const S: Record<string, React.CSSProperties> = {
 
   page: { maxWidth: "1100px", margin: "0 auto", padding: "2rem 1.5rem 4rem" },
   toolbar: { marginBottom: "1.25rem", display: "flex", gap: "0.6rem", flexWrap: "wrap", alignItems: "center" },
-  filterSelect: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 0.75rem", outline: "none", minWidth: "160px" },
-  search: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 1rem", minWidth: "240px", flex: 1, outline: "none", boxSizing: "border-box" },
+  filterSelect: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 0.75rem", outline: "none", minWidth: "160px" },
+  search: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 1rem", minWidth: "240px", flex: 1, outline: "none", boxSizing: "border-box" },
   hint: { color: "#cdd6f4", fontSize: "0.875rem" },
   errorText: { color: "#f38ba8", fontSize: "0.875rem" },
 
   tableWrap: { overflowX: "auto" },
-  table: { width: "100%", borderCollapse: "collapse", backgroundColor: "#1e1e2e", borderRadius: "10px", overflow: "hidden" },
-  th: { padding: "0.8rem 1rem", textAlign: "left", color: "#cdd6f4", fontSize: "0.84rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", backgroundColor: "#181825", borderBottom: "1px solid #313244", whiteSpace: "nowrap" },
+  table: { width: "100%", borderCollapse: "collapse", backgroundColor: "#18265b", borderRadius: "10px", overflow: "hidden" },
+  th: { padding: "0.8rem 1rem", textAlign: "left", color: "#cdd6f4", fontSize: "0.84rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", backgroundColor: "#18265b", borderBottom: "1px solid #313244", whiteSpace: "nowrap" },
   trRow: { borderBottom: "1px solid #313244" },
   td: { padding: "0.75rem 1rem", color: "#cdd6f4", verticalAlign: "middle" },
   tdMuted: { padding: "0.75rem 1rem", color: "#cdd6f4", verticalAlign: "middle" },
@@ -313,7 +313,7 @@ const S: Record<string, React.CSSProperties> = {
   btnDelete: { background: "none", border: "1px solid #5a2a30", borderRadius: "5px", color: "#f38ba8", cursor: "pointer", fontSize: "0.875rem", fontWeight: 500, padding: "0.3rem 0.6rem", marginLeft: "0.4rem" },
 
   overlay: { position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 },
-  modal: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem 2rem", maxWidth: "420px", width: "90%" },
+  modal: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem 2rem", maxWidth: "420px", width: "90%" },
   modalTitle: { color: "#f38ba8", fontSize: "1.1rem", fontWeight: 700, margin: "0 0 0.75rem" },
   modalText: { color: "#cdd6f4", fontSize: "0.95rem", margin: "0 0 0.5rem" },
   modalHint: { color: "#cdd6f4", fontSize: "0.82rem", margin: "0 0 1rem", fontStyle: "italic" },
@@ -325,6 +325,6 @@ const S: Record<string, React.CSSProperties> = {
   footer: { display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "1rem", flexWrap: "wrap", gap: "0.5rem" },
   count: { color: "#cdd6f4", fontSize: "0.85rem" },
   pagination: { display: "flex", alignItems: "center", gap: "0.5rem" },
-  pageBtn: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "5px", color: "#cdd6f4", cursor: "pointer", fontSize: "1rem", padding: "0.3rem 0.65rem" },
+  pageBtn: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "5px", color: "#cdd6f4", cursor: "pointer", fontSize: "1rem", padding: "0.3rem 0.65rem" },
   pageInfo: { color: "#cdd6f4", fontSize: "0.85rem" },
 };

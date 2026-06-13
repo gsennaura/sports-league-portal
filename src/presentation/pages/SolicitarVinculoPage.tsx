@@ -34,10 +34,10 @@ const STATUS_LABEL: Record<string, string> = {
 const STATUS_COLOR: Record<string, string> = {
   ativo:              "#a6e3a1",
   pendente_aprovacao: "#f9e2af",
-  inativo:            "#6c7086",
+  inativo:            "#ffffff",
   suspenso:           "#fab387",
   rejeitado:          "#f38ba8",
-  sem_time:           "#6c7086",
+  sem_time:           "#ffffff",
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -131,7 +131,7 @@ export function SolicitarVinculoPage() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   if (loading) {
-    return <main style={S.page}><p style={{ color: "#6c7086", padding: "2rem" }}>Carregando…</p></main>;
+    return <main style={S.page}><p style={{ color: "#ffffff", padding: "2rem" }}>Carregando…</p></main>;
   }
 
   if (pageError) {
@@ -173,7 +173,7 @@ export function SolicitarVinculoPage() {
                         <span style={S.sportLabel}> · {m.team_sport_name}</span>
                       )}
                     </div>
-                    <span style={{ ...S.badge, color: STATUS_COLOR[status] ?? "#a6adc8" }}>
+                    <span style={{ ...S.badge, color: STATUS_COLOR[status] ?? "#ffffff" }}>
                       {STATUS_LABEL[status] ?? status}
                     </span>
                   </div>
@@ -300,17 +300,17 @@ export function SolicitarVinculoPage() {
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const S: Record<string, React.CSSProperties> = {
-  page: { minHeight: "80vh", backgroundColor: "#1e1e2e" },
+  page: { minHeight: "80vh", backgroundColor: "#18265b" },
   container: { maxWidth: "680px", margin: "0 auto", padding: "2rem 1.5rem 5rem" },
 
   backLink: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "1.5rem" },
 
   titleRow: { marginBottom: "2rem" },
   title: { margin: "0 0 0.3rem", fontSize: "1.6rem", fontWeight: 700, color: "#cdd6f4" },
-  subtitle: { margin: 0, fontSize: "0.9rem", color: "#6c7086" },
+  subtitle: { margin: 0, fontSize: "0.9rem", color: "#ffffff" },
 
   card: {
-    backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "12px",
+    backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "12px",
     padding: "1.5rem", marginBottom: "1.25rem",
   },
   cardTitle: { margin: "0 0 1.1rem", fontSize: "0.95rem", fontWeight: 700, color: "#cba6f7", textTransform: "uppercase", letterSpacing: "0.06em" },
@@ -318,22 +318,22 @@ const S: Record<string, React.CSSProperties> = {
   membershipList: { display: "flex", flexDirection: "column", gap: "0.5rem" },
   membershipRow: {
     display: "flex", alignItems: "center", justifyContent: "space-between",
-    backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "8px",
+    backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "8px",
     padding: "0.7rem 1rem", gap: "1rem",
   },
   teamName: { fontSize: "0.9rem", fontWeight: 600, color: "#cdd6f4" },
-  sportLabel: { fontSize: "0.82rem", color: "#6c7086" },
+  sportLabel: { fontSize: "0.82rem", color: "#ffffff" },
   badge: { fontSize: "0.75rem", fontWeight: 600, whiteSpace: "nowrap" as const },
 
   grid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" },
   field: { display: "flex", flexDirection: "column", gap: "5px" },
-  label: { fontSize: "0.75rem", fontWeight: 700, color: "#a6adc8", textTransform: "uppercase", letterSpacing: "0.05em" },
+  label: { fontSize: "0.75rem", fontWeight: 700, color: "#ffffff", textTransform: "uppercase", letterSpacing: "0.05em" },
   select: {
-    backgroundColor: "#1e1e2e", border: "1px solid #45475a", borderRadius: "7px",
+    backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "7px",
     color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 0.75rem",
     outline: "none", width: "100%", cursor: "pointer",
   },
-  hint: { fontSize: "0.72rem", color: "#6c7086", marginTop: "2px" },
+  hint: { fontSize: "0.72rem", color: "#ffffff", marginTop: "2px" },
 
   actions: { display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" as const },
   btnPrimary: {
@@ -345,7 +345,7 @@ const S: Record<string, React.CSSProperties> = {
   btnSecondary: {
     display: "inline-block", textDecoration: "none",
     border: "1px solid #45475a", borderRadius: "7px",
-    color: "#a6adc8", fontSize: "0.875rem", fontWeight: 500,
+    color: "#ffffff", fontSize: "0.875rem", fontWeight: 500,
     padding: "0.55rem 1.1rem", whiteSpace: "nowrap" as const,
   },
 

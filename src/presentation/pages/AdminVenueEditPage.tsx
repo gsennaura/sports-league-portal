@@ -290,7 +290,7 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
                   onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                 />
               ) : (
-                <div style={{ width: 160, height: 107, background: "#1e1e2e", borderRadius: 8, border: "1px solid #313244", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div style={{ width: 160, height: 107, background: "#18265b", borderRadius: 8, border: "1px solid #313244", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <span style={{ color: "#45475a", fontSize: "0.8rem" }}>Sem foto</span>
                 </div>
               )}
@@ -310,7 +310,7 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
                 >
                   {photoUploading ? "Enviando…" : currentPhotoUrl ? "✏️ Alterar foto" : "📷 Adicionar foto"}
                 </button>
-                <span style={{ color: "#6c7086", fontSize: "0.78rem" }}>PNG, JPEG ou WEBP</span>
+                <span style={{ color: "#ffffff", fontSize: "0.78rem" }}>PNG, JPEG ou WEBP</span>
               </div>
             </div>
           </fieldset>
@@ -348,7 +348,7 @@ function Field({
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     position: "relative",
     overflow: "hidden",
@@ -430,7 +430,7 @@ const S: Record<string, React.CSSProperties> = {
     letterSpacing: "0.06em",
   },
   input: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",

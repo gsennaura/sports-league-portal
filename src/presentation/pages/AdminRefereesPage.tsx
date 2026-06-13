@@ -94,7 +94,7 @@ export function AdminRefereesPage({ listReferees, deleteReferee }: Props) {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(135deg, #1e1e2e 0%, #313244 100%)",
+    background: "linear-gradient(135deg, #18265b 0%, #313244 100%)",
     borderBottom: "1px solid #45475a",
     position: "relative",
     overflow: "hidden",
@@ -115,13 +115,13 @@ const S: Record<string, React.CSSProperties> = {
     color: "#cdd6f4", letterSpacing: "-0.02em",
   },
   btnNew: {
-    background: "#cba6f7", color: "#1e1e2e", fontWeight: 700,
+    background: "#cba6f7", color: "#18265b", fontWeight: 700,
     padding: "0.45rem 1.1rem", borderRadius: "8px",
     textDecoration: "none", fontSize: "0.875rem", whiteSpace: "nowrap",
   },
   page: { maxWidth: "900px", margin: "2rem auto", padding: "0 1.5rem 4rem" },
   searchInput: {
-    width: "100%", background: "#1e1e2e", border: "1px solid #45475a",
+    width: "100%", background: "#18265b", border: "1px solid #45475a",
     borderRadius: "8px", padding: "0.6rem 0.75rem", color: "#cdd6f4",
     fontSize: "0.95rem", outline: "none", marginBottom: "1.25rem",
     boxSizing: "border-box",
@@ -129,7 +129,7 @@ const S: Record<string, React.CSSProperties> = {
   table: { display: "flex", flexDirection: "column", gap: "0.5rem" },
   row: {
     display: "flex", alignItems: "center", gap: "0.875rem",
-    background: "#181825", border: "1px solid #313244", borderRadius: "8px",
+    background: "#18265b", border: "1px solid #313244", borderRadius: "8px",
     padding: "0.625rem 0.875rem",
   },
   photo: {

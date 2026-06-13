@@ -181,7 +181,7 @@ export function AdminDirigentesPage() {
                   </div>
                   <div style={{ display: "flex", gap: "8px" }}>
                     <button
-                      style={{ ...S.btnAction, background: "#a6e3a1", color: "#1e1e2e" }}
+                      style={{ ...S.btnAction, background: "#a6e3a1", color: "#18265b" }}
                       disabled={processingPending === p.id}
                       onClick={() => void handlePendingAction(p.id, "aprovar")}
                     >Aprovar</button>
@@ -245,7 +245,7 @@ export function AdminDirigentesPage() {
                           setSearchOpen(false);
                         }}
                       >
-                        <span style={S.dropName}>{u.name ?? <em style={{ color: "#6c7086" }}>sem nome</em>}</span>
+                        <span style={S.dropName}>{u.name ?? <em style={{ color: "#ffffff" }}>sem nome</em>}</span>
                         <span style={S.dropEmail}>{u.email}</span>
                       </button>
                     ))}
@@ -319,7 +319,7 @@ export function AdminDirigentesPage() {
           </select>
 
           {filterTeamId && assignments.length === 0 && (
-            <p style={{ color: "#6c7086", fontSize: "0.875rem" }}>Nenhum dirigente vinculado a este time.</p>
+            <p style={{ color: "#ffffff", fontSize: "0.875rem" }}>Nenhum dirigente vinculado a este time.</p>
           )}
 
           {assignments.map((a) => {
@@ -351,46 +351,46 @@ export function AdminDirigentesPage() {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #cba6f7, #89b4fa)" },
   heroInner: { maxWidth: "860px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
-  subtitle: { color: "#a6adc8", fontSize: "0.875rem", margin: "0.25rem 0 0" },
+  subtitle: { color: "#ffffff", fontSize: "0.875rem", margin: "0.25rem 0 0" },
 
   page: { maxWidth: "860px", margin: "0 auto", padding: "2rem 1.5rem 4rem" },
 
-  card: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "12px", padding: "1.5rem", marginBottom: "1.5rem" },
+  card: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.5rem", marginBottom: "1.5rem" },
   sectionTitle: { fontSize: "1rem", fontWeight: 700, color: "#89b4fa", margin: "0 0 1.25rem" },
 
   form: { display: "flex", flexDirection: "column" as const, gap: "1rem" },
   fieldGroup: { display: "flex", flexDirection: "column" as const, gap: "0.35rem" },
   label: { color: "#cdd6f4", fontSize: "0.825rem", fontWeight: 500 },
   required: { color: "#f38ba8" },
-  optional: { color: "#6c7086", fontWeight: 400 },
+  optional: { color: "#ffffff", fontWeight: 400 },
 
   comboWrap: { position: "relative" as const },
-  searchInput: { width: "100%", backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 0.85rem", outline: "none", boxSizing: "border-box" as const },
+  searchInput: { width: "100%", backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 0.85rem", outline: "none", boxSizing: "border-box" as const },
   selectedChip: { display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: "#313244", border: "1px solid #45475a", borderRadius: "7px", padding: "0.45rem 0.85rem", fontSize: "0.875rem", color: "#cdd6f4" },
   chipText: { flex: 1 },
-  chipEmail: { color: "#6c7086", fontWeight: 400 },
-  chipClear: { background: "none", border: "none", color: "#6c7086", fontSize: "1.1rem", cursor: "pointer", padding: "0 0 0 0.5rem", lineHeight: 1, flexShrink: 0 },
-  dropdown: { position: "absolute" as const, top: "calc(100% + 4px)", left: 0, right: 0, backgroundColor: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px", boxShadow: "0 4px 24px rgba(0,0,0,0.35)", zIndex: 10, overflow: "hidden" as const },
+  chipEmail: { color: "#ffffff", fontWeight: 400 },
+  chipClear: { background: "none", border: "none", color: "#ffffff", fontSize: "1.1rem", cursor: "pointer", padding: "0 0 0 0.5rem", lineHeight: 1, flexShrink: 0 },
+  dropdown: { position: "absolute" as const, top: "calc(100% + 4px)", left: 0, right: 0, backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "8px", boxShadow: "0 4px 24px rgba(0,0,0,0.35)", zIndex: 10, overflow: "hidden" as const },
   dropdownItem: { width: "100%", background: "none", border: "none", borderBottom: "1px solid #313244", padding: "0.55rem 0.85rem", cursor: "pointer", textAlign: "left" as const, display: "flex", flexDirection: "column" as const, gap: "1px" },
-  dropdownEmpty: { position: "absolute" as const, top: "calc(100% + 4px)", left: 0, right: 0, backgroundColor: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px", padding: "0.65rem 0.85rem", color: "#6c7086", fontSize: "0.85rem", zIndex: 10 },
+  dropdownEmpty: { position: "absolute" as const, top: "calc(100% + 4px)", left: 0, right: 0, backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "8px", padding: "0.65rem 0.85rem", color: "#ffffff", fontSize: "0.85rem", zIndex: 10 },
   dropName: { color: "#cdd6f4", fontWeight: 600, fontSize: "0.875rem" },
-  dropEmail: { color: "#6c7086", fontSize: "0.78rem" },
+  dropEmail: { color: "#ffffff", fontSize: "0.78rem" },
 
-  select: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 0.85rem", outline: "none", width: "100%", boxSizing: "border-box" as const, cursor: "pointer", appearance: "auto" as const },
+  select: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.55rem 0.85rem", outline: "none", width: "100%", boxSizing: "border-box" as const, cursor: "pointer", appearance: "auto" as const },
 
   btnSave: { backgroundColor: "#89b4fa", border: "none", borderRadius: "7px", color: "#11111b", fontSize: "0.9rem", fontWeight: 700, padding: "0.55rem 1.5rem", cursor: "pointer" },
   btnDisabled: { opacity: 0.5, cursor: "not-allowed" },
-  btnCancelLink: { background: "none", border: "none", color: "#6c7086", fontSize: "0.85rem", cursor: "pointer", textDecoration: "underline" },
+  btnCancelLink: { background: "none", border: "none", color: "#ffffff", fontSize: "0.85rem", cursor: "pointer", textDecoration: "underline" },
 
   row: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.65rem 0", borderBottom: "1px solid #313244", gap: "0.75rem" },
   rowInfo: { display: "flex", flexDirection: "column" as const, gap: "2px" },
   rowMain: { fontWeight: 600, color: "#cdd6f4", fontSize: "0.9rem" },
-  rowSub: { fontSize: "0.78rem", color: "#6c7086" },
+  rowSub: { fontSize: "0.78rem", color: "#ffffff" },
 
-  btnAction: { background: "#f38ba8", color: "#1e1e2e", border: "none", borderRadius: "6px", padding: "5px 12px", fontWeight: 700, cursor: "pointer", fontSize: "0.82rem" },
+  btnAction: { background: "#f38ba8", color: "#18265b", border: "none", borderRadius: "6px", padding: "5px 12px", fontWeight: 700, cursor: "pointer", fontSize: "0.82rem" },
   btnRemove: { background: "none", border: "1px solid #5a2a30", borderRadius: "6px", color: "#f38ba8", fontSize: "0.8rem", padding: "4px 12px", cursor: "pointer" },
 };

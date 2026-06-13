@@ -23,8 +23,8 @@ export interface MatchUpdatePayload {
 }
 
 export interface MatchRepository {
-  listUpcoming(days?: number): Promise<UpcomingMatch[]>;
-  listRecent(days?: number): Promise<UpcomingMatch[]>;
+  listUpcoming(days?: number, leagueId?: string): Promise<UpcomingMatch[]>;
+  listRecent(days?: number, leagueId?: string): Promise<UpcomingMatch[]>;
   getDetail(id: string): Promise<MatchDetail>;
   getHeadToHead(matchId: string): Promise<HeadToHeadMatch[]>;
   updateResult(matchId: string, payload: MatchResultPayload): Promise<MatchDetail>;

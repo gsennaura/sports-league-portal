@@ -4,7 +4,7 @@ import type { ClubRepository } from "@domain/repositories/ClubRepository";
 export class ListClubs {
   constructor(private readonly repository: ClubRepository) {}
 
-  execute(): Promise<Club[]> {
-    return this.repository.listAll();
+  execute(leagueId?: string): Promise<Club[]> {
+    return this.repository.listAll(leagueId);
   }
 }

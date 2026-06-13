@@ -50,7 +50,7 @@ const STATUS_STYLES: Record<string, { bg: string; color: string; border: string 
   V: { bg: "#1a3a1a", color: "#a6e3a1", border: "#2d5a2d" },
   D: { bg: "#3a1a1a", color: "#f38ba8", border: "#5a2d2d" },
   E: { bg: "#3a3a1a", color: "#f9e2af", border: "#5a5a2d" },
-  A: { bg: "#181825", color: "#45475a", border: "#313244" },
+  A: { bg: "#18265b", color: "#45475a", border: "#313244" },
 };
 
 function StatusBadge({ status }: { status: "V" | "D" | "E" | "A" }) {
@@ -280,7 +280,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                           height: "26px",
                           borderRadius: "50%",
                           backgroundColor: logoUploading ? "#45475a" : "#cba6f7",
-                          border: "2px solid #1e1e2e",
+                          border: "2px solid #18265b",
                           cursor: logoUploading ? "not-allowed" : "pointer",
                           display: "flex",
                           alignItems: "center",
@@ -450,7 +450,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                   })
                 )}
                 {matchesLoaded && matches.length > 0 && (
-                  <p style={{ fontSize: "0.72rem", color: "#6c7086", marginTop: "0.5rem", textAlign: "right" as const }}>
+                  <p style={{ fontSize: "0.72rem", color: "#ffffff", marginTop: "0.5rem", textAlign: "right" as const }}>
                     <span style={{ fontWeight: 600, color: "#a6e3a1" }}>V</span>
                     {" / "}
                     <span style={{ fontWeight: 600, color: "#f38ba8" }}>D</span>
@@ -475,7 +475,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
 const S: Record<string, React.CSSProperties> = {
   // Hero
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "2.5rem",
     overflow: "hidden",
@@ -588,7 +588,7 @@ const S: Record<string, React.CSSProperties> = {
     display: "inline-flex",
     alignItems: "center",
     gap: "0.35rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     padding: "0.4rem 0.85rem",
@@ -632,7 +632,7 @@ const S: Record<string, React.CSSProperties> = {
     display: "block",
   },
   matchCard: {
-    borderBottom: "1px solid #181825",
+    borderBottom: "1px solid #18265b",
     padding: "0.4rem 0",
   },
   matchCardRow: {
@@ -733,7 +733,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   teamsConceptText: {
     fontSize: "0.85rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     lineHeight: 1.6,
   },
 
@@ -754,7 +754,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: "0.65rem 1.25rem",
     fontSize: "0.85rem",
     fontWeight: 600,
-    color: "#6c7086",
+    color: "#ffffff",
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
@@ -799,7 +799,7 @@ const S: Record<string, React.CSSProperties> = {
     alignItems: "center",
     gap: "0.6rem",
     padding: "0.45rem 0",
-    borderBottom: "1px solid #181825",
+    borderBottom: "1px solid #18265b",
   },
   titleYear: {
     fontSize: "0.85rem",
@@ -832,7 +832,7 @@ const S: Record<string, React.CSSProperties> = {
     fontSize: "0.72rem",
     color: "#89b4fa",
     fontWeight: 500,
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "4px",
     padding: "0.1rem 0.4rem",

@@ -83,7 +83,7 @@ export function LeaguesPage({ listLeagues, listChampionships, getRecentMatches }
 const styles: Record<string, React.CSSProperties> = {
   // ─── Hero ──────────────────────────────────────────────────
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "1.75rem",
     overflow: "hidden",

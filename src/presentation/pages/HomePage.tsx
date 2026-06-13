@@ -1,59 +1,81 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import type { GetUpcomingMatches } from "@application/use_cases/GetUpcomingMatches";
 import type { GetRecentMatches } from "@application/use_cases/GetRecentMatches";
-import type { ListLeagues } from "@application/use_cases/ListLeagues";
+import type { ListChampionships } from "@application/use_cases/ListChampionships";
+import type { ListPartners } from "@application/use_cases/ListPartners";
+import type { ListNews } from "@application/use_cases/ListNews";
 import { useUpcomingMatches } from "@presentation/hooks/useUpcomingMatches";
 import { useRecentMatches } from "@presentation/hooks/useRecentMatches";
-import { useLeagues } from "@presentation/hooks/useLeagues";
+import { useChampionships } from "@presentation/hooks/useChampionships";
+import { usePartners } from "@presentation/hooks/usePartners";
+import { useNews } from "@presentation/hooks/useNews";
 import { MatchesByDay } from "@presentation/components/MatchesByDay";
 import { PageLoader } from "@presentation/components/PageLoader";
-import type { League } from "@domain/entities/League";
-import bgSports from "../../images/bg_sports.png";
-import minhaLigaLogo from "../../images/minha_liga.png";
-
-const _RAW_BASE = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main";
-const NO_LEAGUE_PHOTO = `${_RAW_BASE}/leagues/no_league_photo.png`;
+import { NewsCarousel } from "@presentation/components/NewsCarousel";
+import type { Championship } from "@domain/entities/Championship";
+import type { Partner } from "@domain/entities/Partner";
+import { LEAGUE_ID } from "../../config";
 
 interface HomePageProps {
   getUpcomingMatches: GetUpcomingMatches;
   getRecentMatches: GetRecentMatches;
-  listLeagues: ListLeagues;
+  listChampionships: ListChampionships;
+  listPartners: ListPartners;
+  listNews: ListNews;
 }
 
+// ─── Championships ────────────────────────────────────────────────────────────
 
-
-// ─── Ligas ───────────────────────────────────────────────────────────────────
-
-function LeaguesSection({ leagues, loading }: { leagues: League[]; loading: boolean }) {
+function ChampionshipsSection({
+  championships, loading, error,
+}: {
+  championships: Championship[];
+  loading: boolean;
+  error: string | null;
+}) {
   if (loading) return <PageLoader />;
-  if (leagues.length === 0) return <p style={S.muted}>Nenhuma liga cadastrada.</p>;
-
-  const sorted = [...leagues].sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
-
+  if (error) return <p style={S.errText}>{error}</p>;
+  const filtered = championships.filter((c) => !LEAGUE_ID || c.league_id === LEAGUE_ID);
+  if (filtered.length === 0) return <p style={S.muted}>Nenhum campeonato encontrado.</p>;
   return (
-    <div style={S.leagueGrid}>
-      {sorted.map((l) => (
-        <Link key={l.id} to={`/ligas/${l.id}`} style={S.leagueCard}>
-          <div style={S.leagueCardAccent} />
-          <div style={S.leagueCardBody}>
-            <div style={S.leagueNameRow}>
-              <img
-                src={l.logo_url ?? NO_LEAGUE_PHOTO}
-                onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO; }}
-                alt=""
-                style={S.leagueLogo}
-              />
-              <span style={S.leagueName}>{l.name}</span>
-            </div>
-            {l.city_name && (
-              <span style={S.leagueCity}>
-                <span style={S.cityDot}>●</span> {l.city_name}
-              </span>
+    <div style={S.champGrid}>
+      {filtered.map((c) => (
+        <Link key={c.id} to={`/campeonatos/${c.id}`} style={S.champCard}>
+          <div style={S.champCardAccent} />
+          <div style={S.champBody}>
+            <span style={S.champName}>{c.name}</span>
+            <span style={S.champMeta}>{c.year} · {c.city_name}</span>
+            {c.champion_team_name && (
+              <span style={S.champChampion}>🏆 {c.champion_team_name}</span>
             )}
           </div>
-          <span style={S.leagueArrow}>›</span>
+          <span style={S.champArrow}>›</span>
         </Link>
       ))}
+    </div>
+  );
+}
+
+// ─── Partners ─────────────────────────────────────────────────────────────────
+
+function PartnersSection({ partners, loading }: { partners: Partner[]; loading: boolean }) {
+  if (loading) return null;
+  const active = [...partners].filter((p) => p.is_active).sort((a, b) => a.priority - b.priority);
+  if (active.length === 0) return null;
+  return (
+    <div style={S.apoioGrid}>
+      {active.map((p) => {
+        const inner = (
+          <>
+            {p.logo_url && <img src={p.logo_url} alt={p.name} style={S.apoioLogo} />}
+            <span style={S.apoioName}>{p.name}</span>
+          </>
+        );
+        return p.external_url
+          ? <a key={p.id} href={p.external_url} target="_blank" rel="noopener noreferrer" style={S.apoioCard}>{inner}</a>
+          : <div key={p.id} style={S.apoioCard}>{inner}</div>;
+      })}
     </div>
   );
 }
@@ -63,29 +85,24 @@ function LeaguesSection({ leagues, loading }: { leagues: League[]; loading: bool
 export function HomePage({
   getUpcomingMatches,
   getRecentMatches,
-  listLeagues,
+  listChampionships,
+  listPartners,
+  listNews,
 }: HomePageProps) {
   const upcoming = useUpcomingMatches(getUpcomingMatches, 14);
   const recent = useRecentMatches(getRecentMatches, 7);
-  const { leagues, loading: loadingLeagues } = useLeagues(listLeagues);
+  const { championships, loading: loadingChamp, error: errorChamp } = useChampionships(listChampionships);
+  const { partners, loading: loadingPartners } = usePartners(listPartners, LEAGUE_ID || undefined);
+  const { news } = useNews(listNews, LEAGUE_ID || undefined, 8);
 
   return (
-    <div style={S.bgWrapper}>
-      <div style={S.bgOverlay} />
+    <main style={S.page}>
 
-      {/* ─── Content ──────────────────────────────────────────── */}
-      <main style={S.page}>
-
-        {/* ─── Hero ─── */}
-        <div style={S.hero}>
-          <img src={minhaLigaLogo} alt="Minha Liga" style={S.heroLogo} />
-          <p style={S.heroTagline}>Seus campeonatos em um só lugar</p>
-          <div style={S.heroRule} />
-        </div>
+        {news.length > 0 && <NewsCarousel items={news} />}
 
         <section>
-          <SectionDivider label="Ligas" cta={{ label: "ver todas →", href: "/ligas" }} />
-          <LeaguesSection leagues={leagues} loading={loadingLeagues} />
+          <SectionDivider label="Campeonatos" accent="#cba6f7" cta={{ label: "ver todos →", href: "/campeonatos" }} />
+          <ChampionshipsSection championships={championships} loading={loadingChamp} error={errorChamp} />
         </section>
 
         <section>
@@ -110,8 +127,15 @@ export function HomePage({
             dateOrder="desc"
           />
         </section>
+
+        {partners.length > 0 && (
+          <section>
+            <SectionDivider label="Parceiros & Apoiadores" accent="#f9e2af" />
+            <PartnersSection partners={partners} loading={loadingPartners} />
+          </section>
+        )}
+
       </main>
-    </div>
   );
 }
 
@@ -131,7 +155,7 @@ function SectionDivider({
   return (
     <div style={{ ...S.sectionDivider, borderColor: accent + "55" }}>
       <div style={{ ...S.sectionAccentBar, background: accent }} />
-      <span style={{ ...S.sectionLabel, color: "#cdd6f4" }}>{label}</span>
+      <span style={{ ...S.sectionLabel, color: "#18265b" }}>{label}</span>
       {sub && <span style={S.sectionSub}>{sub}</span>}
       <div style={S.sectionRule} />
       {cta && (
@@ -146,68 +170,15 @@ function SectionDivider({
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const S: Record<string, React.CSSProperties> = {
-  // ─── Background ────────────────────────────────────────────
-  bgWrapper: {
-    minHeight: "100vh",
-    backgroundImage: `url(${bgSports})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center top",
-    backgroundAttachment: "fixed",
-    position: "relative",
-  },
-  bgOverlay: {
-    position: "fixed",
-    inset: 0,
-    background: "rgba(17, 17, 27, 0.87)",
-    zIndex: 0,
-    pointerEvents: "none",
-  },
-  // ─── Hero ──────────────────────────────────────────────────
-  hero: {
-    position: "relative",
-    zIndex: 1,
-    textAlign: "center",
-    padding: "3.5rem 1.5rem 2rem",
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    gap: "0.9rem",
-  },
-  heroLogo: {
-    height: "clamp(90px, 14vw, 140px)",
-    width: "auto",
-    objectFit: "contain",
-    filter: "drop-shadow(0 4px 28px rgba(137,180,250,0.5))",
-  },
-  heroTagline: {
-    color: "#a6adc8",
-    fontSize: "clamp(0.85rem, 2vw, 1rem)",
-    fontWeight: 500,
-    margin: 0,
-    letterSpacing: "0.12em",
-    textTransform: "uppercase" as const,
-    textShadow: "0 1px 6px rgba(0,0,0,0.6)",
-  },
-  heroRule: {
-    width: "clamp(60px, 20vw, 120px)",
-    height: "2px",
-    background: "linear-gradient(90deg, transparent, #89b4fa, transparent)",
-    borderRadius: "1px",
-    marginTop: "0.25rem",
-  },
   // ─── Page content ──────────────────────────────────────────
   page: {
-    position: "relative",
-    zIndex: 1,
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "0 1.5rem 5rem",
+    padding: "0 2rem 3rem",
     display: "flex",
     flexDirection: "column" as const,
-    gap: "3rem",
+    gap: "1.5rem",
   },
-  muted: { color: "#6c7086", fontSize: "0.9rem", margin: 0 },
-  errText: { color: "#f38ba8", fontSize: "0.9rem", margin: 0 },
+  muted: { color: "#6b7280", fontSize: "0.9rem", margin: 0 },
+  errText: { color: "#dc2626", fontSize: "0.9rem", margin: 0 },
 
   // ─── Section divider ───────────────────────────────────────
   sectionDivider: {
@@ -234,14 +205,14 @@ const S: Record<string, React.CSSProperties> = {
   sectionSub: {
     fontSize: "0.68rem",
     fontWeight: 600,
-    color: "#6c7086",
+    color: "#6b7280",
     letterSpacing: "0.06em",
     whiteSpace: "nowrap" as const,
   },
   sectionRule: {
     flex: 1,
     height: "1px",
-    background: "linear-gradient(90deg, #313244 0%, transparent 100%)",
+    background: "linear-gradient(90deg, #d1d5db 0%, transparent 100%)",
     borderRadius: "1px",
   },
   sectionCta: {
@@ -252,16 +223,15 @@ const S: Record<string, React.CSSProperties> = {
     whiteSpace: "nowrap" as const,
   },
 
-  // ─── League grid ───────────────────────────────────────────
-  leagueGrid: {
+  // ─── Championships ──────────────────────────────────────────
+  champGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
     gap: "0.75rem",
   },
-  leagueCard: {
+  champCard: {
     display: "flex",
     alignItems: "center",
-    gap: "0",
     borderRadius: "12px",
     backgroundColor: "#1a1a2e",
     border: "1px solid #2a2a45",
@@ -269,35 +239,21 @@ const S: Record<string, React.CSSProperties> = {
     overflow: "hidden",
     transition: "border-color 0.15s, background 0.15s",
   },
-  leagueCardAccent: {
+  champCardAccent: {
     width: "4px",
     alignSelf: "stretch",
-    background: "linear-gradient(180deg, #89b4fa 0%, #cba6f7 100%)",
+    background: "linear-gradient(180deg, #cba6f7 0%, #89b4fa 100%)",
     flexShrink: 0,
   },
-  leagueCardBody: {
+  champBody: {
     flex: 1,
     display: "flex",
     flexDirection: "column" as const,
-    gap: "0.2rem",
+    gap: "0.15rem",
     padding: "0.85rem 0.9rem",
     minWidth: 0,
   },
-  leagueNameRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-    minWidth: 0,
-  },
-  leagueLogo: {
-    width: "36px",
-    height: "36px",
-    objectFit: "contain" as const,
-    borderRadius: "6px",
-    background: "#1e1e2e",
-    flexShrink: 0,
-  },
-  leagueName: {
+  champName: {
     fontSize: "0.95rem",
     fontWeight: 700,
     color: "#cdd6f4",
@@ -305,22 +261,45 @@ const S: Record<string, React.CSSProperties> = {
     textOverflow: "ellipsis",
     whiteSpace: "nowrap" as const,
   },
-  leagueCity: {
-    fontSize: "0.7rem",
-    color: "#6c7086",
-    display: "flex",
-    alignItems: "center",
-    gap: "0.3rem",
-  },
-  cityDot: {
-    fontSize: "0.4rem",
-    color: "#89b4fa",
-  },
-  leagueArrow: {
+  champMeta: { fontSize: "0.72rem", color: "#ffffff", letterSpacing: "0.04em" },
+  champChampion: { fontSize: "0.72rem", color: "#f9e2af", fontWeight: 600 },
+  champArrow: {
     fontSize: "1.4rem",
     color: "#45475a",
     padding: "0 0.9rem",
     flexShrink: 0,
     lineHeight: 1,
+  },
+
+  // ─── Partners ──────────────────────────────────────────────
+  apoioGrid: {
+    display: "flex",
+    flexWrap: "wrap" as const,
+    gap: "0.75rem",
+  },
+  apoioCard: {
+    display: "flex",
+    flexDirection: "column" as const,
+    alignItems: "center",
+    gap: "0.4rem",
+    padding: "1rem 1.25rem",
+    borderRadius: "12px",
+    backgroundColor: "#1a1a2e",
+    border: "1px solid #2a2a45",
+    textDecoration: "none",
+    transition: "border-color 0.15s, background 0.15s",
+    minWidth: "100px",
+  },
+  apoioLogo: {
+    height: "48px",
+    width: "auto",
+    objectFit: "contain",
+    filter: "brightness(1.1)",
+  },
+  apoioName: {
+    fontSize: "0.72rem",
+    color: "#ffffff",
+    textAlign: "center" as const,
+    fontWeight: 600,
   },
 };

@@ -242,10 +242,10 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
 
         {/* Team Association */}
         <section style={S.card}>
-          <h2 style={S.sectionTitle}>Associar ao Time <span style={{ fontSize: "0.8rem", fontWeight: 400, color: "#6c7086" }}>(opcional)</span></h2>
+          <h2 style={S.sectionTitle}>Associar ao Time <span style={{ fontSize: "0.8rem", fontWeight: 400, color: "#ffffff" }}>(opcional)</span></h2>
           <p style={S.hint}>Selecione liga → clube → categoria → time para vincular os atletas importados automaticamente.</p>
           {optionsLoading ? (
-            <p style={{ color: "#a6adc8", fontSize: "0.85rem" }}>Carregando opções…</p>
+            <p style={{ color: "#ffffff", fontSize: "0.85rem" }}>Carregando opções…</p>
           ) : (
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               {/* Liga */}
@@ -348,7 +348,7 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
             <div style={S.previewHeader}>
               <h2 style={S.sectionTitle}>
                 {rows.length} atleta{rows.length !== 1 ? "s" : ""} encontrado{rows.length !== 1 ? "s" : ""}
-                <span style={{ fontSize: "0.75rem", fontWeight: 400, color: "#6c7086", marginLeft: "0.5rem" }}>— clique nas células para editar</span>
+                <span style={{ fontSize: "0.75rem", fontWeight: 400, color: "#ffffff", marginLeft: "0.5rem" }}>— clique nas células para editar</span>
               </h2>
               <div style={{ display: "flex", gap: "0.75rem" }}>
                 <button onClick={handleReset} style={S.btnCancel} disabled={submitting}>Limpar</button>
@@ -375,7 +375,7 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
                 <tbody>
                   {rows.map((r, i) => (
                     <tr key={i} style={i % 2 === 0 ? S.trEven : S.trOdd}>
-                      <td style={{ ...S.td, color: "#6c7086", textAlign: "center" }}>{i + 1}</td>
+                      <td style={{ ...S.td, color: "#ffffff", textAlign: "center" }}>{i + 1}</td>
                       <td style={S.td}>
                         <input
                           style={{ ...S.cellInput, fontWeight: 600, color: r.name ? "#cdd6f4" : "#f38ba8" }}
@@ -487,16 +487,16 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 const S: Record<string, React.CSSProperties> = {
-  hero: { background: "linear-gradient(135deg, #1e1e2e 0%, #181825 100%)", borderBottom: "1px solid #313244", padding: "0" },
+  hero: { background: "linear-gradient(135deg, #18265b 0%, #18265b 100%)", borderBottom: "1px solid #313244", padding: "0" },
   heroAccent: { height: "3px", background: "linear-gradient(90deg, #89b4fa, #cba6f7)" },
   heroInner: { padding: "1.5rem 2rem 1.25rem", maxWidth: "900px", margin: "0 auto" },
   back: { color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", display: "inline-block", marginBottom: "0.5rem" },
   title: { color: "#cdd6f4", fontSize: "1.5rem", fontWeight: 700, margin: 0 },
-  subtitle: { color: "#6c7086", fontSize: "0.9rem", marginTop: "0.25rem" },
+  subtitle: { color: "#ffffff", fontSize: "0.9rem", marginTop: "0.25rem" },
   page: { padding: "1.5rem 2rem", maxWidth: "900px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "1.25rem" },
-  card: { background: "#1e1e2e", border: "1px solid #313244", borderRadius: "8px", padding: "1.25rem 1.5rem" },
+  card: { background: "#18265b", border: "1px solid #313244", borderRadius: "8px", padding: "1.25rem 1.5rem" },
   sectionTitle: { color: "#cdd6f4", fontSize: "1rem", fontWeight: 600, margin: "0 0 0.75rem" },
-  hint: { color: "#a6adc8", fontSize: "0.85rem", marginBottom: "0.75rem", lineHeight: 1.5 },
+  hint: { color: "#ffffff", fontSize: "0.85rem", marginBottom: "0.75rem", lineHeight: 1.5 },
   colList: { display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1rem" },
   colChip: { background: "#313244", color: "#cdd6f4", borderRadius: "4px", padding: "0.2rem 0.55rem", fontSize: "0.75rem", fontFamily: "monospace" },
   colChipRequired: { background: "#313244", color: "#89b4fa", border: "1px solid #89b4fa" },
@@ -504,28 +504,28 @@ const S: Record<string, React.CSSProperties> = {
   uploadRow: { display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" },
   fileLabel: { cursor: "pointer" },
   fileBtn: { display: "inline-block", background: "#313244", border: "1px solid #45475a", borderRadius: "6px", color: "#cdd6f4", cursor: "pointer", fontSize: "0.85rem", padding: "0.45rem 1rem" },
-  fileName: { color: "#a6adc8", fontSize: "0.85rem" },
+  fileName: { color: "#ffffff", fontSize: "0.85rem" },
   errorMsg: { color: "#f38ba8", fontSize: "0.85rem", marginTop: "0.5rem" },
   previewHeader: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem", flexWrap: "wrap", gap: "0.5rem" },
   tableWrap: { overflowX: "auto" },
   table: { width: "100%", borderCollapse: "collapse", fontSize: "0.82rem" },
-  th: { background: "#181825", color: "#6c7086", padding: "0.5rem 0.75rem", textAlign: "left", fontWeight: 500, borderBottom: "1px solid #313244" },
-  td: { color: "#cdd6f4", padding: "0.45rem 0.75rem", borderBottom: "1px solid #1e1e2e" },
-  trEven: { background: "#181825" },
-  trOdd: { background: "#1e1e2e" },
+  th: { background: "#18265b", color: "#ffffff", padding: "0.5rem 0.75rem", textAlign: "left", fontWeight: 500, borderBottom: "1px solid #313244" },
+  td: { color: "#cdd6f4", padding: "0.45rem 0.75rem", borderBottom: "1px solid #18265b" },
+  trEven: { background: "#18265b" },
+  trOdd: { background: "#18265b" },
   cellInput: { background: "transparent", border: "none", borderBottom: "1px solid transparent", color: "#cdd6f4", fontSize: "0.82rem", padding: "0.1rem 0.2rem", width: "100%", outline: "none", minWidth: "80px" },
-  btnDeleteRow: { background: "none", border: "none", color: "#585b70", cursor: "pointer", fontSize: "0.85rem", padding: "0.1rem 0.3rem", borderRadius: "3px" },
+  btnDeleteRow: { background: "none", border: "none", color: "#ffffff", cursor: "pointer", fontSize: "0.85rem", padding: "0.1rem 0.3rem", borderRadius: "3px" },
   trSuccess: { background: "#1e2e1e" },
   trError: { background: "#2e1e1e" },
   summaryRow: { display: "flex", gap: "1.5rem", marginBottom: "1rem", flexWrap: "wrap" },
-  summaryTotal: { color: "#a6adc8", fontSize: "0.9rem" },
+  summaryTotal: { color: "#ffffff", fontSize: "0.9rem" },
   summaryOk: { color: "#a6e3a1", fontWeight: 600, fontSize: "0.9rem" },
   summaryErr: { color: "#f38ba8", fontWeight: 600, fontSize: "0.9rem" },
   badgeOk: { background: "#1e3a1e", color: "#a6e3a1", borderRadius: "4px", padding: "0.1rem 0.45rem", fontSize: "0.75rem" },
   badgeErr: { background: "#3a1e1e", color: "#f38ba8", borderRadius: "4px", padding: "0.1rem 0.45rem", fontSize: "0.75rem" },
-  btnImport: { background: "#89b4fa", color: "#1e1e2e", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: 700, fontSize: "0.9rem", padding: "0.5rem 1.25rem" },
-  btnCancel: { background: "none", border: "1px solid #45475a", borderRadius: "6px", color: "#a6adc8", cursor: "pointer", fontSize: "0.85rem", padding: "0.45rem 1rem" },
+  btnImport: { background: "#89b4fa", color: "#18265b", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: 700, fontSize: "0.9rem", padding: "0.5rem 1.25rem" },
+  btnCancel: { background: "none", border: "1px solid #45475a", borderRadius: "6px", color: "#ffffff", cursor: "pointer", fontSize: "0.85rem", padding: "0.45rem 1rem" },
   fieldGroup: { display: "flex", flexDirection: "column" as const, gap: "0.3rem", minWidth: "180px" },
-  fieldLabel: { fontSize: "0.78rem", fontWeight: 600, color: "#a6adc8", textTransform: "uppercase" as const, letterSpacing: "0.05em" },
-  selectInput: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.45rem 0.75rem", outline: "none" },
+  fieldLabel: { fontSize: "0.78rem", fontWeight: 600, color: "#ffffff", textTransform: "uppercase" as const, letterSpacing: "0.05em" },
+  selectInput: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.45rem 0.75rem", outline: "none" },
 };

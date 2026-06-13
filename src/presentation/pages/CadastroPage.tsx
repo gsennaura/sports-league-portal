@@ -319,7 +319,7 @@ export function CadastroPage() {
             <h2 style={{ color: "#a6e3a1", margin: "0 0 .5rem", fontSize: "1.3rem" }}>Conta criada com sucesso!</h2>
             {selectedTeams.length > 0 ? (
               <>
-                <p style={{ color: "#a6adc8", fontSize: ".9rem", margin: "0 0 1rem" }}>
+                <p style={{ color: "#ffffff", fontSize: ".9rem", margin: "0 0 1rem" }}>
                   {userType === "dirigente"
                     ? "Sua solicitação de dirigente foi enviada e aguarda aprovação do administrador."
                     : "Suas solicitações de vínculo foram enviadas e aguardam aprovação."}
@@ -328,19 +328,19 @@ export function CadastroPage() {
                   {selectedTeams.map(st => (
                     <div key={st.teamId} style={{ background: "#313244", borderRadius: 8, padding: ".5rem .9rem", marginBottom: 6, textAlign: "left" }}>
                       <span style={{ color: "#cdd6f4", fontSize: ".9rem" }}>{st.teamName}</span>
-                      <span style={{ color: "#6c7086", fontSize: ".75rem", marginLeft: 8 }}>{st.leagueName}</span>
+                      <span style={{ color: "#ffffff", fontSize: ".75rem", marginLeft: 8 }}>{st.leagueName}</span>
                       <span style={{ marginLeft: 8, fontSize: ".75rem", color: "#f9e2af" }}>⏳ aguardando aprovação</span>
                     </div>
                   ))}
                 </div>
               </>
             ) : (
-              <p style={{ color: "#a6adc8", fontSize: ".9rem", margin: "0 0 1.25rem" }}>
+              <p style={{ color: "#ffffff", fontSize: ".9rem", margin: "0 0 1.25rem" }}>
                 Você pode solicitar vínculo com times no seu perfil a qualquer momento.
               </p>
             )}
             <button
-              style={{ ...S.input, background: "#89b4fa", color: "#1e1e2e", fontWeight: 700, cursor: "pointer", border: "none", borderRadius: 8, padding: ".75rem", width: "100%" }}
+              style={{ ...S.input, background: "#89b4fa", color: "#18265b", fontWeight: 700, cursor: "pointer", border: "none", borderRadius: 8, padding: ".75rem", width: "100%" }}
               onClick={() => navigate("/meu-perfil")}
             >
               Ir para meu perfil →
@@ -436,7 +436,7 @@ export function CadastroPage() {
         {/* ── Step 3: Dirigente ── */}
         {step === 3 && userType === "dirigente" && (
           <form onSubmit={handleStep3Next} style={S.form}>
-            <p style={{ color: "#a6adc8", fontSize: ".9rem", lineHeight: 1.5, margin: "0 0 12px" }}>
+            <p style={{ color: "#ffffff", fontSize: ".9rem", lineHeight: 1.5, margin: "0 0 12px" }}>
               Olá, <strong style={{ color: "#cdd6f4" }}>{name}</strong>! Você vai criar uma conta de dirigente.
               Um administrador precisará aprovar seu acesso a cada time.
             </p>
@@ -450,7 +450,7 @@ export function CadastroPage() {
           <div style={S.form}>
             <p style={S.question}>
               {userType === "athlete" ? "Em qual(is) time(s) você joga?" : "Para qual time você quer ser dirigente?"}
-              <span style={{ color: "#6c7086", fontWeight: 400, fontSize: ".85rem" }}> (opcional)</span>
+              <span style={{ color: "#ffffff", fontWeight: 400, fontSize: ".85rem" }}> (opcional)</span>
             </p>
 
             <Label>Liga</Label>
@@ -491,7 +491,7 @@ export function CadastroPage() {
 
             {selTeamId && userType === "athlete" && (
               <>
-                <Label>Número da camisa <span style={{ color: "#6c7086", fontWeight: 400, textTransform: "none" as const }}>(opcional)</span></Label>
+                <Label>Número da camisa <span style={{ color: "#ffffff", fontWeight: 400, textTransform: "none" as const }}>(opcional)</span></Label>
                 <input style={S.input} type="number" min={1} max={99} value={selJersey} onChange={e => setSelJersey(e.target.value)} placeholder="Ex: 10" />
               </>
             )}
@@ -508,14 +508,14 @@ export function CadastroPage() {
 
             {selectedTeams.length > 0 && (
               <div style={{ marginTop: 4 }}>
-                <p style={{ color: "#a6adc8", fontSize: ".8rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".04em", margin: "0 0 6px" }}>
+                <p style={{ color: "#ffffff", fontSize: ".8rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".04em", margin: "0 0 6px" }}>
                   Times selecionados
                 </p>
                 {selectedTeams.map(st => (
-                  <div key={st.teamId} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#1e1e2e", borderRadius: 6, padding: ".4rem .7rem", marginBottom: 4 }}>
+                  <div key={st.teamId} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#18265b", borderRadius: 6, padding: ".4rem .7rem", marginBottom: 4 }}>
                     <div>
                       <span style={{ color: "#cdd6f4", fontSize: ".9rem" }}>{st.teamName}</span>
-                      <span style={{ color: "#6c7086", fontSize: ".75rem", marginLeft: 8 }}>
+                      <span style={{ color: "#ffffff", fontSize: ".75rem", marginLeft: 8 }}>
                         {st.leagueName}{st.jerseyNumber ? ` · #${st.jerseyNumber}` : ""}
                       </span>
                     </div>
@@ -552,11 +552,11 @@ function StepIndicator({ step, userType }: { step: Step; userType: UserType }) {
             width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: ".8rem", fontWeight: 700,
             background: i + 1 === step ? "#cba6f7" : i + 1 < step ? "#a6e3a1" : "#313244",
-            color: i + 1 <= step ? "#1e1e2e" : "#6c7086",
+            color: i + 1 <= step ? "#18265b" : "#ffffff",
           }}>
             {i + 1 < step ? "✓" : i + 1}
           </div>
-          <span style={{ fontSize: ".65rem", color: i + 1 === step ? "#cba6f7" : "#6c7086" }}>{l}</span>
+          <span style={{ fontSize: ".65rem", color: i + 1 === step ? "#cba6f7" : "#ffffff" }}>{l}</span>
         </div>
       ))}
     </div>
@@ -564,34 +564,34 @@ function StepIndicator({ step, userType }: { step: Step; userType: UserType }) {
 }
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <label style={{ fontSize: ".8rem", fontWeight: 600, color: "#a6adc8", textTransform: "uppercase" as const, letterSpacing: ".04em" }}>{children}</label>;
+  return <label style={{ fontSize: ".8rem", fontWeight: 600, color: "#ffffff", textTransform: "uppercase" as const, letterSpacing: ".04em" }}>{children}</label>;
 }
 
 function Btn({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return <button {...props} style={{ padding: ".7rem", background: props.disabled ? "#45475a" : "#89b4fa", color: "#1e1e2e", border: "none", borderRadius: 8, fontSize: "1rem", fontWeight: 700, cursor: props.disabled ? "not-allowed" : "pointer", marginTop: ".25rem" }}>{children}</button>;
+  return <button {...props} style={{ padding: ".7rem", background: props.disabled ? "#45475a" : "#89b4fa", color: "#18265b", border: "none", borderRadius: 8, fontSize: "1rem", fontWeight: 700, cursor: props.disabled ? "not-allowed" : "pointer", marginTop: ".25rem" }}>{children}</button>;
 }
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const S: Record<string, React.CSSProperties> = {
-  page: { minHeight: "100vh", backgroundColor: "#1e1e2e", color: "#cdd6f4", display: "flex", justifyContent: "center", alignItems: "flex-start", padding: "40px 16px 80px" },
+  page: { minHeight: "100vh", backgroundColor: "#18265b", color: "#cdd6f4", display: "flex", justifyContent: "center", alignItems: "flex-start", padding: "40px 16px 80px" },
   card: { width: "100%", maxWidth: 440, backgroundColor: "#313244", borderRadius: 16, padding: "28px 24px" },
   header: { marginBottom: 20, textAlign: "center" },
   title: { fontSize: "1.4rem", fontWeight: 700, color: "#cba6f7", margin: "0 0 4px" },
   form: { display: "flex", flexDirection: "column", gap: "0.8rem" },
-  input: { padding: ".55rem .85rem", borderRadius: 8, border: "1px solid #45475a", background: "#1e1e2e", color: "#cdd6f4", fontSize: "1rem" },
+  input: { padding: ".55rem .85rem", borderRadius: 8, border: "1px solid #45475a", background: "#18265b", color: "#cdd6f4", fontSize: "1rem" },
   error: { color: "#f38ba8", background: "rgba(243,139,168,.1)", border: "1px solid rgba(243,139,168,.3)", borderRadius: 6, padding: ".5rem .75rem", fontSize: ".875rem", marginBottom: 4 },
-  loginLink: { textAlign: "center", fontSize: ".85rem", color: "#6c7086", margin: "4px 0 0" },
+  loginLink: { textAlign: "center", fontSize: ".85rem", color: "#ffffff", margin: "4px 0 0" },
   link: { color: "#89b4fa", textDecoration: "none" },
   question: { fontSize: "1rem", fontWeight: 600, color: "#cdd6f4", margin: "0 0 8px", textAlign: "center" },
   typeGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
-  typeBtn: { display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "20px 8px", background: "#1e1e2e", border: "2px solid #45475a", borderRadius: 12, cursor: "pointer", color: "#cdd6f4", fontWeight: 600, fontSize: ".9rem", transition: "border-color .15s" },
-  typeBtnActive: { border: "2px solid #cba6f7", background: "#1e1e2e" },
+  typeBtn: { display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "20px 8px", background: "#18265b", border: "2px solid #45475a", borderRadius: 12, cursor: "pointer", color: "#cdd6f4", fontWeight: 600, fontSize: ".9rem", transition: "border-color .15s" },
+  typeBtnActive: { border: "2px solid #cba6f7", background: "#18265b" },
   typeIcon: { fontSize: "1.8rem" },
-  backBtn: { background: "none", border: "none", color: "#6c7086", cursor: "pointer", fontSize: ".85rem", textAlign: "left", padding: 0, marginTop: 4 },
-  teamList: { background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 8, overflow: "hidden", maxHeight: 200, overflowY: "auto" },
+  backBtn: { background: "none", border: "none", color: "#ffffff", cursor: "pointer", fontSize: ".85rem", textAlign: "left", padding: 0, marginTop: 4 },
+  teamList: { background: "#18265b", border: "1px solid #45475a", borderRadius: 8, overflow: "hidden", maxHeight: 200, overflowY: "auto" },
   teamItem: { width: "100%", textAlign: "left", background: "none", border: "none", borderBottom: "1px solid #313244", padding: ".6rem .85rem", color: "#cdd6f4", cursor: "pointer", fontSize: ".9rem" },
   teamItemSelected: { background: "#45475a", color: "#cba6f7", fontWeight: 700 },
-  noResults: { padding: ".6rem .85rem", color: "#6c7086", fontSize: ".85rem", margin: 0 },
+  noResults: { padding: ".6rem .85rem", color: "#ffffff", fontSize: ".85rem", margin: 0 },
 };
 

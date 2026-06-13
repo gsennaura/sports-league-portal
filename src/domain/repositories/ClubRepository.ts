@@ -20,7 +20,7 @@ export interface UpdateClubPayload extends CreateClubPayload {
 }
 
 export interface ClubRepository {
-  listAll(): Promise<Club[]>;
+  listAll(leagueId?: string): Promise<Club[]>;
   getById(id: string): Promise<Club>;
   getMatches(clubId: string, year?: number): Promise<ClubMatch[]>;
   getTitles(clubId: string): Promise<ClubTitle[]>;

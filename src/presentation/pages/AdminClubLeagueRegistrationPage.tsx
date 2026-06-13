@@ -142,7 +142,7 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
   return (
     <>
       {toast && (
-        <div style={{ ...S.toast, background: toast.type === "success" ? "#a6e3a1" : "#f38ba8", color: "#1e1e2e" }}>
+        <div style={{ ...S.toast, background: toast.type === "success" ? "#a6e3a1" : "#f38ba8", color: "#18265b" }}>
           {toast.msg}
         </div>
       )}
@@ -200,7 +200,7 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
         {loading && <p style={{ color: "#cdd6f4", marginTop: "1rem" }}>Carregando...</p>}
 
         {!loading && filteredAffiliated.length === 0 && (
-          <p style={{ color: "#a6adc8", marginTop: "2rem" }}>
+          <p style={{ color: "#ffffff", marginTop: "2rem" }}>
             {affiliatedClubs.length === 0
               ? 'Nenhum clube filiado a esta liga. Use "+ Filiar Clube" para adicionar.'
               : "Nenhum clube encontrado para a busca."}
@@ -249,7 +249,7 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
               autoFocus
             />
             {filteredModal.length === 0 ? (
-              <p style={{ color: "#a6adc8", marginTop: "1rem", textAlign: "center" }}>
+              <p style={{ color: "#ffffff", marginTop: "1rem", textAlign: "center" }}>
                 {nonAffiliatedClubs.length === 0
                   ? "Todos os clubes já estão filiados."
                   : "Nenhum clube encontrado."}
@@ -284,7 +284,7 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(135deg, #1e1e2e 0%, #181825 100%)",
+    background: "linear-gradient(135deg, #18265b 0%, #18265b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "1.5rem",
     position: "relative",
@@ -296,7 +296,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   heroInner: { maxWidth: "900px", margin: "0 auto", padding: "1.5rem 1.5rem 0" },
   title: { color: "#cdd6f4", fontSize: "1.6rem", fontWeight: 700, margin: "0.5rem 0 0.2rem" },
-  subtitle: { color: "#a6adc8", fontSize: "0.9rem", margin: 0 },
+  subtitle: { color: "#ffffff", fontSize: "0.9rem", margin: 0 },
   page: { maxWidth: "900px", margin: "0 auto", padding: "1.5rem" },
   toolbar: {
     display: "flex", alignItems: "center", gap: "0.75rem",
@@ -309,7 +309,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   stats: { display: "flex", gap: "0.5rem", alignItems: "center", marginBottom: "0.75rem" },
   badge: {
-    background: "#89b4fa", color: "#1e1e2e",
+    background: "#89b4fa", color: "#18265b",
     borderRadius: "12px", padding: "0.2rem 0.7rem",
     fontSize: "0.78rem", fontWeight: 600,
   },
@@ -321,7 +321,7 @@ const S: Record<string, React.CSSProperties> = {
     marginBottom: "0.5rem",
   },
   btnFiliar: {
-    background: "#a6e3a1", color: "#1e1e2e",
+    background: "#a6e3a1", color: "#18265b",
     border: "none", borderRadius: "6px",
     padding: "0.5rem 1.25rem", fontWeight: 700,
     cursor: "pointer", fontSize: "0.9rem",
@@ -331,13 +331,13 @@ const S: Record<string, React.CSSProperties> = {
   item: {
     display: "flex", alignItems: "center", gap: "0.75rem",
     borderRadius: "8px", padding: "0.7rem 1rem",
-    background: "#1e1e2e", border: "1px solid #313244",
+    background: "#18265b", border: "1px solid #313244",
   },
   clubInfo: { display: "flex", alignItems: "baseline", gap: "0.5rem", flex: 1 },
   clubName: { color: "#cdd6f4", fontWeight: 600, fontSize: "0.95rem" },
-  clubNick: { color: "#a6adc8", fontSize: "0.8rem" },
+  clubNick: { color: "#ffffff", fontSize: "0.8rem" },
   tagFiliado: {
-    background: "#a6e3a1", color: "#1e1e2e",
+    background: "#a6e3a1", color: "#18265b",
     borderRadius: "10px", padding: "0.15rem 0.6rem",
     fontSize: "0.72rem", fontWeight: 600,
   },
@@ -348,7 +348,7 @@ const S: Record<string, React.CSSProperties> = {
     fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" as const,
   },
   tagFiliarBtn: {
-    background: "#89b4fa", color: "#1e1e2e",
+    background: "#89b4fa", color: "#18265b",
     borderRadius: "10px", padding: "0.15rem 0.65rem",
     fontSize: "0.72rem", fontWeight: 600,
   },
@@ -358,7 +358,7 @@ const S: Record<string, React.CSSProperties> = {
     display: "flex", alignItems: "center", justifyContent: "center",
   },
   modal: {
-    background: "#181825", border: "1px solid #45475a",
+    background: "#18265b", border: "1px solid #45475a",
     borderRadius: "12px", padding: "1.5rem",
     width: "100%", maxWidth: "500px",
     maxHeight: "85vh", overflow: "hidden",
@@ -371,7 +371,7 @@ const S: Record<string, React.CSSProperties> = {
   modalTitle: { color: "#cdd6f4", margin: 0, fontSize: "1.1rem", fontWeight: 700 },
   btnClose: {
     background: "transparent", border: "none",
-    color: "#a6adc8", cursor: "pointer", fontSize: "1.1rem",
+    color: "#ffffff", cursor: "pointer", fontSize: "1.1rem",
     padding: "0.2rem 0.4rem",
   },
   toast: {

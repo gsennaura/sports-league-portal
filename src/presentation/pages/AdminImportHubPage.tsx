@@ -47,7 +47,7 @@ const CARDS: ImportCard[] = [
     title: "Resultados em Bulk",
     description: "Atualize placares de múltiplas partidas de uma vez. Em breve.",
     href: "#",
-    color: "#6c7086",
+    color: "#ffffff",
     icon: "📊",
     status: "coming_soon",
   },
@@ -110,7 +110,7 @@ export function AdminImportHubPage() {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #cba6f7, #a6e3a1)" },
   heroInner: { maxWidth: "900px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
@@ -121,18 +121,18 @@ const S: Record<string, React.CSSProperties> = {
 
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "1.25rem" },
 
-  card: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px", overflow: "hidden", display: "flex", flexDirection: "column" },
+  card: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px", overflow: "hidden", display: "flex", flexDirection: "column" },
   cardAccent: { height: "3px" },
   cardBody: { display: "flex", gap: "0.85rem", padding: "1.25rem 1.25rem 0.75rem", flex: 1 },
   cardIcon: { fontSize: "1.75rem", lineHeight: 1, flexShrink: 0 },
   cardTitle: { color: "#cdd6f4", fontWeight: 700, fontSize: "1rem", margin: 0 },
-  cardDesc: { color: "#a6adc8", fontSize: "0.82rem", lineHeight: 1.5, margin: 0 },
+  cardDesc: { color: "#ffffff", fontSize: "0.82rem", lineHeight: 1.5, margin: 0 },
   cardBtn: { display: "block", margin: "0 1.25rem 1.25rem", padding: "0.45rem 0", textAlign: "center" as const, border: "1px solid", borderRadius: "6px", fontWeight: 600, fontSize: "0.875rem", textDecoration: "none", cursor: "pointer" },
-  cardBtnDisabled: { display: "block", margin: "0 1.25rem 1.25rem", padding: "0.45rem 0", textAlign: "center" as const, border: "1px solid #45475a", borderRadius: "6px", fontSize: "0.875rem", color: "#6c7086", cursor: "default" },
-  badgeSoon: { backgroundColor: "#2a2a3e", border: "1px solid #45475a", borderRadius: "4px", color: "#6c7086", fontSize: "0.7rem", padding: "0.1rem 0.4rem", fontWeight: 600 },
+  cardBtnDisabled: { display: "block", margin: "0 1.25rem 1.25rem", padding: "0.45rem 0", textAlign: "center" as const, border: "1px solid #45475a", borderRadius: "6px", fontSize: "0.875rem", color: "#ffffff", cursor: "default" },
+  badgeSoon: { backgroundColor: "#2a2a3e", border: "1px solid #45475a", borderRadius: "4px", color: "#ffffff", fontSize: "0.7rem", padding: "0.1rem 0.4rem", fontWeight: 600 },
 
   sectionHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem" },
   sectionTitle: { color: "#cdd6f4", fontSize: "0.85rem", fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.07em", margin: 0 },
   linkBtn: { color: "#89b4fa", fontSize: "0.875rem", textDecoration: "none" },
-  hint: { color: "#a6adc8", fontSize: "0.875rem", margin: 0 },
+  hint: { color: "#ffffff", fontSize: "0.875rem", margin: 0 },
 };

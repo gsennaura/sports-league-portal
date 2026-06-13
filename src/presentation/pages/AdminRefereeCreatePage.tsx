@@ -133,7 +133,7 @@ export function AdminRefereeCreatePage({ createReferee }: Props) {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(135deg, #1e1e2e 0%, #313244 100%)",
+    background: "linear-gradient(135deg, #18265b 0%, #313244 100%)",
     borderBottom: "1px solid #45475a",
     position: "relative", overflow: "hidden",
   },
@@ -149,7 +149,7 @@ const S: Record<string, React.CSSProperties> = {
   back: { color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", display: "block", marginBottom: "0.5rem" },
   title: { margin: 0, fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", letterSpacing: "-0.02em" },
   page: { maxWidth: "720px", margin: "2rem auto", padding: "0 1.5rem 4rem" },
-  form: { background: "#181825", border: "1px solid #313244", borderRadius: "12px", padding: "1.5rem" },
+  form: { background: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.5rem" },
   fieldset: { border: "none", margin: 0, padding: 0 },
   legend: {
     color: "#cba6f7", fontSize: "0.78rem", fontWeight: 600,
@@ -159,7 +159,7 @@ const S: Record<string, React.CSSProperties> = {
   fieldGroup: { display: "flex", flexDirection: "column", gap: "0.4rem" },
   label: { color: "#cdd6f4", fontSize: "0.82rem", fontWeight: 500 },
   input: {
-    background: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px",
+    background: "#18265b", border: "1px solid #45475a", borderRadius: "8px",
     padding: "0.6rem 0.75rem", color: "#cdd6f4", fontSize: "0.95rem",
     width: "100%", outline: "none", boxSizing: "border-box",
   },
@@ -172,7 +172,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   btnSave: {
     background: "#cba6f7", border: "none", borderRadius: "8px",
-    padding: "0.6rem 1.5rem", color: "#1e1e2e", fontSize: "0.875rem",
+    padding: "0.6rem 1.5rem", color: "#18265b", fontSize: "0.875rem",
     fontWeight: 700, cursor: "pointer",
   },
 };

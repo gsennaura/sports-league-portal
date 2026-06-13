@@ -185,7 +185,7 @@ const S: Record<string, React.CSSProperties> = {
     background: "linear-gradient(90deg, #cba6f7 0%, #89b4fa 50%, #a6e3a1 100%)",
   },
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "2.5rem",
   },
@@ -229,7 +229,7 @@ const S: Record<string, React.CSSProperties> = {
     objectFit: "cover" as const,
     border: "3px solid #313244",
     flexShrink: 0,
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
   },
   heroInfo: {
     flex: 1,
@@ -261,7 +261,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   attrLabel: {
     fontSize: "0.68rem",
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase" as const,
     letterSpacing: "0.06em",
     fontWeight: 600,
@@ -290,17 +290,17 @@ const S: Record<string, React.CSSProperties> = {
     paddingBottom: "0.5rem",
   },
   notes: {
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.9rem",
     lineHeight: 1.6,
     margin: 0,
   },
   empty: {
-    color: "#6c7086",
+    color: "#ffffff",
     fontSize: "0.9rem",
   },
   status: {
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.9rem",
   },
   errorText: {
@@ -315,7 +315,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   matchCard: {
     display: "block",
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "0.85rem 1.1rem",
@@ -333,7 +333,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   matchChampionship: {
     fontSize: "0.75rem",
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase" as const,
     letterSpacing: "0.05em",
   },
@@ -374,6 +374,6 @@ const S: Record<string, React.CSSProperties> = {
     display: "block",
     marginTop: "0.4rem",
     fontSize: "0.75rem",
-    color: "#6c7086",
+    color: "#ffffff",
   },
 };

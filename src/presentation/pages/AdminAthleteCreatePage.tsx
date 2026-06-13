@@ -282,7 +282,7 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
                       {photoPreview ? "Trocar foto" : "Escolher foto"}
                     </label>
                     {photoFile && (
-                      <span style={{ fontSize: "0.78rem", color: "#6c7086", maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <span style={{ fontSize: "0.78rem", color: "#ffffff", maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {photoFile.name}
                       </span>
                     )}
@@ -352,7 +352,7 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
           <fieldset style={S.fieldset}>
             <legend style={S.legend}>Vínculo com Time <span style={S.opt}>(opcional — vai para aprovação)</span></legend>
 
-            {teamsLoading && <p style={{ color: "#6c7086", fontSize: "0.85rem", marginTop: "0.5rem" }}>Carregando esportes e times…</p>}
+            {teamsLoading && <p style={{ color: "#ffffff", fontSize: "0.85rem", marginTop: "0.5rem" }}>Carregando esportes e times…</p>}
 
             {!teamsLoading && (
               <>
@@ -397,7 +397,7 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
 
           {error && <p style={S.errorMsg}>{error}</p>}
 
-          <p style={{ fontSize: "0.8rem", color: "#6c7086", margin: 0 }}>
+          <p style={{ fontSize: "0.8rem", color: "#ffffff", margin: 0 }}>
             Campos marcados com <span style={{ color: "#f38ba8", fontWeight: 700 }}>*</span> são obrigatórios.
           </p>
 
@@ -415,7 +415,7 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #a6e3a1, #89b4fa)" },
   heroInner: { maxWidth: "900px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
@@ -424,15 +424,15 @@ const S: Record<string, React.CSSProperties> = {
   form: { display: "flex", flexDirection: "column", gap: "1.5rem" },
   fieldset: { border: "1px solid #313244", borderRadius: "8px", padding: "1.25rem 1.5rem", margin: 0 },
   legend: { fontSize: "0.84rem", fontWeight: 700, color: "#cdd6f4", textTransform: "uppercase", letterSpacing: "0.07em", padding: "0 0.5rem" },
-  opt: { fontWeight: 400, textTransform: "none", letterSpacing: "normal", color: "#6c7086", fontSize: "0.78rem" },
+  opt: { fontWeight: 400, textTransform: "none", letterSpacing: "normal", color: "#ffffff", fontSize: "0.78rem" },
   grid2: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem", marginTop: "1rem" },
   grid3: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginTop: "1rem" },
   fieldGroup: { display: "flex", flexDirection: "column", gap: "0.3rem" },
   label: { fontSize: "0.83rem", fontWeight: 600, color: "#cdd6f4", textTransform: "uppercase", letterSpacing: "0.06em" },
-  input: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", boxSizing: "border-box" },
+  input: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", boxSizing: "border-box" },
   select: { cursor: "pointer", appearance: "auto" as const },
-  textarea: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", resize: "vertical", boxSizing: "border-box", marginTop: "0.3rem" },
-  hintBox: { fontSize: "0.82rem", color: "#a6adc8", backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "6px", padding: "0.65rem 0.85rem", lineHeight: 1.5, margin: 0 },
+  textarea: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", resize: "vertical", boxSizing: "border-box", marginTop: "0.3rem" },
+  hintBox: { fontSize: "0.82rem", color: "#ffffff", backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", padding: "0.65rem 0.85rem", lineHeight: 1.5, margin: 0 },
   pendingNotice: { fontSize: "0.83rem", color: "#a6e3a1", backgroundColor: "#1a2a1a", border: "1px solid #2a4a2a", borderRadius: "6px", padding: "0.6rem 0.85rem", marginTop: "0.85rem", marginBottom: 0 },
   errorMsg: { color: "#f38ba8", backgroundColor: "#2a1a1f", border: "1px solid #5a2a30", borderRadius: "6px", padding: "0.75rem 1rem", fontSize: "0.875rem" },
   actions: { display: "flex", justifyContent: "flex-end", gap: "0.75rem", paddingTop: "0.5rem" },
@@ -440,5 +440,5 @@ const S: Record<string, React.CSSProperties> = {
   btnSubmit: { backgroundColor: "#a6e3a1", border: "none", borderRadius: "6px", color: "#11111b", fontSize: "0.9rem", fontWeight: 700, padding: "0.6rem 1.5rem", cursor: "pointer" },
   btnUpload: { display: "inline-block", backgroundColor: "transparent", border: "1px solid #45475a", borderRadius: "6px", color: "#89b4fa", fontSize: "0.85rem", fontWeight: 500, padding: "0.4rem 0.85rem", cursor: "pointer" },
   photoThumb: { width: 52, height: 52, borderRadius: "50%", objectFit: "cover" as const, border: "2px solid #45475a", flexShrink: 0 },
-  photoPlaceholder: { width: 52, height: 52, borderRadius: "50%", backgroundColor: "#313244", border: "2px solid #45475a", display: "flex", alignItems: "center", justifyContent: "center", color: "#6c7086", fontSize: "1.25rem", flexShrink: 0 },
+  photoPlaceholder: { width: 52, height: 52, borderRadius: "50%", backgroundColor: "#313244", border: "2px solid #45475a", display: "flex", alignItems: "center", justifyContent: "center", color: "#ffffff", fontSize: "1.25rem", flexShrink: 0 },
 };

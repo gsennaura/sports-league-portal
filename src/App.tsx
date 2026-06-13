@@ -1,13 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { listChampionships, getChampionshipDetail, updateChampionshipPodium, loadPhaseGroups, getEditionTopScorers, listTeams, getClubTeams, createTeam, updateTeam, deleteTeam, getTeamMatches, getTeamMatchYears, getTeamDetail, getTeamAthleteStats, listLeagues, getLeague, getClub, getClubMatches, getClubTitles, listClubs, getUpcomingMatches, getRecentMatches, getMatchDetail, getHeadToHead, createVenue, listVenues, updateVenue, getVenueMatches, createClub, updateClub, createLeague, updateLeague, createChampionship, updateMatchResult, updateMatch, getLiveWindowMatches, searchAthletes, getRandomAthletes, getAthleteDetail, getAthleteStats, createAthlete, updateAthlete, deleteAthlete, bulkImportAthletes, addAthleteToTeam, removeAthleteFromTeam, getAthleteTeamHistory, getTeamAthletes, athleteRepository, addMatchEvent, annulMatchEvent, listReferees, getRefereeDetail, createReferee, updateReferee, deleteReferee, getRefereeMatches, refereeRepository, getAthleteChampionshipRegistrations, registerAthleteChampionship, updateChampionshipRegistration, cancelChampionshipRegistration, listEditionRegistrations, getEligibleAthletes, checkAthleteMatchEvents, manageClubLeagueRegistrations, clubRepository, leagueRepository, venueRepository, createCity, listCities, listStates } from "./infrastructure/composition";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { listChampionships, getChampionshipDetail, updateChampionshipPodium, loadPhaseGroups, getEditionTopScorers, listTeams, getClubTeams, createTeam, updateTeam, deleteTeam, getTeamMatches, getTeamMatchYears, getTeamDetail, getTeamAthleteStats, listLeagues, getClub, getClubMatches, getClubTitles, listClubs, getUpcomingMatches, getRecentMatches, getMatchDetail, getHeadToHead, createVenue, listVenues, updateVenue, getVenueMatches, createClub, updateClub, createLeague, updateLeague, createChampionship, updateMatchResult, updateMatch, getLiveWindowMatches, searchAthletes, createAthlete, updateAthlete, deleteAthlete, bulkImportAthletes, addAthleteToTeam, removeAthleteFromTeam, getAthleteTeamHistory, getTeamAthletes, athleteRepository, addMatchEvent, annulMatchEvent, listReferees, getRefereeDetail, createReferee, updateReferee, deleteReferee, getRefereeMatches, refereeRepository, registerAthleteChampionship, updateChampionshipRegistration, listEditionRegistrations, getEligibleAthletes, checkAthleteMatchEvents, manageClubLeagueRegistrations, clubRepository, venueRepository, createCity, listCities, listStates, listPartners, listNews, getNewsDetail, listDocuments, listEmendas } from "./infrastructure/composition";
 import { AuthProvider } from "@presentation/context/AuthContext";
 import { ProtectedRoute } from "@presentation/components/ProtectedRoute";
 import { TopNav } from "@presentation/components/TopNav";
 import { Footer } from "@presentation/components/Footer";
 import { LoginPage } from "@presentation/pages/LoginPage";
 import { HomePage } from "@presentation/pages/HomePage";
-import { LeaguesPage } from "@presentation/pages/LeaguesPage";
-import { LeagueDetailPage } from "@presentation/pages/LeagueDetailPage";
 import { ChampionshipsPage } from "@presentation/pages/ChampionshipsPage";
 import { ChampionshipDetailPage } from "@presentation/pages/ChampionshipDetailPage";
 import { TeamDetailPage } from "@presentation/pages/TeamDetailPage";
@@ -42,8 +40,6 @@ import { AdminMatchEditPage } from "@presentation/pages/AdminMatchEditPage";
 import { LiveMatchesPage } from "@presentation/pages/LiveMatchesPage";
 import { VenuesPage } from "@presentation/pages/VenuesPage";
 import { VenueDetailPage } from "@presentation/pages/VenueDetailPage";
-import { AthletesPage } from "@presentation/pages/AthletesPage";
-import { AthleteDetailPage } from "@presentation/pages/AthleteDetailPage";
 import { AdminAthletesPage } from "@presentation/pages/AdminAthletesPage";
 import { AdminAthleteCreatePage } from "@presentation/pages/AdminAthleteCreatePage";
 import { AdminAthleteEditPage } from "@presentation/pages/AdminAthleteEditPage";
@@ -67,33 +63,123 @@ import { AdminDirigentesPage } from "@presentation/pages/AdminDirigentesPage";
 import { AdminUsersPage } from "@presentation/pages/AdminUsersPage";
 import { AdminLeagueAdminsPage } from "@presentation/pages/AdminLeagueAdminsPage";
 import { RoundSharePage } from "@presentation/pages/RoundSharePage";
+import { NewsPage } from "@presentation/pages/NewsPage";
+import { NewsDetailPage } from "@presentation/pages/NewsDetailPage";
+import { DocumentsPage } from "@presentation/pages/DocumentsPage";
+import { EmendasPage } from "@presentation/pages/EmendasPage";
+import { ActiveLeagueProvider, useActiveLeague } from "@presentation/context/ActiveLeagueContext";
+import { useEffect } from "react";
+import bgSports from "./images/bg_sports.png";
+
+const _RAW_BASE_NAV = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main";
+const NO_LEAGUE_PHOTO_NAV = `${_RAW_BASE_NAV}/leagues/no_league_photo.png`;
+
+function LeagueTopBanner() {
+  const { league } = useActiveLeague();
+  if (!league) return null;
+  return (
+    <>
+      <div style={{ height: "6px", background: "linear-gradient(90deg, #047857 0%, #0d9488 50%, #0ea5e9 100%)" }} />
+      <a href="/" style={{
+        backgroundColor: "#ffffff",
+        borderBottom: "2px solid #e5e7eb",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "1.25rem",
+        padding: "0.85rem 2rem",
+        textDecoration: "none",
+        cursor: "pointer",
+      }}>
+        <img
+          src={league.logo_url ?? NO_LEAGUE_PHOTO_NAV}
+          onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO_NAV; }}
+          alt={league.short_name}
+          style={{ height: "clamp(56px, 9vw, 80px)", width: "auto", objectFit: "contain", flexShrink: 0, filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.15))" }}
+        />
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
+          <div style={{ fontWeight: 900, color: "#18265b", fontSize: "clamp(1.3rem, 3vw, 1.9rem)", letterSpacing: "0.04em", textTransform: "uppercase" as const, lineHeight: 1.05 }}>{league.short_name}</div>
+          <div style={{ color: "#374151", fontSize: "clamp(0.65rem, 1.2vw, 0.78rem)", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, lineHeight: 1 }}>{league.name}</div>
+          {league.city_name && (
+            <div style={{ color: "#6b7280", fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.05em", marginTop: "0.1rem" }}>{league.city_name}{league.founded_year ? ` · Est. ${league.founded_year}` : ""}</div>
+          )}
+        </div>
+      </a>
+    </>
+  );
+}
+
+const appBg: React.CSSProperties = {
+  minHeight: "100vh",
+  backgroundImage: `url(${bgSports})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center top",
+  backgroundAttachment: "fixed",
+};
+
+const publicPageCard: React.CSSProperties = {
+  backgroundColor: "#ffffff",
+  borderRadius: "16px",
+  overflow: "hidden",
+  boxShadow: "0 8px 56px rgba(0,0,0,0.5)",
+  maxWidth: "1100px",
+  margin: "1rem auto 0",
+  minHeight: "calc(100vh - 8rem)",
+};
+
+function PublicLayout() {
+  return <div style={publicPageCard}><Outlet /></div>;
+}
+
+function TitleUpdater() {
+  const { league } = useActiveLeague();
+  useEffect(() => {
+    if (league?.name) document.title = league.name;
+  }, [league]);
+  return null;
+}
 
 export function App() {
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <AuthProvider>
-        <TopNav />
+        <ActiveLeagueProvider>
+        <TitleUpdater />
+        <div style={appBg}>
+        <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
+          <LeagueTopBanner />
+          <TopNav />
+        </div>
         <div style={{ paddingBottom: "72px" }}>
         <Routes>
-          <Route path="/" element={<HomePage getUpcomingMatches={getUpcomingMatches} getRecentMatches={getRecentMatches} listLeagues={listLeagues} />} />
           <Route path="/share/rodada" element={<RoundSharePage />} />
-          <Route path="/ligas" element={<LeaguesPage listLeagues={listLeagues} listChampionships={listChampionships} getRecentMatches={getRecentMatches} />} />
-          <Route path="/ligas/:id" element={<LeagueDetailPage getLeague={getLeague} listChampionships={listChampionships} getUpcomingMatches={getUpcomingMatches} getRecentMatches={getRecentMatches} leagueRepository={leagueRepository} />} />
-          <Route path="/campeonatos" element={<ChampionshipsPage listChampionships={listChampionships} listLeagues={listLeagues} />} />
-          <Route path="/campeonatos/:id" element={<ChampionshipDetailPage getChampionshipDetail={getChampionshipDetail} updateChampionshipPodium={updateChampionshipPodium} loadPhaseGroups={loadPhaseGroups} getEditionTopScorers={getEditionTopScorers} />} />
-          <Route path="/locais" element={<VenuesPage listVenues={listVenues} />} />
-          <Route path="/locais/:slug" element={<VenueDetailPage getVenueMatches={getVenueMatches} venueRepository={venueRepository} />} />
-          <Route path="/clubes" element={<ClubsPage listClubs={listClubs} />} />
-          <Route path="/clubes/:slug" element={<ClubDetailPage getClub={getClub} getClubMatches={getClubMatches} getClubTitles={getClubTitles} getClubTeams={getClubTeams} clubRepository={clubRepository} />} />
-          <Route path="/times/:slug" element={<TeamDetailPage getTeamMatches={getTeamMatches} getTeamMatchYears={getTeamMatchYears} getTeamDetail={getTeamDetail} getTeamAthletes={getTeamAthletes} getTeamAthleteStats={getTeamAthleteStats} addAthleteToTeam={addAthleteToTeam} searchAthletes={searchAthletes} />} />
-          <Route path="/partidas/:id" element={<MatchDetailPage getMatchDetail={getMatchDetail} getHeadToHead={getHeadToHead} getTeamAthletes={getTeamAthletes} getTeamMatches={getTeamMatches} addMatchEvent={addMatchEvent} annulMatchEvent={annulMatchEvent} />} />
-          <Route path="/ao-vivo" element={<LiveMatchesPage getLiveWindowMatches={getLiveWindowMatches} />} />
-          <Route path="/atletas" element={<AthletesPage searchAthletes={searchAthletes} getRandomAthletes={getRandomAthletes} />} />
-          <Route path="/atletas/:id" element={<AthleteDetailPage getAthleteDetail={getAthleteDetail} getAthleteStats={getAthleteStats} deleteAthlete={deleteAthlete} listChampionships={listChampionships} getAthleteChampionshipRegistrations={getAthleteChampionshipRegistrations} registerAthleteChampionship={registerAthleteChampionship} updateChampionshipRegistration={updateChampionshipRegistration} cancelChampionshipRegistration={cancelChampionshipRegistration} athleteRepository={athleteRepository} />} />
-          <Route path="/arbitros" element={<RefereesPage listReferees={listReferees} />} />
-          <Route path="/arbitros/:id" element={<RefereeDetailPage getRefereeDetail={getRefereeDetail} getRefereeMatches={getRefereeMatches} />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/cadastro" element={<CadastroPage />} />
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<HomePage getUpcomingMatches={getUpcomingMatches} getRecentMatches={getRecentMatches} listChampionships={listChampionships} listPartners={listPartners} listNews={listNews} />} />
+            <Route path="/ligas" element={<Navigate to="/campeonatos" replace />} />
+            <Route path="/ligas/:id" element={<Navigate to="/campeonatos" replace />} />
+            <Route path="/noticias" element={<NewsPage listNews={listNews} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
+            <Route path="/noticias/:id" element={<NewsDetailPage getNewsDetail={getNewsDetail} />} />
+            <Route path="/documentos" element={<DocumentsPage listDocuments={listDocuments} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
+            <Route path="/emendas" element={<EmendasPage listEmendas={listEmendas} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
+            <Route path="/campeonatos" element={<ChampionshipsPage listChampionships={listChampionships} />} />
+            <Route path="/campeonatos/:id" element={<ChampionshipDetailPage getChampionshipDetail={getChampionshipDetail} updateChampionshipPodium={updateChampionshipPodium} loadPhaseGroups={loadPhaseGroups} getEditionTopScorers={getEditionTopScorers} />} />
+            <Route path="/locais" element={<VenuesPage listVenues={listVenues} />} />
+            <Route path="/locais/:slug" element={<VenueDetailPage getVenueMatches={getVenueMatches} venueRepository={venueRepository} />} />
+            <Route path="/clubes" element={<ClubsPage listClubs={listClubs} />} />
+            <Route path="/clubes/:slug" element={<ClubDetailPage getClub={getClub} getClubMatches={getClubMatches} getClubTitles={getClubTitles} getClubTeams={getClubTeams} clubRepository={clubRepository} />} />
+            <Route path="/times/:slug" element={<TeamDetailPage getTeamMatches={getTeamMatches} getTeamMatchYears={getTeamMatchYears} getTeamDetail={getTeamDetail} getTeamAthletes={getTeamAthletes} getTeamAthleteStats={getTeamAthleteStats} addAthleteToTeam={addAthleteToTeam} searchAthletes={searchAthletes} />} />
+            <Route path="/partidas/:id" element={<MatchDetailPage getMatchDetail={getMatchDetail} getHeadToHead={getHeadToHead} getTeamAthletes={getTeamAthletes} getTeamMatches={getTeamMatches} addMatchEvent={addMatchEvent} annulMatchEvent={annulMatchEvent} />} />
+            <Route path="/ao-vivo" element={<LiveMatchesPage getLiveWindowMatches={getLiveWindowMatches} />} />
+            <Route path="/atletas" element={<Navigate to="/" replace />} />
+            <Route path="/atletas/:id" element={<Navigate to="/" replace />} />
+            <Route path="/arbitros" element={<RefereesPage listReferees={listReferees} />} />
+            <Route path="/arbitros/:id" element={<RefereeDetailPage getRefereeDetail={getRefereeDetail} getRefereeMatches={getRefereeMatches} />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/cadastro" element={<CadastroPage />} />
+            <Route path="/meu-perfil" element={<ProtectedRoute role="any"><MyProfilePage /></ProtectedRoute>} />
+            <Route path="/solicitar-vinculo" element={<ProtectedRoute role="any"><SolicitarVinculoPage /></ProtectedRoute>} />
+            <Route path="/meu-time" element={<ProtectedRoute role="any"><DirigentePage /></ProtectedRoute>} />
+          </Route>
           <Route path="/admin/locais" element={<ProtectedRoute><AdminVenuesPage listVenues={listVenues} /></ProtectedRoute>} />
           <Route path="/admin/locais/novo" element={<ProtectedRoute><AdminVenueCreatePage createVenue={createVenue} /></ProtectedRoute>} />
           <Route path="/admin/locais/importar" element={<ProtectedRoute><AdminVenueBulkImportPage createVenue={createVenue} /></ProtectedRoute>} />
@@ -133,9 +219,9 @@ export function App() {
           <Route path="/admin/arbitros/:id/editar" element={<ProtectedRoute><AdminRefereeEditPage updateReferee={updateReferee} deleteReferee={deleteReferee} refereeRepository={refereeRepository} /></ProtectedRoute>} />
           <Route path="/admin/pendencias-vinculo" element={<ProtectedRoute><AdminMembershipPendingPage /></ProtectedRoute>} />
           <Route path="/admin" element={<ProtectedRoute><Navigate to="/admin/pendencias-vinculo" replace /></ProtectedRoute>} />
-          <Route path="/meu-perfil" element={<ProtectedRoute role="any"><MyProfilePage /></ProtectedRoute>} />
-          <Route path="/solicitar-vinculo" element={<ProtectedRoute role="any"><SolicitarVinculoPage /></ProtectedRoute>} />
-          <Route path="/meu-time" element={<ProtectedRoute role="any"><DirigentePage /></ProtectedRoute>} />
+          <Route path="/admin/dirigentes" element={<ProtectedRoute role="full_admin"><AdminDirigentesPage /></ProtectedRoute>} />
+          <Route path="/admin/usuarios" element={<ProtectedRoute role="full_admin"><AdminUsersPage /></ProtectedRoute>} />
+          <Route path="/admin/league-admins" element={<ProtectedRoute role="full_admin"><AdminLeagueAdminsPage /></ProtectedRoute>} />
           <Route path="/admin/dirigentes" element={<ProtectedRoute role="full_admin"><AdminDirigentesPage /></ProtectedRoute>} />
           <Route path="/admin/usuarios" element={<ProtectedRoute role="full_admin"><AdminUsersPage /></ProtectedRoute>} />
           <Route path="/admin/league-admins" element={<ProtectedRoute role="full_admin"><AdminLeagueAdminsPage /></ProtectedRoute>} />
@@ -143,6 +229,8 @@ export function App() {
         </Routes>
         </div>
         <Footer />
+        </div>
+        </ActiveLeagueProvider>
       </AuthProvider>
     </BrowserRouter>
   );

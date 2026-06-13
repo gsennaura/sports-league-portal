@@ -480,7 +480,7 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
             {addMode === "choice" && (
               <>
                 <h2 style={S.modalTitle}>Adicionar Atleta</h2>
-                <p style={{ color: "#a6adc8", fontSize: "0.875rem", marginBottom: "1.25rem" }}>
+                <p style={{ color: "#ffffff", fontSize: "0.875rem", marginBottom: "1.25rem" }}>
                   Como deseja adicionar o atleta a este time?
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
@@ -524,7 +524,7 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                     </button>
                   </div>
                   {!athleteSearchLoading && athleteSearch.length >= 2 && athleteSearchResults.length === 0 && (
-                    <p style={{ color: "#6c7086", fontSize: "0.83rem", margin: 0 }}>Nenhum atleta encontrado.</p>
+                    <p style={{ color: "#ffffff", fontSize: "0.83rem", margin: 0 }}>Nenhum atleta encontrado.</p>
                   )}
                   {athleteSearchResults.length > 0 && (
                     <div style={{ border: "1px solid #313244", borderRadius: "6px", maxHeight: "160px", overflowY: "auto" }}>
@@ -543,7 +543,7 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                             .catch(() => setSelectedAthleteTeams([]));
                         }}
                         >
-                          {a.name}{a.nickname ? <span style={{ color: "#a6adc8", marginLeft: "0.4rem" }}>({a.nickname})</span> : null}
+                          {a.name}{a.nickname ? <span style={{ color: "#ffffff", marginLeft: "0.4rem" }}>({a.nickname})</span> : null}
                         </div>
                       ))}
                     </div>
@@ -552,20 +552,20 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                     <div>
                       <p style={{ color: "#a6e3a1", fontSize: "0.85rem", margin: "0 0 0.35rem" }}>✓ Selecionado: {selectedAthlete.name}</p>
                       {selectedAthleteTeams.length > 0 && (
-                        <div style={{ backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", padding: "0.5rem 0.85rem", fontSize: "0.8rem" }}>
-                          <p style={{ color: "#6c7086", margin: "0 0 0.35rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", fontSize: "0.72rem" }}>Times ativos atualmente</p>
+                        <div style={{ backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", padding: "0.5rem 0.85rem", fontSize: "0.8rem" }}>
+                          <p style={{ color: "#ffffff", margin: "0 0 0.35rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", fontSize: "0.72rem" }}>Times ativos atualmente</p>
                           <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.2rem" }}>
                             {selectedAthleteTeams.map((t) => (
                               <li key={t.team_id} style={{ color: "#cdd6f4" }}>
                                 ⚽ {t.team_name ?? t.team_id}
-                                {t.team_sport_name && <span style={{ color: "#6c7086", marginLeft: "0.4rem" }}>({t.team_sport_name})</span>}
+                                {t.team_sport_name && <span style={{ color: "#ffffff", marginLeft: "0.4rem" }}>({t.team_sport_name})</span>}
                               </li>
                             ))}
                           </ul>
                         </div>
                       )}
                       {selectedAthleteTeams.length === 0 && (
-                        <p style={{ color: "#6c7086", fontSize: "0.78rem", margin: 0 }}>Nenhum time ativo.</p>
+                        <p style={{ color: "#ffffff", fontSize: "0.78rem", margin: 0 }}>Nenhum time ativo.</p>
                       )}
                     </div>
                   )}
@@ -633,7 +633,7 @@ function activeDotStyle(active: boolean): React.CSSProperties {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #89b4fa, #a6e3a1)" },
   heroInner: { maxWidth: "900px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
@@ -655,7 +655,7 @@ const S: Record<string, React.CSSProperties> = {
   fieldGroup: { display: "flex", flexDirection: "column", gap: "0.35rem" },
   label: { color: "#cdd6f4", fontSize: "0.825rem", fontWeight: 500 },
   required: { color: "#f38ba8" },
-  input: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.85rem", outline: "none", boxSizing: "border-box", width: "100%" },
+  input: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "7px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.85rem", outline: "none", boxSizing: "border-box", width: "100%" },
   select: { cursor: "pointer", appearance: "auto" },
   clearBtn: { marginTop: "0.5rem", background: "none", border: "1px solid #5a2a30", borderRadius: "5px", color: "#f38ba8", fontSize: "0.78rem", padding: "0.25rem 0.7rem", cursor: "pointer" },
 
@@ -665,23 +665,23 @@ const S: Record<string, React.CSSProperties> = {
   btnCancel: { color: "#cdd6f4", textDecoration: "none", fontSize: "0.875rem" },
 
   tabBar: { display: "flex", gap: "0.5rem", marginTop: "1rem" },
-  tab: { background: "transparent", border: "1px solid #313244", borderRadius: "6px", color: "#6c7086", fontSize: "0.85rem", padding: "0.35rem 1rem", cursor: "pointer" },
+  tab: { background: "transparent", border: "1px solid #313244", borderRadius: "6px", color: "#ffffff", fontSize: "0.85rem", padding: "0.35rem 1rem", cursor: "pointer" },
   tabActive: { backgroundColor: "#89b4fa", borderColor: "#89b4fa", color: "#11111b", fontWeight: 700 },
   athletesHeader: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" },
   btnAddAthlete: { backgroundColor: "#a6e3a1", border: "none", borderRadius: "6px", color: "#11111b", fontWeight: 700, fontSize: "0.875rem", padding: "0.5rem 1rem", cursor: "pointer" },
   tableWrap: { overflowX: "auto", borderRadius: "8px", border: "1px solid #313244" },
   table: { width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" },
-  th: { backgroundColor: "#181825", color: "#cdd6f4", fontWeight: 600, fontSize: "0.84rem", textAlign: "left", padding: "0.75rem 1rem", borderBottom: "1px solid #313244" },
-  trRow: { borderBottom: "1px solid #1e1e2e" },
+  th: { backgroundColor: "#18265b", color: "#cdd6f4", fontWeight: 600, fontSize: "0.84rem", textAlign: "left", padding: "0.75rem 1rem", borderBottom: "1px solid #313244" },
+  trRow: { borderBottom: "1px solid #18265b" },
   td: { padding: "0.65rem 1rem", color: "#cdd6f4", verticalAlign: "middle" },
-  tdMuted: { padding: "0.65rem 1rem", color: "#6c7086", fontSize: "0.85rem", verticalAlign: "middle" },
+  tdMuted: { padding: "0.65rem 1rem", color: "#ffffff", fontSize: "0.85rem", verticalAlign: "middle" },
   rowLink: { color: "#89b4fa", textDecoration: "none" },
   nickBadge: { marginLeft: "0.4rem", fontSize: "0.72rem", color: "#cba6f7", fontStyle: "italic" },
-  activeBadge: { fontSize: "0.72rem", fontWeight: 700, backgroundColor: "#a6e3a1", color: "#1e1e2e", borderRadius: "4px", padding: "0.1rem 0.45rem" },
+  activeBadge: { fontSize: "0.72rem", fontWeight: 700, backgroundColor: "#a6e3a1", color: "#18265b", borderRadius: "4px", padding: "0.1rem 0.45rem" },
   btnExit: { fontSize: "0.78rem", backgroundColor: "#45475a", border: "none", borderRadius: "5px", color: "#cdd6f4", padding: "0.2rem 0.7rem", cursor: "pointer" },
-  empty: { padding: "1.5rem", color: "#6c7086", textAlign: "center" },
+  empty: { padding: "1.5rem", color: "#ffffff", textAlign: "center" },
   overlay: { position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 },
-  modal: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px", padding: "1.75rem 2rem", width: "100%", maxWidth: "440px", boxSizing: "border-box" },
+  modal: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px", padding: "1.75rem 2rem", width: "100%", maxWidth: "440px", boxSizing: "border-box" },
   modalTitle: { fontSize: "1.1rem", fontWeight: 700, color: "#cdd6f4", margin: "0 0 1rem" },
   modalActions: { display: "flex", justifyContent: "flex-end", gap: "0.6rem", paddingTop: "0.25rem" },
   mError: { color: "#f38ba8", fontSize: "0.85rem", margin: 0 },

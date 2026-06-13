@@ -244,7 +244,7 @@ export function DirigentePage() {
               />
               {(athleteResults[team.teamId] ?? []).map((a) => (
                 <div key={a.id} style={S.memberRow}>
-                  <span style={S.memberName}>{a.name}{a.nickname ? ` (${a.nickname})` : ""} <span style={{ color: "#6c7086", fontSize: ".8rem" }}>{a.position ?? ""}</span></span>
+                  <span style={S.memberName}>{a.name}{a.nickname ? ` (${a.nickname})` : ""} <span style={{ color: "#ffffff", fontSize: ".8rem" }}>{a.position ?? ""}</span></span>
                   <button
                     style={S.approveBtn}
                     disabled={addingAthlete === a.id}
@@ -266,20 +266,20 @@ const S: Record<string, React.CSSProperties> = {
   page: { maxWidth: 720, margin: "32px auto", padding: "0 16px", fontFamily: "sans-serif", color: "#cdd6f4" },
   title: { fontSize: 28, fontWeight: 700, marginBottom: 16, color: "#cba6f7" },
   tabs: { display: "flex", gap: 8, marginBottom: 20 },
-  tab: { padding: "8px 20px", borderRadius: 8, border: "none", background: "#313244", color: "#a6adc8", fontWeight: 600, cursor: "pointer", fontSize: "1rem" },
-  tabActive: { background: "#cba6f7", color: "#1e1e2e" },
-  card: { backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: 12, padding: 24, marginBottom: 24 },
+  tab: { padding: "8px 20px", borderRadius: 8, border: "none", background: "#313244", color: "#ffffff", fontWeight: 600, cursor: "pointer", fontSize: "1rem" },
+  tabActive: { background: "#cba6f7", color: "#18265b" },
+  card: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: 12, padding: 24, marginBottom: 24 },
   teamName: { fontSize: 20, fontWeight: 700, color: "#89b4fa", marginTop: 0, marginBottom: 12 },
-  sectionTitle: { fontSize: 14, fontWeight: 600, color: "#a6adc8", textTransform: "uppercase" as const, letterSpacing: "0.05em", marginBottom: 12 },
-  hint: { color: "#a6adc8", fontSize: 14 },
-  empty: { color: "#6c7086", fontSize: 14 },
+  sectionTitle: { fontSize: 14, fontWeight: 600, color: "#ffffff", textTransform: "uppercase" as const, letterSpacing: "0.05em", marginBottom: 12 },
+  hint: { color: "#ffffff", fontSize: 14 },
+  empty: { color: "#ffffff", fontSize: 14 },
   memberRow: { display: "flex", flexWrap: "wrap" as const, alignItems: "center", justifyContent: "space-between", gap: 8, padding: "10px 0", borderBottom: "1px solid #313244" },
   memberInfo: { display: "flex", flexDirection: "column" as const, gap: 2 },
   memberName: { fontWeight: 600, color: "#cdd6f4" },
-  memberDate: { fontSize: 12, color: "#6c7086" },
+  memberDate: { fontSize: 12, color: "#ffffff" },
   actions: { display: "flex", gap: 8 },
-  approveBtn: { background: "#a6e3a1", color: "#1e1e2e", border: "none", borderRadius: 6, padding: "6px 14px", fontWeight: 700, cursor: "pointer" },
-  rejectBtn: { background: "#f38ba8", color: "#1e1e2e", border: "none", borderRadius: 6, padding: "6px 14px", fontWeight: 700, cursor: "pointer" },
+  approveBtn: { background: "#a6e3a1", color: "#18265b", border: "none", borderRadius: 6, padding: "6px 14px", fontWeight: 700, cursor: "pointer" },
+  rejectBtn: { background: "#f38ba8", color: "#18265b", border: "none", borderRadius: 6, padding: "6px 14px", fontWeight: 700, cursor: "pointer" },
   successText: { color: "#a6e3a1", fontSize: 13, width: "100%" },
   errorText: { color: "#f38ba8", fontSize: 13, width: "100%" },
   input: { width: "100%", padding: ".5rem .85rem", borderRadius: 8, border: "1px solid #45475a", background: "#313244", color: "#cdd6f4", fontSize: ".95rem", boxSizing: "border-box" as const, marginBottom: 8 },

@@ -42,8 +42,9 @@ type RawMatch = {
 export class ApiClubRepository implements ClubRepository {
   constructor(private readonly baseUrl: string) {}
 
-  async listAll(): Promise<Club[]> {
-    const clubsResp = await fetch(`${this.baseUrl}/clubs`);
+  async listAll(leagueId?: string): Promise<Club[]> {
+    const params = leagueId ? `?league_id=${encodeURIComponent(leagueId)}` : "";
+    const clubsResp = await fetch(`${this.baseUrl}/clubs${params}`);
     if (!clubsResp.ok) throw new Error(`Falha ao buscar clubes: ${clubsResp.status}`);
     const clubs = await clubsResp.json() as Array<RawClub & { city_name?: string; venue_name?: string }>;
     return clubs.map((c) => ({

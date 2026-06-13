@@ -267,7 +267,7 @@ export function AdminAthleteEditPage({ updateAthlete, deleteAthlete, athleteRepo
           {error && <p style={S.errorMsg}>{error}</p>}
           {success && <p style={S.successMsg}>✔ Atleta atualizado! Redirecionando…</p>}
 
-          <p style={{ fontSize: "0.8rem", color: "#6c7086", margin: 0 }}>
+          <p style={{ fontSize: "0.8rem", color: "#ffffff", margin: 0 }}>
             Campos marcados com <span style={{ color: "#f38ba8", fontWeight: 700 }}>*</span> são obrigatórios.
           </p>
 
@@ -293,7 +293,7 @@ export function AdminAthleteEditPage({ updateAthlete, deleteAthlete, athleteRepo
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #a6e3a1, #89b4fa)" },
   heroInner: { maxWidth: "900px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
@@ -308,11 +308,11 @@ const S: Record<string, React.CSSProperties> = {
   grid3: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginTop: "1rem" },
   fieldGroup: { display: "flex", flexDirection: "column", gap: "0.3rem" },
   label: { fontSize: "0.83rem", fontWeight: 600, color: "#cdd6f4", textTransform: "uppercase", letterSpacing: "0.06em" },
-  input: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", boxSizing: "border-box" },
+  input: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", boxSizing: "border-box" },
   select: { cursor: "pointer", appearance: "auto" },
-  textarea: { backgroundColor: "#181825", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", resize: "vertical", boxSizing: "border-box", marginTop: "0.5rem" },
-  photoPreview: { width: 80, height: 80, borderRadius: "8px", objectFit: "cover", border: "2px solid #313244", backgroundColor: "#181825", flexShrink: 0 },
-  photoPencil: { position: "absolute", bottom: "-6px", right: "-6px", width: "26px", height: "26px", borderRadius: "50%", backgroundColor: "#cba6f7", border: "2px solid #1e1e2e", color: "#11111b", fontSize: "0.75rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 },
+  textarea: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", resize: "vertical", boxSizing: "border-box", marginTop: "0.5rem" },
+  photoPreview: { width: 80, height: 80, borderRadius: "8px", objectFit: "cover", border: "2px solid #313244", backgroundColor: "#18265b", flexShrink: 0 },
+  photoPencil: { position: "absolute", bottom: "-6px", right: "-6px", width: "26px", height: "26px", borderRadius: "50%", backgroundColor: "#cba6f7", border: "2px solid #18265b", color: "#11111b", fontSize: "0.75rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 },
   errorMsg: { color: "#f38ba8", backgroundColor: "#2a1a1f", border: "1px solid #5a2a30", borderRadius: "6px", padding: "0.75rem 1rem", fontSize: "0.875rem" },
   successMsg: { color: "#a6e3a1", backgroundColor: "#1a2a1f", border: "1px solid #2a5a30", borderRadius: "6px", padding: "0.75rem 1rem", fontSize: "0.875rem" },
   actions: { display: "flex", justifyContent: "flex-end", gap: "0.75rem", paddingTop: "0.5rem", alignItems: "center" },

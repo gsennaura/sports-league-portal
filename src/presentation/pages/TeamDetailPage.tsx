@@ -251,18 +251,18 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                             {a.athlete_nickname ?? a.athlete_name ?? "—"}
                           </span>
                           {a.athlete_nickname && a.athlete_name && a.athlete_nickname !== a.athlete_name && (
-                            <span style={{ fontSize: "0.74rem", color: "#6c7086", marginLeft: "0.4rem" }}>
+                            <span style={{ fontSize: "0.74rem", color: "#ffffff", marginLeft: "0.4rem" }}>
                               {a.athlete_name}
                             </span>
                           )}
                         </td>
-                        <td style={{ ...styles.rosterTd, fontSize: "0.78rem", color: "#a6adc8" }}>
+                        <td style={{ ...styles.rosterTd, fontSize: "0.78rem", color: "#ffffff" }}>
                           {a.athlete_position ?? "—"}
                         </td>
                         <td style={{ ...styles.rosterTd, textAlign: "center" as const }}>
                           <div style={{ display: "flex", gap: "0.3rem", justifyContent: "center", flexWrap: "wrap" as const }}>
                             {s && s.goals > 0 && <StatBadge color="#a6e3a1" bg="#1a2e1a" label="⚽" value={s.goals} />}
-                            {s && s.yellow_cards > 0 && <StatBadge color="#1e1e2e" bg="#f9e2af" label="🟨" value={s.yellow_cards} />}
+                            {s && s.yellow_cards > 0 && <StatBadge color="#18265b" bg="#f9e2af" label="🟨" value={s.yellow_cards} />}
                             {s && s.red_cards > 0 && <StatBadge color="#fff" bg="#e04060" label="🟥" value={s.red_cards} />}
                           </div>
                         </td>
@@ -287,28 +287,28 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
           {/* Add athlete modal */}
           {addMode !== null && (
             <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}>
-              <div style={{ background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 14, padding: "1.5rem", width: "min(90vw, 420px)", display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+              <div style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 14, padding: "1.5rem", width: "min(90vw, 420px)", display: "flex", flexDirection: "column", gap: "0.9rem" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <span style={{ fontWeight: 700, fontSize: "1rem", color: "#cdd6f4" }}>Adicionar atleta ao elenco</span>
-                  <button onClick={() => setAddMode(null)} style={{ background: "none", border: "none", color: "#6c7086", fontSize: "1.2rem", cursor: "pointer", lineHeight: 1 }}>✕</button>
+                  <button onClick={() => setAddMode(null)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.2rem", cursor: "pointer", lineHeight: 1 }}>✕</button>
                 </div>
 
                 {/* Step 1: choice */}
                 {addMode === "choice" && (
                   <>
-                    <p style={{ color: "#a6adc8", fontSize: "0.875rem", margin: 0 }}>
+                    <p style={{ color: "#ffffff", fontSize: "0.875rem", margin: 0 }}>
                       Como deseja adicionar o atleta?
                     </p>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                       <button
-                        style={{ background: "#cba6f7", color: "#1e1e2e", border: "none", borderRadius: 8, padding: "0.75rem 1rem", fontWeight: 700, fontSize: "0.9rem", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 2 }}
+                        style={{ background: "#cba6f7", color: "#18265b", border: "none", borderRadius: 8, padding: "0.75rem 1rem", fontWeight: 700, fontSize: "0.9rem", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 2 }}
                         onClick={() => setAddMode("existing")}
                       >
                         <span>Atleta existente</span>
                         <span style={{ fontSize: "0.78rem", fontWeight: 400, opacity: 0.85 }}>Buscar por nome, CPF ou e-mail</span>
                       </button>
                       <button
-                        style={{ background: "#a6e3a1", color: "#1e1e2e", border: "none", borderRadius: 8, padding: "0.75rem 1rem", fontWeight: 700, fontSize: "0.9rem", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 2 }}
+                        style={{ background: "#a6e3a1", color: "#18265b", border: "none", borderRadius: 8, padding: "0.75rem 1rem", fontWeight: 700, fontSize: "0.9rem", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 2 }}
                         onClick={() => { setAddMode(null); navigate("/admin/atletas/novo", { state: { teamId: id, teamName: team?.name ?? "" } }); }}
                       >
                         <span>Criar novo atleta</span>
@@ -318,7 +318,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                     <button
                       type="button"
                       onClick={() => setAddMode(null)}
-                      style={{ background: "none", border: "1px solid #45475a", borderRadius: 8, color: "#a6adc8", padding: "0.4rem 0.85rem", fontSize: "0.82rem", cursor: "pointer", alignSelf: "flex-start" }}
+                      style={{ background: "none", border: "1px solid #45475a", borderRadius: 8, color: "#ffffff", padding: "0.4rem 0.85rem", fontSize: "0.82rem", cursor: "pointer", alignSelf: "flex-start" }}
                     >
                       Cancelar
                     </button>
@@ -346,7 +346,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                           } catch { setSearchResults([]); }
                         }, 300);
                       }}
-                      style={{ background: "#181825", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: "0.5rem 0.8rem", fontSize: "0.9rem", outline: "none" }}
+                      style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: "0.5rem 0.8rem", fontSize: "0.9rem", outline: "none" }}
                     />
 
                     {searchResults.length > 0 && !selectedAthleteId && (
@@ -355,24 +355,24 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                           <div
                             key={a.id}
                             onClick={() => { setSelectedAthleteId(a.id); setSearchQuery(a.nickname ?? a.name); setSearchResults([]); }}
-                            style={{ padding: "0.6rem 0.8rem", cursor: "pointer", borderBottom: "1px solid #313244", color: "#cdd6f4", fontSize: "0.88rem", background: "#1e1e2e" }}
+                            style={{ padding: "0.6rem 0.8rem", cursor: "pointer", borderBottom: "1px solid #313244", color: "#cdd6f4", fontSize: "0.88rem", background: "#18265b" }}
                             onMouseEnter={(e) => (e.currentTarget.style.background = "#313244")}
-                            onMouseLeave={(e) => (e.currentTarget.style.background = "#1e1e2e")}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = "#18265b")}
                           >
                             {a.nickname ? `${a.nickname} (${a.name})` : a.name}
-                            {a.position && <span style={{ color: "#6c7086", marginLeft: "0.4rem", fontSize: "0.8rem" }}>{a.position}</span>}
+                            {a.position && <span style={{ color: "#ffffff", marginLeft: "0.4rem", fontSize: "0.8rem" }}>{a.position}</span>}
                           </div>
                         ))}
                       </div>
                     )}
 
-                    <label style={{ display: "flex", flexDirection: "column", gap: "0.3rem", fontSize: "0.82rem", color: "#a6adc8" }}>
+                    <label style={{ display: "flex", flexDirection: "column", gap: "0.3rem", fontSize: "0.82rem", color: "#ffffff" }}>
                       Data de início
                       <input
                         type="date"
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
-                        style={{ background: "#181825", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: "0.45rem 0.7rem", fontSize: "0.9rem", outline: "none" }}
+                        style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: "0.45rem 0.7rem", fontSize: "0.9rem", outline: "none" }}
                       />
                     </label>
 
@@ -382,7 +382,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                       <button
                         type="button"
                         onClick={() => setAddMode("choice")}
-                        style={{ background: "none", border: "1px solid #45475a", borderRadius: 8, color: "#a6adc8", padding: "0.4rem 0.85rem", fontSize: "0.82rem", cursor: "pointer" }}
+                        style={{ background: "none", border: "1px solid #45475a", borderRadius: 8, color: "#ffffff", padding: "0.4rem 0.85rem", fontSize: "0.82rem", cursor: "pointer" }}
                       >
                         ← Voltar
                       </button>
@@ -402,7 +402,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                             setAddLoading(false);
                           }
                         }}
-                        style={{ background: selectedAthleteId ? "#a6e3a1" : "#313244", color: selectedAthleteId ? "#1e1e2e" : "#6c7086", border: "none", borderRadius: 8, padding: "0.6rem 1.2rem", fontWeight: 700, fontSize: "0.9rem", cursor: selectedAthleteId ? "pointer" : "not-allowed", opacity: addLoading ? 0.6 : 1 }}
+                        style={{ background: selectedAthleteId ? "#a6e3a1" : "#313244", color: selectedAthleteId ? "#18265b" : "#ffffff", border: "none", borderRadius: 8, padding: "0.6rem 1.2rem", fontWeight: 700, fontSize: "0.9rem", cursor: selectedAthleteId ? "pointer" : "not-allowed", opacity: addLoading ? 0.6 : 1 }}
                       >
                         {addLoading ? "Adicionando..." : "Adicionar"}
                       </button>
@@ -429,11 +429,11 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                 >
                   <div
                     onClick={(e) => e.stopPropagation()}
-                    style={{ background: "#1e1e2e", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", minWidth: 220, maxWidth: 320, width: "100%", maxHeight: "80vh", overflowY: "auto" }}
+                    style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", minWidth: 220, maxWidth: 320, width: "100%", maxHeight: "80vh", overflowY: "auto" }}
                   >
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
                       <span style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4" }}>📅 Temporadas</span>
-                      <button onClick={() => setYearModalOpen(false)} style={{ background: "none", border: "none", color: "#6c7086", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
+                      <button onClick={() => setYearModalOpen(false)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                       {matchYears.map((y) => {
@@ -682,7 +682,7 @@ const styles: Record<string, React.CSSProperties> = {
     margin: 0,
   },
   infoCard: {
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "1rem 1.25rem",
@@ -729,7 +729,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   champBlock: {
     marginBottom: "1rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     overflow: "hidden",
@@ -741,7 +741,7 @@ const styles: Record<string, React.CSSProperties> = {
     textTransform: "uppercase" as const,
     letterSpacing: "0.08em",
     padding: "0.5rem 1rem",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
   },
   matchLink: {
@@ -750,7 +750,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: "block",
   },
   matchCard: {
-    borderBottom: "1px solid #181825",
+    borderBottom: "1px solid #18265b",
     padding: "0.4rem 0",
   },
   matchCardRow: {
@@ -774,7 +774,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   mTimeLabel: {
     fontSize: "0.65rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     fontWeight: 600,
   },
   mTeamsCol: {
@@ -800,7 +800,7 @@ const styles: Record<string, React.CSSProperties> = {
     background: "transparent",
     border: "1px solid #45475a",
     borderRadius: "8px",
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.85rem",
     fontWeight: 600,
     padding: "0.35rem 0.9rem",
@@ -849,7 +849,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   mPhaseLabel: {
     fontSize: "0.65rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     whiteSpace: "nowrap" as const,
     textAlign: "right" as const,
   },
@@ -866,7 +866,7 @@ const styles: Record<string, React.CSSProperties> = {
     textAlign: "center" as const,
   },
   summary: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "1rem 1.25rem",
@@ -912,18 +912,18 @@ const styles: Record<string, React.CSSProperties> = {
     width: "100%",
     borderCollapse: "collapse" as const,
     marginTop: "0.75rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     overflow: "hidden",
   },
   rosterThead: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
   },
   rosterTh: {
     fontSize: "0.65rem",
     fontWeight: 700,
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase" as const,
     letterSpacing: "0.07em",
     padding: "0.5rem 0.75rem",

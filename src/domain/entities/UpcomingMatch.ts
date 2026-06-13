@@ -19,6 +19,7 @@ export interface UpcomingMatch {
   phase_name: string;
   phase_type: string;
   division_name: string | null;
+  league_id: string | null;
   league_name: string | null;
   league_short_name: string | null;
   city_name: string | null;

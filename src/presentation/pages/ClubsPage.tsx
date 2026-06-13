@@ -4,6 +4,7 @@ import { toSlugPath } from "@utils/slug";
 import type { ListClubs } from "@application/use_cases/ListClubs";
 import type { Club } from "@domain/entities/Club";
 import { API_BASE } from "@infrastructure/apiBase";
+import { LEAGUE_ID } from "../../config";
 
 interface ClubsPageProps {
   listClubs: ListClubs;
@@ -98,7 +99,7 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
     type RawLeague = { id: string; name: string };
 
     Promise.all([
-      listClubs.execute(),
+      listClubs.execute(LEAGUE_ID || undefined),
       fetch(`${API_BASE}/teams`).then((r) => (r.ok ? (r.json() as Promise<RawTeam[]>) : [])),
       fetch(`${API_BASE}/leagues?`).then((r) => (r.ok ? (r.json() as Promise<RawLeague[]>) : [])),
     ])
@@ -309,7 +310,7 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
 
 const styles: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "2.5rem",
     overflow: "hidden",
@@ -370,14 +371,14 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "0.6rem",
     marginBottom: "2rem",
     padding: "1.25rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "10px",
   },
   filterInput: {
     width: "100%",
     padding: "0.6rem 0.9rem",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -392,7 +393,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   filterSelect: {
     padding: "0.55rem 0.75rem",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -409,7 +410,7 @@ const styles: Record<string, React.CSSProperties> = {
     backgroundColor: "#89b4fa",
     border: "none",
     borderRadius: "6px",
-    color: "#1e1e2e",
+    color: "#18265b",
     fontSize: "0.9rem",
     fontWeight: 700,
     cursor: "pointer",
@@ -420,7 +421,7 @@ const styles: Record<string, React.CSSProperties> = {
     backgroundColor: "transparent",
     border: "1px solid #45475a",
     borderRadius: "6px",
-    color: "#6c7086",
+    color: "#ffffff",
     fontSize: "0.85rem",
     cursor: "pointer",
   },
@@ -433,7 +434,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   resultsLabel: {
     fontSize: "0.8rem",
-    color: "#6c7086",
+    color: "#ffffff",
     letterSpacing: "0.03em",
   },
   clubsGrid: {
@@ -444,10 +445,10 @@ const styles: Record<string, React.CSSProperties> = {
   seeMoreHint: {
     marginTop: "1.5rem",
     padding: "1rem 1.25rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
-    color: "#6c7086",
+    color: "#ffffff",
     fontSize: "0.85rem",
     textAlign: "center" as const,
     letterSpacing: "0.01em",
@@ -459,7 +460,7 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "column" as const,
     gap: "0.5rem",
     padding: "0.85rem 1rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     textDecoration: "none",
@@ -477,7 +478,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   clubMeta: {
     fontSize: "0.72rem",
-    color: "#6c7086",
+    color: "#ffffff",
     marginTop: "0.1rem",
   },
 

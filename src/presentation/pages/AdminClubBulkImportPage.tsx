@@ -202,14 +202,14 @@ function ResolutionChip({
   return (
     <div style={{ ...S.chip, ...(checked ? (found ? S.chipOk : S.chipErr) : {}) }}>
       <span>{name}</span>
-      {!checked && <span style={{ color: "#6c7086", fontSize: "0.7rem" }}>—</span>}
+      {!checked && <span style={{ color: "#ffffff", fontSize: "0.7rem" }}>—</span>}
       {found    && <span style={{ color: "#a6e3a1", fontSize: "0.75rem", fontWeight: 700 }}>✓</span>}
       {checked && !found && (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
           <span style={{ color: "#f38ba8", fontSize: "0.75rem", fontWeight: 700 }}>✗ não encontrado</span>
           {suggestion
             ? <span style={{ color: "#fab387", fontSize: "0.65rem" }}>Quis dizer: <em>{suggestion}</em>?</span>
-            : <span style={{ color: "#6c7086", fontSize: "0.65rem" }}>Nenhum nome parecido</span>
+            : <span style={{ color: "#ffffff", fontSize: "0.65rem" }}>Nenhum nome parecido</span>
           }
         </div>
       )}
@@ -792,7 +792,7 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
               </div>
               <div style={{ marginTop: "0.75rem" }}>
                 {loadingLeagues
-                  ? <span style={{ color: "#6c7086", fontSize: "0.85rem" }}>Carregando ligas…</span>
+                  ? <span style={{ color: "#ffffff", fontSize: "0.85rem" }}>Carregando ligas…</span>
                   : (
                     <select
                       value={affiliateLeagueId}
@@ -833,7 +833,7 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                   <div style={S.teamsRow}>
                     <span style={S.teamsLabel}>Esporte:</span>
                     {loadingSports
-                      ? <span style={{ color: "#6c7086", fontSize: "0.85rem" }}>Carregando…</span>
+                      ? <span style={{ color: "#ffffff", fontSize: "0.85rem" }}>Carregando…</span>
                       : sports.length === 0
                         ? <span style={{ color: "#f38ba8", fontSize: "0.85rem" }}>Nenhum esporte cadastrado</span>
                         : (
@@ -926,7 +926,7 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                       </td>
                       <td style={S.td}>
                         {r.success && (
-                          <span style={r.teamErrors?.length ? S.badgeErr : (r.teamsCreated ? S.badgeTeam : { color: "#6c7086", fontSize: "0.78rem" })}>
+                          <span style={r.teamErrors?.length ? S.badgeErr : (r.teamsCreated ? S.badgeTeam : { color: "#ffffff", fontSize: "0.78rem" })}>
                             {r.teamsCreated
                               ? `⚽ ${r.teamsCreated}`
                               : (r.teamErrors?.length ? `⚠ ${r.teamErrors.length} erro${r.teamErrors.length !== 1 ? "s" : ""}` : "—")}
@@ -960,12 +960,12 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#181825", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
+  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
   heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #cba6f7, #a6e3a1)" },
   heroInner: { maxWidth: "1100px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
   back: { color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", display: "block", marginBottom: "0.5rem" },
   title: { margin: 0, fontSize: "1.6rem", fontWeight: 700, color: "#cdd6f4" },
-  subtitle: { margin: "0.25rem 0 0", fontSize: "0.875rem", color: "#6c7086" },
+  subtitle: { margin: "0.25rem 0 0", fontSize: "0.875rem", color: "#ffffff" },
 
   page: { maxWidth: "1100px", margin: "0 auto", padding: "1.5rem" },
 
@@ -973,28 +973,28 @@ const S: Record<string, React.CSSProperties> = {
   dropzone: {
     border: "2px dashed #45475a", borderRadius: "10px", padding: "2.5rem",
     textAlign: "center", cursor: "pointer", transition: "border-color 0.2s",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
   },
   dropzoneError: { borderColor: "#f38ba8" },
   dropIcon: { fontSize: "2.5rem", marginBottom: "0.5rem" },
   dropTitle: { margin: 0, fontWeight: 600, color: "#cdd6f4", fontSize: "1rem" },
-  dropHint: { margin: "0.4rem 0 0", color: "#6c7086", fontSize: "0.85rem" },
+  dropHint: { margin: "0.4rem 0 0", color: "#ffffff", fontSize: "0.85rem" },
   btnTemplate: {
     padding: "0.45rem 1rem", border: "1px solid #45475a", borderRadius: "6px",
-    background: "#181825", color: "#cdd6f4", cursor: "pointer", fontSize: "0.82rem",
+    background: "#18265b", color: "#cdd6f4", cursor: "pointer", fontSize: "0.82rem",
     whiteSpace: "nowrap" as const,
   },
-  hint: { color: "#6c7086", fontSize: "0.8rem", margin: 0 },
+  hint: { color: "#ffffff", fontSize: "0.8rem", margin: 0 },
   errorText: { color: "#f38ba8", fontSize: "0.85rem", margin: "0.5rem 0 0" },
 
   // Resolution
   resolveCard: {
-    backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px",
+    backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px",
     padding: "1.25rem", marginBottom: "1rem",
   },
   resolveHeader: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem", marginBottom: "1rem" },
   resolveTitle: { margin: 0, fontSize: "1.1rem", fontWeight: 700, color: "#cba6f7" },
-  resolveDesc: { margin: "0.2rem 0 0", fontSize: "0.85rem", color: "#a6adc8" },
+  resolveDesc: { margin: "0.2rem 0 0", fontSize: "0.85rem", color: "#ffffff" },
   btnResolve: {
     padding: "0.5rem 1.1rem", border: "1px solid #cba6f7", borderRadius: "6px",
     backgroundColor: "transparent", color: "#cba6f7", cursor: "pointer", fontWeight: 600,
@@ -1003,7 +1003,7 @@ const S: Record<string, React.CSSProperties> = {
   chipList: { display: "flex", flexWrap: "wrap" as const, gap: "0.5rem" },
   chip: {
     display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.3rem 0.75rem",
-    borderRadius: "999px", border: "1px solid #45475a", backgroundColor: "#181825",
+    borderRadius: "999px", border: "1px solid #45475a", backgroundColor: "#18265b",
     fontSize: "0.82rem", color: "#cdd6f4",
   },
   chipOk:  { backgroundColor: "#1a3a2a", borderColor: "#a6e3a1", color: "#a6e3a1" },
@@ -1012,11 +1012,11 @@ const S: Record<string, React.CSSProperties> = {
 
   // Table
   tableTopBar: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" },
-  rowCount: { margin: 0, color: "#a6adc8", fontSize: "0.85rem" },
+  rowCount: { margin: 0, color: "#ffffff", fontSize: "0.85rem" },
   tableWrap: { overflowX: "auto" as const, marginBottom: "1rem" },
   table: { width: "100%", borderCollapse: "collapse" as const, fontSize: "0.82rem" },
-  th: { padding: "0.5rem 0.6rem", textAlign: "left" as const, borderBottom: "1px solid #313244", color: "#a6adc8", fontWeight: 600, whiteSpace: "nowrap" as const },
-  tr: { borderBottom: "1px solid #1e1e2e" },
+  th: { padding: "0.5rem 0.6rem", textAlign: "left" as const, borderBottom: "1px solid #313244", color: "#ffffff", fontWeight: 600, whiteSpace: "nowrap" as const },
+  tr: { borderBottom: "1px solid #18265b" },
   trErr: { backgroundColor: "#2a1525" },
   td: { padding: "0.25rem 0.4rem" },
   cell: {
@@ -1024,17 +1024,17 @@ const S: Record<string, React.CSSProperties> = {
     fontSize: "0.82rem", padding: "0.25rem 0.3rem", outline: "none",
   },
   venueSelect: {
-    width: "100%", background: "#1e1e2e", border: "none", color: "#cdd6f4",
+    width: "100%", background: "#18265b", border: "none", color: "#cdd6f4",
     fontSize: "0.82rem", padding: "0.25rem 0.3rem", cursor: "pointer", outline: "none",
     minWidth: 200,
   },
-  btnRemove: { background: "transparent", border: "none", color: "#6c7086", cursor: "pointer", fontSize: "0.9rem", padding: "0.2rem 0.4rem" },
+  btnRemove: { background: "transparent", border: "none", color: "#ffffff", cursor: "pointer", fontSize: "0.9rem", padding: "0.2rem 0.4rem" },
 
   // Actions
   actions: { display: "flex", gap: "0.75rem", alignItems: "center", flexWrap: "wrap" as const, marginTop: "0.5rem" },
   btnPrimary: {
     padding: "0.55rem 1.3rem", border: "none", borderRadius: "6px",
-    backgroundColor: "#cba6f7", color: "#1e1e2e", fontWeight: 700,
+    backgroundColor: "#cba6f7", color: "#18265b", fontWeight: 700,
     cursor: "pointer", fontSize: "0.9rem", textDecoration: "none",
     display: "inline-block",
   },
@@ -1044,7 +1044,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   btnBack: {
     padding: "0.5rem 1rem", border: "1px solid #45475a", borderRadius: "6px",
-    background: "transparent", color: "#a6adc8", cursor: "pointer", fontSize: "0.85rem",
+    background: "transparent", color: "#ffffff", cursor: "pointer", fontSize: "0.85rem",
   },
 
   // Results
@@ -1057,22 +1057,22 @@ const S: Record<string, React.CSSProperties> = {
 
   // League affiliation panel
   leagueCard: {
-    backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px",
+    backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px",
     padding: "1rem 1.25rem", margin: "1rem 0 0",
   },
 
   // Team creation panel
   teamsCard: {
-    backgroundColor: "#1e1e2e", border: "1px solid #313244", borderRadius: "10px",
+    backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px",
     padding: "1rem 1.25rem", margin: "1rem 0 0",
   },
   teamsToggleRow: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" },
   teamsToggleLabel: { display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#cdd6f4", fontWeight: 600, fontSize: "0.9rem" },
   teamsBody: { marginTop: "1rem", display: "flex", flexDirection: "column" as const, gap: "0.75rem" },
   teamsRow: { display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" as const },
-  teamsLabel: { color: "#a6adc8", fontSize: "0.85rem", minWidth: 80, flexShrink: 0 },
+  teamsLabel: { color: "#ffffff", fontSize: "0.85rem", minWidth: 80, flexShrink: 0 },
   sportSelect: {
-    backgroundColor: "#181825", border: "1px solid #45475a", borderRadius: "6px",
+    backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "6px",
     color: "#cdd6f4", padding: "0.35rem 0.75rem", fontSize: "0.85rem", cursor: "pointer",
   },
 
@@ -1080,27 +1080,27 @@ const S: Record<string, React.CSSProperties> = {
   bulkCatRow: { display: "flex", alignItems: "flex-start", gap: "0.75rem", flexWrap: "wrap" as const, marginTop: "0.25rem" },
   bulkCatBtn: {
     padding: "0.2rem 0.6rem", borderRadius: 6, border: "1px solid #45475a",
-    background: "#181825", color: "#6c7086", fontSize: "0.78rem", cursor: "pointer",
+    background: "#18265b", color: "#ffffff", fontSize: "0.78rem", cursor: "pointer",
   },
-  bulkCatBtnAll:  { background: "#a6e3a1", color: "#1e1e2e", borderColor: "#a6e3a1", fontWeight: 700 as const },
-  bulkCatBtnSome: { background: "#fab387", color: "#1e1e2e", borderColor: "#fab387" },
+  bulkCatBtnAll:  { background: "#a6e3a1", color: "#18265b", borderColor: "#a6e3a1", fontWeight: 700 as const },
+  bulkCatBtnSome: { background: "#fab387", color: "#18265b", borderColor: "#fab387" },
 
   // Per-row category picker
   pickerBtn: {
     padding: "0.25rem 0.6rem", border: "1px solid #45475a", borderRadius: "999px",
-    background: "#181825", color: "#6c7086", cursor: "pointer", fontSize: "0.75rem",
+    background: "#18265b", color: "#ffffff", cursor: "pointer", fontSize: "0.75rem",
     whiteSpace: "nowrap" as const,
   },
   pickerBtnActive: { borderColor: "#89b4fa", color: "#89b4fa", backgroundColor: "#1a2a3a", fontWeight: 700 },
   pickerPanel: {
     position: "absolute" as const, top: "calc(100% + 4px)", left: 0, zIndex: 100,
-    backgroundColor: "#1e1e2e", border: "1px solid #45475a", borderRadius: "8px",
+    backgroundColor: "#18265b", border: "1px solid #45475a", borderRadius: "8px",
     padding: "0.5rem", display: "flex", flexDirection: "column" as const,
     gap: "0.25rem", minWidth: 180, boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
   },
   pickerItem: {
     padding: "0.3rem 0.6rem", borderRadius: "4px", cursor: "pointer",
-    fontSize: "0.8rem", color: "#a6adc8", userSelect: "none" as const,
+    fontSize: "0.8rem", color: "#ffffff", userSelect: "none" as const,
   },
   pickerItemOn: { backgroundColor: "#1a2a3a", color: "#89b4fa", fontWeight: 600 },
 };

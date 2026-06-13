@@ -141,7 +141,7 @@ export function AdminClubsPage({ listClubs }: Props) {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
     position: "relative",
     overflow: "hidden",
@@ -178,7 +178,7 @@ const S: Record<string, React.CSSProperties> = {
   searchWrap: { marginTop: "1rem" },
   searchInput: {
     width: "100%",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -197,7 +197,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   table: { width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" },
   th: {
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     color: "#cdd6f4",
     fontWeight: 600,
     fontSize: "0.84rem",
@@ -208,7 +208,7 @@ const S: Record<string, React.CSSProperties> = {
     borderBottom: "1px solid #313244",
     whiteSpace: "nowrap",
   },
-  trRow: { borderBottom: "1px solid #1e1e2e" },
+  trRow: { borderBottom: "1px solid #18265b" },
   td: { padding: "0.75rem 1rem", color: "#cdd6f4", verticalAlign: "middle" },
   tdMuted: { padding: "0.75rem 1rem", color: "#cdd6f4", verticalAlign: "middle" },
   empty: { padding: "2rem 1rem", color: "#cdd6f4", textAlign: "center" },

@@ -183,7 +183,7 @@ const ST: Record<string, React.CSSProperties> = {
     flexWrap: "wrap",
   },
   counter: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "10px",
     padding: "0.75rem 1rem",
@@ -195,11 +195,11 @@ const ST: Record<string, React.CSSProperties> = {
   },
   counterIcon: { fontSize: "1.2rem" },
   counterValue: { fontSize: "1.4rem", fontWeight: 900, color: "#cdd6f4" },
-  counterLabel: { fontSize: "0.7rem", color: "#a6adc8" },
+  counterLabel: { fontSize: "0.7rem", color: "#ffffff" },
   subTitle: {
     fontSize: "0.8rem",
     fontWeight: 600,
-    color: "#a6adc8",
+    color: "#ffffff",
     textTransform: "uppercase" as const,
     letterSpacing: "0.05em",
     margin: "0 0 0.5rem",
@@ -213,7 +213,7 @@ const ST: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "center",
     gap: "0.75rem",
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "0.5rem 0.75rem",
@@ -226,7 +226,7 @@ const ST: Record<string, React.CSSProperties> = {
     minWidth: "80px",
     gap: "0.1rem",
   },
-  goalDate: { fontSize: "0.72rem", color: "#a6adc8" },
+  goalDate: { fontSize: "0.72rem", color: "#ffffff" },
   goalChamp: { fontSize: "0.68rem", color: "#cba6f7" },
   goalCenter: {
     flex: 1,
@@ -251,7 +251,7 @@ const ST: Record<string, React.CSSProperties> = {
   },
   byTeamTh: {
     padding: "0.4rem 0.75rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     fontWeight: 600,
     fontSize: "0.72rem",
     textTransform: "uppercase" as const,
@@ -262,7 +262,7 @@ const ST: Record<string, React.CSSProperties> = {
   byTeamTd: {
     padding: "0.45rem 0.75rem",
     color: "#cdd6f4",
-    borderBottom: "1px solid #1e1e2e",
+    borderBottom: "1px solid #18265b",
   },
   byTeamTr: {
     background: "transparent",
@@ -563,7 +563,7 @@ export function AthleteDetailPage({
                       height: "28px",
                       borderRadius: "50%",
                       backgroundColor: photoUploading ? "#45475a" : "#cba6f7",
-                      border: "2px solid #1e1e2e",
+                      border: "2px solid #18265b",
                       cursor: photoUploading ? "not-allowed" : "pointer",
                       display: "flex",
                       alignItems: "center",
@@ -641,7 +641,7 @@ export function AthleteDetailPage({
                     {stats.by_team.map((t) => (
                       <tr key={t.team_id} style={ST.byTeamTr}>
                         <td style={ST.byTeamTd}>{t.team_name}</td>
-                        <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#a6adc8" }}>{t.matches_played}</td>
+                        <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#ffffff" }}>{t.matches_played}</td>
                         <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#a6e3a1", fontWeight: 700 }}>{t.goals > 0 ? t.goals : "–"}</td>
                         <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#f9e2af", fontWeight: 700 }}>{t.yellow_cards > 0 ? t.yellow_cards : "–"}</td>
                         <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#f38ba8", fontWeight: 700 }}>{t.red_cards > 0 ? t.red_cards : "–"}</td>
@@ -726,7 +726,7 @@ export function AthleteDetailPage({
 
                 <label style={M.label}>Edição do Campeonato *</label>
                 {champLoading ? (
-                  <p style={{ color: "#a6adc8", fontSize: "0.85rem" }}>Carregando campeonatos…</p>
+                  <p style={{ color: "#ffffff", fontSize: "0.85rem" }}>Carregando campeonatos…</p>
                 ) : (
                   <select
                     style={M.select}
@@ -797,7 +797,7 @@ export function AthleteDetailPage({
           onClick={() => setActionConfirm(null)}
         >
           <div
-            style={{ background: "#1e1e2e", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "400px" }}
+            style={{ background: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "400px" }}
             onClick={(e) => e.stopPropagation()}
           >
             <p style={{ margin: "0 0 1.25rem", color: "#cdd6f4", fontSize: "1rem", lineHeight: 1.5 }}>{actionConfirm.message}</p>
@@ -809,7 +809,7 @@ export function AthleteDetailPage({
                 Cancelar
               </button>
               <button
-                style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "#89b4fa", color: "#1e1e2e", fontWeight: 700, cursor: "pointer" }}
+                style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "#89b4fa", color: "#18265b", fontWeight: 700, cursor: "pointer" }}
                 onClick={() => void actionConfirm.onConfirm()}
               >
                 Confirmar
@@ -843,7 +843,7 @@ const S: Record<string, React.CSSProperties> = {
     background: "linear-gradient(90deg, #a6e3a1 0%, #89b4fa 50%, #cba6f7 100%)",
   },
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "2.5rem",
   },
@@ -896,7 +896,7 @@ const S: Record<string, React.CSSProperties> = {
     objectFit: "cover",
     border: "2px solid #313244",
     flexShrink: 0,
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
   },
   heroInfo: {
     display: "flex",
@@ -925,7 +925,7 @@ const S: Record<string, React.CSSProperties> = {
   attrLabel: {
     fontSize: "0.68rem",
     fontWeight: 600,
-    color: "#6c7086",
+    color: "#ffffff",
     textTransform: "uppercase",
     letterSpacing: "0.07em",
   },
@@ -981,7 +981,7 @@ const S: Record<string, React.CSSProperties> = {
   historyBadge: {
     fontSize: "0.72rem",
     color: "#cba6f7",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "4px",
     padding: "0.1rem 0.4rem",
@@ -989,34 +989,34 @@ const S: Record<string, React.CSSProperties> = {
   activeBadge: {
     fontSize: "0.7rem",
     fontWeight: 700,
-    color: "#1e1e2e",
+    color: "#18265b",
     backgroundColor: "#a6e3a1",
     borderRadius: "4px",
     padding: "0.1rem 0.45rem",
   },
   historyPeriod: {
     fontSize: "0.78rem",
-    color: "#6c7086",
+    color: "#ffffff",
     width: "100%",
   },
   historyNotes: {
     fontSize: "0.75rem",
-    color: "#585b70",
+    color: "#ffffff",
     fontStyle: "italic",
     width: "100%",
   },
   notes: {
     fontSize: "0.9rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     lineHeight: 1.6,
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "1rem",
   },
   status: { color: "#cdd6f4" },
   errorText: { color: "#f38ba8" },
-  empty: { color: "#6c7086", fontSize: "0.9rem" },
+  empty: { color: "#ffffff", fontSize: "0.9rem" },
 };
 
 // ─── Championship Registration Row styles ─────────────────────────────────────
@@ -1027,7 +1027,7 @@ const CR: Record<string, React.CSSProperties> = {
     alignItems: "center",
     gap: "0.75rem",
     padding: "0.65rem 1rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
   },
@@ -1052,16 +1052,16 @@ const CR: Record<string, React.CSSProperties> = {
     gap: "0.4rem",
     alignItems: "center",
   },
-  teamName: { fontSize: "0.78rem", color: "#a6adc8" },
+  teamName: { fontSize: "0.78rem", color: "#ffffff" },
   regNum: {
     fontSize: "0.72rem",
     color: "#cba6f7",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "4px",
     padding: "0.1rem 0.4rem",
   },
-  date: { fontSize: "0.72rem", color: "#6c7086" },
+  date: { fontSize: "0.72rem", color: "#ffffff" },
   right: {
     display: "flex",
     alignItems: "center",
@@ -1095,7 +1095,7 @@ const CR: Record<string, React.CSSProperties> = {
   cancelBtn: {
     background: "transparent",
     border: "1px solid #45475a",
-    color: "#6c7086",
+    color: "#ffffff",
     borderRadius: "4px",
     fontSize: "0.78rem",
     padding: "0.15rem 0.45rem",
@@ -1128,7 +1128,7 @@ const M: Record<string, React.CSSProperties> = {
     padding: "1rem",
   },
   modal: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "12px",
     width: "100%",
@@ -1149,7 +1149,7 @@ const M: Record<string, React.CSSProperties> = {
   closeBtn: {
     background: "transparent",
     border: "none",
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "1.4rem",
     cursor: "pointer",
     lineHeight: 1,
@@ -1164,12 +1164,12 @@ const M: Record<string, React.CSSProperties> = {
   label: {
     fontSize: "0.78rem",
     fontWeight: 600,
-    color: "#a6adc8",
+    color: "#ffffff",
     textTransform: "uppercase",
     letterSpacing: "0.05em",
   },
   input: {
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -1179,7 +1179,7 @@ const M: Record<string, React.CSSProperties> = {
     boxSizing: "border-box",
   },
   select: {
-    background: "#181825",
+    background: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "6px",
     color: "#cdd6f4",
@@ -1198,7 +1198,7 @@ const M: Record<string, React.CSSProperties> = {
   cancelBtn: {
     background: "transparent",
     border: "1px solid #45475a",
-    color: "#a6adc8",
+    color: "#ffffff",
     borderRadius: "6px",
     fontSize: "0.85rem",
     padding: "0.45rem 1rem",

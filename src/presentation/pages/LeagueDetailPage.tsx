@@ -224,7 +224,7 @@ export function LeagueDetailPage({ getLeague, listChampionships, getUpcomingMatc
                     src={currentLogoUrl ?? NO_LEAGUE_PHOTO}
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO; }}
                     alt={`Logo ${league.name}`}
-                    style={{ width: 108, height: 108, objectFit: "contain", borderRadius: 12, background: "#1e1e2e" }}
+                    style={{ width: 108, height: 108, objectFit: "contain", borderRadius: 12, background: "#18265b" }}
                   />
                   {isAdmin && leagueRepository && (
                     <>
@@ -247,7 +247,7 @@ export function LeagueDetailPage({ getLeague, listChampionships, getUpcomingMatc
                           height: "24px",
                           borderRadius: "50%",
                           backgroundColor: logoUploading ? "#45475a" : "#cba6f7",
-                          border: "2px solid #1e1e2e",
+                          border: "2px solid #18265b",
                           cursor: logoUploading ? "not-allowed" : "pointer",
                           display: "flex",
                           alignItems: "center",
@@ -339,7 +339,7 @@ export function LeagueDetailPage({ getLeague, listChampionships, getUpcomingMatc
             <section style={styles.section}>
               <div style={styles.champsHeader}>
                 <span style={styles.champsTitle}>Clubes Filiados</span>
-                <span style={{ fontSize: "0.8rem", color: "#6c7086" }}>
+                <span style={{ fontSize: "0.8rem", color: "#ffffff" }}>
                   {clubs.filter((c) => c.is_active).length} ativo{clubs.filter((c) => c.is_active).length !== 1 ? "s" : ""}
                 </span>
               </div>
@@ -387,7 +387,7 @@ export function LeagueDetailPage({ getLeague, listChampionships, getUpcomingMatc
 const styles: Record<string, React.CSSProperties> = {
   // ─── Hero ──────────────────────────────────────────────────
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "2.5rem",
     overflow: "hidden",
@@ -531,7 +531,7 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     justifyContent: "space-between",
     padding: "0.55rem 0.85rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
   },
@@ -574,7 +574,7 @@ const cardStyles: Record<string, React.CSSProperties> = {
     flexDirection: "column",
     gap: "0.6rem",
     padding: "1.1rem 1.2rem 0.9rem",
-    backgroundColor: "#1e1e2e",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "14px",
     textDecoration: "none",
@@ -604,7 +604,7 @@ const cardStyles: Record<string, React.CSSProperties> = {
   editionCount: {
     fontSize: "0.65rem",
     fontWeight: 600,
-    color: "#6c7086",
+    color: "#ffffff",
     whiteSpace: "nowrap" as const,
     flexShrink: 0,
   },
@@ -619,7 +619,7 @@ const cardStyles: Record<string, React.CSSProperties> = {
   subtitle: {
     margin: 0,
     fontSize: "0.75rem",
-    color: "#6c7086",
+    color: "#ffffff",
   },
   years: {
     display: "flex",
@@ -639,7 +639,7 @@ const cardStyles: Record<string, React.CSSProperties> = {
   yearMore: {
     fontSize: "0.68rem",
     fontWeight: 600,
-    color: "#6c7086",
+    color: "#ffffff",
     padding: "0.15rem 0.3rem",
     alignSelf: "center",
   },
@@ -647,7 +647,7 @@ const cardStyles: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "column" as const,
     gap: "0.25rem",
-    backgroundColor: "#181825",
+    backgroundColor: "#18265b",
     border: "1px solid #313244",
     borderRadius: "8px",
     padding: "0.5rem 0.75rem",
@@ -676,7 +676,7 @@ const cardStyles: Record<string, React.CSSProperties> = {
   },
   podiumYear: {
     fontSize: "0.65rem",
-    color: "#6c7086",
+    color: "#ffffff",
     flexShrink: 0,
   },
   cta: {

@@ -25,7 +25,7 @@ function VenueCard({ venue }: { venue: Venue; cityName: string }) {
           src={venue.photo_url ?? NO_VENUE_PHOTO}
           onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_VENUE_PHOTO; }}
           alt={venue.name}
-          style={{ width: 72, height: 52, objectFit: "cover", borderRadius: 6, flexShrink: 0, background: "#181825" }}
+          style={{ width: 72, height: 52, objectFit: "cover", borderRadius: 6, flexShrink: 0, background: "#18265b" }}
         />
         <div style={S.cardBody}>
           {venue.nickname
@@ -122,7 +122,7 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
 
 const S: Record<string, React.CSSProperties> = {
   hero: {
-    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
     borderBottom: "1px solid #313244",
     paddingBottom: "2.5rem",
     overflow: "hidden",
@@ -165,7 +165,7 @@ const S: Record<string, React.CSSProperties> = {
     margin: 0,
     marginTop: "0.15rem",
     fontSize: "1rem",
-    color: "#a6adc8",
+    color: "#ffffff",
     lineHeight: 1.6,
   },
 
@@ -175,7 +175,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: "2.5rem 2rem 4rem",
   },
   status: {
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.95rem",
   },
   error: {
@@ -202,7 +202,7 @@ const S: Record<string, React.CSSProperties> = {
 
   // Card
   card: {
-    background: "#1e1e2e",
+    background: "#18265b",
     border: "1px solid #313244",
     borderRadius: "0.65rem",
     padding: "1rem 1.1rem",
@@ -230,7 +230,7 @@ const S: Record<string, React.CSSProperties> = {
     lineHeight: 1.3,
   },
   cardFullName: {
-    color: "#a6adc8",
+    color: "#ffffff",
     fontSize: "0.82rem",
     lineHeight: 1.3,
   },
