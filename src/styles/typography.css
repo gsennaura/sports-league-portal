@@ -73,7 +73,7 @@
 
 .page-card .page-container .page-title,
 .page-card .page-container h1,
-.page-card .page-container h2:not(.mbd-day-heading):not(.news-carousel__heading):not(.year-group__heading) {
+.page-card .page-container h2:not(.mbd-day-heading):not(.news-carousel__heading):not(.year-group__heading):not(.news-grid__title) {
   color: var(--c-brand);
 }
 
