@@ -155,7 +155,7 @@ function SectionDivider({
   return (
     <div style={{ ...S.sectionDivider, borderColor: accent + "55" }}>
       <div style={{ ...S.sectionAccentBar, background: accent }} />
-      <span style={{ ...S.sectionLabel, color: "#18265b" }}>{label}</span>
+      <span style={{ ...S.sectionLabel, color: "var(--c-brand)" }}>{label}</span>
       {sub && <span className="section-divider__sub">{sub}</span>}
       <div className="section-divider__rule" />
       {cta && (

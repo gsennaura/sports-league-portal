@@ -137,8 +137,8 @@ export function SolicitarVinculoPage() {
   if (pageError) {
     return (
       <main className="page-container">
-        <p style={{ color: "#f38ba8" }}>{pageError}</p>
-        <Link to="/meu-perfil" style={{ color: "#89b4fa", fontSize: "0.875rem" }}>← Voltar ao perfil</Link>
+        <p style={{ color: "var(--c-negative)" }}>{pageError}</p>
+        <Link to="/meu-perfil" style={{ color: "var(--c-link)", fontSize: "0.875rem" }}>← Voltar ao perfil</Link>
       </main>
     );
   }
@@ -251,10 +251,7 @@ export function SolicitarVinculoPage() {
               <div className="form-field">
                 <label className="form-label">Time *</label>
                 <select
-                  style={{
-                    ...S.select,
-                    borderColor: selectedTeamId ? "#89b4fa" : "#45475a",
-                  }}
+                  className="form-select" style={{ borderColor: selectedTeamId ? "var(--c-link)" : "#45475a", }}
                   value={selectedTeamId}
                   onChange={(e) => setSelectedTeamId(e.target.value)}
                   disabled={teamOptions.length === 0}

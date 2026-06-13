@@ -333,7 +333,7 @@ export function AdminRegistrationsPage({
   }
 
   if (!isAdmin && !isLeagueAdmin) {
-    return <div className="page-container"><div className="hero__inner"><p style={{ color: "#f38ba8" }}>Acesso restrito a administradores.</p></div></div>;
+    return <div className="page-container"><div className="hero__inner"><p style={{ color: "var(--c-negative)" }}>Acesso restrito a administradores.</p></div></div>;
   }
 
   const toRegisterRows = rows.filter(
@@ -360,12 +360,12 @@ export function AdminRegistrationsPage({
       <p className="page-subtitle">Selecione a liga, o campeonato e o time para gerenciar inscrições.</p>
 
       {/* Selectors */}
-      <div style={S.card}>
+      <div className="card">
         {loadingOptions ? (
           <p style={{ color: "#ffffff", fontSize: "14px" }}>Carregando opções...</p>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <div style={S.row}>
+            <div className="form-field-group">
               {/* Liga */}
               <div className="form-field">
                 <label className="form-label">Liga</label>
@@ -391,7 +391,7 @@ export function AdminRegistrationsPage({
               <div className="form-field">
                 <label className="form-label">Campeonato</label>
                 <select
-                  style={{ ...S.select, opacity: !selectedLeagueId ? 0.5 : 1 }}
+                  className="form-select" style={{ opacity: !selectedLeagueId ? 0.5 : 1 }}
                   value={selectedChampId}
                   onChange={(e) => {
                     const editionId = e.target.value;
@@ -411,12 +411,12 @@ export function AdminRegistrationsPage({
               </div>
             </div>
 
-            <div style={S.row}>
+            <div className="form-field-group">
               {/* Time */}
               <div className="form-field">
                 <label className="form-label">Time</label>
                 <select
-                  style={{ ...S.select, opacity: !selectedChampId ? 0.5 : 1 }}
+                  className="form-select" style={{ opacity: !selectedChampId ? 0.5 : 1 }}
                   value={selectedTeamId}
                   onChange={(e) => setSelectedTeamId(e.target.value)}
                   disabled={!selectedChampId}
@@ -432,7 +432,7 @@ export function AdminRegistrationsPage({
 
             {/* Category mismatch warning */}
             {categoryMismatch && (
-              <div style={S.mismatchBanner}>
+              <div className="form-error">
                 ⚠ Inconsistência: o time é da categoria <strong>{CATEGORY_LABEL[selectedTeam?.category ?? ""] ?? selectedTeam?.category}</strong>,
                 mas o campeonato é de <strong>{CATEGORY_LABEL[selectedChampionship?.level ?? ""] ?? selectedChampionship?.level}</strong>.
                 Corrija a seleção antes de inscrever.
@@ -444,9 +444,9 @@ export function AdminRegistrationsPage({
 
       {/* Table */}
       {hasTable && (
-        <div style={S.card}>
+        <div className="card">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-            <span style={{ fontSize: "15px", fontWeight: 600, color: "#cdd6f4" }}>
+            <span style={{ fontSize: "15px", fontWeight: 600, color: "var(--c-text)" }}>
               Atletas
               {rows.length > 0 && (
                 <span style={{ fontSize: "13px", fontWeight: 400, color: "#ffffff", marginLeft: "10px" }}>
@@ -459,9 +459,9 @@ export function AdminRegistrationsPage({
           </div>
 
           {tableLoading ? (
-            <div style={S.loader}>Carregando dados...</div>
+            <div className="muted">Carregando dados...</div>
           ) : rows.length === 0 ? (
-            <div style={S.empty}>
+            <div className="muted">
               {athletes.length === 0
                 ? "Nenhum atleta ativo neste time."
                 : "Nenhum atleta encontrado para esta combinação."}
@@ -470,12 +470,12 @@ export function AdminRegistrationsPage({
             <table className="data-table">
               <thead>
                 <tr>
-                  <th style={{ ...S.th, width: "40px" }}></th>
-                  <th style={S.th}>Atleta</th>
-                  <th style={S.th}>Posição</th>
-                  <th style={{ ...S.th, width: "60px" }}>#</th>
-                  <th style={S.th}>Nº Reg.</th>
-                  <th style={S.th}>Situação</th>
+                  <th style={{ width: "40px" }}></th>
+                  <th >Atleta</th>
+                  <th >Posição</th>
+                  <th style={{ width: "60px" }}>#</th>
+                  <th >Nº Reg.</th>
+                  <th >Situação</th>
                 </tr>
               </thead>
               <tbody>
@@ -494,23 +494,23 @@ export function AdminRegistrationsPage({
                       }}
                       onClick={() => !isIneligible && toggleAthlete(row.athleteId)}
                     >
-                      <td style={S.td}>
+                      <td >
                         <input
                           type="checkbox"
-                          style={S.checkbox}
+                          className="form-checkbox"
                           checked={isChecked}
                           disabled={isIneligible}
                           onChange={() => !isIneligible && toggleAthlete(row.athleteId)}
                           onClick={(e) => e.stopPropagation()}
                         />
                       </td>
-                      <td style={{ ...S.td, fontWeight: 500 }}>{row.name}</td>
-                      <td style={{ ...S.td, color: "#ffffff" }}>{row.position ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#ffffff" }}>{row.jerseyNumber ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#ffffff", fontFamily: "monospace", fontSize: "12px" }}>
+                      <td style={{ fontWeight: 500 }}>{row.name}</td>
+                      <td style={{ color: "#ffffff" }}>{row.position ?? "—"}</td>
+                      <td style={{ color: "#ffffff" }}>{row.jerseyNumber ?? "—"}</td>
+                      <td style={{ color: "#ffffff", fontFamily: "monospace", fontSize: "12px" }}>
                         {row.registration?.registration_number ?? "—"}
                       </td>
-                      <td style={S.td}>
+                      <td >
                         {row.status === "registered" && row.registration ? (
                           <span style={badgeStyle(pendingUnregister ? "withdrawn" : row.registration.status)}>
                             {pendingUnregister
@@ -530,7 +530,7 @@ export function AdminRegistrationsPage({
                             Não elegível
                           </span>
                         ) : (
-                          <span style={{ color: "#a6e3a1", fontSize: "12px" }}>
+                          <span style={{ color: "var(--c-positive)", fontSize: "12px" }}>
                             {isChecked ? "Será inscrito →" : "Elegível"}
                           </span>
                         )}
@@ -571,8 +571,8 @@ export function AdminRegistrationsPage({
 
       {/* Results */}
       {results && (
-        <div style={S.card}>
-          <p style={{ fontSize: "15px", fontWeight: 600, color: "#cdd6f4", margin: "0 0 12px" }}>Resultado</p>
+        <div className="card">
+          <p style={{ fontSize: "15px", fontWeight: 600, color: "var(--c-text)", margin: "0 0 12px" }}>Resultado</p>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {results.map((r) => (
               <li
@@ -580,11 +580,11 @@ export function AdminRegistrationsPage({
                 style={{ padding: "6px 0", borderBottom: "1px solid #313244", fontSize: "14px" }}
               >
                 {r.ok ? (
-                  <span style={S.resultOk}>
+                  <span className="badge badge--success">
                     ✓ {r.name} — {r.action === "register" ? "inscrito com sucesso" : "desinscrito com sucesso"}
                   </span>
                 ) : (
-                  <span style={S.resultFail}>✗ {r.name} — {r.error}</span>
+                  <span className="badge badge--danger">✗ {r.name} — {r.error}</span>
                 )}
               </li>
             ))}
@@ -600,17 +600,17 @@ export function AdminRegistrationsPage({
         onClick={() => setConfirmOpen(false)}
       >
         <div
-          style={{ background: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "460px" }}
+          style={{ background: "var(--c-brand)", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "460px" }}
           onClick={(e) => e.stopPropagation()}
         >
-          <h3 style={{ margin: "0 0 1rem", color: "#cdd6f4", fontSize: "1.1rem" }}>Confirmar alterações</h3>
+          <h3 style={{ margin: "0 0 1rem", color: "var(--c-text)", fontSize: "1.1rem" }}>Confirmar alterações</h3>
 
           {toRegisterRows.length > 0 && (
             <div style={{ marginBottom: "0.875rem" }}>
-              <p style={{ margin: "0 0 0.4rem", color: "#a6e3a1", fontWeight: 600, fontSize: "0.9rem" }}>
+              <p style={{ margin: "0 0 0.4rem", color: "var(--c-positive)", fontWeight: 600, fontSize: "0.9rem" }}>
                 ✓ {toRegisterRows.length} atleta(s) serão inscritos:
               </p>
-              <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "#cdd6f4", fontSize: "0.88rem" }}>
+              <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "var(--c-text)", fontSize: "0.88rem" }}>
                 {toRegisterRows.map((r) => <li key={r.athleteId}>{r.name}</li>)}
               </ul>
             </div>
@@ -618,10 +618,10 @@ export function AdminRegistrationsPage({
 
           {toUnregisterRows.length > 0 && (
             <div style={{ marginBottom: "0.875rem" }}>
-              <p style={{ margin: "0 0 0.4rem", color: "#f38ba8", fontWeight: 600, fontSize: "0.9rem" }}>
+              <p style={{ margin: "0 0 0.4rem", color: "var(--c-negative)", fontWeight: 600, fontSize: "0.9rem" }}>
                 ✗ {toUnregisterRows.length} atleta(s) serão desinscritos:
               </p>
-              <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "#cdd6f4", fontSize: "0.88rem" }}>
+              <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "var(--c-text)", fontSize: "0.88rem" }}>
                 {toUnregisterRows.map((r) => <li key={r.athleteId}>{r.name}</li>)}
               </ul>
             </div>
@@ -629,13 +629,13 @@ export function AdminRegistrationsPage({
 
           <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end", marginTop: "1.25rem" }}>
             <button
-              style={{ padding: "0.45rem 1rem", borderRadius: "6px", border: "1px solid #45475a", background: "none", color: "#cdd6f4", cursor: "pointer" }}
+              style={{ padding: "0.45rem 1rem", borderRadius: "6px", border: "1px solid #45475a", background: "none", color: "var(--c-text)", cursor: "pointer" }}
               onClick={() => setConfirmOpen(false)}
             >
               Cancelar
             </button>
             <button
-              style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "#89b4fa", color: "#18265b", fontWeight: 700, cursor: "pointer" }}
+              style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "var(--c-link)", color: "var(--c-brand)", fontWeight: 700, cursor: "pointer" }}
               onClick={() => { setConfirmOpen(false); void handleSubmit(); }}
             >
               Confirmar

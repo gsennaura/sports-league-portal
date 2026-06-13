@@ -27,7 +27,7 @@ function TopScorersTable({ scorers }: { scorers: TopScorerItem[] }) {
   if (scorers.length === 0) return null;
   return (
     <div style={{ marginBottom: "2rem" }}>
-      <h2 style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: "0.75rem" }}>
+      <h2 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: "0.75rem" }}>
         ⚽ Artilharia
       </h2>
       <table style={{ width: "100%", borderCollapse: "collapse" as const, fontSize: "0.85rem" }}>
@@ -36,18 +36,18 @@ function TopScorersTable({ scorers }: { scorers: TopScorerItem[] }) {
             <th style={{ textAlign: "center" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600, width: "2rem" }}>#</th>
             <th style={{ textAlign: "left" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600 }}>Atleta</th>
             <th style={{ textAlign: "left" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600 }}>Time</th>
-            <th style={{ textAlign: "center" as const, padding: "0.35rem 0.5rem", color: "#a6e3a1", fontWeight: 700, width: "3.5rem" }}>Gols</th>
+            <th style={{ textAlign: "center" as const, padding: "0.35rem 0.5rem", color: "var(--c-positive)", fontWeight: 700, width: "3.5rem" }}>Gols</th>
           </tr>
         </thead>
         <tbody>
           {scorers.map((s, i) => (
             <tr key={s.athlete_id} style={{ borderBottom: "1px solid #18265b", background: i % 2 === 0 ? "transparent" : "#1a1a2e" }}>
-              <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: i === 0 ? "#f9e2af" : "#ffffff", fontWeight: i === 0 ? 900 : 500 }}>{i + 1}</td>
-              <td style={{ padding: "0.4rem 0.5rem", color: "#cdd6f4", fontWeight: 600 }}>
+              <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: i === 0 ? "var(--c-warning)" : "#ffffff", fontWeight: i === 0 ? 900 : 500 }}>{i + 1}</td>
+              <td style={{ padding: "0.4rem 0.5rem", color: "var(--c-text)", fontWeight: 600 }}>
                 <Link to={`/atletas/${s.athlete_id}`} style={{ color: "inherit", textDecoration: "none" }}>{s.athlete_name}</Link>
               </td>
               <td style={{ padding: "0.4rem 0.5rem", color: "#ffffff" }}>{s.team_name}</td>
-              <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: "#a6e3a1", fontWeight: 900, fontSize: "0.95rem" }}>{s.goals}</td>
+              <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: "var(--c-positive)", fontWeight: 900, fontSize: "0.95rem" }}>{s.goals}</td>
             </tr>
           ))}
         </tbody>
@@ -134,7 +134,7 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
       <div style={statStyles.highlightRow}>
         {/* Campeão — sempre primeiro */}
         <div style={statStyles.highlightCard}>
-          <span style={{ ...statStyles.highlightTag, color: "#f9e2af" }}>🏆 Campeão</span>
+          <span style={{ ...statStyles.highlightTag, color: "var(--c-warning)" }}>🏆 Campeão</span>
           {isOngoing ? (
             <span style={{ fontSize: "0.85rem", color: "#ffffff", fontStyle: "italic" }}>Em andamento</span>
           ) : champion ? (
@@ -150,7 +150,7 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
         {/* Vice-campeão */}
         {!isOngoing && (
           <div style={statStyles.highlightCard}>
-            <span style={{ ...statStyles.highlightTag, color: "#cba6f7" }}>🥈 Vice-campeão</span>
+            <span style={{ ...statStyles.highlightTag, color: "var(--c-action)" }}>🥈 Vice-campeão</span>
             {runnerUp ? (
               <div style={statStyles.highlightTeam}>
                 <Shield url={runnerUp.logo} size={28} />
@@ -164,12 +164,12 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
 
         {bestAttack && (
           <div style={statStyles.highlightCard}>
-            <span style={{ ...statStyles.highlightTag, color: "#f38ba8" }}>⚽ Melhor ataque</span>
+            <span style={{ ...statStyles.highlightTag, color: "var(--c-negative)" }}>⚽ Melhor ataque</span>
             <div style={statStyles.highlightTeam}>
               <Shield url={bestAttack.logo} size={28} />
               <span style={statStyles.highlightName}>{bestAttack.name}</span>
             </div>
-            <span style={{ ...statStyles.highlightStat, color: "#f38ba8" }}>
+            <span style={{ ...statStyles.highlightStat, color: "var(--c-negative)" }}>
               {bestAttack.goals} <span style={statStyles.highlightStatLabel}>gols</span>
             </span>
           </div>
@@ -177,12 +177,12 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
 
         {bestDefense && (
           <div style={statStyles.highlightCard}>
-            <span style={{ ...statStyles.highlightTag, color: "#a6e3a1" }}>🛡 Melhor defesa</span>
+            <span style={{ ...statStyles.highlightTag, color: "var(--c-positive)" }}>🛡 Melhor defesa</span>
             <div style={statStyles.highlightTeam}>
               <Shield url={bestDefense.logo} size={28} />
               <span style={statStyles.highlightName}>{bestDefense.name}</span>
             </div>
-            <span style={{ ...statStyles.highlightStat, color: "#a6e3a1" }}>
+            <span style={{ ...statStyles.highlightStat, color: "var(--c-positive)" }}>
               {bestDefense.against} <span style={statStyles.highlightStatLabel}>sofridos</span>
             </span>
           </div>
@@ -190,12 +190,12 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
 
         {bestAprov && (
           <div style={statStyles.highlightCard}>
-            <span style={{ ...statStyles.highlightTag, color: "#89b4fa" }}>📈 Melhor aproveitamento</span>
+            <span style={{ ...statStyles.highlightTag, color: "var(--c-link)" }}>📈 Melhor aproveitamento</span>
             <div style={statStyles.highlightTeam}>
               <Shield url={bestAprov.logo} size={28} />
               <span style={statStyles.highlightName}>{bestAprov.name}</span>
             </div>
-            <span style={{ ...statStyles.highlightStat, color: "#89b4fa" }}>
+            <span style={{ ...statStyles.highlightStat, color: "var(--c-link)" }}>
               {Math.round(aprov(bestAprov) * 100)}% <span style={statStyles.highlightStatLabel}>aprov.</span>
             </span>
           </div>
@@ -474,10 +474,10 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
             >
               <div
                 onClick={(e) => e.stopPropagation()}
-                style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", minWidth: 280, maxWidth: 420, width: "100%", maxHeight: "80vh", overflowY: "auto" }}
+                style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", minWidth: 280, maxWidth: 420, width: "100%", maxHeight: "80vh", overflowY: "auto" }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                  <span style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4" }}>📅 Edições do campeonato</span>
+                  <span style={{ fontSize: "1rem", fontWeight: 700, color: "var(--c-text)" }}>📅 Edições do campeonato</span>
                   <button onClick={() => setEditionModalOpen(false)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
@@ -487,13 +487,13 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                       <button
                         key={s.edition_id}
                         onClick={() => { setEditionModalOpen(false); navigate(`/campeonatos/${detail.id}?edicao=${s.edition_id}`); }}
-                        style={{ background: isCurrent ? "#313244" : "transparent", border: isCurrent ? "1px solid #89b4fa" : "1px solid #313244", borderRadius: 8, padding: "0.6rem 0.9rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem", textAlign: "left" }}
+                        style={{ background: isCurrent ? "var(--c-border)" : "transparent", border: isCurrent ? "1px solid #89b4fa" : "1px solid #313244", borderRadius: 8, padding: "0.6rem 0.9rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem", textAlign: "left" }}
                       >
-                        <span style={{ fontSize: "0.95rem", fontWeight: 700, color: isCurrent ? "#89b4fa" : "#cdd6f4", flexShrink: 0 }}>{s.year}</span>
+                        <span style={{ fontSize: "0.95rem", fontWeight: 700, color: isCurrent ? "var(--c-link)" : "var(--c-text)", flexShrink: 0 }}>{s.year}</span>
                         <span style={{ fontSize: "0.8rem", color: "#ffffff", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                           {s.champion_team_name ? `🏆 ${s.champion_team_name}` : "—"}
                         </span>
-                        {isCurrent && <span style={{ fontSize: "0.65rem", color: "#89b4fa", fontWeight: 700, flexShrink: 0 }}>atual</span>}
+                        {isCurrent && <span style={{ fontSize: "0.65rem", color: "var(--c-link)", fontWeight: 700, flexShrink: 0 }}>atual</span>}
                       </button>
                     );
                   })}
@@ -517,7 +517,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                   </span>
                 )}
                 {detail.division && (
-                  <span style={{ ...styles.badge, color: "#cba6f7", backgroundColor: "#201a2a", border: "1px solid #4a2a6a" }}>
+                  <span style={{ ...styles.badge, color: "var(--c-action)", backgroundColor: "#201a2a", border: "1px solid #4a2a6a" }}>
                     {detail.division}
                   </span>
                 )}
@@ -525,7 +525,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                 {isAdmin && (
                   <Link
                     to={`/admin/campeonatos/${detail.id}/gerenciar`}
-                    style={{ background: "#313244", color: "#cdd6f4", border: "1px solid #45475a", borderRadius: 8, padding: "0.3rem 0.8rem", fontSize: "0.78rem", fontWeight: 600, textDecoration: "none" }}
+                    style={{ background: "var(--c-border)", color: "var(--c-text)", border: "1px solid #45475a", borderRadius: 8, padding: "0.3rem 0.8rem", fontSize: "0.78rem", fontWeight: 600, textDecoration: "none" }}
                   >
                     ✏️ Gerenciar
                   </Link>
@@ -538,8 +538,8 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                   onClick={() => setEditionModalOpen(true)}
                   style={{ background: "rgba(137,180,250,0.07)", border: "1.5px solid rgba(137,180,250,0.3)", borderRadius: 14, padding: "0.5rem 0.9rem", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.2rem" }}
                 >
-                  <span style={{ fontSize: "3.5rem", fontWeight: 900, color: "#89b4fa", opacity: 0.85, lineHeight: 1, letterSpacing: "-0.03em", userSelect: "none" }}>{detail.year}</span>
-                  <span style={{ fontSize: "0.62rem", fontWeight: 700, color: "#89b4fa", letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.65 }}>edições ▾</span>
+                  <span style={{ fontSize: "3.5rem", fontWeight: 900, color: "var(--c-link)", opacity: 0.85, lineHeight: 1, letterSpacing: "-0.03em", userSelect: "none" }}>{detail.year}</span>
+                  <span style={{ fontSize: "0.62rem", fontWeight: 700, color: "var(--c-link)", letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.65 }}>edições ▾</span>
                 </button>
               ) : (
                 <span style={styles.yearLarge}>{detail.year}</span>
@@ -555,7 +555,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
               <button
                 onClick={handleOpenStandings}
                 disabled={standingsLoading}
-                style={{ background: "#1a1f3a", border: "1px solid #2a3a6a", borderRadius: 8, color: standingsLoading ? "#ffffff" : "#89b4fa", fontWeight: 600, fontSize: "0.85rem", padding: "0.45rem 1rem", cursor: standingsLoading ? "default" : "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+                style={{ background: "#1a1f3a", border: "1px solid #2a3a6a", borderRadius: 8, color: standingsLoading ? "#ffffff" : "var(--c-link)", fontWeight: 600, fontSize: "0.85rem", padding: "0.45rem 1rem", cursor: standingsLoading ? "default" : "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
               >
                 {standingsLoading ? "⏳ Carregando..." : "📊 Ver classificação geral"}
               </button>
@@ -570,10 +570,10 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
             >
               <div
                 onClick={(e) => e.stopPropagation()}
-                style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", width: "100%", maxWidth: 820 }}
+                style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", width: "100%", maxWidth: 820 }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                  <span style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4" }}>📊 Classificação Geral</span>
+                  <span style={{ fontSize: "1rem", fontWeight: 700, color: "var(--c-text)" }}>📊 Classificação Geral</span>
                   <button onClick={() => setStandingsOpen(false)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
                 </div>
                 <OverallStandings standings={detail.overall_standings} phases={detail.phases} />
@@ -585,7 +585,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
           <div style={{ marginBottom: "1.5rem" }}>
             <button
               onClick={handleLoadScorers}
-              style={{ background: "#1a1f3a", border: "1px solid #2a3a6a", borderRadius: 8, color: "#cba6f7", fontWeight: 600, fontSize: "0.85rem", padding: "0.45rem 1rem", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+              style={{ background: "#1a1f3a", border: "1px solid #2a3a6a", borderRadius: 8, color: "var(--c-action)", fontWeight: 600, fontSize: "0.85rem", padding: "0.45rem 1rem", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
             >
               ⚽ Ver artilharia
             </button>
@@ -599,10 +599,10 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
             >
               <div
                 onClick={(e) => e.stopPropagation()}
-                style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", width: "100%", maxWidth: 820 }}
+                style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", width: "100%", maxWidth: 820 }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                  <span style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4" }}>⚽ Artilharia</span>
+                  <span style={{ fontSize: "1rem", fontWeight: 700, color: "var(--c-text)" }}>⚽ Artilharia</span>
                   <button onClick={() => setScorersOpen(false)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
                 </div>
                 {scorersLoading
@@ -652,43 +652,43 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
               <div style={{ marginBottom: "1rem" }}>
                 <button
                   onClick={() => setPodiumOpen((o) => !o)}
-                  style={{ background: "#2a2510", color: "#f9e2af", border: "1px solid #4a3a2a", borderRadius: 8, padding: "0.45rem 1rem", fontWeight: 600, fontSize: "0.82rem", cursor: "pointer", display: "flex", alignItems: "center", gap: "0.4rem" }}
+                  style={{ background: "#2a2510", color: "var(--c-warning)", border: "1px solid #4a3a2a", borderRadius: 8, padding: "0.45rem 1rem", fontWeight: 600, fontSize: "0.82rem", cursor: "pointer", display: "flex", alignItems: "center", gap: "0.4rem" }}
                 >
                   🏆 {podiumOpen ? "Fechar pódio" : "Definir campeão e vice"}
                 </button>
 
                 {podiumOpen && (
-                  <div style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 12, padding: "1rem 1.2rem", marginTop: "0.6rem" }}>
+                  <div style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 12, padding: "1rem 1.2rem", marginTop: "0.6rem" }}>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "0.75rem" }}>
-                      <label style={{ display: "flex", flexDirection: "column", gap: "0.3rem", fontSize: "0.8rem", color: "#cdd6f4" }}>
+                      <label style={{ display: "flex", flexDirection: "column", gap: "0.3rem", fontSize: "0.8rem", color: "var(--c-text)" }}>
                         <span>🥇 Campeão</span>
                         <select
                           value={podiumChampId}
                           onChange={(e) => setPodiumChampId(e.target.value)}
-                          style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 6, color: "#cdd6f4", padding: "0.4rem 0.6rem", fontSize: "0.85rem" }}
+                          style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 6, color: "var(--c-text)", padding: "0.4rem 0.6rem", fontSize: "0.85rem" }}
                         >
                           <option value="">— Selecionar —</option>
                           {teamOptions.map(([tid, t]) => <option key={tid} value={tid}>{t.name}</option>)}
                         </select>
                       </label>
-                      <label style={{ display: "flex", flexDirection: "column", gap: "0.3rem", fontSize: "0.8rem", color: "#cdd6f4" }}>
+                      <label style={{ display: "flex", flexDirection: "column", gap: "0.3rem", fontSize: "0.8rem", color: "var(--c-text)" }}>
                         <span>🥈 Vice-campeão</span>
                         <select
                           value={podiumViceId}
                           onChange={(e) => setPodiumViceId(e.target.value)}
-                          style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 6, color: "#cdd6f4", padding: "0.4rem 0.6rem", fontSize: "0.85rem" }}
+                          style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 6, color: "var(--c-text)", padding: "0.4rem 0.6rem", fontSize: "0.85rem" }}
                         >
                           <option value="">— Selecionar —</option>
                           {teamOptions.map(([tid, t]) => <option key={tid} value={tid}>{t.name}</option>)}
                         </select>
                       </label>
                     </div>
-                    {podiumError && <p style={{ color: "#f38ba8", fontSize: "0.8rem", margin: "0 0 0.5rem" }}>{podiumError}</p>}
-                    {podiumSaved && <p style={{ color: "#a6e3a1", fontSize: "0.8rem", margin: "0 0 0.5rem" }}>✓ Pódio salvo com sucesso!</p>}
+                    {podiumError && <p style={{ color: "var(--c-negative)", fontSize: "0.8rem", margin: "0 0 0.5rem" }}>{podiumError}</p>}
+                    {podiumSaved && <p style={{ color: "var(--c-positive)", fontSize: "0.8rem", margin: "0 0 0.5rem" }}>✓ Pódio salvo com sucesso!</p>}
                     <button
                       onClick={handleSave}
                       disabled={podiumSaving}
-                      style={{ background: "#f9e2af", color: "#18265b", border: "none", borderRadius: 8, padding: "0.5rem 1.2rem", fontWeight: 700, fontSize: "0.85rem", cursor: podiumSaving ? "not-allowed" : "pointer", opacity: podiumSaving ? 0.6 : 1 }}
+                      style={{ background: "var(--c-warning)", color: "var(--c-brand)", border: "none", borderRadius: 8, padding: "0.5rem 1.2rem", fontWeight: 700, fontSize: "0.85rem", cursor: podiumSaving ? "not-allowed" : "pointer", opacity: podiumSaving ? 0.6 : 1 }}
                     >
                       {podiumSaving ? "Salvando..." : "Salvar pódio"}
                     </button>
@@ -932,15 +932,15 @@ function StandingsTable({ standings, teams, showAprov = false, eliminatedTeamIds
           <tr>
             <th style={{ ...styles.th, color: "#ffffff" }}>#</th>
             <th style={{ ...styles.th, textAlign: "left" }}>Time</th>
-            <th style={{ ...styles.th, color: "#89b4fa" }} title="Pontos">Pts</th>
+            <th style={{ ...styles.th, color: "var(--c-link)" }} title="Pontos">Pts</th>
             <th style={styles.th} title="Vitórias">V</th>
             <th style={styles.th} title="Empates">E</th>
             <th style={styles.th} title="Derrotas">D</th>
             <th style={styles.th} title="Gols Marcados">GM</th>
             <th style={styles.th} title="Gols Sofridos">GS</th>
-            {showAprov && <th style={{ ...styles.th, color: "#a6e3a1" }} title="Saldo de Gols">SG</th>}
+            {showAprov && <th style={{ ...styles.th, color: "var(--c-positive)" }} title="Saldo de Gols">SG</th>}
             <th style={styles.th} title="Partidas">J</th>
-            {showAprov && <th style={{ ...styles.th, color: "#f9e2af" }} title="Aproveitamento">Aprov.</th>}
+            {showAprov && <th style={{ ...styles.th, color: "var(--c-warning)" }} title="Aproveitamento">Aprov.</th>}
           </tr>
         </thead>
         <tbody>
@@ -953,15 +953,15 @@ function StandingsTable({ standings, teams, showAprov = false, eliminatedTeamIds
                   <Link to={`/times/${toSlugPath(s.team_name, s.team_id)}`} style={styles.teamLink}>{s.team_name}</Link>
                 </div>
               </td>
-              <td style={{ ...styles.td, fontWeight: 700, color: "#89b4fa" }}>{s.points}</td>
+              <td style={{ ...styles.td, fontWeight: 700, color: "var(--c-link)" }}>{s.points}</td>
               <td style={styles.td}>{s.wins}</td>
               <td style={styles.td}>{s.draws}</td>
               <td style={styles.td}>{s.losses}</td>
               <td style={styles.td}>{s.goals_for}</td>
               <td style={styles.td}>{s.goals_against}</td>
-              {showAprov && <td style={{ ...styles.td, color: s.goal_difference >= 0 ? "#a6e3a1" : "#f38ba8" }}>{s.goal_difference > 0 ? "+" : ""}{s.goal_difference}</td>}
+              {showAprov && <td style={{ ...styles.td, color: s.goal_difference >= 0 ? "var(--c-positive)" : "var(--c-negative)" }}>{s.goal_difference > 0 ? "+" : ""}{s.goal_difference}</td>}
               <td style={styles.td}>{s.matches_played}</td>
-              {showAprov && <td style={{ ...styles.td, fontWeight: 700, color: "#f9e2af" }}>{aprovPct(s)}%</td>}
+              {showAprov && <td style={{ ...styles.td, fontWeight: 700, color: "var(--c-warning)" }}>{aprovPct(s)}%</td>}
             </tr>
           ))}
         </tbody>

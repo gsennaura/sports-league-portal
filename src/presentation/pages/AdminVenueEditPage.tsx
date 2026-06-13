@@ -138,7 +138,7 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
 
   if (loadingVenue) {
     return (
-      <main style={{ padding: "2rem 1.5rem", color: "#cdd6f4" }}>Carregando...</main>
+      <main style={{ padding: "2rem 1.5rem", color: "var(--c-text)" }}>Carregando...</main>
     );
   }
 
@@ -153,15 +153,15 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
       </header>
 
       <main className="page-container">
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
 
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Informações básicas</legend>
-            <div style={S.grid2}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Informações básicas</legend>
+            <div className="form-field-group--2">
               <Field label="Nome oficial *" htmlFor="name">
                 <input
                   id="name"
-                  style={S.input}
+                  className="form-input"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   required
@@ -169,11 +169,11 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
               </Field>
               <Field label="Cidade *" htmlFor="city">
                 {citiesLoading ? (
-                  <div style={{ ...S.input, color: "#cdd6f4" }}>Carregando cidades...</div>
+                  <div className="form-input" style={{ color: "var(--c-text)" }}>Carregando cidades...</div>
                 ) : (
                   <select
                     id="city"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={cityId}
                     onChange={e => setCityId(e.target.value)}
                     required
@@ -186,11 +186,11 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
                 )}
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Apelido / Nome popular" htmlFor="nickname">
                 <input
                   id="nickname"
-                  style={S.input}
+                  className="form-input"
                   value={nickname}
                   onChange={e => setNickname(e.target.value)}
                 />
@@ -198,13 +198,13 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
             </div>
           </fieldset>
 
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Endereço <span style={S.legendOpt}>(opcional)</span></legend>
-            <div style={S.grid3}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Endereço <span className="form-legend">(opcional)</span></legend>
+            <div className="form-field-group--3">
               <Field label="CEP" htmlFor="zip_code">
                 <input
                   id="zip_code"
-                  style={S.input}
+                  className="form-input"
                   value={zipCode}
                   onChange={e => setZipCode(e.target.value)}
                   maxLength={9}
@@ -213,17 +213,17 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
               <Field label="Bairro" htmlFor="neighborhood">
                 <input
                   id="neighborhood"
-                  style={S.input}
+                  className="form-input"
                   value={neighborhood}
                   onChange={e => setNeighborhood(e.target.value)}
                 />
               </Field>
             </div>
-            <div style={S.grid3}>
+            <div className="form-field-group--3">
               <Field label="Rua / Avenida" htmlFor="street" style={{ gridColumn: "1 / 3" }}>
                 <input
                   id="street"
-                  style={S.input}
+                  className="form-input"
                   value={street}
                   onChange={e => setStreet(e.target.value)}
                 />
@@ -231,17 +231,17 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
               <Field label="Número" htmlFor="number">
                 <input
                   id="number"
-                  style={S.input}
+                  className="form-input"
                   value={number}
                   onChange={e => setNumber(e.target.value)}
                 />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Complemento" htmlFor="complement">
                 <input
                   id="complement"
-                  style={S.input}
+                  className="form-input"
                   value={complement}
                   onChange={e => setComplement(e.target.value)}
                 />
@@ -249,15 +249,15 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
             </div>
           </fieldset>
 
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Coordenadas <span style={S.legendOpt}>(opcional)</span></legend>
-            <div style={S.grid2}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Coordenadas <span className="form-legend">(opcional)</span></legend>
+            <div className="form-field-group--2">
               <Field label="Latitude" htmlFor="lat">
                 <input
                   id="lat"
                   type="number"
                   step="any"
-                  style={S.input}
+                  className="form-input"
                   value={latitude}
                   onChange={e => setLatitude(e.target.value)}
                 />
@@ -267,7 +267,7 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
                   id="lng"
                   type="number"
                   step="any"
-                  style={S.input}
+                  className="form-input"
                   value={longitude}
                   onChange={e => setLongitude(e.target.value)}
                 />
@@ -275,12 +275,12 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
             </div>
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✔ Local atualizado! Redirecionando...</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✔ Local atualizado! Redirecionando...</p>}
 
           {/* ── Foto do local ─────────────────────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Foto do local <span style={S.legendOpt}>(opcional)</span></legend>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Foto do local <span className="form-legend">(opcional)</span></legend>
             <div style={{ display: "flex", alignItems: "flex-start", gap: "1.25rem", marginTop: "1rem", flexWrap: "wrap" }}>
               {currentPhotoUrl ? (
                 <img
@@ -290,7 +290,7 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
                   onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                 />
               ) : (
-                <div style={{ width: 160, height: 107, background: "#18265b", borderRadius: 8, border: "1px solid #313244", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div style={{ width: 160, height: 107, background: "var(--c-brand)", borderRadius: 8, border: "1px solid #313244", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <span style={{ color: "#45475a", fontSize: "0.8rem" }}>Sem foto</span>
                 </div>
               )}
@@ -315,9 +315,9 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
             </div>
           </fieldset>
 
-          <div style={S.actions}>
-            <Link to="/admin/locais" style={S.btnCancel}>Cancelar</Link>
-            <button type="submit" style={S.btnSubmit} disabled={submitting}>
+          <div className="form-actions">
+            <Link to="/admin/locais" className="btn btn-secondary">Cancelar</Link>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando..." : "Salvar alterações"}
             </button>
           </div>

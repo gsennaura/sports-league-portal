@@ -51,16 +51,16 @@ export function AdminImportHistoryPage() {
 
       <main className="page-container">
         {error && (
-          <div style={S.errorBanner}>
+          <div className="form-error">
             <span>⚠ {error}</span>
-            <button style={S.errClose} onClick={() => setError(null)}>×</button>
+            <button className="error-banner__close" onClick={() => setError(null)}>×</button>
           </div>
         )}
 
-        {loading && <p style={S.hint}>Carregando...</p>}
+        {loading && <p className="muted">Carregando...</p>}
 
         {!loading && logs.length === 0 && (
-          <p style={S.hint}>Nenhuma importação registrada ainda.</p>
+          <p className="muted">Nenhuma importação registrada ainda.</p>
         )}
 
         {!loading && logs.length > 0 && (
@@ -69,24 +69,24 @@ export function AdminImportHistoryPage() {
               <thead>
                 <tr>
                   {["Data / Hora", "Operação", "Total", "Criados", "Erros"].map((h) => (
-                    <th key={h} style={S.th}>{h}</th>
+                    <th key={h} >{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {logs.map((log) => (
-                  <tr key={log.id} style={S.tr}>
-                    <td style={S.td}>{formatDate(log.created_at)}</td>
-                    <td style={S.td}>
-                      <span style={S.opBadge}>
+                  <tr key={log.id} >
+                    <td >{formatDate(log.created_at)}</td>
+                    <td >
+                      <span className="badge">
                         {OPERATION_LABEL[log.operation] ?? log.operation}
                       </span>
                     </td>
-                    <td style={{ ...S.td, ...S.num }}>{log.total}</td>
-                    <td style={{ ...S.td, ...S.num, color: log.created > 0 ? "#a6e3a1" : "#cdd6f4" }}>
+                    <td style={{ ...S.num }}>{log.total}</td>
+                    <td style={{ ...S.num, color: log.created > 0 ? "var(--c-positive)" : "var(--c-text)" }}>
                       {log.created}
                     </td>
-                    <td style={{ ...S.td, ...S.num, color: log.errors > 0 ? "#f38ba8" : "#cdd6f4" }}>
+                    <td style={{ ...S.num, color: log.errors > 0 ? "var(--c-negative)" : "var(--c-text)" }}>
                       {log.errors}
                     </td>
                   </tr>

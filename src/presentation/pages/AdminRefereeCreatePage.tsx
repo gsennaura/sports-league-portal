@@ -8,9 +8,9 @@ interface Props {
 
 function Field({ label, htmlFor, required, children }: { label: string; htmlFor: string; required?: boolean; children: React.ReactNode }) {
   return (
-    <div style={S.fieldGroup}>
+    <div className="form-field-group">
       <label htmlFor={htmlFor} className="form-label">
-        {label}{required && <span style={{ color: "#f38ba8" }}> *</span>}
+        {label}{required && <span style={{ color: "var(--c-negative)" }}> *</span>}
       </label>
       {children}
     </div>
@@ -71,57 +71,57 @@ export function AdminRefereeCreatePage({ createReferee }: Props) {
       </header>
 
       <main className="page-container">
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
 
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Identificação</legend>
-            <div style={S.grid2}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Identificação</legend>
+            <div className="form-field-group--2">
               <Field label="Nome completo" htmlFor="name" required>
-                <input id="name" style={S.input} value={name} onChange={(e) => setName(e.target.value)} required />
+                <input id="name" className="form-input" value={name} onChange={(e) => setName(e.target.value)} required />
               </Field>
               <Field label="Apelido / Vulgo" htmlFor="nickname">
-                <input id="nickname" style={S.input} value={nickname} onChange={(e) => setNickname(e.target.value)} />
+                <input id="nickname" className="form-input" value={nickname} onChange={(e) => setNickname(e.target.value)} />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Data de nascimento" htmlFor="birth_date">
-                <input id="birth_date" type="date" style={S.input} value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                <input id="birth_date" type="date" className="form-input" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
               </Field>
               <Field label="CPF" htmlFor="cpf">
-                <input id="cpf" style={S.input} value={cpf} onChange={(e) => setCpf(e.target.value)} />
+                <input id="cpf" className="form-input" value={cpf} onChange={(e) => setCpf(e.target.value)} />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Nacionalidade" htmlFor="nationality">
-                <input id="nationality" style={S.input} value={nationality} onChange={(e) => setNationality(e.target.value)} />
+                <input id="nationality" className="form-input" value={nationality} onChange={(e) => setNationality(e.target.value)} />
               </Field>
               <Field label="Telefone" htmlFor="phone">
-                <input id="phone" style={S.input} value={phone} onChange={(e) => setPhone(e.target.value)} />
+                <input id="phone" className="form-input" value={phone} onChange={(e) => setPhone(e.target.value)} />
               </Field>
             </div>
             <Field label="E-mail" htmlFor="email">
-              <input id="email" type="email" style={{ ...S.input, maxWidth: "360px" }} value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input id="email" type="email" className="form-input" style={{ maxWidth: "360px" }} value={email} onChange={(e) => setEmail(e.target.value)} />
             </Field>
           </fieldset>
 
           <fieldset style={{ ...S.fieldset, marginTop: "1.25rem" }}>
-            <legend style={S.legend}>Extra</legend>
+            <legend className="form-legend">Extra</legend>
             <Field label="URL da foto" htmlFor="photo_url">
-              <input id="photo_url" style={S.input} value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} placeholder="https://..." />
+              <input id="photo_url" className="form-input" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} placeholder="https://..." />
             </Field>
             <Field label="Observações" htmlFor="notes">
-              <textarea id="notes" style={{ ...S.input, minHeight: "80px", resize: "vertical" }} value={notes} onChange={(e) => setNotes(e.target.value)} />
+              <textarea id="notes" className="form-input" style={{ minHeight: "80px", resize: "vertical" }} value={notes} onChange={(e) => setNotes(e.target.value)} />
             </Field>
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✓ Árbitro criado! Redirecionando…</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✓ Árbitro criado! Redirecionando…</p>}
 
-          <div style={S.actions}>
-            <button type="button" style={S.btnCancel} onClick={() => navigate("/admin/arbitros")}>
+          <div className="form-actions">
+            <button type="button" className="btn btn-secondary" onClick={() => navigate("/admin/arbitros")}>
               Cancelar
             </button>
-            <button type="submit" style={S.btnSave} disabled={submitting}>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando…" : "Criar árbitro"}
             </button>
           </div>

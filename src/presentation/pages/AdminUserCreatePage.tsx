@@ -55,46 +55,46 @@ export function AdminUserCreatePage() {
       <div style={{ minHeight: "100vh", background: "rgba(0,0,0,0.55)" }}>
       <header className="hero">
         <div className="hero__inner">
-          <nav style={S.breadcrumb}>
-            <Link to="/admin/usuarios" style={S.breadcrumbLink}>Usuários</Link>
-            <span style={S.breadcrumbSep}>/</span>
+          <nav className="breadcrumb">
+            <Link to="/admin/usuarios" className="row-link">Usuários</Link>
+            <span >/</span>
             <span>Novo usuário</span>
           </nav>
           <h1 className="hero__title">Criar usuário</h1>
         </div>
       </header>
 
-      <main style={S.main}>
-        <div style={S.card}>
+      <main >
+        <div className="card">
           {success && (
-            <div style={S.successBanner}>Usuário criado com sucesso!</div>
+            <div className="form-success">Usuário criado com sucesso!</div>
           )}
           {error && (
-            <div style={S.errorBanner}>{error}</div>
+            <div className="form-error">{error}</div>
           )}
 
-          <form onSubmit={handleSubmit} style={S.form} noValidate>
-            <div style={S.fieldGroup}>
+          <form onSubmit={handleSubmit} className="form-body" noValidate>
+            <div className="form-field-group">
               <label className="form-label" htmlFor="email">E-mail</label>
               <input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={S.input}
+                className="form-input"
                 placeholder="usuario@exemplo.com"
                 autoComplete="off"
                 required
               />
             </div>
 
-            <div style={S.fieldGroup}>
+            <div className="form-field-group">
               <label className="form-label" htmlFor="role">Perfil</label>
               <select
                 id="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                style={S.input}
+                className="form-input"
               >
                 {ROLES.map((r) => (
                   <option key={r.value} value={r.value}>{r.label}</option>
@@ -102,41 +102,41 @@ export function AdminUserCreatePage() {
               </select>
             </div>
 
-            <div style={S.fieldGroup}>
+            <div className="form-field-group">
               <label className="form-label" htmlFor="password">Senha</label>
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={S.input}
+                className="form-input"
                 placeholder="Mínimo 6 caracteres"
                 autoComplete="new-password"
                 required
               />
             </div>
 
-            <div style={S.fieldGroup}>
+            <div className="form-field-group">
               <label className="form-label" htmlFor="confirmPassword">Confirmar senha</label>
               <input
                 id="confirmPassword"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                style={S.input}
+                className="form-input"
                 placeholder="Repita a senha"
                 autoComplete="new-password"
                 required
               />
             </div>
 
-            <div style={S.passwordHint}>
+            <div className="muted">
               A senha será armazenada de forma segura com hash bcrypt —
               nunca salvamos a senha em texto puro.
             </div>
 
-            <div style={S.actions}>
-              <Link to="/admin/usuarios" style={S.cancelBtn}>Cancelar</Link>
+            <div className="form-actions">
+              <Link to="/admin/usuarios" className="btn btn-secondary">Cancelar</Link>
               <button type="submit" disabled={submitting} style={submitting ? S.submitBtnDisabled : S.submitBtn}>
                 {submitting ? "Salvando…" : "Criar usuário"}
               </button>

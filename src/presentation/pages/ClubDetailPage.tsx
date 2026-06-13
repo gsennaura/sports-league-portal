@@ -102,42 +102,42 @@ function MatchRow({ match, teamIds }: { match: ClubMatch; teamIds: Set<string> }
   })();
 
   return (
-    <Link to={`/partidas/${match.match_id}`} style={S.matchLink}>
-      <div style={S.matchCard}>
-        <div style={S.matchCardRow}>
+    <Link to={`/partidas/${match.match_id}`} className="row-link">
+      <div className="card">
+        <div className="match-team-row">
           {/* Col 1 — status badge */}
-          <div style={S.mStatusCol}>
+          <div >
             <StatusBadge status={status} />
           </div>
 
           {/* Col 2 — data e hora */}
-          <div style={S.mDateCol}>
-            {dateLabel && <span style={S.mDateLabel}>{dateLabel}</span>}
-            {timeLabel && <span style={S.mTimeLabel}>{timeLabel}</span>}
+          <div >
+            {dateLabel && <span className="muted">{dateLabel}</span>}
+            {timeLabel && <span className="muted">{timeLabel}</span>}
           </div>
 
           {/* Col 3 — times + placar */}
-          <div style={S.mTeamsCol}>
-            <div style={S.mTeamRow}>
-              <span style={S.mScoreSlot}>
+          <div >
+            <div className="match-team-row">
+              <span className="score-slot">
                 {hasScore ? `${match.home_score}${hasPenalty ? ` (${match.home_penalty_score})` : ""}` : ""}
               </span>
               <Shield url={match.home_club_logo_url} />
-              <span style={S.mTeamName}>{match.home_team_name}</span>
+              <span className="team-name">{match.home_team_name}</span>
             </div>
-            <div style={S.mTeamRow}>
-              <span style={S.mScoreSlot}>
+            <div className="match-team-row">
+              <span className="score-slot">
                 {hasScore ? `${match.away_score}${hasPenalty ? ` (${match.away_penalty_score})` : ""}` : ""}
               </span>
               <Shield url={match.away_club_logo_url} />
-              <span style={S.mTeamName}>{match.away_team_name}</span>
+              <span className="team-name">{match.away_team_name}</span>
             </div>
           </div>
 
           {/* Col 4 — estádio */}
           {match.venue_name && (
-            <div style={S.mVenueCol}>
-              <span style={S.mVenueLabel}>{match.venue_name}</span>
+            <div >
+              <span className="muted">{match.venue_name}</span>
             </div>
           )}
         </div>
@@ -245,19 +245,19 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
     <>
       {/* ─── Hero ──────────────────────────────────────────────── */}
       <header className="hero">
-        <div style={S.heroAccentBar} />
+        <div className="hero__bar" />
         <div className="hero__inner">
           <Link to="/clubes" className="back-link">← Clubes</Link>
           {loading && !club && <PageLoader />}
           {club && (
             <>
-              <div style={S.heroTopRow}>
+              <div className="hero__row">
                 <div style={{ position: "relative", flexShrink: 0 }}>
                   <img
                     src={currentLogoUrl ?? club.logo_url ?? NO_SHIELD}
                     alt={`Escudo ${club.nickname ?? club.name}`}
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_SHIELD; }}
-                    style={S.heroShield}
+                    
                   />
                   {isAdmin && clubRepository && (
                     <>
@@ -298,9 +298,9 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                 <div>
                   <h1 className="hero__title">{club.name}</h1>
                   {(club.nickname || club.acronym) && (
-                    <p style={S.heroNickname}>
+                    <p className="muted">
                       {club.nickname && <span>{club.nickname}</span>}
-                      {club.acronym && <span style={S.heroBadge}>{club.acronym}</span>}
+                      {club.acronym && <span className="badge">{club.acronym}</span>}
                     </p>
                   )}
                 </div>
@@ -313,10 +313,10 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                 ].filter(Boolean).join("  ·  ")}
               </p>
               {club.president && (
-                <p style={S.heroMeta}>👤 {club.president}</p>
+                <p className="muted">👤 {club.president}</p>
               )}
               {club.linked_institution && (
-                <p style={S.heroMeta}>🎓 {club.linked_institution}</p>
+                <p className="muted">🎓 {club.linked_institution}</p>
               )}
             </>
           )}
@@ -330,13 +330,13 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
         {!loading && club && (
           <div>
             {/* ─── Tab bar ─────────────────────────────────────── */}
-            <nav style={S.tabBar}>
+            <nav className="tab-bar">
               <button
                 style={activeTab === "times" ? S.tabActive : S.tab}
                 onClick={() => handleTabChange("times")}
               >
                 Times
-                {teams.length > 0 && <span style={S.tabBadge}>{teams.length}</span>}
+                {teams.length > 0 && <span className="badge">{teams.length}</span>}
               </button>
               <button
                 style={activeTab === "titulos" ? S.tabActive : S.tab}
@@ -344,7 +344,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
               >
                 Títulos
                 {titlesLoaded && titles.length > 0 && (
-                  <span style={S.tabBadge}>{titles.length}</span>
+                  <span className="badge">{titles.length}</span>
                 )}
               </button>
               <button
@@ -353,7 +353,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
               >
                 Últimas Partidas
                 {matchesLoaded && matches.length > 0 && (
-                  <span style={S.tabBadge}>{matches.length}</span>
+                  <span className="badge">{matches.length}</span>
                 )}
               </button>
             </nav>
@@ -361,11 +361,11 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
             {/* ─── Tab: Times ──────────────────────────────────── */}
             {activeTab === "times" && (
               <div>
-                <div style={S.teamsConceptBanner}>
-                  <span style={S.teamsConceptIcon}>👕</span>
+                <div className="form-warning">
+                  <span >👕</span>
                   <div>
-                    <div style={S.teamsConceptTitle}>O que são times?</div>
-                    <div style={S.teamsConceptText}>
+                    <div className="section-heading">O que são times?</div>
+                    <div className="muted">
                       Cada time representa um grupo de atletas que compete em uma modalidade e categoria específica.
                       Um clube pode ter vários times — por exemplo, futebol amador, sub-17 ou master —
                       cada um disputando suas próprias competições.
@@ -373,16 +373,16 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                   </div>
                 </div>
                 {teams.length === 0 ? (
-                  <p style={S.empty}>Nenhum time cadastrado.</p>
+                  <p className="muted">Nenhum time cadastrado.</p>
                 ) : (
-                  <div style={S.teamsGrid}>
+                  <div className="form-field-group">
                     {teams.map((t) => {
                       const sport = t.sport_name ?? "Esporte";
                       const cat = t.category ? (categoryLabel[t.category] ?? t.category) : null;
                       return (
-                        <Link key={t.id} to={`/times/${toSlugPath(t.name, t.id)}`} style={S.teamCard}>
-                          <span style={S.teamCardSport}>{sport}</span>
-                          {cat && <span style={S.teamCardCat}>{cat}</span>}
+                        <Link key={t.id} to={`/times/${toSlugPath(t.name, t.id)}`} className="card">
+                          <span className="muted">{sport}</span>
+                          {cat && <span className="muted">{cat}</span>}
                         </Link>
                       );
                     })}
@@ -397,21 +397,21 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                 {!titlesLoaded ? (
                   <PageLoader />
                 ) : titles.length === 0 ? (
-                  <p style={S.empty}>Nenhum título registrado.</p>
+                  <p className="muted">Nenhum título registrado.</p>
                 ) : (
-                  <div style={S.titlesTable}>
+                  <div className="data-table">
                     {titles.map((t) => (
-                      <div key={t.edition_id} style={S.titleRow}>
-                        <span style={S.titleYear}>{t.year}</span>
+                      <div key={t.edition_id} className="match-team-row">
+                        <span className="muted">{t.year}</span>
                         <span style={t.result === "champion" ? S.titleMedalChamp : S.titleMedalVice}>
                           {t.result === "champion" ? "🏆" : "🥈"}
                         </span>
-                        <div style={S.titleInfo}>
-                          <span style={S.titleChamp}>
+                        <div className="muted">
+                          <span className="team-name">
                             {t.championship_nickname ?? t.championship_name}
                           </span>
                           {t.team_category && (
-                            <span style={S.titleCat}>
+                            <span className="muted">
                               {categoryLabel[t.team_category] ?? t.team_category}
                             </span>
                           )}
@@ -429,9 +429,9 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                 {!matchesLoaded ? (
                   <PageLoader />
                 ) : matches.length === 0 ? (
-                  <p style={S.empty}>Nenhuma partida encontrada.</p>
+                  <p className="muted">Nenhuma partida encontrada.</p>
                 ) : categoryGroups.length === 0 ? (
-                  <div style={S.champBlock}>
+                  <div className="page-section">
                     {matches.map((m) => <MatchRow key={m.match_id} match={m} teamIds={teamIds} />)}
                   </div>
                 ) : (
@@ -440,9 +440,9 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                       ? "Sem categoria"
                       : (categoryLabel[catKey] ?? catKey);
                     return (
-                      <div key={catKey} style={S.champBlock}>
-                        <div style={S.champHeader}>
-                          <span style={S.champTeamLink}>{catLabel}</span>
+                      <div key={catKey} className="page-section">
+                        <div className="toolbar">
+                          <span className="row-link">{catLabel}</span>
                         </div>
                         {catMatches.map((m) => <MatchRow key={m.match_id} match={m} teamIds={teamIds} />)}
                       </div>
@@ -451,11 +451,11 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                 )}
                 {matchesLoaded && matches.length > 0 && (
                   <p style={{ fontSize: "0.72rem", color: "#ffffff", marginTop: "0.5rem", textAlign: "right" as const }}>
-                    <span style={{ fontWeight: 600, color: "#a6e3a1" }}>V</span>
+                    <span style={{ fontWeight: 600, color: "var(--c-positive)" }}>V</span>
                     {" / "}
-                    <span style={{ fontWeight: 600, color: "#f38ba8" }}>D</span>
+                    <span style={{ fontWeight: 600, color: "var(--c-negative)" }}>D</span>
                     {" / "}
-                    <span style={{ fontWeight: 600, color: "#f9e2af" }}>E</span>
+                    <span style={{ fontWeight: 600, color: "var(--c-warning)" }}>E</span>
                     {" / "}
                     <span style={{ color: "#45475a" }}>A</span>
                     {" · por categoria"}

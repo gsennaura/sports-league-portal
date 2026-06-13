@@ -121,7 +121,7 @@ export function ChampionshipsPage({ listChampionships }: ChampionshipsPageProps)
                     </span>
                   )}
                   {c.division && (
-                    <span style={{ ...S.badge, color: "#cba6f7", background: "#201a2a", border: "1px solid #4a2a6a" }}>
+                    <span style={{ ...S.badge, color: "var(--c-action)", background: "#201a2a", border: "1px solid #4a2a6a" }}>
                       {c.division}
                     </span>
                   )}

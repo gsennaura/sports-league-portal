@@ -262,13 +262,13 @@ export function AdminGroupMatchesPage() {
 
   // ── Render ────────────────────────────────────────────────────────────────
 
-  if (loading) return <main className="page-container"><p style={{ color: "#cdd6f4" }}>Carregando…</p></main>;
+  if (loading) return <main className="page-container"><p style={{ color: "var(--c-text)" }}>Carregando…</p></main>;
 
   if (error) {
     return (
       <main className="page-container">
-        <p style={{ color: "#f38ba8" }}>{error}</p>
-        <Link to={backUrl} style={{ color: "#89b4fa" }}>← Voltar</Link>
+        <p style={{ color: "var(--c-negative)" }}>{error}</p>
+        <Link to={backUrl} style={{ color: "var(--c-link)" }}>← Voltar</Link>
       </main>
     );
   }
@@ -282,10 +282,10 @@ export function AdminGroupMatchesPage() {
           <Link to={backUrl} className="back-link">← {champName}</Link>
           <div className="hero__row">
             <div>
-              <p style={S.breadcrumb}>{phaseName}</p>
+              <p className="breadcrumb">{phaseName}</p>
               <h1 className="page-title">{groupName}</h1>
             </div>
-            <div style={S.headerActions}>
+            <div className="toolbar">
               <button
                 style={{
                   ...S.btnGenerate,
@@ -299,7 +299,7 @@ export function AdminGroupMatchesPage() {
                 {generating ? "Gerando…" : "⚡ Gerar confrontos"}
               </button>
               <button
-                style={S.btnAdd}
+                className="btn btn-success"
                 onClick={() => {
                   setShowAddForm(v => !v);
                   setSubmitError(null);
@@ -315,9 +315,9 @@ export function AdminGroupMatchesPage() {
             </div>
           </div>
           {/* Teams pill bar */}
-          <div style={S.pillRow}>
+          <div className="filter-bar">
             {teams.map(t => (
-              <span key={t.team_id} style={S.teamPill}>{t.team_name}</span>
+              <span key={t.team_id} className="badge">{t.team_name}</span>
             ))}
             {teams.length === 0 && (
               <span style={{ color: "#ffffff", fontSize: "0.8rem", fontStyle: "italic" }}>
@@ -332,22 +332,22 @@ export function AdminGroupMatchesPage() {
 
         {/* ── Error banner ──────────────────────────────────────────────── */}
         {submitError && (
-          <div style={S.errBanner}>
+          <div className="form-error">
             <span>⚠ {submitError}</span>
-            <button onClick={() => setSubmitError(null)} style={S.errClose}>×</button>
+            <button onClick={() => setSubmitError(null)} className="error-banner__close">×</button>
           </div>
         )}
 
         {/* ── Round schedule config ─────────────────────────────────────── */}
-        <div style={S.rcPanel}>
+        <div className="card">
           <button
             type="button"
-            style={S.rcToggle}
+            className="toolbar"
             onClick={() => setShowRoundConfig(v => !v)}
           >
             <span>📅 Calendário de rodadas</span>
             {rcRound1Date ? (
-              <span style={S.rcActive}>
+              <span className="badge badge--success">
                 Rodada 1: {rcRound1Date.split("-").reverse().join("/")}
                 {rcRound1Time ? ` ${rcRound1Time}` : ""}
                 {" · "}+{rcIntervalDays}d entre rodadas
@@ -360,18 +360,18 @@ export function AdminGroupMatchesPage() {
             </span>
           </button>
           {showRoundConfig && (
-            <div style={S.rcBody}>
-              <p style={S.rcHint}>
+            <div className="form-body">
+              <p className="muted">
                 Configure a data/hora da Rodada 1 e o intervalo em dias entre rodadas.
                 Ao preencher o número da rodada em qualquer partida, a data será preenchida automaticamente.
                 Essa configuração some ao recarregar a página.
               </p>
-              <div style={S.rcFields}>
+              <div className="form-field-group">
                 <div className="form-field">
                   <label className="form-label">Data da Rodada 1</label>
                   <input
                     type="date"
-                    style={S.input}
+                    className="form-input"
                     value={rcRound1Date}
                     onChange={e => setRcRound1Date(e.target.value)}
                   />
@@ -380,7 +380,7 @@ export function AdminGroupMatchesPage() {
                   <label className="form-label">Hora padrão</label>
                   <input
                     type="time"
-                    style={{ ...S.input, maxWidth: "130px" }}
+                    className="form-input" style={{ maxWidth: "130px" }}
                     value={rcRound1Time}
                     onChange={e => setRcRound1Time(e.target.value)}
                     disabled={!rcRound1Date}
@@ -390,7 +390,7 @@ export function AdminGroupMatchesPage() {
                   <label className="form-label">Intervalo (dias)</label>
                   <input
                     type="number"
-                    style={{ ...S.input, maxWidth: "90px" }}
+                    className="form-input" style={{ maxWidth: "90px" }}
                     value={rcIntervalDays}
                     onChange={e => setRcIntervalDays(e.target.value)}
                     min={0}
@@ -400,7 +400,7 @@ export function AdminGroupMatchesPage() {
                 {rcRound1Date && (
                   <button
                     type="button"
-                    style={{ ...S.btnCancelSmall, alignSelf: "flex-end", color: "#f38ba8", borderColor: "#f38ba8" }}
+                    style={{ ...S.btnCancelSmall, alignSelf: "flex-end", color: "var(--c-negative)", borderColor: "#f38ba8" }}
                     onClick={() => { setRcRound1Date(""); setRcRound1Time(""); setRcIntervalDays("7"); }}
                   >
                     Limpar
@@ -413,14 +413,14 @@ export function AdminGroupMatchesPage() {
 
         {/* ── Add match form ────────────────────────────────────────────── */}
         {showAddForm && (
-          <div style={S.formCard}>
-            <h2 style={S.formTitle}>Nova partida</h2>
+          <div className="card">
+            <h2 className="section-heading">Nova partida</h2>
             <form onSubmit={(e) => void handleAddMatch(e)}>
-              <div style={S.formGrid}>
+              <div className="form-field-group--2">
                 <div className="form-field">
                   <label className="form-label">Mandante</label>
                   <select
-                    style={S.input}
+                    className="form-input"
                     value={matchHomeId}
                     onChange={e => setMatchHomeId(e.target.value)}
                     required
@@ -435,7 +435,7 @@ export function AdminGroupMatchesPage() {
                 <div className="form-field">
                   <label className="form-label">Visitante</label>
                   <select
-                    style={S.input}
+                    className="form-input"
                     value={matchAwayId}
                     onChange={e => setMatchAwayId(e.target.value)}
                     required
@@ -450,7 +450,7 @@ export function AdminGroupMatchesPage() {
                   <label className="form-label">Rodada</label>
                   <input
                     type="number"
-                    style={{ ...S.input, maxWidth: "100px" }}
+                    className="form-input" style={{ maxWidth: "100px" }}
                     value={matchRound}
                     onChange={e => {
                       const v = e.target.value;
@@ -472,7 +472,7 @@ export function AdminGroupMatchesPage() {
                   <label className="form-label">Data (opcional)</label>
                   <input
                     type="date"
-                    style={S.input}
+                    className="form-input"
                     value={matchDatePart}
                     onChange={e => setMatchDatePart(e.target.value)}
                   />
@@ -481,7 +481,7 @@ export function AdminGroupMatchesPage() {
                   <label className="form-label">Hora (opcional)</label>
                   <input
                     type="time"
-                    style={{ ...S.input, maxWidth: "140px" }}
+                    className="form-input" style={{ maxWidth: "140px" }}
                     value={matchTimePart}
                     onChange={e => setMatchTimePart(e.target.value)}
                     disabled={!matchDatePart}
@@ -490,7 +490,7 @@ export function AdminGroupMatchesPage() {
                 <div style={{ ...S.field, gridColumn: "span 3" } as React.CSSProperties}>
                   <label className="form-label">Estádio (opcional)</label>
                   <select
-                    style={{ ...S.input, maxWidth: "360px" }}
+                    className="form-input" style={{ maxWidth: "360px" }}
                     value={matchVenueId}
                     onChange={e => setMatchVenueId(e.target.value)}
                   >
@@ -502,10 +502,10 @@ export function AdminGroupMatchesPage() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: "0.75rem", marginTop: "1rem" }}>
-                <button type="submit" style={S.btnSave} disabled={submitting}>
+                <button type="submit" className="btn btn-primary" disabled={submitting}>
                   {submitting ? "Salvando…" : "Salvar partida"}
                 </button>
-                <button type="button" style={S.btnCancel} onClick={() => setShowAddForm(false)}>
+                <button type="button" className="btn btn-secondary" onClick={() => setShowAddForm(false)}>
                   Cancelar
                 </button>
               </div>
@@ -515,9 +515,9 @@ export function AdminGroupMatchesPage() {
 
         {/* ── Match list ────────────────────────────────────────────────── */}
         {matches.length === 0 && !showAddForm && (
-          <div style={S.emptyState}>
-            <p style={S.emptyTitle}>Nenhuma partida cadastrada</p>
-            <p style={S.emptyHint}>
+          <div className="muted">
+            <p className="muted">Nenhuma partida cadastrada</p>
+            <p className="muted">
               Use "⚡ Gerar confrontos" para criar todos os jogos do turno automaticamente,
               ou "+ Adicionar partida" para inserir manualmente.
             </p>
@@ -527,13 +527,13 @@ export function AdminGroupMatchesPage() {
         {rounds.map(round => {
           const roundMatches = matches.filter(m => (m.round_number ?? 0) === round);
           return (
-            <section key={round} style={S.roundSection}>
-              <div style={S.roundHeader}>
-                <span style={S.roundLabel}>{round === 0 ? "Sem rodada" : `Rodada ${round}`}</span>
-                <span style={S.roundCount}>{roundMatches.length} partida{roundMatches.length !== 1 ? "s" : ""}</span>
+            <section key={round} className="page-section">
+              <div className="toolbar">
+                <span className="section-heading">{round === 0 ? "Sem rodada" : `Rodada ${round}`}</span>
+                <span className="muted">{roundMatches.length} partida{roundMatches.length !== 1 ? "s" : ""}</span>
                 {round !== 0 && (
                   <button
-                    style={S.btnShare}
+                    className="btn btn-secondary"
                     onClick={() => openRoundShare(round)}
                     title="Abrir post da rodada para Instagram"
                   >
@@ -541,26 +541,26 @@ export function AdminGroupMatchesPage() {
                   </button>
                 )}
               </div>
-              <div style={S.matchTable}>
+              <div className="data-table">
                 {roundMatches.map(m => (
-                  <div key={m.id} style={S.matchRow}>
+                  <div key={m.id} className="match-team-row">
                     {editingMatchId === m.id ? (
                       /* ── Inline edit form ── */
                       <form
                         onSubmit={(e) => void handleSaveSchedule(e)}
-                        style={S.editForm}
+                        className="form-body"
                       >
-                        <div style={S.matchVsBlock}>
-                          <span style={S.homeTeam}>{teamName(m.home_team_id)}</span>
-                          <span style={S.vsLabel}>×</span>
-                          <span style={S.awayTeam}>{teamName(m.away_team_id)}</span>
+                        <div className="score-grid">
+                          <span className="score-team">{teamName(m.home_team_id)}</span>
+                          <span className="score-sep">×</span>
+                          <span className="score-team">{teamName(m.away_team_id)}</span>
                         </div>
-                        <div style={S.editControls}>
+                        <div className="form-actions">
                           <div className="form-field">
-                            <label style={S.labelSm}>Rodada</label>
+                            <label className="form-label">Rodada</label>
                             <input
                               type="number"
-                              style={{ ...S.input, width: "80px" }}
+                              className="form-input" style={{ width: "80px" }}
                               value={editRound}
                               onChange={e => {
                                 const v = e.target.value;
@@ -579,28 +579,28 @@ export function AdminGroupMatchesPage() {
                             />
                           </div>
                           <div className="form-field">
-                            <label style={S.labelSm}>Data</label>
+                            <label className="form-label">Data</label>
                             <input
                               type="date"
-                              style={{ ...S.input, maxWidth: "160px" }}
+                              className="form-input" style={{ maxWidth: "160px" }}
                               value={editDatePart}
                               onChange={e => setEditDatePart(e.target.value)}
                             />
                           </div>
                           <div className="form-field">
-                            <label style={S.labelSm}>Hora</label>
+                            <label className="form-label">Hora</label>
                             <input
                               type="time"
-                              style={{ ...S.input, maxWidth: "120px" }}
+                              className="form-input" style={{ maxWidth: "120px" }}
                               value={editTimePart}
                               onChange={e => setEditTimePart(e.target.value)}
                               disabled={!editDatePart}
                             />
                           </div>
                           <div style={{ ...S.field, flex: 1, minWidth: "180px" }}>
-                            <label style={S.labelSm}>Estádio</label>
+                            <label className="form-label">Estádio</label>
                             <select
-                              style={S.input}
+                              className="form-input"
                               value={editVenueId}
                               onChange={e => setEditVenueId(e.target.value)}
                             >
@@ -611,10 +611,10 @@ export function AdminGroupMatchesPage() {
                             </select>
                           </div>
                           <div style={{ display: "flex", gap: "0.4rem", alignSelf: "flex-end" }}>
-                            <button type="submit" style={S.btnSaveSmall}>✓ Salvar</button>
+                            <button type="submit" className="btn-sm btn-primary btn">✓ Salvar</button>
                             <button
                               type="button"
-                              style={S.btnCancelSmall}
+                              className="btn-sm btn-secondary btn"
                               onClick={() => setEditingMatchId(null)}
                             >
                               Cancelar
@@ -625,31 +625,31 @@ export function AdminGroupMatchesPage() {
                     ) : (
                       /* ── Match display row ── */
                       <>
-                        <div style={S.matchVsBlock}>
-                          <span style={S.homeTeam}>{teamName(m.home_team_id)}</span>
+                        <div className="score-grid">
+                          <span className="score-team">{teamName(m.home_team_id)}</span>
                           {m.home_score != null ? (
-                            <span style={S.scoreBlock}>{m.home_score} – {m.away_score}</span>
+                            <span className="score-center">{m.home_score} – {m.away_score}</span>
                           ) : (
-                            <span style={S.vsLabel}>×</span>
+                            <span className="score-sep">×</span>
                           )}
-                          <span style={S.awayTeam}>{teamName(m.away_team_id)}</span>
+                          <span className="score-team">{teamName(m.away_team_id)}</span>
                         </div>
-                        <div style={S.matchMeta}>
+                        <div className="muted">
                           {m.match_date && (
-                            <span style={S.dateChip}>📅 {fmtDate(m.match_date)}</span>
+                            <span className="badge">📅 {fmtDate(m.match_date)}</span>
                           )}
                           {m.venue_id && venues.find(v => v.id === m.venue_id) && (
-                            <span style={S.venueChip}>
+                            <span className="badge">
                               🏟 {venues.find(v => v.id === m.venue_id)!.name}
                             </span>
                           )}
                           {m.home_score != null && (
-                            <span style={S.resultChip}>Resultado registrado</span>
+                            <span className="badge">Resultado registrado</span>
                           )}
                         </div>
-                        <div style={S.matchActions}>
+                        <div className="form-actions">
                           <button
-                            style={S.btnEditMatch}
+                            className="btn-edit"
                             onClick={() => {
                               setEditingMatchId(m.id);
                               setEditRound(m.round_number != null ? String(m.round_number) : "");
@@ -664,13 +664,13 @@ export function AdminGroupMatchesPage() {
                           </button>
                           <Link
                             to={`/admin/partidas/${m.id}/resultado`}
-                            style={S.btnScore}
+                            className="btn btn-success"
                             title="Registrar/editar resultado"
                           >
                             ⚽ Resultado
                           </Link>
                           <button
-                            style={S.btnDelete}
+                            className="btn btn-danger"
                             onClick={() => void handleDelete(m.id)}
                             disabled={deletingId === m.id}
                             title="Excluir partida"

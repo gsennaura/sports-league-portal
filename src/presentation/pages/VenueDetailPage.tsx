@@ -63,37 +63,37 @@ function MatchRow({ match }: { match: ClubMatch }) {
   })();
 
   return (
-    <Link to={`/partidas/${match.match_id}`} style={S.matchLink}>
-      <div style={S.matchCard}>
-        <div style={S.matchCardRow}>
+    <Link to={`/partidas/${match.match_id}`} className="row-link">
+      <div className="card">
+        <div className="match-team-row">
           {/* Col 1 — data e hora */}
-          <div style={S.mDateCol}>
-            {dateLabel && <span style={S.mDateLabel}>{dateLabel}</span>}
-            {timeLabel && <span style={S.mTimeLabel}>{timeLabel}</span>}
+          <div >
+            {dateLabel && <span className="muted">{dateLabel}</span>}
+            {timeLabel && <span className="muted">{timeLabel}</span>}
           </div>
 
           {/* Col 2 — times + placar */}
-          <div style={S.mTeamsCol}>
-            <div style={S.mTeamRow}>
-              <span style={S.mScoreSlot}>
+          <div >
+            <div className="match-team-row">
+              <span className="score-slot">
                 {hasScore ? `${match.home_score}${hasPenalty ? ` (${match.home_penalty_score})` : ""}` : ""}
               </span>
               <Shield url={match.home_club_logo_url} />
-              <span style={S.mTeamName}>{match.home_team_name}</span>
+              <span className="team-name">{match.home_team_name}</span>
             </div>
-            <div style={S.mTeamRow}>
-              <span style={S.mScoreSlot}>
+            <div className="match-team-row">
+              <span className="score-slot">
                 {hasScore ? `${match.away_score}${hasPenalty ? ` (${match.away_penalty_score})` : ""}` : ""}
               </span>
               <Shield url={match.away_club_logo_url} />
-              <span style={S.mTeamName}>{match.away_team_name}</span>
+              <span className="team-name">{match.away_team_name}</span>
             </div>
           </div>
 
           {/* Col 3 — campeonato */}
-          <div style={S.mChampCol}>
-            <span style={S.mChampLabel}>{match.championship_name}</span>
-            <span style={S.mPhaseLabel}>{match.phase_name}</span>
+          <div >
+            <span className="muted">{match.championship_name}</span>
+            <span className="muted">{match.phase_name}</span>
           </div>
         </div>
       </div>
@@ -131,8 +131,8 @@ function computeStats(matches: ClubMatch[]): VenueStats {
 function StatItem({ label, value, color, isMobile }: { label: string; value: number; color?: string; isMobile?: boolean }) {
   return (
     <div style={{ ...S.statItem, minWidth: isMobile ? "3rem" : "4rem" }}>
-      <span style={{ ...S.statValue, color: color ?? "#cdd6f4", fontSize: isMobile ? "1.1rem" : "1.6rem" }}>{value}</span>
-      <span style={S.statLabel}>{label}</span>
+      <span style={{ ...S.statValue, color: color ?? "var(--c-text)", fontSize: isMobile ? "1.1rem" : "1.6rem" }}>{value}</span>
+      <span className="muted">{label}</span>
     </div>
   );
 }
@@ -230,12 +230,12 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
     <>
       {/* ─── Hero ─────────────────────────────────────────────────── */}
       <header className="hero">
-        <div style={S.heroAccentBar} />
+        <div className="hero__bar" />
         <div className="hero__inner">
           <Link to="/locais" className="back-link">← Locais</Link>
 
           {loading && <PageLoader />}
-          {error && <p style={S.errorText}>{error}</p>}
+          {error && <p className="error-text">{error}</p>}
 
           {venue && (
             <div style={{ display: "flex", gap: "1.75rem", alignItems: "flex-start", marginTop: "0.5rem", flexWrap: "wrap" }}>
@@ -245,7 +245,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
                   src={currentPhotoUrl ?? NO_VENUE_PHOTO}
                   onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_VENUE_PHOTO; }}
                   alt={`Foto ${venue.name}`}
-                  style={{ width: 260, height: 175, objectFit: "cover", borderRadius: 10, background: "#18265b", display: "block" }}
+                  style={{ width: 260, height: 175, objectFit: "cover", borderRadius: 10, background: "var(--c-brand)", display: "block" }}
                 />
                 {isAdmin && venueRepository && (
                   <>
@@ -285,24 +285,24 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
 
               {/* Right: info */}
               <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", minWidth: 0 }}>
-                <span style={S.heroEyebrow}>🏟 Local</span>
+                <span className="hero__eyebrow">🏟 Local</span>
                 <h1 className="hero__title">{venue.name}</h1>
                 {venue.nickname && (
-                  <p style={S.heroNickname}>"{venue.nickname}"</p>
+                  <p className="muted">"{venue.nickname}"</p>
                 )}
                 {/* Info chips */}
-                <div style={S.infoRow}>
+                <div className="form-field-group">
                   {cityName && (
-                    <span style={S.infoChip}>📍 {venue.neighborhood ? `${venue.neighborhood}, ` : ""}{cityName}</span>
+                    <span className="badge">📍 {venue.neighborhood ? `${venue.neighborhood}, ` : ""}{cityName}</span>
                   )}
                   {addressParts && (
-                    <span style={S.infoChip}>🏠 {addressParts}</span>
+                    <span className="badge">🏠 {addressParts}</span>
                   )}
                   {venue.zip_code && (
-                    <span style={S.infoChip}>CEP {venue.zip_code}</span>
+                    <span className="badge">CEP {venue.zip_code}</span>
                   )}
                   {venue.latitude != null && venue.longitude != null && (
-                    <span style={S.infoChip}>🌐 {venue.latitude.toFixed(5)}, {venue.longitude.toFixed(5)}</span>
+                    <span className="badge">🌐 {venue.latitude.toFixed(5)}, {venue.longitude.toFixed(5)}</span>
                   )}
                 </div>
               </div>
@@ -330,34 +330,34 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
 
             {/* Championships played here */}
             {championships.length > 0 && (
-              <section style={S.champSection}>
-                <h2 style={S.sectionTitle}>Campeonatos neste local</h2>
+              <section className="page-section">
+                <h2 className="section-heading">Campeonatos neste local</h2>
                 <div className="champ-grid">
                   {championships.map((c) => (
                     <div key={c.id} className="champ-card">
-                      <span style={S.champCardName}>{c.name}</span>
-                      <span style={S.champCardCount}>{c.count} partida{c.count !== 1 ? "s" : ""}</span>
+                      <span className="team-name">{c.name}</span>
+                      <span className="muted">{c.count} partida{c.count !== 1 ? "s" : ""}</span>
                     </div>
                   ))}
                 </div>
               </section>
             )}
 
-            <h2 style={S.sectionTitle}>
+            <h2 className="section-heading">
               Partidas neste local
               {matches.length > 0 && (
-                <span style={S.matchCount}>{matches.length}</span>
+                <span className="muted">{matches.length}</span>
               )}
             </h2>
 
             {matches.length === 0 ? (
-              <p style={S.status}>Nenhuma partida registrada neste local.</p>
+              <p className="status-chip">Nenhuma partida registrada neste local.</p>
             ) : (
               <>
                 {dateKeys.map((dateKey) => (
-                  <div key={dateKey} style={S.dateGroup}>
-                    <p style={S.dateHeading}>{formatDateHeading(dateKey)}</p>
-                    <div style={S.matchList}>
+                  <div key={dateKey} className="page-section">
+                    <p className="section-heading">{formatDateHeading(dateKey)}</p>
+                    <div className="data-list">
                       {byDate.get(dateKey)!.map((m) => (
                         <MatchRow key={m.match_id} match={m} />
                       ))}
@@ -367,7 +367,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div style={S.pagination}>
+                  <div className="pagination">
                     <button
                       style={{ ...S.pageBtn, ...(page === 1 ? S.pageBtnDisabled : {}) }}
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
@@ -375,7 +375,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
                     >
                       ← Anterior
                     </button>
-                    <span style={S.pageInfo}>
+                    <span className="page-info">
                       {page} / {totalPages}
                     </span>
                     <button

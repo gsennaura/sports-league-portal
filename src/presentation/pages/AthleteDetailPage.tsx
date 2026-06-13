@@ -48,16 +48,16 @@ function periodLabel(entry: AthleteTeamHistory): string {
 function HistoryRow({ entry }: { entry: AthleteTeamHistory }) {
   const active = entry.is_active;
   return (
-    <div style={S.historyRow}>
+    <div className="match-team-row">
       <div style={historyDotStyle(active)} />
-      <div style={S.historyContent}>
-        <span style={S.historyTeam}>{entry.team_name ?? entry.team_id}</span>
+      <div >
+        <span className="team-name">{entry.team_name ?? entry.team_id}</span>
         {entry.jersey_number != null && (
-          <span style={S.historyBadge}>#{entry.jersey_number}</span>
+          <span className="badge">#{entry.jersey_number}</span>
         )}
-        {active && <span style={S.activeBadge}>Atual</span>}
-        <span style={S.historyPeriod}>{periodLabel(entry)}</span>
-        {entry.notes && <span style={S.historyNotes}>{entry.notes}</span>}
+        {active && <span className="badge badge--success">Atual</span>}
+        <span className="muted">{periodLabel(entry)}</span>
+        {entry.notes && <span className="muted">{entry.notes}</span>}
       </div>
     </div>
   );
@@ -449,7 +449,7 @@ export function AthleteDetailPage({
       <>
         <div className="hero__bar" />
         <main className="page-container">
-          <p style={S.errorText}>{error ?? "Atleta não encontrado."}</p>
+          <p className="error-text">{error ?? "Atleta não encontrado."}</p>
           <Link to="/atletas" className="back-link">← Voltar para Atletas</Link>
         </main>
       </>
@@ -513,14 +513,14 @@ export function AthleteDetailPage({
                 <Link
                   to={`/admin/atletas/${id}/editar`}
                   state={{ athlete: detail.athlete }}
-                  style={S.adminBtnEdit}
+                  className="btn-edit"
                 >
                   ✏️ Editar
                 </Link>
                 <button
                   onClick={handleDelete}
                   disabled={deleting}
-                  style={S.adminBtnDelete}
+                  className="action-btn action-btn--danger"
                 >
                   {deleting ? "Excluindo…" : "🗑 Excluir"}
                 </button>
@@ -528,11 +528,11 @@ export function AthleteDetailPage({
             )}
           </div>
           {deleteError && (
-            <p style={{ color: "#f38ba8", backgroundColor: "#2a1a1f", border: "1px solid #5a2a30", borderRadius: "6px", padding: "0.65rem 1rem", fontSize: "0.85rem", marginBottom: "0.75rem" }}>
+            <p style={{ color: "var(--c-negative)", backgroundColor: "#2a1a1f", border: "1px solid #5a2a30", borderRadius: "6px", padding: "0.65rem 1rem", fontSize: "0.85rem", marginBottom: "0.75rem" }}>
               ⚠ {deleteError}
             </p>
           )}
-          <div style={S.heroProfile}>
+          <div className="hero__inner">
             <div style={{ position: "relative", flexShrink: 0 }}>
               <img
                 src={currentPhotoUrl ?? athlete.photo_url ?? NO_PHOTO}
@@ -540,7 +540,7 @@ export function AthleteDetailPage({
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = NO_PHOTO;
                 }}
-                style={S.heroPhoto}
+                className="avatar avatar--lg"
               />
               {isAdmin && athleteRepository && (
                 <>
@@ -578,16 +578,16 @@ export function AthleteDetailPage({
                 </>
               )}
             </div>
-            <div style={S.heroInfo}>
-              <h1 style={S.heroName}>{athlete.name}</h1>
+            <div className="hero__text">
+              <h1 className="page-title">{athlete.name}</h1>
               {athlete.nickname && (
-                <p style={{ color: "#cba6f7", fontSize: "1rem", fontStyle: "italic", margin: "0 0 0.75rem" }}>"{athlete.nickname}"</p>
+                <p style={{ color: "var(--c-action)", fontSize: "1rem", fontStyle: "italic", margin: "0 0 0.75rem" }}>"{athlete.nickname}"</p>
               )}
-              <div style={S.attrGrid}>
+              <div className="form-field-group">
                 {attrs.map(([label, value]) => (
-                  <div key={label} style={S.attrItem}>
-                    <span style={S.attrLabel}>{label}</span>
-                    <span style={S.attrValue}>{value}</span>
+                  <div key={label} >
+                    <span className="form-label">{label}</span>
+                    <span >{value}</span>
                   </div>
                 ))}
               </div>
@@ -599,8 +599,8 @@ export function AthleteDetailPage({
       <main className="page-container">
         {/* ─── Estatísticas ─────────────────────────────────────── */}
         {stats && (stats.goals > 0 || stats.yellow_cards > 0 || stats.red_cards > 0 || stats.matches_played > 0) && (
-          <section style={S.section}>
-            <h2 style={S.sectionTitle}>Estatísticas</h2>
+          <section className="page-section">
+            <h2 className="section-heading">Estatísticas</h2>
 
             {/* counters row */}
             <div style={ST.countersRow}>
@@ -642,9 +642,9 @@ export function AthleteDetailPage({
                       <tr key={t.team_id} style={ST.byTeamTr}>
                         <td style={ST.byTeamTd}>{t.team_name}</td>
                         <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#ffffff" }}>{t.matches_played}</td>
-                        <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#a6e3a1", fontWeight: 700 }}>{t.goals > 0 ? t.goals : "–"}</td>
-                        <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#f9e2af", fontWeight: 700 }}>{t.yellow_cards > 0 ? t.yellow_cards : "–"}</td>
-                        <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "#f38ba8", fontWeight: 700 }}>{t.red_cards > 0 ? t.red_cards : "–"}</td>
+                        <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "var(--c-positive)", fontWeight: 700 }}>{t.goals > 0 ? t.goals : "–"}</td>
+                        <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "var(--c-warning)", fontWeight: 700 }}>{t.yellow_cards > 0 ? t.yellow_cards : "–"}</td>
+                        <td style={{ ...ST.byTeamTd, textAlign: "center" as const, color: "var(--c-negative)", fontWeight: 700 }}>{t.red_cards > 0 ? t.red_cards : "–"}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -655,12 +655,12 @@ export function AthleteDetailPage({
         )}
 
         {/* Career timeline */}
-        <section style={S.section}>
-          <h2 style={S.sectionTitle}>Carreira</h2>
+        <section className="page-section">
+          <h2 className="section-heading">Carreira</h2>
           {sortedHistory.length === 0 ? (
-            <p style={S.empty}>Nenhum vínculo com time registrado.</p>
+            <p className="muted">Nenhum vínculo com time registrado.</p>
           ) : (
-            <div style={S.timeline}>
+            <div className="data-list">
               {sortedHistory.map((entry) => (
                 <HistoryRow key={entry.id} entry={entry} />
               ))}
@@ -670,7 +670,7 @@ export function AthleteDetailPage({
 
         {/* ─── Inscrições em Campeonatos ─────────────────────────────── */}
         {(isAdmin || champRegs.length > 0) && (
-          <section style={S.section}>
+          <section className="page-section">
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem", paddingBottom: "0.4rem", borderBottom: "1px solid #313244" }}>
               <h2 style={{ ...S.sectionTitle, margin: 0, borderBottom: "none", paddingBottom: 0 }}>Inscrições em Campeonatos</h2>
               {isAdmin && (
@@ -678,7 +678,7 @@ export function AthleteDetailPage({
               )}
             </div>
             {champRegs.length === 0 ? (
-              <p style={S.empty}>Nenhuma inscrição em campeonato.</p>
+              <p className="muted">Nenhuma inscrição em campeonato.</p>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 {champRegs.map((reg) => (
@@ -705,9 +705,9 @@ export function AthleteDetailPage({
 
         {/* Notes */}
         {athlete.notes && (
-          <section style={S.section}>
-            <h2 style={S.sectionTitle}>Observações</h2>
-            <p style={S.notes}>{athlete.notes}</p>
+          <section className="page-section">
+            <h2 className="section-heading">Observações</h2>
+            <p className="muted">{athlete.notes}</p>
           </section>
         )}
       </main>
@@ -745,7 +745,7 @@ export function AthleteDetailPage({
 
                 <label style={M.label}>Time *</label>
                 {activeTeams.length === 0 ? (
-                  <p style={{ color: "#f38ba8", fontSize: "0.82rem" }}>Atleta não possui vínculo ativo com nenhum time.</p>
+                  <p style={{ color: "var(--c-negative)", fontSize: "0.82rem" }}>Atleta não possui vínculo ativo com nenhum time.</p>
                 ) : (
                   <select
                     style={M.select}
@@ -797,19 +797,19 @@ export function AthleteDetailPage({
           onClick={() => setActionConfirm(null)}
         >
           <div
-            style={{ background: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "400px" }}
+            style={{ background: "var(--c-brand)", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "400px" }}
             onClick={(e) => e.stopPropagation()}
           >
-            <p style={{ margin: "0 0 1.25rem", color: "#cdd6f4", fontSize: "1rem", lineHeight: 1.5 }}>{actionConfirm.message}</p>
+            <p style={{ margin: "0 0 1.25rem", color: "var(--c-text)", fontSize: "1rem", lineHeight: 1.5 }}>{actionConfirm.message}</p>
             <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end" }}>
               <button
-                style={{ padding: "0.45rem 1rem", borderRadius: "6px", border: "1px solid #45475a", background: "none", color: "#cdd6f4", cursor: "pointer" }}
+                style={{ padding: "0.45rem 1rem", borderRadius: "6px", border: "1px solid #45475a", background: "none", color: "var(--c-text)", cursor: "pointer" }}
                 onClick={() => setActionConfirm(null)}
               >
                 Cancelar
               </button>
               <button
-                style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "#89b4fa", color: "#18265b", fontWeight: 700, cursor: "pointer" }}
+                style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "var(--c-link)", color: "var(--c-brand)", fontWeight: 700, cursor: "pointer" }}
                 onClick={() => void actionConfirm.onConfirm()}
               >
                 Confirmar

@@ -119,23 +119,23 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
   return (
     <>
       {/* ─── Header ─────────────────────────────────────────────────────── */}
-      <header style={S.header}>
-        <div style={S.headerInner}>
-          <div style={S.headerTopRow}>
+      <header className="toolbar">
+        <div className="toolbar">
+          <div className="toolbar">
             <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
             {isAdmin && id && (
-              <Link to={`/admin/partidas/${id}/editar`} style={S.editBtn}>
+              <Link to={`/admin/partidas/${id}/editar`} className="btn-edit">
                 ✏️ Editar partida
               </Link>
             )}
           </div>
           {match && (
-            <div style={S.context}>
-              <span style={S.contextChamp}>
+            <div className="muted">
+              <span className="muted">
                 {match.championship_name} · {match.championship_year}
                 {match.division_name ? ` · ${match.division_name}` : ""}
               </span>
-              <span style={S.contextPhase}>
+              <span className="muted">
                 {[match.phase_name, `Rodada ${match.round_number}`].join(" · ")}
               </span>
             </div>
@@ -146,45 +146,45 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
       {/* ─── Content ────────────────────────────────────────────────────── */}
       <main className="page-container">
         {loading && <PageLoader />}
-        {error && <p style={S.errorText}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && match && (
           <>
             {match.match_date && (
-              <p style={S.dateTimeLine}>{formatDateTime(match.match_date)}</p>
+              <p className="muted">{formatDateTime(match.match_date)}</p>
             )}
 
-            <div style={S.scoreCard}>
-              <div style={S.scoreGrid}>
+            <div className="score-card">
+              <div className="score-grid">
                 {/* Home team */}
-                <div style={S.teamBlock}>
+                <div className="score-team">
                   <Shield url={match.home_club_logo_url} size={48} />
-                  <Link to={`/times/${toSlugPath(match.home_team_name, match.home_team_id)}`} style={S.teamNameLink}>{match.home_team_name}</Link>
+                  <Link to={`/times/${toSlugPath(match.home_team_name, match.home_team_id)}`} className="row-link">{match.home_team_name}</Link>
                   {homeForm.length > 0 && <FormRow form={homeForm} />}
                 </div>
 
                 {/* Score */}
-                <div style={S.scoreCenterBlock}>
+                <div className="score-center">
                   {match.home_score !== null && match.away_score !== null ? (
                     <>
-                      <span style={S.bigScore}>
+                      <span className="score-big">
                         {match.home_score} × {match.away_score}
                       </span>
                       {match.home_penalty_score !== null && match.away_penalty_score !== null && (
-                        <span style={S.penaltyScore}>
+                        <span className="muted">
                           pên: {match.home_penalty_score} × {match.away_penalty_score}
                         </span>
                       )}
                     </>
                   ) : (
-                    <span style={S.vsText}>vs</span>
+                    <span className="score-sep">vs</span>
                   )}
                 </div>
 
                 {/* Away team */}
                 <div style={{ ...S.teamBlock, textAlign: "right" as const, alignItems: "flex-end" }}>
                   <Shield url={match.away_club_logo_url} size={48} />
-                  <Link to={`/times/${toSlugPath(match.away_team_name, match.away_team_id)}`} style={S.teamNameLink}>{match.away_team_name}</Link>
+                  <Link to={`/times/${toSlugPath(match.away_team_name, match.away_team_id)}`} className="row-link">{match.away_team_name}</Link>
                   {awayForm.length > 0 && <FormRow form={awayForm} />}
                 </div>
               </div>
@@ -192,10 +192,10 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
 
             {/* ─── Meta info ──────────────────────────────────────────── */}
             {(match.venue_name || match.city_name) && (
-              <p style={S.venueLine}>
+              <p className="muted">
                 📍{" "}
                 {match.venue_id
-                  ? <Link to={`/locais/${toSlugPath(match.venue_name!, match.venue_id!)}`} style={S.venueLink}>{match.venue_name}</Link>
+                  ? <Link to={`/locais/${toSlugPath(match.venue_name!, match.venue_id!)}`} className="row-link">{match.venue_name}</Link>
                   : match.venue_name
                 }
                 {match.venue_name && match.city_name && " — "}
@@ -240,7 +240,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
             {/* ─── Equipe de Arbitragem ────────────────────────────── */}
             <Section title="Equipe de Arbitragem">
               {!match.referees || match.referees.length === 0 ? (
-                <p style={S.placeholder}>Equipe de arbitragem não informada.</p>
+                <p className="muted">Equipe de arbitragem não informada.</p>
               ) : (
                 <RefereesSection referees={match.referees} />
               )}
@@ -249,7 +249,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
             {/* ─── Head to head ───────────────────────────────────────── */}
             <Section title="Histórico Entre os Times">
               {h2hGroups.length === 0 ? (
-                <p style={S.placeholder}>Nenhum confronto anterior encontrado.</p>
+                <p className="muted">Nenhum confronto anterior encontrado.</p>
               ) : (
                 <>
                   <H2HStats
@@ -259,8 +259,8 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
                     homeId={match.home_team_id}
                   />
                   {h2hGroups.map(([key, group]) => (
-                    <div key={key} style={S.h2hGroup}>
-                      <div style={S.h2hGroupHeader}>
+                    <div key={key} className="page-section">
+                      <div className="toolbar">
                         {group[0].championship_name} · {group[0].championship_year}
                       </div>
                       {group.map((m) => (
@@ -299,7 +299,7 @@ function RefereesSection({ referees }: { referees: MatchReferee[] }) {
           to={`/arbitros/${ref.referee_id}`}
           style={{
             display: "flex", alignItems: "center", gap: "0.65rem",
-            background: "#18265b", border: "1px solid #313244", borderRadius: "10px",
+            background: "var(--c-brand)", border: "1px solid #313244", borderRadius: "10px",
             padding: "0.5rem 0.85rem 0.5rem 0.5rem", textDecoration: "none",
             minWidth: "180px",
           }}
@@ -308,15 +308,15 @@ function RefereesSection({ referees }: { referees: MatchReferee[] }) {
             src={ref.referee_photo_url ?? NO_REFEREE_PHOTO}
             alt={ref.referee_name ?? ""}
             onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_REFEREE_PHOTO; }}
-            style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" as const, flexShrink: 0, backgroundColor: "#18265b" }}
+            style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" as const, flexShrink: 0, backgroundColor: "var(--c-brand)" }}
           />
           <div style={{ display: "flex", flexDirection: "column" as const, gap: "0.15rem", minWidth: 0 }}>
-            <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#cdd6f4", whiteSpace: "nowrap" as const, overflow: "hidden", textOverflow: "ellipsis" }}>
+            <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--c-text)", whiteSpace: "nowrap" as const, overflow: "hidden", textOverflow: "ellipsis" }}>
               {ref.referee_nickname ?? ref.referee_name ?? "Árbitro"}
             </span>
             <span style={{
-              fontSize: "0.68rem", fontWeight: 700, color: "#18265b",
-              background: ROLE_COLORS[ref.role] ?? "#cdd6f4",
+              fontSize: "0.68rem", fontWeight: 700, color: "var(--c-brand)",
+              background: ROLE_COLORS[ref.role] ?? "var(--c-text)",
               borderRadius: "4px", padding: "0 5px", lineHeight: "1.5",
               alignSelf: "flex-start",
             }}>
@@ -363,7 +363,7 @@ function RosterSection({
   if (!isMobile) {
     return (
       <Section title="Elencos">
-        <div style={S.rosterColumns}>
+        <div className="roster-grid">
           <RosterColumn
             teamName={homeTeamName}
             athletes={homeAthletes}
@@ -484,7 +484,7 @@ function FormRow({ form }: { form: FormResult[] }) {
             height: 20,
             borderRadius: "4px",
             backgroundColor: FORM_COLORS[r],
-            color: "#18265b",
+            color: "var(--c-brand)",
             fontSize: "0.65rem",
             fontWeight: 700,
             display: "flex",
@@ -570,9 +570,9 @@ function RosterColumn({
 
   return (
     <div style={{ ...S.rosterCol, alignItems: align === "right" ? "flex-end" : "flex-start" }}>
-      {!hideName && <span style={S.rosterColTitle}>{teamName}</span>}
+      {!hideName && <span className="muted">{teamName}</span>}
       {sorted.length === 0 ? (
-        <span style={S.rosterEmpty}>Sem elenco cadastrado</span>
+        <span className="muted">Sem elenco cadastrado</span>
       ) : (
         sorted.map((a) => {
           const isOpen = popover?.athleteId === a.athlete_id;
@@ -587,16 +587,16 @@ function RosterColumn({
                     src={a.athlete_photo_url || NO_ATHLETE_PHOTO}
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_ATHLETE_PHOTO; }}
                     alt={a.athlete_name ?? "Atleta"}
-                    style={S.rosterThumb}
+                    className="avatar"
                   />
                   <div style={{ ...S.rosterInfo, alignItems: align === "right" ? "flex-end" : "flex-start" }}>
-                    <span style={S.rosterPlayerName}>{a.athlete_nickname ?? a.athlete_name ?? "—"}</span>
-                    <div style={S.rosterMeta}>
+                    <span className="team-name">{a.athlete_nickname ?? a.athlete_name ?? "—"}</span>
+                    <div className="muted">
                       {a.jersey_number != null && (
-                        <span style={S.jerseyNum}>#{a.jersey_number}</span>
+                        <span className="muted">#{a.jersey_number}</span>
                       )}
                       {a.athlete_position && (
-                        <span style={S.rosterPos}>{a.athlete_position}</span>
+                        <span className="muted">{a.athlete_position}</span>
                       )}
                     </div>
                   </div>
@@ -699,36 +699,36 @@ function H2HStats({
   const awayPct = 100 - homePct - drawPct;
 
   return (
-    <div style={S.statsBlock}>
+    <div className="stats-block">
       {/* Win bar */}
-      <div style={S.statsRow}>
-        <span style={S.statsTeamLabel}>{homeName}</span>
-        <span style={S.statsTeamLabel} />
+      <div className="stats-row">
+        <span className="muted">{homeName}</span>
+        <span className="muted" />
         <span style={{ ...S.statsTeamLabel, textAlign: "right" as const }}>{awayName}</span>
       </div>
-      <div style={S.statsRow}>
-        <span style={S.statsCount}>{homeWins}V</span>
-        <span style={S.statsCountCenter}>{draws}E</span>
+      <div className="stats-row">
+        <span className="stats-count">{homeWins}V</span>
+        <span className="stats-count">{draws}E</span>
         <span style={{ ...S.statsCount, textAlign: "right" as const }}>{awayWins}V</span>
       </div>
-      <div style={S.winBar}>
+      <div className="win-bar">
         {homePct > 0 && <div style={{ ...S.winBarHome, width: `${homePct}%` }} />}
         {drawPct > 0 && <div style={{ ...S.winBarDraw, width: `${drawPct}%` }} />}
         {awayPct > 0 && <div style={{ ...S.winBarAway, width: `${awayPct}%` }} />}
       </div>
-      <div style={S.statsRow}>
-        <span style={S.statsPct}>{homePct}%</span>
+      <div className="stats-row">
+        <span className="muted">{homePct}%</span>
         <span style={{ ...S.statsPct, textAlign: "center" as const }}>{drawPct}%</span>
         <span style={{ ...S.statsPct, textAlign: "right" as const }}>{awayPct}%</span>
       </div>
 
-      <div style={S.statsDivider} />
+      <div  />
 
       {/* Goals */}
       <StatBar label="Gols marcados" homeVal={homeGoals} awayVal={awayGoals} />
       <StatBar label="Média de gols" homeVal={+(homeGoals / total).toFixed(1)} awayVal={+(awayGoals / total).toFixed(1)} />
 
-      <div style={S.statsFootnote}>{total} jogo{total !== 1 ? "s" : ""} no histórico</div>
+      <div className="muted">{total} jogo{total !== 1 ? "s" : ""} no histórico</div>
     </div>
   );
 }
@@ -738,13 +738,13 @@ function StatBar({ label, homeVal, awayVal }: { label: string; homeVal: number; 
   const homePct = Math.round((homeVal / total) * 100);
   const awayPct = 100 - homePct;
   return (
-    <div style={S.statBarBlock}>
-      <div style={S.statBarHeader}>
-        <span style={S.statBarVal}>{homeVal}</span>
-        <span style={S.statBarLabel}>{label}</span>
+    <div className="stat-bar">
+      <div className="stat-bar__header">
+        <span className="muted">{homeVal}</span>
+        <span className="muted">{label}</span>
         <span style={{ ...S.statBarVal, textAlign: "right" as const }}>{awayVal}</span>
       </div>
-      <div style={S.statBarTrack}>
+      <div className="stat-bar__track">
         {homePct > 0 && <div style={{ ...S.statBarFillHome, width: `${homePct}%` }} />}
         {awayPct > 0 && <div style={{ ...S.statBarFillAway, width: `${awayPct}%` }} />}
       </div>
@@ -754,9 +754,9 @@ function StatBar({ label, homeVal, awayVal }: { label: string; homeVal: number; 
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={S.section}>
-      <h2 style={S.sectionTitle}>{title}</h2>
-      <div style={S.sectionBody}>{children}</div>
+    <section className="page-section">
+      <h2 className="section-heading">{title}</h2>
+      <div className="page-container">{children}</div>
     </section>
   );
 }
@@ -777,35 +777,35 @@ function H2HMatchRow({ match: m }: { match: HeadToHeadMatch }) {
   })();
 
   return (
-    <Link to={`/partidas/${m.id}`} style={S.h2hMatchLink}>
-      <div style={S.h2hCardRow}>
+    <Link to={`/partidas/${m.id}`} className="row-link">
+      <div className="match-team-row">
         {/* Col 1 — data */}
-        <div style={S.h2hDateCol}>
-          {dateLabel && <span style={S.h2hDateLabel}>{dateLabel}</span>}
-          {timeLabel && <span style={S.h2hTimeLabel}>{timeLabel}</span>}
+        <div >
+          {dateLabel && <span className="muted">{dateLabel}</span>}
+          {timeLabel && <span className="muted">{timeLabel}</span>}
         </div>
 
         {/* Col 2 — times + placar */}
-        <div style={S.h2hTeamsCol}>
-          <div style={S.h2hTeamRow}>
-            <span style={S.h2hScoreSlot}>
+        <div >
+          <div className="match-team-row">
+            <span className="score-big">
               {hasScore ? `${m.home_score}${hasPenalty ? ` (${m.home_penalty_score})` : ""}` : ""}
             </span>
             <Shield url={m.home_club_logo_url ?? null} size={16} />
-            <span style={S.h2hTeamName}>{m.home_team_name}</span>
+            <span className="team-name">{m.home_team_name}</span>
           </div>
-          <div style={S.h2hTeamRow}>
-            <span style={S.h2hScoreSlot}>
+          <div className="match-team-row">
+            <span className="score-big">
               {hasScore ? `${m.away_score}${hasPenalty ? ` (${m.away_penalty_score})` : ""}` : ""}
             </span>
             <Shield url={m.away_club_logo_url ?? null} size={16} />
-            <span style={S.h2hTeamName}>{m.away_team_name}</span>
+            <span className="team-name">{m.away_team_name}</span>
           </div>
         </div>
 
         {/* Col 3 — fase */}
-        <div style={S.h2hPhaseCol}>
-          <span style={S.h2hPhaseLabel}>{m.phase_name}</span>
+        <div >
+          <span className="muted">{m.phase_name}</span>
         </div>
       </div>
     </Link>

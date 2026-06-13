@@ -148,8 +148,8 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
           <div className="hero__row">
             <h1 className="page-title">Atletas</h1>
             <div style={{ display: "flex", gap: "0.75rem" }}>
-              <Link to="/admin/atletas/importar" style={{ ...S.btnNew, background: "none", border: "1px solid #89b4fa", color: "#89b4fa" }}>⬆ Importar CSV</Link>
-              <Link to="/admin/atletas/novo" style={S.btnNew}>+ Novo atleta</Link>
+              <Link to="/admin/atletas/importar" style={{ ...S.btnNew, background: "none", border: "1px solid #89b4fa", color: "var(--c-link)" }}>⬆ Importar CSV</Link>
+              <Link to="/admin/atletas/novo" className="btn btn-success">+ Novo atleta</Link>
             </div>
           </div>
         </div>
@@ -157,9 +157,9 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
 
       <main className="page-container">
         {/* Cascade filter bar */}
-        <div style={S.toolbar}>
+        <div className="toolbar">
           <select
-            style={S.filterSelect}
+            className="filter-select"
             value={selectedLeagueId}
             onChange={(e) => { setSelectedLeagueId(e.target.value); setSelectedSport(""); setSelectedCategory(""); setSelectedTeamId(""); }}
             disabled={isLeagueAdmin && !isAdmin && allLeagues.length <= 1}
@@ -168,7 +168,7 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
             {allLeagues.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
           </select>
           <select
-            style={S.filterSelect}
+            className="filter-select"
             value={selectedSport}
             onChange={(e) => { setSelectedSport(e.target.value); setSelectedCategory(""); setSelectedTeamId(""); }}
           >
@@ -176,7 +176,7 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
             {availableSports.map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
           <select
-            style={S.filterSelect}
+            className="filter-select"
             value={selectedCategory}
             onChange={(e) => { setSelectedCategory(e.target.value); setSelectedTeamId(""); }}
           >
@@ -194,17 +194,17 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
         </div>
 
         {/* Text search (secondary — for name filter or full_admin search) */}
-        <div style={S.searchWrap}>
+        <div className="search-wrap">
           <input
             type="search"
             placeholder={selectedTeamId ? "Filtrar atletas do time..." : "Buscar atleta por nome (mín. 2 caracteres)…"}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !selectedTeamId) handleSearch(); }}
-            style={S.searchInput}
+            className="search-input"
           />
           {!selectedTeamId && (
-            <button onClick={handleSearch} disabled={loading || query.trim().length < 2} style={S.searchBtn}>
+            <button onClick={handleSearch} disabled={loading || query.trim().length < 2} className="btn btn-primary">
               {loading ? "Buscando…" : "Buscar"}
             </button>
           )}
@@ -220,45 +220,45 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
         {/* Team athlete results */}
         {selectedTeamId && (
           <>
-            {loadingAthletes && <p style={S.hint}>Carregando atletas...</p>}
+            {loadingAthletes && <p className="muted">Carregando atletas...</p>}
             {!loadingAthletes && filteredTeamAthletes.length === 0 && (
-              <p style={S.hint}>{teamAthletes.length === 0 ? "Nenhum atleta ativo neste time." : "Nenhum atleta encontrado para o filtro."}</p>
+              <p className="muted">{teamAthletes.length === 0 ? "Nenhum atleta ativo neste time." : "Nenhum atleta encontrado para o filtro."}</p>
             )}
             {!loadingAthletes && filteredTeamAthletes.length > 0 && (
               <div className="table-wrap">
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th style={S.th}>Foto</th>
-                      <th style={S.th}>Nome</th>
-                      <th style={S.th}>Apelido</th>
-                      <th style={S.th}>Posição</th>
-                      <th style={S.th}>N° Camisa</th>
-                      <th style={S.th}>Ações</th>
+                      <th >Foto</th>
+                      <th >Nome</th>
+                      <th >Apelido</th>
+                      <th >Posição</th>
+                      <th >N° Camisa</th>
+                      <th >Ações</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredTeamAthletes.map((a) => (
-                      <tr key={a.id} style={S.trRow}>
-                        <td style={S.td}>
+                      <tr key={a.id} >
+                        <td >
                           <img
                             src={a.athlete_photo_url ?? NO_PHOTO}
                             alt={a.athlete_name ?? ""}
                             onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_PHOTO; }}
-                            style={S.thumb}
+                            className="avatar"
                           />
                         </td>
-                        <td style={S.td}>
-                          <Link to={`/atletas/${a.athlete_id}`} style={S.rowLink}>{a.athlete_name ?? "?"}</Link>
+                        <td >
+                          <Link to={`/atletas/${a.athlete_id}`} className="row-link">{a.athlete_name ?? "?"}</Link>
                         </td>
-                        <td style={S.tdMuted}>{a.athlete_nickname ?? "—"}</td>
-                        <td style={S.tdMuted}>{a.athlete_position ?? "—"}</td>
-                        <td style={S.tdMuted}>{a.jersey_number ?? "—"}</td>
-                        <td style={S.td}>
-                          <div style={S.actionGroup}>
-                            <Link to={`/admin/atletas/${a.athlete_id}/editar`} style={S.btnEdit}>Editar</Link>
-                            <Link to={`/admin/atletas/${a.athlete_id}/times`} style={S.btnSec}>Times</Link>
-                            <Link to={`/admin/atletas/${a.athlete_id}/ligas`} style={S.btnSec}>Ligas</Link>
+                        <td className="td-muted">{a.athlete_nickname ?? "—"}</td>
+                        <td className="td-muted">{a.athlete_position ?? "—"}</td>
+                        <td className="td-muted">{a.jersey_number ?? "—"}</td>
+                        <td >
+                          <div className="td-action">
+                            <Link to={`/admin/atletas/${a.athlete_id}/editar`} className="btn-edit">Editar</Link>
+                            <Link to={`/admin/atletas/${a.athlete_id}/times`} className="btn btn-secondary">Times</Link>
+                            <Link to={`/admin/atletas/${a.athlete_id}/ligas`} className="btn btn-secondary">Ligas</Link>
                           </div>
                         </td>
                       </tr>
@@ -273,52 +273,52 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
         {/* Text search results (when no team selected) */}
         {!selectedTeamId && (
           <>
-            {!searched && !isLeagueAdmin && <p style={S.hint}>Selecione um time nos filtros acima, ou busque por nome.</p>}
-            {!searched && isLeagueAdmin && !selectedTeamId && <p style={S.hint}>Selecione um time para ver os atletas.</p>}
+            {!searched && !isLeagueAdmin && <p className="muted">Selecione um time nos filtros acima, ou busque por nome.</p>}
+            {!searched && isLeagueAdmin && !selectedTeamId && <p className="muted">Selecione um time para ver os atletas.</p>}
             {searched && !loading && results?.length === 0 && (
-              <p style={S.hint}>Nenhum atleta encontrado para "{query}".</p>
+              <p className="muted">Nenhum atleta encontrado para "{query}".</p>
             )}
             {results && results.length > 0 && (
               <div className="table-wrap">
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th style={S.th}>Foto</th>
-                      <th style={S.th}>Nome</th>
-                      <th style={S.th}>Apelido</th>
-                      <th style={S.th}>Posição</th>
-                      <th style={S.th}>CPF</th>
-                      <th style={S.th}>RG</th>
-                      <th style={S.th}>Ações</th>
+                      <th >Foto</th>
+                      <th >Nome</th>
+                      <th >Apelido</th>
+                      <th >Posição</th>
+                      <th >CPF</th>
+                      <th >RG</th>
+                      <th >Ações</th>
                     </tr>
                   </thead>
                   <tbody>
                     {results.map((a) => (
-                      <tr key={a.id} style={S.trRow}>
-                        <td style={S.td}>
+                      <tr key={a.id} >
+                        <td >
                           <img
                             src={a.photo_url ?? NO_PHOTO}
                             alt={a.name}
                             onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_PHOTO; }}
-                            style={S.thumb}
+                            className="avatar"
                           />
                         </td>
-                        <td style={S.td}>
-                          <Link to={`/atletas/${a.id}`} style={S.rowLink}>{a.name}</Link>
+                        <td >
+                          <Link to={`/atletas/${a.id}`} className="row-link">{a.name}</Link>
                         </td>
-                        <td style={S.tdMuted}>{a.nickname ?? "—"}</td>
-                        <td style={S.tdMuted}>{a.position ?? "—"}</td>
-                        <td style={S.tdMuted}>{a.cpf ?? "—"}</td>
-                        <td style={S.tdMuted}>{a.rg ?? "—"}</td>
-                        <td style={S.td}>
-                          <div style={S.actionGroup}>
-                            <Link to={`/admin/atletas/${a.id}/editar`} state={{ athlete: a }} style={S.btnEdit}>Editar</Link>
-                            <Link to={`/admin/atletas/${a.id}/times`} style={S.btnSec}>Times</Link>
-                            <Link to={`/admin/atletas/${a.id}/ligas`} style={S.btnSec}>Ligas</Link>
+                        <td className="td-muted">{a.nickname ?? "—"}</td>
+                        <td className="td-muted">{a.position ?? "—"}</td>
+                        <td className="td-muted">{a.cpf ?? "—"}</td>
+                        <td className="td-muted">{a.rg ?? "—"}</td>
+                        <td >
+                          <div className="td-action">
+                            <Link to={`/admin/atletas/${a.id}/editar`} state={{ athlete: a }} className="btn-edit">Editar</Link>
+                            <Link to={`/admin/atletas/${a.id}/times`} className="btn btn-secondary">Times</Link>
+                            <Link to={`/admin/atletas/${a.id}/ligas`} className="btn btn-secondary">Ligas</Link>
                             <button
                               onClick={() => handleDelete(a)}
                               disabled={deletingId === a.id}
-                              style={S.btnDelete}
+                              className="btn btn-danger"
                             >
                               {deletingId === a.id ? "…" : "Excluir"}
                             </button>

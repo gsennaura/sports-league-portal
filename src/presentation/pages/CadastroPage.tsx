@@ -313,10 +313,10 @@ export function CadastroPage() {
   if (completed) {
     return (
       <div className="page-container">
-        <div style={S.card}>
+        <div className="card">
           <div style={{ textAlign: "center", padding: "1.5rem 0" }}>
             <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>✅</div>
-            <h2 style={{ color: "#a6e3a1", margin: "0 0 .5rem", fontSize: "1.3rem" }}>Conta criada com sucesso!</h2>
+            <h2 style={{ color: "var(--c-positive)", margin: "0 0 .5rem", fontSize: "1.3rem" }}>Conta criada com sucesso!</h2>
             {selectedTeams.length > 0 ? (
               <>
                 <p style={{ color: "#ffffff", fontSize: ".9rem", margin: "0 0 1rem" }}>
@@ -326,10 +326,10 @@ export function CadastroPage() {
                 </p>
                 <div style={{ marginBottom: "1.25rem" }}>
                   {selectedTeams.map(st => (
-                    <div key={st.teamId} style={{ background: "#313244", borderRadius: 8, padding: ".5rem .9rem", marginBottom: 6, textAlign: "left" }}>
-                      <span style={{ color: "#cdd6f4", fontSize: ".9rem" }}>{st.teamName}</span>
+                    <div key={st.teamId} style={{ background: "var(--c-border)", borderRadius: 8, padding: ".5rem .9rem", marginBottom: 6, textAlign: "left" }}>
+                      <span style={{ color: "var(--c-text)", fontSize: ".9rem" }}>{st.teamName}</span>
                       <span style={{ color: "#ffffff", fontSize: ".75rem", marginLeft: 8 }}>{st.leagueName}</span>
-                      <span style={{ marginLeft: 8, fontSize: ".75rem", color: "#f9e2af" }}>⏳ aguardando aprovação</span>
+                      <span style={{ marginLeft: 8, fontSize: ".75rem", color: "var(--c-warning)" }}>⏳ aguardando aprovação</span>
                     </div>
                   ))}
                 </div>
@@ -340,7 +340,7 @@ export function CadastroPage() {
               </p>
             )}
             <button
-              style={{ ...S.input, background: "#89b4fa", color: "#18265b", fontWeight: 700, cursor: "pointer", border: "none", borderRadius: 8, padding: ".75rem", width: "100%" }}
+              className="form-input" style={{ background: "var(--c-link)", color: "var(--c-brand)", fontWeight: 700, cursor: "pointer", border: "none", borderRadius: 8, padding: ".75rem", width: "100%" }}
               onClick={() => navigate("/meu-perfil")}
             >
               Ir para meu perfil →
@@ -353,8 +353,8 @@ export function CadastroPage() {
 
   return (
     <div className="page-container">
-      <div style={S.card}>
-        <div style={S.header}>
+      <div className="card">
+        <div className="toolbar">
           <h1 className="page-title">Criar conta</h1>
           <StepIndicator step={step} userType={userType} />
         </div>
@@ -363,98 +363,98 @@ export function CadastroPage() {
 
         {/* ── Step 1: Conta ── */}
         {step === 1 && (
-          <form onSubmit={handleStep1Next} style={S.form}>
+          <form onSubmit={handleStep1Next} className="form-body">
             <Label>Nome completo *</Label>
-            <input style={S.input} autoFocus value={name} onChange={e => setName(e.target.value)} placeholder="Seu nome completo" required />
+            <input className="form-input" autoFocus value={name} onChange={e => setName(e.target.value)} placeholder="Seu nome completo" required />
             <Label>CPF *</Label>
-            <input style={S.input} value={cpf} onChange={e => setCpf(maskCpf(e.target.value))} placeholder="000.000.000-00" maxLength={14} required />
+            <input className="form-input" value={cpf} onChange={e => setCpf(maskCpf(e.target.value))} placeholder="000.000.000-00" maxLength={14} required />
             <Label>Telefone / WhatsApp *</Label>
-            <input style={S.input} type="tel" value={phone} onChange={e => setPhone(maskPhone(e.target.value))} placeholder="(00) 00000-0000" maxLength={16} required />
+            <input className="form-input" type="tel" value={phone} onChange={e => setPhone(maskPhone(e.target.value))} placeholder="(00) 00000-0000" maxLength={16} required />
             <Label>Data de nascimento *</Label>
-            <input style={S.input} type="date" value={birthDate} onChange={e => setBirthDate(e.target.value)} required />
+            <input className="form-input" type="date" value={birthDate} onChange={e => setBirthDate(e.target.value)} required />
             <Label>E-mail *</Label>
-            <input style={S.input} type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="seuemail@exemplo.com" required />
+            <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="seuemail@exemplo.com" required />
             <Label>Senha *</Label>
-            <input style={S.input} type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Mínimo 8 caracteres" />
+            <input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Mínimo 8 caracteres" />
             <Label>Confirmar senha *</Label>
-            <input style={S.input} type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Repita a senha" />
+            <input className="form-input" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Repita a senha" />
             <Btn type="submit" disabled={loading}>{loading ? "Verificando..." : "Próximo →"}</Btn>
-            <p style={S.loginLink}>Já tem conta? <Link to="/login" style={S.link}>Entrar</Link></p>
+            <p className="row-link">Já tem conta? <Link to="/login" className="row-link">Entrar</Link></p>
           </form>
         )}
 
         {/* ── Step 2: Tipo ── */}
         {step === 2 && (
-          <div style={S.form}>
-            <p style={S.question}>Como você quer se cadastrar?</p>
+          <div className="form-body">
+            <p className="muted">Como você quer se cadastrar?</p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-              <button style={S.typeBtn} onClick={() => { setUserType("athlete"); setError(null); setStep(3); }}>
-                <span style={S.typeIcon}>⚽</span>
+              <button className="btn btn-secondary" onClick={() => { setUserType("athlete"); setError(null); setStep(3); }}>
+                <span >⚽</span>
                 <span>Sou atleta</span>
               </button>
-              <button style={S.typeBtn} onClick={() => { setUserType("dirigente"); setError(null); setStep(3); }}>
-                <span style={S.typeIcon}>🏆</span>
+              <button className="btn btn-secondary" onClick={() => { setUserType("dirigente"); setError(null); setStep(3); }}>
+                <span >🏆</span>
                 <span>Sou dirigente</span>
               </button>
-              <button style={S.typeBtn} disabled={loading} onClick={() => { setUserType("torcedor"); setError(null); doRegisterUser("torcedor"); }}>
-                <span style={S.typeIcon}>📣</span>
+              <button className="btn btn-secondary" disabled={loading} onClick={() => { setUserType("torcedor"); setError(null); doRegisterUser("torcedor"); }}>
+                <span >📣</span>
                 <span>{loading ? "Criando..." : "Sou torcedor"}</span>
               </button>
             </div>
-            <button style={S.backBtn} onClick={() => { setError(null); setStep(1); }}>← Voltar</button>
+            <button className="btn btn-secondary" onClick={() => { setError(null); setStep(1); }}>← Voltar</button>
           </div>
         )}
 
         {/* ── Step 3: Atleta ── */}
         {step === 3 && userType === "athlete" && (
-          <form onSubmit={handleStep3Next} style={S.form}>
+          <form onSubmit={handleStep3Next} className="form-body">
             <Label>Apelido</Label>
-            <input style={S.input} autoFocus value={nickname} onChange={e => setNickname(e.target.value)} placeholder="Como te chamam no campo" />
+            <input className="form-input" autoFocus value={nickname} onChange={e => setNickname(e.target.value)} placeholder="Como te chamam no campo" />
             <Label>Posição</Label>
-            <select style={S.input} value={position} onChange={e => setPosition(e.target.value)}>
+            <select className="form-input" value={position} onChange={e => setPosition(e.target.value)}>
               <option value="">Selecione sua posição</option>
               {["Goleiro","Lateral Direito","Lateral Esquerdo","Zagueiro","Volante","Meio-Campo","Meia Atacante","Ponta Direita","Ponta Esquerda","Centroavante"].map(p => (
                 <option key={p} value={p}>{p}</option>
               ))}
             </select>
             <Label>Pé dominante *</Label>
-            <select style={S.input} value={preferredFoot} onChange={e => setPreferredFoot(e.target.value)} required>
+            <select className="form-input" value={preferredFoot} onChange={e => setPreferredFoot(e.target.value)} required>
               <option value="">Selecione</option>
               <option value="Direito">Direito</option>
               <option value="Esquerdo">Esquerdo</option>
               <option value="Ambidestro">Ambidestro</option>
             </select>
             <Label>Altura (cm) *</Label>
-            <input style={S.input} type="number" min={100} max={250} value={heightCm} onChange={e => setHeightCm(e.target.value)} placeholder="Ex: 175" required />
+            <input className="form-input" type="number" min={100} max={250} value={heightCm} onChange={e => setHeightCm(e.target.value)} placeholder="Ex: 175" required />
             <Label>Peso (kg) *</Label>
-            <input style={S.input} type="number" min={30} max={200} step={0.1} value={weightKg} onChange={e => setWeightKg(e.target.value)} placeholder="Ex: 70.5" required />
+            <input className="form-input" type="number" min={30} max={200} step={0.1} value={weightKg} onChange={e => setWeightKg(e.target.value)} placeholder="Ex: 70.5" required />
             <Btn type="submit" disabled={loading}>{loading ? "Criando conta..." : "Próximo →"}</Btn>
-            <button style={S.backBtn} onClick={() => { setError(null); setStep(2); }}>← Voltar</button>
+            <button className="btn btn-secondary" onClick={() => { setError(null); setStep(2); }}>← Voltar</button>
           </form>
         )}
 
         {/* ── Step 3: Dirigente ── */}
         {step === 3 && userType === "dirigente" && (
-          <form onSubmit={handleStep3Next} style={S.form}>
+          <form onSubmit={handleStep3Next} className="form-body">
             <p style={{ color: "#ffffff", fontSize: ".9rem", lineHeight: 1.5, margin: "0 0 12px" }}>
-              Olá, <strong style={{ color: "#cdd6f4" }}>{name}</strong>! Você vai criar uma conta de dirigente.
+              Olá, <strong style={{ color: "var(--c-text)" }}>{name}</strong>! Você vai criar uma conta de dirigente.
               Um administrador precisará aprovar seu acesso a cada time.
             </p>
             <Btn type="submit" disabled={loading}>{loading ? "Criando conta..." : "Criar conta e selecionar time →"}</Btn>
-            <button style={S.backBtn} onClick={() => { setError(null); setStep(2); }}>← Voltar</button>
+            <button className="btn btn-secondary" onClick={() => { setError(null); setStep(2); }}>← Voltar</button>
           </form>
         )}
 
         {/* ── Step 4: Seleção de times ── */}
         {step === 4 && (
-          <div style={S.form}>
-            <p style={S.question}>
+          <div className="form-body">
+            <p className="muted">
               {userType === "athlete" ? "Em qual(is) time(s) você joga?" : "Para qual time você quer ser dirigente?"}
               <span style={{ color: "#ffffff", fontWeight: 400, fontSize: ".85rem" }}> (opcional)</span>
             </p>
 
             <Label>Liga</Label>
-            <select style={S.input} value={selLeagueId} onChange={e => setSelLeagueId(e.target.value)}>
+            <select className="form-input" value={selLeagueId} onChange={e => setSelLeagueId(e.target.value)}>
               <option value="">Selecione uma liga</option>
               {leagues.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
             </select>
@@ -462,7 +462,7 @@ export function CadastroPage() {
             {selLeagueId && (
               <>
                 <Label>Esporte</Label>
-                <select style={S.input} value={selSport} onChange={e => setSelSport(e.target.value)}>
+                <select className="form-input" value={selSport} onChange={e => setSelSport(e.target.value)}>
                   <option value="">Selecione um esporte</option>
                   {sports.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
@@ -472,7 +472,7 @@ export function CadastroPage() {
             {selSport && (
               <>
                 <Label>Categoria</Label>
-                <select style={S.input} value={selCategory} onChange={e => setSelCategory(e.target.value)}>
+                <select className="form-input" value={selCategory} onChange={e => setSelCategory(e.target.value)}>
                   <option value="">Selecione uma categoria</option>
                   {categories.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
                 </select>
@@ -482,7 +482,7 @@ export function CadastroPage() {
             {selCategory && (
               <>
                 <Label>Time</Label>
-                <select style={S.input} value={selTeamId} onChange={e => setSelTeamId(e.target.value)}>
+                <select className="form-input" value={selTeamId} onChange={e => setSelTeamId(e.target.value)}>
                   <option value="">Selecione um time</option>
                   {teamOptions.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
                 </select>
@@ -492,14 +492,14 @@ export function CadastroPage() {
             {selTeamId && userType === "athlete" && (
               <>
                 <Label>Número da camisa <span style={{ color: "#ffffff", fontWeight: 400, textTransform: "none" as const }}>(opcional)</span></Label>
-                <input style={S.input} type="number" min={1} max={99} value={selJersey} onChange={e => setSelJersey(e.target.value)} placeholder="Ex: 10" />
+                <input className="form-input" type="number" min={1} max={99} value={selJersey} onChange={e => setSelJersey(e.target.value)} placeholder="Ex: 10" />
               </>
             )}
 
             {selTeamId && (
               <button
                 type="button"
-                style={{ ...S.typeBtn, padding: ".5rem", fontSize: ".9rem", borderColor: "#a6e3a1", color: "#a6e3a1" }}
+                style={{ ...S.typeBtn, padding: ".5rem", fontSize: ".9rem", borderColor: "var(--c-positive)", color: "#a6e3a1" }}
                 onClick={addTeam}
               >
                 + Adicionar este time
@@ -512,17 +512,17 @@ export function CadastroPage() {
                   Times selecionados
                 </p>
                 {selectedTeams.map(st => (
-                  <div key={st.teamId} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "#18265b", borderRadius: 6, padding: ".4rem .7rem", marginBottom: 4 }}>
+                  <div key={st.teamId} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--c-brand)", borderRadius: 6, padding: ".4rem .7rem", marginBottom: 4 }}>
                     <div>
-                      <span style={{ color: "#cdd6f4", fontSize: ".9rem" }}>{st.teamName}</span>
+                      <span style={{ color: "var(--c-text)", fontSize: ".9rem" }}>{st.teamName}</span>
                       <span style={{ color: "#ffffff", fontSize: ".75rem", marginLeft: 8 }}>
                         {st.leagueName}{st.jerseyNumber ? ` · #${st.jerseyNumber}` : ""}
                       </span>
                     </div>
-                    <button onClick={() => removeTeam(st.teamId)} style={{ background: "none", border: "none", color: "#f38ba8", cursor: "pointer", fontSize: ".85rem" }}>✕</button>
+                    <button onClick={() => removeTeam(st.teamId)} style={{ background: "none", border: "none", color: "var(--c-negative)", cursor: "pointer", fontSize: ".85rem" }}>✕</button>
                   </div>
                 ))}
-                <p style={{ color: "#a6e3a1", fontSize: ".8rem", margin: "4px 0" }}>
+                <p style={{ color: "var(--c-positive)", fontSize: ".8rem", margin: "4px 0" }}>
                   ✓ Sua solicitação ficará pendente até aprovação do administrador ou dirigente do time.
                 </p>
               </div>
@@ -556,7 +556,7 @@ function StepIndicator({ step, userType }: { step: Step; userType: UserType }) {
           }}>
             {i + 1 < step ? "✓" : i + 1}
           </div>
-          <span style={{ fontSize: ".65rem", color: i + 1 === step ? "#cba6f7" : "#ffffff" }}>{l}</span>
+          <span style={{ fontSize: ".65rem", color: i + 1 === step ? "var(--c-action)" : "#ffffff" }}>{l}</span>
         </div>
       ))}
     </div>
@@ -568,7 +568,7 @@ function Label({ children }: { children: React.ReactNode }) {
 }
 
 function Btn({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return <button {...props} style={{ padding: ".7rem", background: props.disabled ? "#45475a" : "#89b4fa", color: "#18265b", border: "none", borderRadius: 8, fontSize: "1rem", fontWeight: 700, cursor: props.disabled ? "not-allowed" : "pointer", marginTop: ".25rem" }}>{children}</button>;
+  return <button {...props} style={{ padding: ".7rem", background: props.disabled ? "#45475a" : "var(--c-link)", color: "var(--c-brand)", border: "none", borderRadius: 8, fontSize: "1rem", fontWeight: 700, cursor: props.disabled ? "not-allowed" : "pointer", marginTop: ".25rem" }}>{children}</button>;
 }
 
 // ── Styles ────────────────────────────────────────────────────────────────────

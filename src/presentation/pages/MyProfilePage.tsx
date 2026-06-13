@@ -231,7 +231,7 @@ export function MyProfilePage() {
   );
 
   if (loading) return <div className="page-container"><p style={{ color: "#ffffff", padding: 40 }}>Carregando…</p></div>;
-  if (pageError) return <div className="page-container"><p style={{ color: "#f38ba8", padding: 40 }}>{pageError}</p></div>;
+  if (pageError) return <div className="page-container"><p style={{ color: "var(--c-negative)", padding: 40 }}>{pageError}</p></div>;
   if (!profile) return null;
 
   const initials = profile.name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
@@ -239,19 +239,19 @@ export function MyProfilePage() {
   return (
     <>
       <div className="page-container">
-        <div style={S.container}>
+        <div className="page-container">
 
           {/* ── Hero ─────────────────────────────────────────────────────── */}
           <div className="hero">
-            <div style={S.avatarWrap}>
+            <div className="avatar">
               <div style={{ position: "relative", display: "inline-block" }}>
                 {(photoPreview ?? profile.photo_url)
-                  ? <img src={photoPreview ?? profile.photo_url!} alt="foto" style={S.avatar} />
-                  : <div style={S.avatarPlaceholder}>{initials}</div>
+                  ? <img src={photoPreview ?? profile.photo_url!} alt="foto" className="avatar" />
+                  : <div className="avatar-placeholder">{initials}</div>
                 }
                 <label
                   htmlFor="hero-photo-input"
-                  style={S.photoPencil}
+                  
                   title="Alterar foto"
                 >{photoUploading ? "…" : "✏"}</label>
                 <input
@@ -286,28 +286,28 @@ export function MyProfilePage() {
                 />
               </div>
             </div>
-            <div style={S.heroInfo}>
-              <h1 style={S.heroName}>{profile.name}</h1>
-              {profile.nickname && <p style={S.heroNickname}>"{profile.nickname}"</p>}
-              <p style={S.heroEmail}>{user?.email}</p>
+            <div className="hero__text">
+              <h1 className="page-title">{profile.name}</h1>
+              {profile.nickname && <p className="muted">"{profile.nickname}"</p>}
+              <p className="muted">{user?.email}</p>
             </div>
-            <button style={S.btnEdit} onClick={() => setEditOpen(true)}>Editar perfil</button>
+            <button className="btn-edit" onClick={() => setEditOpen(true)}>Editar perfil</button>
           </div>
 
           {/* ── Vínculo atual ─────────────────────────────────────────────── */}
-          <div style={S.section}>
-            <h2 style={S.sectionTitle}>Status do vínculo</h2>
+          <div className="page-section">
+            <h2 className="section-heading">Status do vínculo</h2>
             {memberships.length === 0 ? (
-              <div style={S.membershipCard}>
-                <span style={S.membershipTeam}>Nenhum vínculo com time</span>
+              <div className="card">
+                <span className="team-name">Nenhum vínculo com time</span>
                 <StatusBadge status="sem_time" />
               </div>
             ) : (
               memberships.filter((m) => m.membership_status !== "rejeitado").map((m) => (
-                <div key={m.id} style={S.membershipCard}>
+                <div key={m.id} className="card">
                   <div>
-                    <span style={S.membershipTeam}>{m.team_name ?? m.team_id}</span>
-                    {m.team_sport_name && <span style={S.membershipSport}> · {m.team_sport_name}</span>}
+                    <span className="team-name">{m.team_name ?? m.team_id}</span>
+                    {m.team_sport_name && <span className="muted"> · {m.team_sport_name}</span>}
                   </div>
                   <StatusBadge status={m.membership_status ?? "sem_time"} />
                 </div>
@@ -316,9 +316,9 @@ export function MyProfilePage() {
           </div>
 
           {/* ── Informações pessoais ──────────────────────────────────────── */}
-          <div style={S.section}>
-            <h2 style={S.sectionTitle}>Informações pessoais</h2>
-            <div style={S.infoGrid}>
+          <div className="page-section">
+            <h2 className="section-heading">Informações pessoais</h2>
+            <div className="form-field-group">
               <InfoItem label="Posição" value={profile.position ?? "—"} />
               <InfoItem label="Pé dominante" value={profile.preferred_foot ?? "—"} />
               <InfoItem label="Altura" value={profile.height_cm ? `${profile.height_cm} cm` : "—"} />
@@ -330,33 +330,33 @@ export function MyProfilePage() {
 
           {/* ── Solicitar vínculo ─────────────────────────────────────────── */}
           {!hasPendingOrActive && (
-            <div style={S.section}>
-              <h2 style={S.sectionTitle}>Solicitar vínculo com time</h2>
-              <p style={S.sectionSub}>Selecione o time e envie uma solicitação. O administrador irá aprovar.</p>
+            <div className="page-section">
+              <h2 className="section-heading">Solicitar vínculo com time</h2>
+              <p className="muted">Selecione o time e envie uma solicitação. O administrador irá aprovar.</p>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".75rem" }}>
-                <div style={S.fieldGroup}>
+                <div className="form-field-group">
                   <label className="form-label">Liga</label>
                   <select className="search-input" value={selectedLeague} onChange={(e) => { setSelectedLeague(e.target.value); setSelectedSport(""); setSelectedCategory(""); setSelectedTeamId(""); }}>
                     <option value="">Todas as ligas</option>
                     {leagues.map((lg) => <option key={lg.id} value={lg.id}>{lg.name}</option>)}
                   </select>
                 </div>
-                <div style={S.fieldGroup}>
+                <div className="form-field-group">
                   <label className="form-label">Esporte</label>
                   <select className="search-input" value={selectedSport} onChange={(e) => { setSelectedSport(e.target.value); setSelectedCategory(""); setSelectedTeamId(""); }}>
                     <option value="">Todos os esportes</option>
                     {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
                   </select>
                 </div>
-                <div style={S.fieldGroup}>
+                <div className="form-field-group">
                   <label className="form-label">Categoria</label>
                   <select className="search-input" value={selectedCategory} onChange={(e) => { setSelectedCategory(e.target.value); setSelectedTeamId(""); }} disabled={availableCategories.length === 0}>
                     <option value="">Todas as categorias</option>
                     {availableCategories.map((c) => <option key={c} value={c}>{CATEGORY_LABEL[c] ?? c}</option>)}
                   </select>
                 </div>
-                <div style={S.fieldGroup}>
+                <div className="form-field-group">
                   <label className="form-label">Time</label>
                   <select className="search-input" value={selectedTeamId} onChange={(e) => setSelectedTeamId(e.target.value)} disabled={filteredTeams.length === 0}>
                     <option value="">Selecione um time</option>
@@ -384,21 +384,21 @@ export function MyProfilePage() {
 
       {/* ── Edit Modal ─────────────────────────────────────────────────────── */}
       {editOpen && (
-        <div style={S.overlay} onClick={() => { if (!saving) setEditOpen(false); }}>
-          <div style={S.modal} onClick={(e) => e.stopPropagation()}>
-            <h3 style={S.modalTitle}>Editar perfil</h3>
-            <p style={S.modalSub}>Suas informações pessoais de atleta</p>
+        <div className="modal-overlay" onClick={() => { if (!saving) setEditOpen(false); }}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title">Editar perfil</h3>
+            <p className="muted">Suas informações pessoais de atleta</p>
 
             {saveError && <p className="error-text">{saveError}</p>}
-            {saveOk && <p style={S.ok}>Salvo com sucesso!</p>}
+            {saveOk && <p className="form-success">Salvo com sucesso!</p>}
 
-            <div style={S.row2}>
-              <div style={S.fieldGroup}>
+            <div className="form-field-group--2">
+              <div className="form-field-group">
                 <label className="form-label">Apelido / Nome de guerra</label>
                 <input className="search-input" value={editForm.nickname} placeholder="Como te chamam em campo"
                   onChange={(e) => setEditForm({ ...editForm, nickname: e.target.value })} />
               </div>
-              <div style={S.fieldGroup}>
+              <div className="form-field-group">
                 <label className="form-label">Posição</label>
                 <select className="search-input" value={editForm.position}
                   onChange={(e) => setEditForm({ ...editForm, position: e.target.value })}>
@@ -408,8 +408,8 @@ export function MyProfilePage() {
               </div>
             </div>
 
-            <div style={S.row2}>
-              <div style={S.fieldGroup}>
+            <div className="form-field-group--2">
+              <div className="form-field-group">
                 <label className="form-label">Pé dominante</label>
                 <select className="search-input" value={editForm.preferred_foot}
                   onChange={(e) => setEditForm({ ...editForm, preferred_foot: e.target.value })}>
@@ -417,7 +417,7 @@ export function MyProfilePage() {
                   {FOOT_OPTIONS.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
                 </select>
               </div>
-              <div style={S.fieldGroup}>
+              <div className="form-field-group">
                 <label className="form-label">Telefone</label>
                 <input className="search-input" type="tel" value={editForm.phone}
                   onChange={(e) => setEditForm({ ...editForm, phone: maskPhone(e.target.value) })}
@@ -425,20 +425,20 @@ export function MyProfilePage() {
               </div>
             </div>
 
-            <div style={S.row2}>
-              <div style={S.fieldGroup}>
+            <div className="form-field-group--2">
+              <div className="form-field-group">
                 <label className="form-label">Altura (cm)</label>
                 <input className="search-input" type="number" min={100} max={250} value={editForm.height_cm}
                   onChange={(e) => setEditForm({ ...editForm, height_cm: e.target.value })} />
               </div>
-              <div style={S.fieldGroup}>
+              <div className="form-field-group">
                 <label className="form-label">Peso (kg)</label>
                 <input className="search-input" type="number" min={30} max={200} step={0.1} value={editForm.weight_kg}
                   onChange={(e) => setEditForm({ ...editForm, weight_kg: e.target.value })} />
               </div>
             </div>
 
-            <div style={S.fieldGroup}>
+            <div className="form-field-group">
               <label className="form-label">Foto de perfil</label>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 {(photoPreview ?? editForm as unknown as Record<string,unknown>)  && (photoPreview
@@ -447,7 +447,7 @@ export function MyProfilePage() {
                     ? <img src={profile.photo_url} alt="preview" style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover", border: "2px solid #45475a" }} />
                     : null
                 )}
-                <label htmlFor="modal-photo-input" style={S.btnUpload}>
+                <label htmlFor="modal-photo-input" className="btn btn-secondary">
                   {photoPreview ? "Trocar foto" : "Escolher foto"}
                 </label>
                 <input
@@ -468,9 +468,9 @@ export function MyProfilePage() {
               </div>
             </div>
 
-            <div style={S.modalActions}>
-              <button style={S.btnCancel} onClick={() => setEditOpen(false)} disabled={saving}>Cancelar</button>
-              <button style={S.btnSave} onClick={saveEdit} disabled={saving}>
+            <div className="modal-actions">
+              <button className="btn btn-secondary" onClick={() => setEditOpen(false)} disabled={saving}>Cancelar</button>
+              <button className="btn btn-primary" onClick={saveEdit} disabled={saving}>
                 {saving ? "Salvando..." : "Salvar alterações"}
               </button>
             </div>
@@ -487,7 +487,7 @@ function InfoItem({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
       <span style={{ fontSize: ".75rem", fontWeight: 600, color: "#ffffff", textTransform: "uppercase", letterSpacing: ".05em" }}>{label}</span>
-      <span style={{ fontSize: ".95rem", color: "#cdd6f4" }}>{value}</span>
+      <span style={{ fontSize: ".95rem", color: "var(--c-text)" }}>{value}</span>
     </div>
   );
 }

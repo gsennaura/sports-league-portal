@@ -54,22 +54,22 @@ export function AdminVenuesPage({ listVenues }: Props) {
             <h1 className="page-title">Locais</h1>
             <div style={{ display: "flex", gap: "0.5rem" }}>
               <Link to="/admin/locais/importar" style={{ ...S.btnNew, backgroundColor: "#fab387" }}>⬆ Importar CSV</Link>
-              <Link to="/admin/locais/novo" style={S.btnNew}>+ Novo local</Link>
+              <Link to="/admin/locais/novo" className="btn btn-success">+ Novo local</Link>
             </div>
           </div>
-          <div style={S.searchWrap}>
+          <div className="search-wrap">
             <input
               type="search"
               placeholder="Pesquisar por nome, apelido ou cidade..."
               value={search}
               onChange={e => { setSearch(e.target.value); setPage(1); }}
-              style={S.searchInput}
+              className="search-input"
             />
           </div>
         </div>
       </header>
       <main className="page-container">
-        {loading && <p style={S.hint}>Carregando...</p>}
+        {loading && <p className="muted">Carregando...</p>}
         {error && <p className="error-text">{error}</p>}
         {!loading && !error && (
           <>
@@ -77,35 +77,35 @@ export function AdminVenuesPage({ listVenues }: Props) {
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>Nome</th>
-                    <th style={S.th}>Apelido</th>
-                    <th style={S.th}>Cidade</th>
-                    <th style={S.th}>Bairro</th>
+                    <th >Nome</th>
+                    <th >Apelido</th>
+                    <th >Cidade</th>
+                    <th >Bairro</th>
                   </tr>
                 </thead>
                 <tbody>
                   {slice.length === 0 ? (
                     <tr>
-                      <td colSpan={4} style={S.empty}>Nenhum local cadastrado.</td>
+                      <td colSpan={4} className="muted">Nenhum local cadastrado.</td>
                     </tr>
                   ) : (
                     slice.map(v => (
                       <tr
                         key={v.id}
-                        style={S.trRow}
+                        
                       >
-                        <td style={S.td}>
+                        <td >
                           <Link
                             to={`/admin/locais/${v.id}/editar`}
                             state={{ venue: v }}
-                            style={S.rowLink}
+                            className="row-link"
                           >
                             {v.name}
                           </Link>
                         </td>
-                        <td style={S.tdMuted}>{v.nickname ?? "—"}</td>
-                        <td style={S.td}>{cityMap.get(v.city_id) ?? "—"}</td>
-                        <td style={S.tdMuted}>{v.neighborhood ?? "—"}</td>
+                        <td className="td-muted">{v.nickname ?? "—"}</td>
+                        <td >{cityMap.get(v.city_id) ?? "—"}</td>
+                        <td className="td-muted">{v.neighborhood ?? "—"}</td>
                       </tr>
                     ))
                   )}
@@ -113,10 +113,10 @@ export function AdminVenuesPage({ listVenues }: Props) {
               </table>
             </div>
 
-            <div style={S.footer}>
-              <span style={S.count}>{filtered.length} {filtered.length === 1 ? "local" : "locais"}{q ? " encontrado" : ""}</span>
+            <div >
+              <span className="page-info">{filtered.length} {filtered.length === 1 ? "local" : "locais"}{q ? " encontrado" : ""}</span>
               {totalPages > 1 && (
-                <div style={S.pagination}>
+                <div className="pagination">
                   <button
                     style={{ ...S.pgBtn, ...(page === 1 ? S.pgBtnDisabled : {}) }}
                     disabled={page === 1}
@@ -124,7 +124,7 @@ export function AdminVenuesPage({ listVenues }: Props) {
                   >
                     ‹ Anterior
                   </button>
-                  <span style={S.pgInfo}>{page} / {totalPages}</span>
+                  <span className="page-info">{page} / {totalPages}</span>
                   <button
                     style={{ ...S.pgBtn, ...(page === totalPages ? S.pgBtnDisabled : {}) }}
                     disabled={page === totalPages}

@@ -283,20 +283,20 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
 
         {/* ── UPLOAD ── */}
         {!rows.length && !results && (
-          <section style={S.uploadSection}>
+          <section className="page-section">
             <div
-              style={S.uploadBox}
+              className="upload-area"
               onClick={() => fileRef.current?.click()}
               onDrop={handleDrop}
               onDragOver={e => e.preventDefault()}
             >
-              <span style={S.uploadIcon}>📂</span>
-              <p style={S.uploadLabel}>Clique ou arraste o arquivo CSV aqui</p>
+              <span >📂</span>
+              <p className="form-label">Clique ou arraste o arquivo CSV aqui</p>
               {fileName
-                ? <p style={S.fileName}>📄 {fileName}</p>
-                : <p style={S.uploadHint}>.csv • UTF-8</p>
+                ? <p className="muted">📄 {fileName}</p>
+                : <p className="muted">.csv • UTF-8</p>
               }
-              {parseError && <p style={S.errorText}>{parseError}</p>}
+              {parseError && <p className="error-text">{parseError}</p>}
             </div>
             <input
               ref={fileRef}
@@ -305,10 +305,10 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
               style={{ display: "none" }}
               onChange={handleFileChange}
             />
-            <button style={S.btnTemplate} onClick={downloadTemplate}>
+            <button className="btn btn-secondary" onClick={downloadTemplate}>
               ⬇ Baixar modelo CSV
             </button>
-            <p style={S.hint}>
+            <p className="muted">
               Colunas: <code>nome*</code>, <code>cidade*</code>, <code>apelido</code>,{" "}
               <code>bairro</code>, <code>rua</code>, <code>numero</code>,{" "}
               <code>complemento</code>, <code>cep</code>, <code>latitude</code>, <code>longitude</code>
@@ -325,23 +325,23 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
           const hasUnresolved = totalResolved > 0 && foundCount < totalResolved;
           return (
             <>
-              <div style={S.tableTopBar}>
-                <p style={S.rowCount}>
+              <div className="table-top-bar">
+                <p className="page-info">
                   {rows.length} {rows.length === 1 ? "local" : "locais"} · {distinctCities.length} cidade{distinctCities.length !== 1 ? "s" : ""} única{distinctCities.length !== 1 ? "s" : ""}
                 </p>
                 <button
-                  style={S.btnSecondary}
+                  className="btn btn-secondary"
                   onClick={() => { setRows([]); setFileName(null); setSaveError(null); setCityResolutionMap({}); setCitySuggestions({}); setCityResolutionDone(false); }}
                 >
                   ↩ Recarregar CSV
                 </button>
               </div>
 
-              <div style={S.resolveCard}>
-                <div style={S.resolveHeader}>
+              <div className="card">
+                <div className="toolbar">
                   <div>
-                    <h2 style={S.resolveTitle}>Resolução de Cidades</h2>
-                    <p style={S.resolveDesc}>
+                    <h2 className="section-heading">Resolução de Cidades</h2>
+                    <p className="muted">
                       {totalResolved === 0
                         ? `Identifique as ${distinctCities.length} cidade${distinctCities.length !== 1 ? "s" : ""} do arquivo no sistema antes de revisar os locais.`
                         : allFound
@@ -359,7 +359,7 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                   </button>
                 </div>
 
-                <div style={S.cityList}>
+                <div className="form-field-group">
                   {distinctCities.map(name => {
                     const checked = name in cityResolutionMap;
                     const found = checked && cityResolutionMap[name] !== null;
@@ -368,10 +368,10 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                       <div key={name} style={{ ...S.cityChip, ...(checked ? (found ? S.cityChipOk : S.cityChipErr) : {}) }}>
                         <span>{name}</span>
                         {!checked && <span style={{ color: "#ffffff", fontSize: "0.7rem" }}>—</span>}
-                        {found   && <span style={{ color: "#a6e3a1", fontSize: "0.75rem", fontWeight: 700 }}>✓</span>}
+                        {found   && <span style={{ color: "var(--c-positive)", fontSize: "0.75rem", fontWeight: 700 }}>✓</span>}
                         {checked && !found && (
                           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
-                            <span style={{ color: "#f38ba8", fontSize: "0.75rem", fontWeight: 700 }}>✗ não encontrada</span>
+                            <span style={{ color: "var(--c-negative)", fontSize: "0.75rem", fontWeight: 700 }}>✗ não encontrada</span>
                             {suggestion && (
                               <span style={{ color: "#fab387", fontSize: "0.65rem" }}>
                                 Quis dizer: <em>{suggestion}</em>?
@@ -387,11 +387,11 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                   })}
                 </div>
 
-                {resolveError && <p style={S.errorText}>{resolveError}</p>}
+                {resolveError && <p className="error-text">{resolveError}</p>}
               </div>
 
               {totalResolved > 0 && (
-                <div style={S.actions}>
+                <div className="form-actions">
                   <button
                     style={{ ...S.btnPrimary, opacity: allFound ? 1 : 0.5 }}
                     onClick={() => setCityResolutionDone(true)}
@@ -402,10 +402,10 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                   </button>
                   {hasUnresolved && (
                     <>
-                      <button style={S.btnSecondary} onClick={() => setCityResolutionDone(true)}>
+                      <button className="btn btn-secondary" onClick={() => setCityResolutionDone(true)}>
                         Continuar mesmo assim
                       </button>
-                      <span style={S.hintWarn}>⚠ Cidades não encontradas ficarão destacadas na tabela.</span>
+                      <span className="muted">⚠ Cidades não encontradas ficarão destacadas na tabela.</span>
                     </>
                   )}
                 </div>
@@ -417,12 +417,12 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
         {/* ── STEP 3: TABELA EDITÁVEL ── */}
         {rows.length > 0 && cityResolutionDone && !results && (
           <>
-            <div style={S.tableTopBar}>
-              <p style={S.rowCount}>
+            <div className="table-top-bar">
+              <p className="page-info">
                 {rows.length} {rows.length === 1 ? "local carregado" : "locais carregados"}
               </p>
               <button
-                style={S.btnSecondary}
+                className="btn btn-secondary"
                 onClick={() => { setCityResolutionDone(false); }}
               >
                 ← Voltar às cidades
@@ -433,18 +433,18 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>#</th>
-                    <th style={S.th}>Nome *</th>
-                    <th style={{ ...S.th, minWidth: "160px" }}>Cidade *</th>
-                    <th style={S.th}>Apelido</th>
-                    <th style={S.th}>Bairro</th>
-                    <th style={S.th}>Rua</th>
-                    <th style={S.th}>Nº</th>
-                    <th style={S.th}>Complemento</th>
-                    <th style={S.th}>CEP</th>
-                    <th style={S.th}>Lat</th>
-                    <th style={S.th}>Lng</th>
-                    <th style={S.th}></th>
+                    <th >#</th>
+                    <th >Nome *</th>
+                    <th style={{ minWidth: "160px" }}>Cidade *</th>
+                    <th >Apelido</th>
+                    <th >Bairro</th>
+                    <th >Rua</th>
+                    <th >Nº</th>
+                    <th >Complemento</th>
+                    <th >CEP</th>
+                    <th >Lat</th>
+                    <th >Lng</th>
+                    <th ></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -453,10 +453,10 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                     const rowBg = i % 2 === 0 ? "#18265b" : "#18265b";
                     return (
                       <tr key={row._id} style={{ backgroundColor: rowBg }}>
-                        <td style={S.tdNum}>{i + 1}</td>
+                        <td className="td-muted">{i + 1}</td>
 
                         {/* Nome */}
-                        <td style={S.td}>
+                        <td >
                           <input
                             style={{ ...S.cell, ...(!row.nome.trim() ? S.cellErr : {}) }}
                             value={row.nome}
@@ -466,7 +466,7 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                         </td>
 
                         {/* Cidade */}
-                        <td style={S.td}>
+                        <td >
                           <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                             <input
                               style={{ ...S.cell, width: "130px", ...(!cityOk && row.cidade ? S.cellErr : {}) }}
@@ -485,56 +485,56 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
                         </td>
 
                         {/* Apelido */}
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.apelido}
+                        <td >
+                          <input className="cell-input" value={row.apelido}
                             onChange={e => updateRow(row._id, "apelido", e.target.value)} placeholder="Apelido" />
                         </td>
 
                         {/* Bairro */}
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.bairro}
+                        <td >
+                          <input className="cell-input" value={row.bairro}
                             onChange={e => updateRow(row._id, "bairro", e.target.value)} placeholder="Bairro" />
                         </td>
 
                         {/* Rua */}
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.rua}
+                        <td >
+                          <input className="cell-input" value={row.rua}
                             onChange={e => updateRow(row._id, "rua", e.target.value)} placeholder="Rua" />
                         </td>
 
                         {/* Número */}
-                        <td style={S.td}>
+                        <td >
                           <input style={{ ...S.cell, width: "55px" }} value={row.numero}
                             onChange={e => updateRow(row._id, "numero", e.target.value)} placeholder="Nº" />
                         </td>
 
                         {/* Complemento */}
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.complemento}
+                        <td >
+                          <input className="cell-input" value={row.complemento}
                             onChange={e => updateRow(row._id, "complemento", e.target.value)} placeholder="Compl." />
                         </td>
 
                         {/* CEP */}
-                        <td style={S.td}>
+                        <td >
                           <input style={{ ...S.cell, width: "80px" }} value={row.cep}
                             onChange={e => updateRow(row._id, "cep", e.target.value)} placeholder="CEP" />
                         </td>
 
                         {/* Latitude */}
-                        <td style={S.td}>
+                        <td >
                           <input style={{ ...S.cell, width: "75px" }} value={row.latitude}
                             onChange={e => updateRow(row._id, "latitude", e.target.value)} placeholder="-18.00" />
                         </td>
 
                         {/* Longitude */}
-                        <td style={S.td}>
+                        <td >
                           <input style={{ ...S.cell, width: "75px" }} value={row.longitude}
                             onChange={e => updateRow(row._id, "longitude", e.target.value)} placeholder="-48.00" />
                         </td>
 
                         {/* Remover */}
-                        <td style={S.td}>
-                          <button style={S.btnDel} onClick={() => removeRow(row._id)} title="Remover">✕</button>
+                        <td >
+                          <button className="btn btn-danger" onClick={() => removeRow(row._id)} title="Remover">✕</button>
                         </td>
                       </tr>
                     );
@@ -544,11 +544,11 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
             </div>
 
             {hasErrors && (
-              <p style={S.warning}>⚠ Corrija os campos em vermelho antes de salvar.</p>
+              <p className="form-warning">⚠ Corrija os campos em vermelho antes de salvar.</p>
             )}
-            {saveError && <p style={S.errorText}>{saveError}</p>}
+            {saveError && <p className="error-text">{saveError}</p>}
 
-            <div style={S.actions}>
+            <div className="form-actions">
               <button
                 style={{ ...S.btnPrimary, opacity: saving || hasErrors ? 0.55 : 1 }}
                 onClick={handleSave}
@@ -563,10 +563,10 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
         {/* ── RESULTADOS ── */}
         {results && (
           <>
-            <div style={S.resultsBar}>
-              <span style={S.badgeOk}>✅ {results.filter(r => r.success).length} salvos</span>
+            <div className="import-bar">
+              <span className="badge badge--success">✅ {results.filter(r => r.success).length} salvos</span>
               {results.some(r => !r.success) && (
-                <span style={S.badgeFail}>❌ {results.filter(r => !r.success).length} com erro</span>
+                <span className="badge badge--danger">❌ {results.filter(r => !r.success).length} com erro</span>
               )}
             </div>
 
@@ -574,19 +574,19 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>#</th>
-                    <th style={S.th}>Nome</th>
-                    <th style={S.th}>Status</th>
-                    <th style={S.th}>Detalhe</th>
+                    <th >#</th>
+                    <th >Nome</th>
+                    <th >Status</th>
+                    <th >Detalhe</th>
                   </tr>
                 </thead>
                 <tbody>
                   {results.map(r => (
                     <tr key={r.row} style={{ backgroundColor: r.success ? "#1a2e1e" : "#2e1a1e" }}>
-                      <td style={S.tdNum}>{r.row}</td>
-                      <td style={S.td}>{r.nome}</td>
-                      <td style={S.td}>{r.success ? "✅ Criado" : "❌ Erro"}</td>
-                      <td style={{ ...S.td, color: r.success ? "#a6e3a1" : "#f38ba8" }}>
+                      <td className="td-muted">{r.row}</td>
+                      <td >{r.nome}</td>
+                      <td >{r.success ? "✅ Criado" : "❌ Erro"}</td>
+                      <td style={{ color: r.success ? "var(--c-positive)" : "var(--c-negative)" }}>
                         {r.error ?? "—"}
                       </td>
                     </tr>
@@ -595,10 +595,10 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
               </table>
             </div>
 
-            <div style={S.actions}>
-              <Link to="/admin/locais" style={S.btnPrimary}>← Ver locais</Link>
+            <div className="form-actions">
+              <Link to="/admin/locais" className="btn btn-primary">← Ver locais</Link>
               <button
-                style={S.btnSecondary}
+                className="btn btn-secondary"
                 onClick={() => { setRows([]); setResults(null); setFileName(null); setCityResolutionMap({}); setCitySuggestions({}); setCityResolutionDone(false); }}
               >
                 Importar mais

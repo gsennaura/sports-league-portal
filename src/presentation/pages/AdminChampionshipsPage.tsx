@@ -92,9 +92,9 @@ export function AdminChampionshipsPage({ listChampionships }: Props) {
         <div className="hero__inner">
           <div className="hero__row">
             <h1 className="page-title">Campeonatos</h1>
-            <Link to="/admin/campeonatos/novo" style={S.btnNew}>+ Novo campeonato</Link>
+            <Link to="/admin/campeonatos/novo" className="btn btn-success">+ Novo campeonato</Link>
           </div>
-          <div style={S.searchWrap}>
+          <div className="search-wrap">
             <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               <select
                 value={selectedLeagueId}
@@ -117,7 +117,7 @@ export function AdminChampionshipsPage({ listChampionships }: Props) {
         </div>
       </header>
       <main className="page-container">
-        {loading && <p style={S.hint}>Carregando...</p>}
+        {loading && <p className="muted">Carregando...</p>}
         {error && <p className="error-text">{error}</p>}
         {!loading && !error && (
           <>
@@ -125,38 +125,38 @@ export function AdminChampionshipsPage({ listChampionships }: Props) {
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>Campeonato</th>
-                    <th style={S.th}>Apelido</th>
-                    <th style={S.th}>Divisão</th>
-                    <th style={S.th}>Esporte</th>
-                    <th style={S.th}>Nível</th>
-                    <th style={S.th}>Cidade</th>
-                    <th style={S.th} colSpan={2}></th>
+                    <th >Campeonato</th>
+                    <th >Apelido</th>
+                    <th >Divisão</th>
+                    <th >Esporte</th>
+                    <th >Nível</th>
+                    <th >Cidade</th>
+                    <th  colSpan={2}></th>
                   </tr>
                 </thead>
                 <tbody>
                   {slice.length === 0 ? (
                     <tr>
-                      <td colSpan={8} style={S.empty}>Nenhum campeonato cadastrado.</td>
+                      <td colSpan={8} className="muted">Nenhum campeonato cadastrado.</td>
                     </tr>
                   ) : (
                     slice.map(c => (
-                      <tr key={c.id} style={S.trRow}>
-                        <td style={S.td}>
-                          <span style={S.champName}>{c.name}</span>
+                      <tr key={c.id} >
+                        <td >
+                          <span className="team-name">{c.name}</span>
                         </td>
-                        <td style={S.tdMuted}>{c.nickname ?? "—"}</td>
-                        <td style={S.tdMuted}>{c.division ?? "—"}</td>
-                        <td style={S.tdMuted}>{c.sport_name}</td>
-                        <td style={S.td}>{c.level ? LEVEL_LABEL[c.level] ?? c.level : "—"}</td>
-                        <td style={S.tdMuted}>{c.city_name}</td>
-                        <td style={S.tdAction}>
-                          <Link to={`/admin/campeonatos/${c.id}/nova-edicao`} style={S.newEditionLink}>
+                        <td className="td-muted">{c.nickname ?? "—"}</td>
+                        <td className="td-muted">{c.division ?? "—"}</td>
+                        <td className="td-muted">{c.sport_name}</td>
+                        <td >{c.level ? LEVEL_LABEL[c.level] ?? c.level : "—"}</td>
+                        <td className="td-muted">{c.city_name}</td>
+                        <td className="td-action">
+                          <Link to={`/admin/campeonatos/${c.id}/nova-edicao`} className="row-link">
                             + Nova Edição
                           </Link>
                         </td>
-                        <td style={S.tdAction}>
-                          <Link to={`/admin/campeonatos/${c.id}/edicoes`} style={S.manageLink}>
+                        <td className="td-action">
+                          <Link to={`/admin/campeonatos/${c.id}/edicoes`} className="row-link">
                             Gerenciar →
                           </Link>
                         </td>
@@ -167,12 +167,12 @@ export function AdminChampionshipsPage({ listChampionships }: Props) {
               </table>
             </div>
 
-            <div style={S.footer}>
-              <span style={S.count}>
+            <div >
+              <span className="page-info">
                 {allSeries.length} {allSeries.length === 1 ? "campeonato" : "campeonatos"}{q ? " encontrado" : ""}
               </span>
               {totalPages > 1 && (
-                <div style={S.pagination}>
+                <div className="pagination">
                   <button
                     style={{ ...S.pgBtn, ...(page === 1 ? S.pgBtnDisabled : {}) }}
                     disabled={page === 1}
@@ -180,7 +180,7 @@ export function AdminChampionshipsPage({ listChampionships }: Props) {
                   >
                     ‹ Anterior
                   </button>
-                  <span style={S.pgInfo}>{page} / {totalPages}</span>
+                  <span className="page-info">{page} / {totalPages}</span>
                   <button
                     style={{ ...S.pgBtn, ...(page === totalPages ? S.pgBtnDisabled : {}) }}
                     disabled={page === totalPages}

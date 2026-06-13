@@ -142,7 +142,7 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
   return (
     <>
       {toast && (
-        <div style={{ ...S.toast, background: toast.type === "success" ? "#a6e3a1" : "#f38ba8", color: "#18265b" }}>
+        <div style={{ ...S.toast, background: toast.type === "success" ? "var(--c-positive)" : "var(--c-negative)", color: "var(--c-brand)" }}>
           {toast.msg}
         </div>
       )}
@@ -157,9 +157,9 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
 
       <main className="page-container">
         {/* Toolbar: league selector + Filiar button */}
-        <div style={S.toolbar}>
+        <div className="toolbar">
           <select
-            style={S.leagueSelect}
+            className="form-select"
             value={selectedLeagueId}
             onChange={(e) => { setSelectedLeagueId(e.target.value); setSearch(""); }}
             disabled={isLeagueAdmin && !isAdmin && adminLeagues.length <= 1}
@@ -171,7 +171,7 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
           </select>
           <div style={{ flex: 1 }} />
           <button
-            style={S.btnFiliar}
+            className="btn btn-primary"
             onClick={() => { setShowModal(true); setModalSearch(""); }}
             disabled={!selectedLeagueId || loading}
           >
@@ -181,15 +181,15 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
 
         {/* Stats */}
         {!loading && (
-          <div style={S.stats}>
-            <span style={S.badge}>{affiliatedClubs.length} filiado(s)</span>
+          <div className="stats-block">
+            <span className="badge">{affiliatedClubs.length} filiado(s)</span>
           </div>
         )}
 
         {/* Search within affiliated */}
         {affiliatedClubs.length > 3 && (
           <input
-            style={S.search}
+            className="search-wrap"
             type="text"
             placeholder="Buscar clube filiado..."
             value={search}
@@ -197,7 +197,7 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
           />
         )}
 
-        {loading && <p style={{ color: "#cdd6f4", marginTop: "1rem" }}>Carregando...</p>}
+        {loading && <p style={{ color: "var(--c-text)", marginTop: "1rem" }}>Carregando...</p>}
 
         {!loading && filteredAffiliated.length === 0 && (
           <p style={{ color: "#ffffff", marginTop: "2rem" }}>
@@ -207,18 +207,18 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
           </p>
         )}
 
-        <ul style={S.list}>
+        <ul className="data-list">
           {filteredAffiliated.map((item) => (
-            <li key={item.club.id} style={S.item}>
-              <div style={S.clubInfo}>
-                <span style={S.clubName}>{item.club.name}</span>
-                {item.club.nickname && <span style={S.clubNick}>{item.club.nickname}</span>}
+            <li key={item.club.id} >
+              <div >
+                <span className="team-name">{item.club.name}</span>
+                {item.club.nickname && <span className="muted">{item.club.nickname}</span>}
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <span style={S.tagFiliado}>filiado</span>
+                <span className="badge badge--success">filiado</span>
                 {item.registration && (
                   <button
-                    style={S.btnDesfiliar}
+                    className="btn btn-secondary"
                     onClick={() => handleDesfiliar(item.registration!.id, item.club.name)}
                     disabled={!!desfiliating}
                     title="Desfiliar clube"
@@ -234,14 +234,14 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
 
       {/* ── Filiar Clube Modal ── */}
       {showModal && (
-        <div style={S.overlay} onClick={() => setShowModal(false)}>
-          <div style={S.modal} onClick={(e) => e.stopPropagation()}>
-            <div style={S.modalHeader}>
-              <h3 style={S.modalTitle}>Filiar Clube</h3>
-              <button style={S.btnClose} onClick={() => setShowModal(false)}>✕</button>
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3 className="modal-title">Filiar Clube</h3>
+              <button className="btn btn-secondary" onClick={() => setShowModal(false)}>✕</button>
             </div>
             <input
-              style={S.search}
+              className="search-wrap"
               type="text"
               placeholder="Buscar clube..."
               value={modalSearch}
@@ -262,14 +262,14 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
                     style={{ ...S.item, cursor: affiliating ? "not-allowed" : "pointer" }}
                     onClick={() => !affiliating && handleAffiliate(item.club.id)}
                   >
-                    <div style={S.clubInfo}>
-                      <span style={S.clubName}>{item.club.name}</span>
-                      {item.club.nickname && <span style={S.clubNick}>{item.club.nickname}</span>}
+                    <div >
+                      <span className="team-name">{item.club.name}</span>
+                      {item.club.nickname && <span className="muted">{item.club.nickname}</span>}
                     </div>
                     {affiliating === item.club.id ? (
-                      <span style={{ color: "#f9e2af", fontSize: "0.8rem" }}>Afiliando...</span>
+                      <span style={{ color: "var(--c-warning)", fontSize: "0.8rem" }}>Afiliando...</span>
                     ) : (
-                      <span style={S.tagFiliarBtn}>Filiar</span>
+                      <span className="btn btn-primary">Filiar</span>
                     )}
                   </li>
                 ))}

@@ -94,14 +94,14 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
         </div>
       </header>
       <main className="page-container">
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Informações básicas</legend>
-            <div style={S.grid2}>
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Informações básicas</legend>
+            <div className="form-field-group--2">
               <Field label="Nome da liga *" htmlFor="name">
                 <input
                   id="name"
-                  style={S.input}
+                  className="form-input"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   placeholder="Ex: Liga Mineira de Futebol"
@@ -111,7 +111,7 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
               <Field label="Sigla *" htmlFor="short_name">
                 <input
                   id="short_name"
-                  style={S.input}
+                  className="form-input"
                   value={shortName}
                   onChange={e => setShortName(e.target.value)}
                   placeholder="Ex: LMF"
@@ -119,14 +119,14 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
                 />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Cidade *" htmlFor="city">
                 {optionsLoading ? (
-                  <div style={{ ...S.input, color: "#cdd6f4" }}>Carregando...</div>
+                  <div className="form-input" style={{ color: "var(--c-text)" }}>Carregando...</div>
                 ) : (
                   <select
                     id="city"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={cityId}
                     onChange={e => setCityId(e.target.value)}
                     required
@@ -137,13 +137,13 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
                 )}
               </Field>
               <Field label="É federada?" htmlFor="is_federated" style={{ justifyContent: "flex-end" }}>
-                <label style={S.checkboxLabel}>
+                <label className="form-checkbox-label">
                   <input
                     id="is_federated"
                     type="checkbox"
                     checked={isFederated}
                     onChange={e => setIsFederated(e.target.checked)}
-                    style={S.checkbox}
+                    className="form-checkbox"
                   />
                   Liga federada
                 </label>
@@ -151,13 +151,13 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
             </div>
           </fieldset>
 
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Detalhes <span style={S.legendOpt}>(opcional)</span></legend>
-            <div style={S.grid2}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Detalhes <span className="form-legend">(opcional)</span></legend>
+            <div className="form-field-group--2">
               <Field label="Presidente" htmlFor="president">
                 <input
                   id="president"
-                  style={S.input}
+                  className="form-input"
                   value={president}
                   onChange={e => setPresident(e.target.value)}
                   placeholder="Ex: João da Silva"
@@ -167,7 +167,7 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
                 <input
                   id="founded_year"
                   type="number"
-                  style={S.input}
+                  className="form-input"
                   value={foundedYear}
                   onChange={e => setFoundedYear(e.target.value)}
                   placeholder="Ex: 1982"
@@ -176,11 +176,11 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
                 />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Endereço" htmlFor="address">
                 <input
                   id="address"
-                  style={S.input}
+                  className="form-input"
                   value={address}
                   onChange={e => setAddress(e.target.value)}
                   placeholder="Ex: Rua das Ligas, 100"
@@ -190,7 +190,7 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
                 <input
                   id="website"
                   type="url"
-                  style={S.input}
+                  className="form-input"
                   value={website}
                   onChange={e => setWebsite(e.target.value)}
                   placeholder="Ex: https://liga.com.br"
@@ -200,11 +200,11 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
             <div style={{ ...S.grid2, marginTop: "1rem" }}>
               <Field label="Liga pai" htmlFor="parent_league">
                 {optionsLoading ? (
-                  <div style={{ ...S.input, color: "#cdd6f4" }}>Carregando...</div>
+                  <div className="form-input" style={{ color: "var(--c-text)" }}>Carregando...</div>
                 ) : (
                   <select
                     id="parent_league"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={parentLeagueId}
                     onChange={e => setParentLeagueId(e.target.value)}
                   >
@@ -216,11 +216,11 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
               <Field label="Logo" htmlFor="league-logo">
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                   {logoPreview
-                    ? <img src={logoPreview} alt="preview" style={S.photoThumb} />
-                    : <div style={S.photoPlaceholder}>🏆</div>
+                    ? <img src={logoPreview} alt="preview" className="avatar" />
+                    : <div className="avatar-placeholder">🏆</div>
                   }
                   <div>
-                    <label htmlFor="league-logo" style={S.btnUpload}>
+                    <label htmlFor="league-logo" className="btn btn-secondary">
                       {logoPreview ? "Trocar logo" : "Escolher logo"}
                     </label>
                     {logoFile && (
@@ -242,12 +242,12 @@ export function AdminLeagueCreatePage({ createLeague }: Props) {
             </div>
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✔ Liga cadastrada! Redirecionando...</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✔ Liga cadastrada! Redirecionando...</p>}
 
-          <div style={S.actions}>
-            <Link to="/admin/ligas" style={S.btnCancel}>Cancelar</Link>
-            <button type="submit" style={S.btnSubmit} disabled={submitting}>
+          <div className="form-actions">
+            <Link to="/admin/ligas" className="btn btn-secondary">Cancelar</Link>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando..." : "Cadastrar liga"}
             </button>
           </div>

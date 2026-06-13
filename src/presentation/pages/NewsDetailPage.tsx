@@ -38,19 +38,19 @@ export function NewsDetailPage({ getNewsDetail }: Props) {
     <>
       {news.image_url && (
         <div style={{ ...S.coverWrap }}>
-          <img src={news.image_url} alt={news.title} style={S.cover} />
-          <div style={S.coverOverlay} />
+          <img src={news.image_url} alt={news.title}  />
+          <div  />
         </div>
       )}
       <main className="page-container">
         <Link to="/noticias" className="back-link">← Notícias</Link>
-        <article style={S.article}>
-          <span style={S.date}>{formatDate(news.published_at ?? news.created_at)}</span>
+        <article >
+          <span className="muted">{formatDate(news.published_at ?? news.created_at)}</span>
           <h1 className="page-title">{news.title}</h1>
-          {news.summary && <p style={S.summary}>{news.summary}</p>}
-          <hr style={S.divider} />
+          {news.summary && <p className="muted">{news.summary}</p>}
+          <hr  />
           <div
-            style={S.content}
+            
             dangerouslySetInnerHTML={{ __html: news.content.replace(/\n/g, "<br />") }}
           />
         </article>

@@ -136,53 +136,53 @@ export function RoundSharePage() {
         * { box-sizing: border-box; }
       `}</style>
 
-      <div style={S.overlay}>
+      <div className="modal-overlay">
 
         {/* Close button */}
-        <button onClick={() => window.close()} style={S.closeBtn} title="Fechar">✕</button>
+        <button onClick={() => window.close()} className="btn btn-secondary" title="Fechar">✕</button>
 
         {loading && (
-          <div style={S.centerMsg}>
+          <div className="muted">
             <p style={{ color: "#fca5a5", fontSize: "1.2rem" }}>Carregando…</p>
           </div>
         )}
 
         {error && (
-          <div style={S.centerMsg}>
+          <div className="muted">
             <p style={{ color: "#f87171" }}>{error}</p>
           </div>
         )}
 
         {!loading && !error && (
-          <div id="round-card" style={S.card}>
+          <div id="round-card" className="card">
 
             {/* Top accent bar */}
             <div className="hero__bar" />
 
             {/* Header: logos + championship info */}
-            <div style={S.header}>
-              <div style={S.logoPair}>
-                <img src={seteColinasLogo} style={S.logoMain} alt="Liga" />
-                <img src={seteNosLogo}    style={S.logoSec}  alt="Sete nos Esportes" />
+            <div className="toolbar">
+              <div className="logo-pair">
+                <img src={seteColinasLogo} className="avatar avatar--lg" alt="Liga" />
+                <img src={seteNosLogo}    className="avatar"  alt="Sete nos Esportes" />
               </div>
-              <div style={S.champName}>{champName}</div>
-              {context && <div style={S.contextLine}>{context}</div>}
+              <div className="team-name">{champName}</div>
+              {context && <div className="muted">{context}</div>}
             </div>
 
             {/* Divider */}
-            <div style={S.divider} />
+            <div  />
 
             {/* Round section */}
-            <div style={S.roundSection}>
-              <div style={S.rodadaLabel}>R O D A D A</div>
-              <div style={S.roundNumber}>{round}</div>
+            <div className="page-section">
+              <div className="muted">R O D A D A</div>
+              <div className="muted">{round}</div>
             </div>
 
             {/* Gradient separator */}
-            <div style={S.gradSep} />
+            <div  />
 
             {/* Matches grouped by date */}
-            <div style={S.matchList}>
+            <div className="data-list">
               {matches.length === 0 && (
                 <div style={{ color: "#5a3030", textAlign: "center", padding: "48px 0", fontSize: "1.1rem" }}>
                   Nenhuma partida nesta rodada.
@@ -192,12 +192,12 @@ export function RoundSharePage() {
               {dateKeys.map(dateKey => {
                 const dayMatches = byDate.get(dateKey)!;
                 return (
-                  <div key={dateKey} style={S.dateGroup}>
+                  <div key={dateKey} className="page-section">
                     {/* Date heading */}
-                    <div style={S.dateHeading}>
-                      <div style={S.dateLine} />
-                      <span style={S.dateText}>{fmtDateHeading(dateKey)}</span>
-                      <div style={S.dateLine} />
+                    <div className="section-heading">
+                      <div className="muted" />
+                      <span className="muted">{fmtDateHeading(dateKey)}</span>
+                      <div className="muted" />
                     </div>
 
                     {dayMatches.map(m => {
@@ -211,13 +211,13 @@ export function RoundSharePage() {
                       const venueName = m.venue_id ? (venueMap[m.venue_id] ?? null) : null;
 
                       return (
-                        <div key={m.id} style={S.matchCard}>
-                          <div style={S.edgeAccent} />
+                        <div key={m.id} className="card">
+                          <div  />
 
-                          <div style={S.teamsRow}>
+                          <div className="match-team-row">
                             {/* Home */}
-                            <div style={S.teamSideHome}>
-                              <div style={S.teamNameWrapHome}>
+                            <div className="match-team-row">
+                              <div className="team-name">
                                 <div style={{
                                   ...S.teamName,
                                   fontWeight: homeWin ? 700 : 500,
@@ -225,26 +225,26 @@ export function RoundSharePage() {
                                 }}>
                                   {home.name}
                                 </div>
-                                {homeWin && <div style={S.winnerBadge}>VENCEDOR</div>}
+                                {homeWin && <div className="badge badge--success">VENCEDOR</div>}
                               </div>
                               <Shield url={home.logo} size={56} />
                             </div>
 
                             {/* Score / VS */}
-                            <div style={S.scoreBox}>
+                            <div className="score-box">
                               {hasScore ? (
-                                <div style={S.score}>
+                                <div className="score-big">
                                   {m.home_score} – {m.away_score}
                                 </div>
                               ) : (
-                                <div style={S.vsText}>vs</div>
+                                <div className="score-sep">vs</div>
                               )}
                             </div>
 
                             {/* Away */}
-                            <div style={S.teamSideAway}>
+                            <div className="match-team-row">
                               <Shield url={away.logo} size={56} />
-                              <div style={S.teamNameWrapAway}>
+                              <div className="team-name">
                                 <div style={{
                                   ...S.teamName,
                                   fontWeight: awayWin ? 700 : 500,
@@ -260,7 +260,7 @@ export function RoundSharePage() {
 
                           {/* Time + venue */}
                           {(time || venueName) && (
-                            <div style={S.matchMeta}>
+                            <div className="muted">
                               {time      && <span>🕐 {time}</span>}
                               {time && venueName && <span style={{ color: "#4a2020" }}>·</span>}
                               {venueName && <span>🏟 {venueName}</span>}

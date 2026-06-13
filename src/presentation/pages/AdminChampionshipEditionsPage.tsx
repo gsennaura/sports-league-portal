@@ -116,7 +116,7 @@ export function AdminChampionshipEditionsPage() {
               <h1 className="page-title">{champLabel}</h1>
               {champSub && <p className="page-subtitle">{champSub}</p>}
             </div>
-            <Link to={`/admin/campeonatos/${champId}/nova-edicao`} style={S.btnNew}>
+            <Link to={`/admin/campeonatos/${champId}/nova-edicao`} className="btn btn-success">
               + Nova Edição
             </Link>
           </div>
@@ -124,24 +124,24 @@ export function AdminChampionshipEditionsPage() {
       </header>
 
       <main className="page-container">
-        {loading && <p style={S.hint}>Carregando edições…</p>}
-        {error && <p style={S.errorText}>{error}</p>}
+        {loading && <p className="muted">Carregando edições…</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {deleteError && (
-          <p style={{ color: "#f38ba8", fontSize: "0.875rem", marginBottom: "1rem" }}>⚠ {deleteError}</p>
+          <p style={{ color: "var(--c-negative)", fontSize: "0.875rem", marginBottom: "1rem" }}>⚠ {deleteError}</p>
         )}
 
         {!loading && !error && editions.length === 0 && (
-          <div style={S.emptyState}>
-            <p style={S.emptyText}>Nenhuma edição cadastrada.</p>
-            <Link to={`/admin/campeonatos/${champId}/nova-edicao`} style={S.btnNewLarge}>
+          <div className="muted">
+            <p className="muted">Nenhuma edição cadastrada.</p>
+            <Link to={`/admin/campeonatos/${champId}/nova-edicao`} className="btn btn-success">
               + Criar primeira edição
             </Link>
             <button
               type="button"
               onClick={handleDeleteChampionship}
               disabled={deleting}
-              style={S.btnDeleteChamp}
+              className="btn btn-danger"
             >
               {deleting ? "Excluindo…" : "🗑 Excluir campeonato"}
             </button>
@@ -153,34 +153,34 @@ export function AdminChampionshipEditionsPage() {
             <table className="data-table">
               <thead>
                 <tr>
-                  <th style={S.th}>Ano</th>
-                  <th style={S.th}>Nome</th>
-                  <th style={S.th}>Status</th>
-                  <th style={S.th}>Campeão</th>
-                  <th style={S.th}>Vice</th>
-                  <th style={S.th}></th>
+                  <th >Ano</th>
+                  <th >Nome</th>
+                  <th >Status</th>
+                  <th >Campeão</th>
+                  <th >Vice</th>
+                  <th ></th>
                 </tr>
               </thead>
               <tbody>
                 {editions.map((ed) => (
-                  <tr key={ed.id} style={S.trRow}>
-                    <td style={S.tdYear}>{ed.year}</td>
-                    <td style={S.td}>{ed.edition_name ?? `Edição ${ed.year}`}</td>
-                    <td style={S.td}>
+                  <tr key={ed.id} >
+                    <td className="td-muted">{ed.year}</td>
+                    <td >{ed.edition_name ?? `Edição ${ed.year}`}</td>
+                    <td >
                       <span style={{ ...S.statusBadge, ...(STATUS_STYLE[ed.status] ?? STATUS_STYLE.planned) }}>
                         {STATUS_LABEL[ed.status] ?? ed.status}
                       </span>
                     </td>
-                    <td style={S.tdMuted}>
+                    <td className="td-muted">
                       {ed.champion_team_id ? (teamNames.get(ed.champion_team_id) ?? "—") : "—"}
                     </td>
-                    <td style={S.tdMuted}>
+                    <td className="td-muted">
                       {ed.runner_up_team_id ? (teamNames.get(ed.runner_up_team_id) ?? "—") : "—"}
                     </td>
-                    <td style={S.tdAction}>
+                    <td className="td-action">
                       <Link
                         to={`/admin/campeonatos/${champId}/gerenciar?edicao=${ed.id}`}
-                        style={S.manageLink}
+                        className="row-link"
                       >
                         Gerenciar →
                       </Link>

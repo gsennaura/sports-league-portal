@@ -86,16 +86,16 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
       </header>
 
       <main className="page-container">
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
 
           {/* ── Obrigatórios ─────────────────────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Informações básicas</legend>
-            <div style={S.grid2}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Informações básicas</legend>
+            <div className="form-field-group--2">
               <Field label="Nome oficial *" htmlFor="name">
                 <input
                   id="name"
-                  style={S.input}
+                  className="form-input"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ex: Estádio Municipal de Uberaba"
@@ -104,11 +104,11 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
               </Field>
               <Field label="Cidade *" htmlFor="city">
                 {citiesLoading ? (
-                  <div style={{ ...S.input, color: "#cdd6f4" }}>Carregando cidades...</div>
+                  <div className="form-input" style={{ color: "var(--c-text)" }}>Carregando cidades...</div>
                 ) : (
                   <select
                     id="city"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={cityId}
                     onChange={(e) => setCityId(e.target.value)}
                     required
@@ -121,11 +121,11 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
                 )}
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Apelido / Nome popular" htmlFor="nickname">
                 <input
                   id="nickname"
-                  style={S.input}
+                  className="form-input"
                   value={nickname}
                   onChange={(e) => setNickname(e.target.value)}
                   placeholder="Ex: Uberabão"
@@ -135,13 +135,13 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
           </fieldset>
 
           {/* ── Endereço ─────────────────────────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Endereço <span style={S.legendOpt}>(opcional)</span></legend>
-            <div style={S.grid3}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Endereço <span className="form-legend">(opcional)</span></legend>
+            <div className="form-field-group--3">
               <Field label="CEP" htmlFor="zip_code">
                 <input
                   id="zip_code"
-                  style={S.input}
+                  className="form-input"
                   value={zipCode}
                   onChange={(e) => setZipCode(e.target.value)}
                   placeholder="00000-000"
@@ -151,18 +151,18 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
               <Field label="Bairro" htmlFor="neighborhood">
                 <input
                   id="neighborhood"
-                  style={S.input}
+                  className="form-input"
                   value={neighborhood}
                   onChange={(e) => setNeighborhood(e.target.value)}
                   placeholder="Ex: Centro"
                 />
               </Field>
             </div>
-            <div style={S.grid3}>
+            <div className="form-field-group--3">
               <Field label="Rua / Avenida" htmlFor="street" style={{ gridColumn: "1 / 3" }}>
                 <input
                   id="street"
-                  style={S.input}
+                  className="form-input"
                   value={street}
                   onChange={(e) => setStreet(e.target.value)}
                   placeholder="Ex: Av. das Flores"
@@ -171,18 +171,18 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
               <Field label="Número" htmlFor="number">
                 <input
                   id="number"
-                  style={S.input}
+                  className="form-input"
                   value={number}
                   onChange={(e) => setNumber(e.target.value)}
                   placeholder="Ex: 1000 ou s/n"
                 />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Complemento" htmlFor="complement">
                 <input
                   id="complement"
-                  style={S.input}
+                  className="form-input"
                   value={complement}
                   onChange={(e) => setComplement(e.target.value)}
                   placeholder="Ex: Portão B"
@@ -192,15 +192,15 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
           </fieldset>
 
           {/* ── Coordenadas ──────────────────────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Coordenadas <span style={S.legendOpt}>(opcional)</span></legend>
-            <div style={S.grid2}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Coordenadas <span className="form-legend">(opcional)</span></legend>
+            <div className="form-field-group--2">
               <Field label="Latitude" htmlFor="lat">
                 <input
                   id="lat"
                   type="number"
                   step="any"
-                  style={S.input}
+                  className="form-input"
                   value={latitude}
                   onChange={(e) => setLatitude(e.target.value)}
                   placeholder="Ex: -19.7231"
@@ -211,7 +211,7 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
                   id="lng"
                   type="number"
                   step="any"
-                  style={S.input}
+                  className="form-input"
                   value={longitude}
                   onChange={(e) => setLongitude(e.target.value)}
                   placeholder="Ex: -47.9319"
@@ -221,13 +221,13 @@ export function AdminVenueCreatePage({ createVenue }: AdminVenueCreatePageProps)
           </fieldset>
 
           {/* ── Feedback ─────────────────────────────────────── */}
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✔ Local cadastrado! Redirecionando para edição...</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✔ Local cadastrado! Redirecionando para edição...</p>}
 
           {/* ── Ações ────────────────────────────────────────── */}
-          <div style={S.actions}>
-            <Link to="/admin/locais" style={S.btnCancel}>Cancelar</Link>
-            <button type="submit" style={S.btnSubmit} disabled={submitting}>
+          <div className="form-actions">
+            <Link to="/admin/locais" className="btn btn-secondary">Cancelar</Link>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando..." : "Cadastrar local"}
             </button>
           </div>
@@ -256,145 +256,3 @@ function Field({
   );
 }
 
-const S: Record<string, React.CSSProperties> = {
-  hero: {
-    backgroundColor: "#18265b",
-    borderBottom: "1px solid #313244",
-    position: "relative",
-    overflow: "hidden",
-  },
-  heroAccent: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: "3px",
-    background: "linear-gradient(90deg, #cba6f7, #89b4fa)",
-  },
-  heroInner: {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "1.5rem 1.5rem 1.25rem",
-  },
-  back: {
-    display: "inline-block",
-    color: "#89b4fa",
-    textDecoration: "none",
-    fontSize: "0.85rem",
-    marginBottom: "0.75rem",
-  },
-  title: {
-    fontSize: "1.5rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    margin: 0,
-  },
-  page: {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "2rem 1.5rem 4rem",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "1.5rem",
-  },
-  fieldset: {
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    padding: "1.25rem 1.5rem",
-    margin: 0,
-  },
-  legend: {
-    fontSize: "0.84rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.07em",
-    padding: "0 0.5rem",
-  },
-  legendOpt: {
-    fontWeight: 400,
-    color: "#cdd6f4",
-    textTransform: "none" as const,
-    letterSpacing: "normal",
-    fontSize: "0.8rem",
-  },
-  grid2: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "1rem",
-    marginTop: "1rem",
-  },
-  grid3: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-    gap: "1rem",
-    marginTop: "1rem",
-  },
-  label: {
-    fontSize: "0.83rem",
-    fontWeight: 600,
-    color: "#cdd6f4",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.06em",
-  },
-  input: {
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "6px",
-    color: "#cdd6f4",
-    fontSize: "0.9rem",
-    padding: "0.55rem 0.75rem",
-    outline: "none",
-    width: "100%",
-  },
-  select: {
-    cursor: "pointer",
-    appearance: "auto" as const,
-  },
-  errorMsg: {
-    color: "#f38ba8",
-    backgroundColor: "#2a1a1f",
-    border: "1px solid #5a2a30",
-    borderRadius: "6px",
-    padding: "0.75rem 1rem",
-    fontSize: "0.875rem",
-  },
-  successMsg: {
-    color: "#a6e3a1",
-    backgroundColor: "#1a2a1f",
-    border: "1px solid #2a5a30",
-    borderRadius: "6px",
-    padding: "0.75rem 1rem",
-    fontSize: "0.875rem",
-  },
-  actions: {
-    display: "flex",
-    justifyContent: "flex-end",
-    gap: "0.75rem",
-    paddingTop: "0.5rem",
-  },
-  btnCancel: {
-    backgroundColor: "transparent",
-    border: "1px solid #313244",
-    borderRadius: "6px",
-    color: "#cdd6f4",
-    fontSize: "0.9rem",
-    fontWeight: 500,
-    padding: "0.6rem 1.25rem",
-    textDecoration: "none",
-    display: "inline-flex",
-    alignItems: "center",
-  },
-  btnSubmit: {
-    backgroundColor: "#cba6f7",
-    border: "none",
-    borderRadius: "6px",
-    color: "#11111b",
-    fontSize: "0.9rem",
-    fontWeight: 700,
-    padding: "0.6rem 1.5rem",
-    cursor: "pointer",
-  },
-};

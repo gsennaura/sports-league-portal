@@ -222,37 +222,37 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
 
       <main className="page-container">
         {/* Instructions */}
-        <section style={S.card}>
-          <h2 style={S.sectionTitle}>Formato do CSV</h2>
-          <p style={S.hint}>
+        <section className="card">
+          <h2 className="section-heading">Formato do CSV</h2>
+          <p className="muted">
             O arquivo deve ter colunas separadas por vírgula. A primeira linha deve ser o cabeçalho.
             Apenas o campo <strong>name</strong> é obrigatório. Datas no formato <code>AAAA-MM-DD</code>.
           </p>
-          <div style={S.colList}>
+          <div className="form-field-group">
             {CSV_HEADERS.map((h, i) => (
               <span key={h} style={{ ...S.colChip, ...(i === 0 ? S.colChipRequired : {}) }}>
                 {h}{i === 0 ? " *" : ""}
               </span>
             ))}
           </div>
-          <button onClick={downloadTemplate} style={S.btnDownload}>
+          <button onClick={downloadTemplate} className="btn btn-secondary">
             ⬇ Baixar modelo CSV
           </button>
         </section>
 
         {/* Team Association */}
-        <section style={S.card}>
-          <h2 style={S.sectionTitle}>Associar ao Time <span style={{ fontSize: "0.8rem", fontWeight: 400, color: "#ffffff" }}>(opcional)</span></h2>
-          <p style={S.hint}>Selecione liga → clube → categoria → time para vincular os atletas importados automaticamente.</p>
+        <section className="card">
+          <h2 className="section-heading">Associar ao Time <span style={{ fontSize: "0.8rem", fontWeight: 400, color: "#ffffff" }}>(opcional)</span></h2>
+          <p className="muted">Selecione liga → clube → categoria → time para vincular os atletas importados automaticamente.</p>
           {optionsLoading ? (
             <p style={{ color: "#ffffff", fontSize: "0.85rem" }}>Carregando opções…</p>
           ) : (
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               {/* Liga */}
-              <div style={S.fieldGroup}>
-                <label style={S.fieldLabel}>Liga</label>
+              <div className="form-field-group">
+                <label className="form-label">Liga</label>
                 <select
-                  style={S.selectInput}
+                  className="form-select"
                   value={selLeague}
                   onChange={e => {
                     setSelLeague(e.target.value);
@@ -267,8 +267,8 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
               </div>
 
               {/* Clube */}
-              <div style={S.fieldGroup}>
-                <label style={S.fieldLabel}>Clube</label>
+              <div className="form-field-group">
+                <label className="form-label">Clube</label>
                 <select
                   style={{ ...S.selectInput, opacity: !selLeague ? 0.5 : 1 }}
                   value={selClub}
@@ -284,8 +284,8 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
               </div>
 
               {/* Categoria */}
-              <div style={S.fieldGroup}>
-                <label style={S.fieldLabel}>Categoria</label>
+              <div className="form-field-group">
+                <label className="form-label">Categoria</label>
                 <select
                   style={{ ...S.selectInput, opacity: !selClub ? 0.5 : 1 }}
                   value={selCategory}
@@ -300,8 +300,8 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
               </div>
 
               {/* Time */}
-              <div style={S.fieldGroup}>
-                <label style={S.fieldLabel}>Time</label>
+              <div className="form-field-group">
+                <label className="form-label">Time</label>
                 <select
                   style={{ ...S.selectInput, opacity: !selCategory ? 0.5 : 1 }}
                   value={selTeam}
@@ -317,17 +317,17 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
             </div>
           )}
           {selTeam && (
-            <p style={{ color: "#a6e3a1", fontSize: "0.82rem", marginTop: "0.75rem" }}>
+            <p style={{ color: "var(--c-positive)", fontSize: "0.82rem", marginTop: "0.75rem" }}>
               ✓ Atletas importados serão adicionados ao time selecionado.
             </p>
           )}
         </section>
 
         {/* Upload */}
-        <section style={S.card}>
-          <h2 style={S.sectionTitle}>Selecionar Arquivo</h2>
-          <div style={S.uploadRow}>
-            <label style={S.fileLabel}>
+        <section className="card">
+          <h2 className="section-heading">Selecionar Arquivo</h2>
+          <div className="form-field-group">
+            <label className="form-label">
               <input
                 ref={fileRef}
                 type="file"
@@ -335,99 +335,99 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
                 onChange={handleFile}
                 style={{ display: "none" }}
               />
-              <span style={S.fileBtn}>Escolher arquivo CSV</span>
+              <span className="btn btn-secondary">Escolher arquivo CSV</span>
             </label>
-            {fileName && <span style={S.fileName}>{fileName}</span>}
+            {fileName && <span className="muted">{fileName}</span>}
           </div>
-          {parseError && <p style={S.errorMsg}>{parseError}</p>}
+          {parseError && <p className="form-error">{parseError}</p>}
         </section>
 
         {/* Preview — editable */}
         {rows.length > 0 && !results && (
-          <section style={S.card}>
-            <div style={S.previewHeader}>
-              <h2 style={S.sectionTitle}>
+          <section className="card">
+            <div className="toolbar">
+              <h2 className="section-heading">
                 {rows.length} atleta{rows.length !== 1 ? "s" : ""} encontrado{rows.length !== 1 ? "s" : ""}
                 <span style={{ fontSize: "0.75rem", fontWeight: 400, color: "#ffffff", marginLeft: "0.5rem" }}>— clique nas células para editar</span>
               </h2>
               <div style={{ display: "flex", gap: "0.75rem" }}>
-                <button onClick={handleReset} style={S.btnCancel} disabled={submitting}>Limpar</button>
-                <button onClick={handleImport} style={S.btnImport} disabled={submitting || rows.length === 0}>
+                <button onClick={handleReset} className="btn btn-secondary" disabled={submitting}>Limpar</button>
+                <button onClick={handleImport} className="btn btn-primary" disabled={submitting || rows.length === 0}>
                   {submitting ? "Importando…" : `Importar ${rows.length} atleta${rows.length !== 1 ? "s" : ""}`}
                 </button>
               </div>
             </div>
-            {submitError && <p style={S.errorMsg}>{submitError}</p>}
+            {submitError && <p className="form-error">{submitError}</p>}
             <div className="table-wrap">
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={{ ...S.th, width: "32px" }}>#</th>
-                    <th style={S.th}>Nome *</th>
-                    <th style={S.th}>Nascimento</th>
-                    <th style={S.th}>CPF</th>
-                    <th style={S.th}>Apelido</th>
-                    <th style={S.th}>Posição</th>
-                    <th style={S.th}>Nacionalidade</th>
-                    <th style={{ ...S.th, width: "32px" }}></th>
+                    <th style={{ width: "32px" }}>#</th>
+                    <th >Nome *</th>
+                    <th >Nascimento</th>
+                    <th >CPF</th>
+                    <th >Apelido</th>
+                    <th >Posição</th>
+                    <th >Nacionalidade</th>
+                    <th style={{ width: "32px" }}></th>
                   </tr>
                 </thead>
                 <tbody>
                   {rows.map((r, i) => (
                     <tr key={i} style={i % 2 === 0 ? S.trEven : S.trOdd}>
-                      <td style={{ ...S.td, color: "#ffffff", textAlign: "center" }}>{i + 1}</td>
-                      <td style={S.td}>
+                      <td style={{ color: "#ffffff", textAlign: "center" }}>{i + 1}</td>
+                      <td >
                         <input
-                          style={{ ...S.cellInput, fontWeight: 600, color: r.name ? "#cdd6f4" : "#f38ba8" }}
+                          style={{ ...S.cellInput, fontWeight: 600, color: r.name ? "var(--c-text)" : "var(--c-negative)" }}
                           value={r.name}
                           placeholder="Nome obrigatório"
                           onChange={e => updateRow(i, "name", e.target.value)}
                         />
                       </td>
-                      <td style={S.td}>
+                      <td >
                         <input
-                          style={S.cellInput}
+                          className="form-input"
                           value={r.birth_date ?? ""}
                           placeholder="AAAA-MM-DD"
                           onChange={e => updateRow(i, "birth_date", e.target.value)}
                         />
                       </td>
-                      <td style={S.td}>
+                      <td >
                         <input
-                          style={S.cellInput}
+                          className="form-input"
                           value={r.cpf ?? ""}
                           placeholder="CPF"
                           onChange={e => updateRow(i, "cpf", e.target.value)}
                         />
                       </td>
-                      <td style={S.td}>
+                      <td >
                         <input
-                          style={S.cellInput}
+                          className="form-input"
                           value={r.nickname ?? ""}
                           placeholder="Apelido"
                           onChange={e => updateRow(i, "nickname", e.target.value)}
                         />
                       </td>
-                      <td style={S.td}>
+                      <td >
                         <input
-                          style={S.cellInput}
+                          className="form-input"
                           value={r.position ?? ""}
                           placeholder="Posição"
                           onChange={e => updateRow(i, "position", e.target.value)}
                         />
                       </td>
-                      <td style={S.td}>
+                      <td >
                         <input
-                          style={S.cellInput}
+                          className="form-input"
                           value={r.nationality ?? ""}
                           placeholder="Nacionalidade"
                           onChange={e => updateRow(i, "nationality", e.target.value)}
                         />
                       </td>
-                      <td style={{ ...S.td, textAlign: "center" }}>
+                      <td style={{ textAlign: "center" }}>
                         <button
                           title="Remover linha"
-                          style={S.btnDeleteRow}
+                          className="btn btn-danger"
                           onClick={() => deleteRow(i)}
                           disabled={submitting}
                         >✕</button>
@@ -442,37 +442,37 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
 
         {/* Results */}
         {results && summary && (
-          <section style={S.card}>
-            <div style={S.previewHeader}>
-              <h2 style={S.sectionTitle}>Resultado da Importação</h2>
-              <button onClick={handleReset} style={S.btnCancel}>Nova importação</button>
+          <section className="card">
+            <div className="toolbar">
+              <h2 className="section-heading">Resultado da Importação</h2>
+              <button onClick={handleReset} className="btn btn-secondary">Nova importação</button>
             </div>
-            <div style={S.summaryRow}>
-              <span style={S.summaryTotal}>Total: {summary.total}</span>
-              <span style={S.summaryOk}>✓ Criados: {summary.created}</span>
-              {summary.errors > 0 && <span style={S.summaryErr}>✗ Erros: {summary.errors}</span>}
+            <div className="form-field-group">
+              <span className="muted">Total: {summary.total}</span>
+              <span className="form-success">✓ Criados: {summary.created}</span>
+              {summary.errors > 0 && <span className="form-error">✗ Erros: {summary.errors}</span>}
             </div>
             <div className="table-wrap">
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>#</th>
-                    <th style={S.th}>Nome</th>
-                    <th style={S.th}>Status</th>
-                    <th style={S.th}>Detalhe</th>
+                    <th >#</th>
+                    <th >Nome</th>
+                    <th >Status</th>
+                    <th >Detalhe</th>
                   </tr>
                 </thead>
                 <tbody>
                   {results.map((r) => (
                     <tr key={r.row} style={r.success ? S.trSuccess : S.trError}>
-                      <td style={S.td}>{r.row}</td>
-                      <td style={S.td}>{r.name}</td>
-                      <td style={S.td}>
+                      <td >{r.row}</td>
+                      <td >{r.name}</td>
+                      <td >
                         <span style={r.success ? S.badgeOk : S.badgeErr}>
                           {r.success ? "Criado" : "Erro"}
                         </span>
                       </td>
-                      <td style={S.td}>{r.error ?? (r.athlete_id ? `ID: ${r.athlete_id.slice(0, 8)}…` : "–")}</td>
+                      <td >{r.error ?? (r.athlete_id ? `ID: ${r.athlete_id.slice(0, 8)}…` : "–")}</td>
                     </tr>
                   ))}
                 </tbody>

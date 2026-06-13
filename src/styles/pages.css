@@ -466,3 +466,125 @@
   border-bottom: 1px solid var(--c-border);
   padding-bottom: 0.4rem;
 }
+
+/* ── Login page ─────────────────────────────────────────────────── */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.login-page__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.login-page__card {
+  position: relative;
+  z-index: 1;
+  width: min(400px, 95vw);
+  background: var(--c-surface-2);
+}
+
+/* ── Score / match display ──────────────────────────────────────── */
+.score-card {
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.score-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.score-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.score-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.score-big {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--c-positive);
+}
+
+.win-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--c-border);
+}
+
+/* ── Stats ──────────────────────────────────────────────────────── */
+.stats-block {
+  padding: 1.25rem 1rem 0.75rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stats-count {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--c-text);
+}
+
+.stat-bar {
+  margin-bottom: 0.75rem;
+}
+
+.stat-bar__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.stat-bar__track {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--c-border);
+  overflow: hidden;
+}
+
+/* ── Roster grid ────────────────────────────────────────────────── */
+.roster-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* ── Logo pair (round share) ────────────────────────────────────── */
+.logo-pair {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

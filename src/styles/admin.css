@@ -150,3 +150,337 @@
 .admin-panel__body {
   padding: 1.25rem;
 }
+
+/* ── Modal ──────────────────────────────────────────────────────── */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--c-black-60);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  width: min(480px, 95vw);
+  box-shadow: var(--shadow-card);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-text);
+}
+
+.modal-body {
+  color: var(--c-text);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+/* ── Toolbar / header de seção ──────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.table-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+/* ── Filtros ────────────────────────────────────────────────────── */
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.filter-select {
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  color: var(--c-text);
+  font-size: var(--text-sm);
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+}
+
+/* ── Paginação ──────────────────────────────────────────────────── */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.page-btn {
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--c-border);
+  background: transparent;
+  color: var(--c-text);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  min-width: 2rem;
+}
+
+.page-btn:hover { border-color: var(--c-link); color: var(--c-link); }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.page-info {
+  font-size: var(--text-xs);
+  color: var(--c-text-muted);
+}
+
+/* ── Missing classes from Phase 5 migration ────────────────────── */
+
+/* .page-section — wrapper de seção com margem */
+.page-section {
+  margin-bottom: 2.5rem;
+}
+
+/* .cell-input — input transparente inline em células */
+.cell-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--c-text);
+  font-size: var(--text-xs);
+  padding: 0.25rem 0.3rem;
+  outline: none;
+}
+
+/* .tab-bar — barra de abas */
+.tab-bar {
+  display: flex;
+  border-bottom: 2px solid var(--c-border);
+  gap: 0;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* .team-name — nome do time em partidas */
+.team-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-text);
+  white-space: nowrap;
+}
+
+/* .score-slot — campo de score editável */
+.score-slot {
+  width: 3.5rem;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  color: var(--c-text);
+  padding: 0.3rem;
+}
+
+/* .score-box — exibição de placar */
+.score-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--c-text);
+  gap: 0.5rem;
+  min-width: 4rem;
+}
+
+/* .score-sep — separador de placar "×" */
+.score-sep {
+  color: var(--c-text-muted);
+  font-size: 0.9rem;
+  padding: 0 0.2rem;
+}
+
+/* .match-team-row — linha de time em partida */
+.match-team-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* .avatar-placeholder — placeholder de foto */
+.avatar-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--c-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-text-muted);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* .badge--success / --danger */
+.badge--success {
+  color: var(--c-positive);
+  background: var(--c-positive-10);
+}
+.badge--danger {
+  color: var(--c-negative);
+  background: var(--c-negative-10);
+}
+
+/* .breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--text-xs);
+  color: var(--c-text-muted);
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* .data-list — lista de itens simples */
+.data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* .td-action — célula de ações inline */
+.td-action {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+/* .upload-area — área de drag&drop */
+.upload-area {
+  border: 2px dashed var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  color: var(--c-text-muted);
+  transition: border-color 0.15s;
+}
+.upload-area:hover { border-color: var(--c-action); }
+
+/* .form-warning */
+.form-warning {
+  color: var(--c-warning);
+  background: var(--c-warning-10);
+  border: 1px solid var(--c-warning-25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: var(--text-sm);
+}
+
+.btn-edit {
+  font-size: var(--text-xs);
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--c-border);
+  background: transparent;
+  color: var(--c-link);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-edit:hover { border-color: var(--c-link); background: var(--c-link-07); }
+
+/* ── Error banner com botão fechar ──────────────────────────────── */
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.error-banner__close {
+  background: none;
+  border: none;
+  color: var(--c-negative);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+/* ── Row link ───────────────────────────────────────────────────── */
+
+.row-link {
+  color: var(--c-link);
+  text-decoration: none;
+  font-weight: 500;
+}
+.row-link:hover { text-decoration: underline; }
+
+/* ── Search wrap ────────────────────────────────────────────────── */
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  max-width: 360px;
+}
+
+/* ── Section heading row ─────────────────────────────────────────── */
+
+.section-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Checkbox standalone (sem label) ────────────────────────────── */
+
+.form-checkbox {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: var(--c-action);
+}

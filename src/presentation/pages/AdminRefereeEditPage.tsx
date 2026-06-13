@@ -17,7 +17,7 @@ const NO_PHOTO =
 
 function Field({ label, htmlFor, children }: { label: string; htmlFor: string; children: React.ReactNode }) {
   return (
-    <div style={S.fieldGroup}>
+    <div className="form-field-group">
       <label htmlFor={htmlFor} className="form-label">{label}</label>
       {children}
     </div>
@@ -114,7 +114,7 @@ export function AdminRefereeEditPage({ updateReferee, deleteReferee, refereeRepo
     }
   }
 
-  if (loading) return <main style={{ padding: "2rem 1.5rem", color: "#cdd6f4" }}>Carregando…</main>;
+  if (loading) return <main style={{ padding: "2rem 1.5rem", color: "var(--c-text)" }}>Carregando…</main>;
 
   return (
     <>
@@ -125,30 +125,30 @@ export function AdminRefereeEditPage({ updateReferee, deleteReferee, refereeRepo
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem" }}>
             <h1 className="page-title">Editar Árbitro</h1>
             <div style={{ display: "flex", gap: "0.5rem" }}>
-              <Link to={`/arbitros/${id}`} style={S.subLink}>Ver Perfil Público</Link>
+              <Link to={`/arbitros/${id}`} className="row-link">Ver Perfil Público</Link>
             </div>
           </div>
         </div>
       </header>
 
       <main className="page-container">
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
 
           {/* Photo */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Foto</legend>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Foto</legend>
             <div style={{ marginTop: "0.5rem", display: "inline-block", position: "relative" }}>
               <img
                 src={photoPreview ?? photoUrl ?? NO_PHOTO}
                 alt="foto"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_PHOTO; }}
-                style={S.photoPreview}
+                className="avatar avatar--lg"
               />
               <button
                 type="button"
                 title="Alterar foto"
                 onClick={() => setShowPhotoModal(true)}
-                style={S.photoPencil}
+                
               >
                 ✏
               </button>
@@ -170,60 +170,60 @@ export function AdminRefereeEditPage({ updateReferee, deleteReferee, refereeRepo
           )}
 
           <fieldset style={{ ...S.fieldset, marginTop: "1.25rem" }}>
-            <legend style={S.legend}>Identificação</legend>
-            <div style={S.grid2}>
+            <legend className="form-legend">Identificação</legend>
+            <div className="form-field-group--2">
               <Field label="Nome completo *" htmlFor="name">
-                <input id="name" style={S.input} value={name} onChange={(e) => setName(e.target.value)} required />
+                <input id="name" className="form-input" value={name} onChange={(e) => setName(e.target.value)} required />
               </Field>
               <Field label="Apelido / Vulgo" htmlFor="nickname">
-                <input id="nickname" style={S.input} value={nickname} onChange={(e) => setNickname(e.target.value)} />
+                <input id="nickname" className="form-input" value={nickname} onChange={(e) => setNickname(e.target.value)} />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Data de nascimento" htmlFor="birth_date">
-                <input id="birth_date" type="date" style={S.input} value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                <input id="birth_date" type="date" className="form-input" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
               </Field>
               <Field label="CPF" htmlFor="cpf">
-                <input id="cpf" style={S.input} value={cpf} onChange={(e) => setCpf(e.target.value)} />
+                <input id="cpf" className="form-input" value={cpf} onChange={(e) => setCpf(e.target.value)} />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Nacionalidade" htmlFor="nationality">
-                <input id="nationality" style={S.input} value={nationality} onChange={(e) => setNationality(e.target.value)} />
+                <input id="nationality" className="form-input" value={nationality} onChange={(e) => setNationality(e.target.value)} />
               </Field>
               <Field label="Telefone" htmlFor="phone">
-                <input id="phone" style={S.input} value={phone} onChange={(e) => setPhone(e.target.value)} />
+                <input id="phone" className="form-input" value={phone} onChange={(e) => setPhone(e.target.value)} />
               </Field>
             </div>
             <Field label="E-mail" htmlFor="email">
-              <input id="email" type="email" style={{ ...S.input, maxWidth: "360px" }} value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input id="email" type="email" className="form-input" style={{ maxWidth: "360px" }} value={email} onChange={(e) => setEmail(e.target.value)} />
             </Field>
           </fieldset>
 
           <fieldset style={{ ...S.fieldset, marginTop: "1.25rem" }}>
-            <legend style={S.legend}>Observações</legend>
+            <legend className="form-legend">Observações</legend>
             <Field label="Observações" htmlFor="notes">
-              <textarea id="notes" style={{ ...S.input, minHeight: "80px", resize: "vertical" }} value={notes} onChange={(e) => setNotes(e.target.value)} />
+              <textarea id="notes" className="form-input" style={{ minHeight: "80px", resize: "vertical" }} value={notes} onChange={(e) => setNotes(e.target.value)} />
             </Field>
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✓ Árbitro salvo! Redirecionando…</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✓ Árbitro salvo! Redirecionando…</p>}
 
-          <div style={S.actions}>
+          <div className="form-actions">
             <button
               type="button"
-              style={S.btnDelete}
+              className="btn btn-danger"
               onClick={handleDelete}
               disabled={deleting}
             >
               {deleting ? "Excluindo…" : "Excluir árbitro"}
             </button>
             <div style={{ display: "flex", gap: "0.75rem" }}>
-              <button type="button" style={S.btnCancel} onClick={() => navigate("/admin/arbitros")}>
+              <button type="button" className="btn btn-secondary" onClick={() => navigate("/admin/arbitros")}>
                 Cancelar
               </button>
-              <button type="submit" style={S.btnSave} disabled={submitting}>
+              <button type="submit" className="btn btn-primary" disabled={submitting}>
                 {submitting ? "Salvando…" : "Salvar"}
               </button>
             </div>

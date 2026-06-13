@@ -758,13 +758,13 @@ export function AdminChampionshipManagePage() {
 
   // ── Render ─────────────────────────────────────────────────────────────────
 
-  if (loading) return <main style={{ padding: "2rem 1.5rem", color: "#cdd6f4" }}>Carregando...</main>;
+  if (loading) return <main style={{ padding: "2rem 1.5rem", color: "var(--c-text)" }}>Carregando...</main>;
 
   if (error || !champ) {
     return (
       <main style={{ padding: "2rem 1.5rem" }}>
-        <p style={{ color: "#f38ba8" }}>{error ?? "Campeonato não encontrado."}</p>
-        <Link to="/admin/campeonatos" style={{ color: "#89b4fa" }}>← Voltar</Link>
+        <p style={{ color: "var(--c-negative)" }}>{error ?? "Campeonato não encontrado."}</p>
+        <Link to="/admin/campeonatos" style={{ color: "var(--c-link)" }}>← Voltar</Link>
       </main>
     );
   }
@@ -799,9 +799,9 @@ export function AdminChampionshipManagePage() {
               {champ.nickname && <span className="page-subtitle">{champ.nickname}</span>}
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-              <div style={S.champMeta}>
-                <span style={S.metaBadge}>{champ.year}</span>
-                {champ.level && <span style={S.metaBadge}>{LEVEL_LABEL[champ.level] ?? champ.level}</span>}
+              <div className="muted">
+                <span className="badge">{champ.year}</span>
+                {champ.level && <span className="badge">{LEVEL_LABEL[champ.level] ?? champ.level}</span>}
               </div>
               {editions.length === 0 && (
                 <button
@@ -816,7 +816,7 @@ export function AdminChampionshipManagePage() {
               )}
             </div>
           </div>
-          <div style={S.tabBar}>
+          <div className="tab-bar">
             <button
               style={{ ...S.tab, ...(activeTab === "estrutura" ? S.tabActive : {}) }}
               onClick={() => switchToTab("estrutura")}
@@ -843,9 +843,9 @@ export function AdminChampionshipManagePage() {
 
         {/* ── Erro global de submit ─────────────────────────────────── */}
         {submitError && (
-          <div style={S.globalError}>
+          <div className="form-error">
             <span>⚠ {submitError}</span>
-            <button onClick={() => setSubmitError(null)} style={S.errClose}>×</button>
+            <button onClick={() => setSubmitError(null)} className="error-banner__close">×</button>
           </div>
         )}
 
@@ -854,15 +854,15 @@ export function AdminChampionshipManagePage() {
         <>
           {/* Dados da Edição */}
           <section style={{ ...S.section, marginBottom: "1rem" }}>
-            <div style={S.sectionHeader}>
-              <h2 style={S.sectionTitle}>Dados da Edição</h2>
+            <div className="section-row">
+              <h2 className="section-heading">Dados da Edição</h2>
             </div>
-            <div style={S.editionCard}>
-              <div style={S.editionRow}>
-                <div style={S.editionField}>
-                  <label style={S.editionLabel}>Status</label>
+            <div className="card">
+              <div className="form-field-group">
+                <div >
+                  <label className="form-label">Status</label>
                   <select
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={editionStatus}
                     onChange={e => setEditionStatus(e.target.value)}
                   >
@@ -871,10 +871,10 @@ export function AdminChampionshipManagePage() {
                     <option value="finished">Encerrado</option>
                   </select>
                 </div>
-                <div style={S.editionField}>
-                  <label style={S.editionLabel}>Campeão</label>
+                <div >
+                  <label className="form-label">Campeão</label>
                   <select
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={editionChampionId}
                     onChange={e => setEditionChampionId(e.target.value)}
                   >
@@ -884,10 +884,10 @@ export function AdminChampionshipManagePage() {
                     ))}
                   </select>
                 </div>
-                <div style={S.editionField}>
-                  <label style={S.editionLabel}>Vice-campeão</label>
+                <div >
+                  <label className="form-label">Vice-campeão</label>
                   <select
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={editionRunnerUpId}
                     onChange={e => setEditionRunnerUpId(e.target.value)}
                   >
@@ -898,17 +898,17 @@ export function AdminChampionshipManagePage() {
                   </select>
                 </div>
               </div>
-              <div style={S.editionActions}>
+              <div className="form-actions">
                 <button
                   type="button"
                   onClick={handleSaveEditionInfo}
                   disabled={savingEdition}
-                  style={S.btnSave}
+                  className="btn btn-primary"
                 >
                   {savingEdition ? "Salvando..." : "Salvar edição"}
                 </button>
                 {editionSaveOk && (
-                  <span style={{ color: "#a6e3a1", fontSize: "0.85rem" }}>✔ Salvo!</span>
+                  <span style={{ color: "var(--c-positive)", fontSize: "0.85rem" }}>✔ Salvo!</span>
                 )}
                 <button
                   type="button"
@@ -920,7 +920,7 @@ export function AdminChampionshipManagePage() {
                   {deletingEdition ? "Excluindo..." : "🗑 Excluir edição"}
                 </button>
                 {editionInfo?.champion_team_id && (
-                  <span style={{ color: "#f9e2af", fontSize: "0.82rem", marginLeft: "auto", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <span style={{ color: "var(--c-warning)", fontSize: "0.82rem", marginLeft: "auto", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     🏆 {allTeams.find(t => t.id === editionInfo.champion_team_id)?.name}
                     {editionInfo.runner_up_team_id && (
                       <> · 🥈 {allTeams.find(t => t.id === editionInfo.runner_up_team_id)?.name}</>
@@ -944,7 +944,7 @@ export function AdminChampionshipManagePage() {
                   </p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
                     {editionClubs.map(c => (
-                      <span key={c.id} style={{ background: "#313244", color: "#cdd6f4", borderRadius: "999px", padding: "0.2rem 0.7rem", fontSize: "0.82rem" }}>
+                      <span key={c.id} style={{ background: "var(--c-border)", color: "var(--c-text)", borderRadius: "999px", padding: "0.2rem 0.7rem", fontSize: "0.82rem" }}>
                         {c.name}
                       </span>
                     ))}
@@ -954,20 +954,20 @@ export function AdminChampionshipManagePage() {
             </div>
           </section>
           {/* Fases */}
-          <section style={S.section}>
-            <div style={S.sectionHeader}>
-              <h2 style={S.sectionTitle}>Fases</h2>
-              <button style={S.btnAdd} onClick={openPhaseForm}>
+          <section className="page-section">
+            <div className="section-row">
+              <h2 className="section-heading">Fases</h2>
+              <button className="btn btn-success" onClick={openPhaseForm}>
                 {showPhaseForm ? "Cancelar" : "+ Nova fase"}
               </button>
             </div>
 
           {showPhaseForm && (
-            <div style={S.inlineFormCard}>
+            <div className="card">
               <form onSubmit={handleAddPhase}>
-                <div style={S.inlineFormRow}>
+                <div className="form-field-group">
                   <input
-                    style={{ ...S.input, flex: 2 }}
+                    className="form-input" style={{ flex: 2 }}
                     placeholder="Nome da fase (ex: Fase de Grupos)"
                     value={phaseName}
                     onChange={e => setPhaseName(e.target.value)}
@@ -976,7 +976,7 @@ export function AdminChampionshipManagePage() {
                   />
                   <input
                     type="number"
-                    style={{ ...S.input, width: "90px" }}
+                    className="form-input" style={{ width: "90px" }}
                     placeholder="Ordem"
                     value={phaseOrder}
                     onChange={e => setPhaseOrder(e.target.value)}
@@ -986,22 +986,22 @@ export function AdminChampionshipManagePage() {
                 </div>
                 <div style={{ ...S.inlineFormRow, marginTop: "0.5rem" }}>
                   <select
-                    style={{ ...S.input, ...S.select, flex: 1 }}
+                    className="form-select" style={{ flex: 1 }}
                     value={phaseType}
                     onChange={e => setPhaseType(e.target.value)}
                   >
                     <option value="round_robin">Pontos Corridos</option>
                     <option value="knockout">Mata-Mata</option>
                   </select>
-                  <button type="submit" style={S.btnSave} disabled={submitting}>Salvar</button>
-                  <button type="button" style={S.btnCancel} onClick={() => setShowPhaseForm(false)}>Cancelar</button>
+                  <button type="submit" className="btn btn-primary" disabled={submitting}>Salvar</button>
+                  <button type="button" className="btn btn-secondary" onClick={() => setShowPhaseForm(false)}>Cancelar</button>
                 </div>
               </form>
             </div>
           )}
 
           {phases.length === 0 && !showPhaseForm && (
-            <p style={S.emptyHint}>Nenhuma fase cadastrada.</p>
+            <p className="muted">Nenhuma fase cadastrada.</p>
           )}
 
           {phases.map(phase => {
@@ -1009,12 +1009,12 @@ export function AdminChampionshipManagePage() {
             const isGroupFormOpen = groupFormPhase === phase.id;
 
             return (
-              <div key={phase.id} style={S.phaseCard}>
+              <div key={phase.id} className="card">
                 {/* Phase header */}
                 <div style={{ ...S.phaseHeader, ...(isKO ? S.phaseHeaderKO : S.phaseHeaderRR) }}>
-                  <div style={S.phaseHeaderLeft}>
-                    <span style={S.phaseOrder}>#{phase.order}</span>
-                    <span style={S.phaseName}>{phase.name}</span>
+                  <div className="toolbar">
+                    <span className="muted">#{phase.order}</span>
+                    <span className="section-heading">{phase.name}</span>
                     <span style={{ ...S.phaseBadge, ...(isKO ? S.phaseBadgeKO : S.phaseBadgeRR) }}>
                       {PHASE_TYPE_LABEL[phase.phase_type] ?? phase.phase_type}
                     </span>
@@ -1031,7 +1031,7 @@ export function AdminChampionshipManagePage() {
                   </div>
                   <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
                     <button
-                      style={S.btnAddSmall}
+                      className="btn-sm btn-success btn"
                       onClick={() => {
                         setGroupName("");
                         setGroupFormPhase(isGroupFormOpen ? null : phase.id);
@@ -1041,7 +1041,7 @@ export function AdminChampionshipManagePage() {
                       {isGroupFormOpen ? "Cancelar" : "+ Grupo"}
                     </button>
                     <button
-                      style={S.btnDeletePhase}
+                      className="btn btn-danger"
                       onClick={() => handleDeletePhase(phase.id)}
                       disabled={deletingPhaseId === phase.id}
                       title="Excluir fase"
@@ -1052,44 +1052,44 @@ export function AdminChampionshipManagePage() {
                 </div>
 
                 {/* Phase body */}
-                <div style={S.phaseBody}>
+                <div className="form-body">
                   {isGroupFormOpen && (
                     <form
                       onSubmit={(e) => handleAddGroup(phase.id, e)}
                       style={{ ...S.inlineForm, marginBottom: "0.75rem" }}
                     >
                       <input
-                        style={{ ...S.input, flex: 1 }}
+                        className="form-input" style={{ flex: 1 }}
                         placeholder="Nome do grupo (ex: Grupo A, QF1)"
                         value={groupName}
                         onChange={e => setGroupName(e.target.value)}
                         required
                         autoFocus
                       />
-                      <button type="submit" style={S.btnSave} disabled={submitting}>Salvar</button>
+                      <button type="submit" className="btn btn-primary" disabled={submitting}>Salvar</button>
                     </form>
                   )}
 
                   {phase.groups.length === 0 && !isGroupFormOpen && (
-                    <p style={S.emptyHint}>Nenhum grupo nesta fase. Use "+ Grupo" para adicionar.</p>
+                    <p className="muted">Nenhum grupo nesta fase. Use "+ Grupo" para adicionar.</p>
                   )}
 
-                  <div style={S.groupsGrid}>
+                  <div className="form-field-group">
                     {phase.groups.map(group => {
                       const available = teamsAvailableForGroup(group.id);
                       const isTeamFormOpen = teamFormGroup === group.id;
 
                       return (
-                        <div key={group.id} style={S.groupCard}>
+                        <div key={group.id} className="card">
                           {/* Group header */}
-                          <div style={S.groupHeader}>
-                            <span style={S.groupName}>{group.name}</span>
+                          <div className="toolbar">
+                            <span className="section-heading">{group.name}</span>
                             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                              <span style={S.groupCount}>
+                              <span className="muted">
                                 {group.teams.length} time{group.teams.length !== 1 ? "s" : ""}
                               </span>
                               <button
-                                style={S.btnDeleteGroup}
+                                className="btn btn-danger"
                                 onClick={() => handleDeleteGroup(group.id, phase.id)}
                                 disabled={deletingGroupId === group.id}
                                 title="Excluir grupo"
@@ -1100,9 +1100,9 @@ export function AdminChampionshipManagePage() {
                           </div>
 
                           {/* Teams list */}
-                          <div style={S.teamsList}>
+                          <div className="data-list">
                             {group.teams.length === 0
-                              ? <span style={S.emptyTeams}>Sem times</span>
+                              ? <span className="muted">Sem times</span>
                               : group.teams.map(t => {
                                 const tKey = `${group.id}:${t.team_id}`;
                                 return (
@@ -1112,7 +1112,7 @@ export function AdminChampionshipManagePage() {
                                       onClick={() => handleRemoveTeamFromGroup(group.id, t.team_id, phase.id)}
                                       disabled={removingTeamKey === tKey}
                                       title="Remover do grupo"
-                                      style={{ background: "none", border: "none", cursor: "pointer", color: "#f38ba8", fontSize: "0.75rem", padding: 0, lineHeight: 1 }}
+                                      style={{ background: "none", border: "none", cursor: "pointer", color: "var(--c-negative)", fontSize: "0.75rem", padding: 0, lineHeight: 1 }}
                                     >
                                       {removingTeamKey === tKey ? "…" : "×"}
                                     </button>
@@ -1126,25 +1126,25 @@ export function AdminChampionshipManagePage() {
                           {isTeamFormOpen ? (
                             <form
                               onSubmit={(e) => handleAddTeam(group.id, e)}
-                              style={S.addTeamForm}
+                              className="form-body"
                             >
-                              <div style={S.addTeamFilters}>
-                                <div style={S.addTeamFilterItem}>
-                                  <span style={S.addTeamFilterLabel}>Liga</span>
-                                  <span style={S.addTeamFilterValue}>
+                              <div className="filter-bar">
+                                <div >
+                                  <span className="form-label">Liga</span>
+                                  <span className="form-select">
                                     {champ?.league_id ? (leagueName ?? "Carregando…") : "Sem liga"}
                                   </span>
                                 </div>
-                                <div style={S.addTeamFilterItem}>
-                                  <span style={S.addTeamFilterLabel}>Categoria</span>
-                                  <span style={S.addTeamFilterValue}>
+                                <div >
+                                  <span className="form-label">Categoria</span>
+                                  <span className="form-select">
                                     {champ?.level ? (LEVEL_LABEL[champ.level] ?? champ.level) : "Sem categoria"}
                                   </span>
                                 </div>
                               </div>
-                              <div style={S.addTeamRow}>
+                              <div className="form-field-group">
                                 <select
-                                  style={{ ...S.input, ...S.select, flex: 1, fontSize: "0.8rem", padding: "0.35rem 0.5rem" }}
+                                  className="form-select" style={{ flex: 1, fontSize: "0.8rem", padding: "0.35rem 0.5rem" }}
                                   value={selectedTeamId}
                                   onChange={e => setSelectedTeamId(e.target.value)}
                                   required
@@ -1157,10 +1157,10 @@ export function AdminChampionshipManagePage() {
                                     </option>
                                   ))}
                                 </select>
-                                <button type="submit" style={S.btnSaveSmall} disabled={submitting || !selectedTeamId}>✓</button>
+                                <button type="submit" className="btn-sm btn-primary btn" disabled={submitting || !selectedTeamId}>✓</button>
                                 <button
                                   type="button"
-                                  style={S.btnCancelSmall}
+                                  className="btn-sm btn-secondary btn"
                                   onClick={() => { setTeamFormGroup(null); setSelectedTeamId(""); }}
                                 >×</button>
                               </div>
@@ -1184,9 +1184,9 @@ export function AdminChampionshipManagePage() {
                           )}
 
                           {/* Partidas */}
-                          <div style={S.matchDivider} />
-                          <div style={S.matchSectionHeader}>
-                            <span style={S.matchSectionTitle}>Partidas</span>
+                          <div  />
+                          <div className="toolbar">
+                            <span className="section-heading">Partidas</span>
                             {group.matches.length > 0 && (
                               <span style={{ color: "#ffffff", fontSize: "0.72rem" }}>
                                 {group.matches.length}
@@ -1195,7 +1195,7 @@ export function AdminChampionshipManagePage() {
                           </div>
                           <Link
                             to={`/admin/campeonatos/${id}/grupos/${group.id}/partidas?edicao=${resolvedEditionId ?? ""}&grupo=${encodeURIComponent(group.name)}&fase=${encodeURIComponent(phase.name)}&champ=${encodeURIComponent(champ.name)}`}
-                            style={S.btnManageMatches}
+                            className="btn btn-primary"
                           >
                             {group.matches.length > 0
                               ? `Gerenciar partidas (${group.matches.length}) →`
@@ -1215,31 +1215,31 @@ export function AdminChampionshipManagePage() {
 
         {/* ── ATLETAS INSCRITOS ─────────────────────────────────────── */}
         {activeTab === "inscritos" && (
-          <section style={S.section}>
-            <div style={S.sectionHeader}>
-              <h2 style={S.sectionTitle}>Atletas Inscritos</h2>
-              <button style={S.btnAdd} onClick={() => void loadRegistrations()}>
+          <section className="page-section">
+            <div className="section-row">
+              <h2 className="section-heading">Atletas Inscritos</h2>
+              <button className="btn btn-success" onClick={() => void loadRegistrations()}>
                 ↻ Recarregar
               </button>
             </div>
 
             {regError && (
-              <div style={S.globalError}>
+              <div className="form-error">
                 <span>⚠ {regError}</span>
-                <button onClick={() => setRegError(null)} style={S.errClose}>×</button>
+                <button onClick={() => setRegError(null)} className="error-banner__close">×</button>
               </div>
             )}
 
-            {regLoading && <p style={S.emptyHint}>Carregando inscrições...</p>}
+            {regLoading && <p className="muted">Carregando inscrições...</p>}
 
             {!regLoading && !resolvedEditionId && (
-              <p style={{ ...S.emptyHint, color: "#f38ba8" }}>
+              <p style={{ ...S.emptyHint, color: "var(--c-negative)" }}>
                 Nenhuma edição encontrada para este campeonato.
               </p>
             )}
 
             {!regLoading && resolvedEditionId && regLoaded && registrations.length === 0 && (
-              <p style={S.emptyHint}>Nenhuma inscrição nesta edição.</p>
+              <p className="muted">Nenhuma inscrição nesta edição.</p>
             )}
 
             {!regLoading && registrations.length > 0 && (
@@ -1248,7 +1248,7 @@ export function AdminChampionshipManagePage() {
                   <select
                     value={regFilterTeam}
                     onChange={e => { setRegFilterTeam(e.target.value); setRegPage(0); }}
-                    style={{ ...S.input, ...S.select, minWidth: "180px" }}
+                    className="form-select" style={{ minWidth: "180px" }}
                   >
                     <option value="">Todos os times</option>
                     {teamStats.map(tc => (
@@ -1260,7 +1260,7 @@ export function AdminChampionshipManagePage() {
                   <select
                     value={regFilterStatus}
                     onChange={e => { setRegFilterStatus(e.target.value); setRegPage(0); }}
-                    style={{ ...S.input, ...S.select, minWidth: "160px" }}
+                    className="form-select" style={{ minWidth: "160px" }}
                   >
                     <option value="">Todos os status</option>
                     <option value="pending">Pendente</option>
@@ -1274,35 +1274,35 @@ export function AdminChampionshipManagePage() {
                     <span key={tc.team_id} style={{ ...S.teamChip, padding: "0.35rem 0.75rem" }}>
                       {tc.name} · {tc.total} inscrito{tc.total !== 1 ? "s" : ""}
                       {tc.pending > 0 && (
-                        <span style={{ color: "#f9e2af" }}> · {tc.pending}↑</span>
+                        <span style={{ color: "var(--c-warning)" }}> · {tc.pending}↑</span>
                       )}
                       {tc.approved > 0 && (
-                        <span style={{ color: "#a6e3a1" }}> · {tc.approved}✓</span>
+                        <span style={{ color: "var(--c-positive)" }}> · {tc.approved}✓</span>
                       )}
                     </span>
                   ))}
                 </div>
 
                 {filteredRegs.length === 0 ? (
-                  <p style={S.emptyHint}>Nenhuma inscrição corresponde aos filtros.</p>
+                  <p className="muted">Nenhuma inscrição corresponde aos filtros.</p>
                 ) : (
                   <div style={{ ...S.inlineFormCard, padding: 0, overflow: "hidden" }}>
                     <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.875rem" }}>
                       <thead>
                         <tr>
-                          <th style={S.regTh}>Atleta</th>
-                          <th style={S.regTh}>Time</th>
-                          <th style={S.regTh}># Insc.</th>
-                          <th style={S.regTh}>Data</th>
-                          <th style={S.regTh}>Status</th>
-                          <th style={S.regTh}>Ações</th>
+                          <th >Atleta</th>
+                          <th >Time</th>
+                          <th ># Insc.</th>
+                          <th >Data</th>
+                          <th >Status</th>
+                          <th >Ações</th>
                         </tr>
                       </thead>
                       <tbody>
                         {pagedRegs.map(r => (
                           <React.Fragment key={r.id}>
                             <tr style={{ borderBottom: "1px solid #313244" }}>
-                              <td style={S.regTd}>{r.athlete_name}</td>
+                              <td >{r.athlete_name}</td>
                               <td style={{ ...S.regTd, color: "#ffffff" }}>{r.team_name}</td>
                               <td style={{ ...S.regTd, fontFamily: "monospace", color: "#ffffff" }}>
                                 {r.registration_number ?? "—"}
@@ -1310,12 +1310,12 @@ export function AdminChampionshipManagePage() {
                               <td style={{ ...S.regTd, color: "#ffffff" }}>
                                 {r.registered_at ? fmtDate(r.registered_at) : "—"}
                               </td>
-                              <td style={S.regTd}>
+                              <td >
                                 <span style={regBadgeStyle(r.status)}>
                                   {STATUS_LABEL[r.status] ?? r.status}
                                 </span>
                               </td>
-                              <td style={S.regTd}>
+                              <td >
                                 <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
                                   {r.status !== "approved" && (
                                     <button
@@ -1329,7 +1329,7 @@ export function AdminChampionshipManagePage() {
                                   )}
                                   {r.status !== "rejected" && (
                                     <button
-                                      style={{ background: "none", border: "1px solid #f38ba8", borderRadius: "4px", color: "#f38ba8", fontSize: "0.75rem", cursor: "pointer", padding: "0.2rem 0.55rem" }}
+                                      style={{ background: "none", border: "1px solid #f38ba8", borderRadius: "4px", color: "var(--c-negative)", fontSize: "0.75rem", cursor: "pointer", padding: "0.2rem 0.55rem" }}
                                       onClick={() => {
                                         setRejectingRegId(rejectingRegId === r.id ? null : r.id);
                                         setRejectNotes("");
@@ -1348,21 +1348,21 @@ export function AdminChampionshipManagePage() {
                                 <td colSpan={6} style={{ padding: "0.6rem 1rem" }}>
                                   <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
                                     <input
-                                      style={{ ...S.input, flex: 1, minWidth: "200px", fontSize: "0.8rem" }}
+                                      className="form-input" style={{ flex: 1, minWidth: "200px", fontSize: "0.8rem" }}
                                       placeholder="Motivo da rejeição (opcional)"
                                       value={rejectNotes}
                                       onChange={e => setRejectNotes(e.target.value)}
                                       autoFocus
                                     />
                                     <button
-                                      style={{ ...S.btnSaveSmall, backgroundColor: "#f38ba8", color: "#18265b", fontSize: "0.8rem" }}
+                                      style={{ ...S.btnSaveSmall, backgroundColor: "var(--c-negative)", color: "var(--c-brand)", fontSize: "0.8rem" }}
                                       onClick={() => void handleRejectReg(r.id)}
                                       disabled={!!regBusy[r.id]}
                                     >
                                       Confirmar
                                     </button>
                                     <button
-                                      style={S.btnCancelSmall}
+                                      className="btn-sm btn-secondary btn"
                                       onClick={() => { setRejectingRegId(null); setRejectNotes(""); }}
                                     >
                                       ×
@@ -1401,15 +1401,15 @@ export function AdminChampionshipManagePage() {
 
         {/* ── RODADAS ──────────────────────────────────────────────── */}
         {activeTab === "rodadas" && (
-          <section style={S.section}>
-            <div style={S.sectionHeader}>
-              <h2 style={S.sectionTitle}>Criar Rodada em Lote</h2>
+          <section className="page-section">
+            <div className="section-row">
+              <h2 className="section-heading">Criar Rodada em Lote</h2>
             </div>
 
             {submitError && (
-              <div style={S.globalError}>
+              <div className="form-error">
                 <span>⚠ {submitError}</span>
-                <button onClick={() => setSubmitError(null)} style={S.errClose}>×</button>
+                <button onClick={() => setSubmitError(null)} className="error-banner__close">×</button>
               </div>
             )}
 
@@ -1420,7 +1420,7 @@ export function AdminChampionshipManagePage() {
                 <select
                   value={roundPhaseId}
                   onChange={e => { setRoundPhaseId(e.target.value); setRoundGroupId(""); setRoundRows([{ home_team_id: "", away_team_id: "", match_date: "", venue_id: "" }]); setRoundResult(null); }}
-                  style={S.input}
+                  className="form-input"
                 >
                   <option value="">Selecione uma fase</option>
                   {phases.map(p => (
@@ -1433,7 +1433,7 @@ export function AdminChampionshipManagePage() {
                 <select
                   value={roundGroupId}
                   onChange={e => { setRoundGroupId(e.target.value); setRoundRows([{ home_team_id: "", away_team_id: "", match_date: "", venue_id: "" }]); setRoundResult(null); }}
-                  style={S.input}
+                  className="form-input"
                   disabled={!roundPhaseId}
                 >
                   <option value="">Selecione um grupo</option>
@@ -1449,7 +1449,7 @@ export function AdminChampionshipManagePage() {
                   min="1"
                   value={roundNumber}
                   onChange={e => setRoundNumber(e.target.value)}
-                  style={{ ...S.input, width: "6rem" }}
+                  className="form-input" style={{ width: "6rem" }}
                 />
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
@@ -1458,7 +1458,7 @@ export function AdminChampionshipManagePage() {
                   type="datetime-local"
                   value={roundDefaultDate}
                   onChange={e => setRoundDefaultDate(e.target.value)}
-                  style={S.input}
+                  className="form-input"
                 />
               </div>
             </div>
@@ -1470,11 +1470,11 @@ export function AdminChampionshipManagePage() {
               return (
                 <div style={{ marginBottom: "1rem" }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-                    <span style={{ color: "#cdd6f4", fontSize: "0.82rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    <span style={{ color: "var(--c-text)", fontSize: "0.82rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em" }}>
                       Partidas ({roundRows.length})
                     </span>
                     <button
-                      style={S.btnAddSmall}
+                      className="btn-sm btn-success btn"
                       onClick={() => setRoundRows(prev => [...prev, { home_team_id: "", away_team_id: "", match_date: "", venue_id: "" }])}
                     >
                       + Partida
@@ -1482,7 +1482,7 @@ export function AdminChampionshipManagePage() {
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {roundRows.map((row, idx) => (
-                      <div key={idx} style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap", backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", padding: "0.6rem 0.75rem" }}>
+                      <div key={idx} style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap", backgroundColor: "var(--c-brand)", border: "1px solid #313244", borderRadius: "6px", padding: "0.6rem 0.75rem" }}>
                         <span style={{ color: "#ffffff", fontSize: "0.75rem", fontFamily: "monospace", minWidth: "1.5rem" }}>#{idx + 1}</span>
                         <select
                           value={row.home_team_id}
@@ -1518,7 +1518,7 @@ export function AdminChampionshipManagePage() {
                         </select>
                         <button
                           onClick={() => setRoundRows(prev => prev.filter((_, i) => i !== idx))}
-                          style={{ background: "none", border: "none", color: "#f38ba8", cursor: "pointer", fontSize: "0.9rem", padding: "0 0.2rem", lineHeight: 1 }}
+                          style={{ background: "none", border: "none", color: "var(--c-negative)", cursor: "pointer", fontSize: "0.9rem", padding: "0 0.2rem", lineHeight: 1 }}
                           title="Remover"
                         >
                           ×
@@ -1527,10 +1527,10 @@ export function AdminChampionshipManagePage() {
                     ))}
                   </div>
                   <div style={{ marginTop: "1rem", display: "flex", gap: "0.75rem" }}>
-                    <button style={S.btnSave} onClick={() => void handleSaveRound()} disabled={savingRound}>
+                    <button className="btn btn-primary" onClick={() => void handleSaveRound()} disabled={savingRound}>
                       {savingRound ? "Salvando..." : "Salvar Rodada"}
                     </button>
-                    <button style={S.btnCancel} onClick={() => { setRoundRows([{ home_team_id: "", away_team_id: "", match_date: "", venue_id: "" }]); setRoundResult(null); setSubmitError(null); }}>
+                    <button className="btn btn-secondary" onClick={() => { setRoundRows([{ home_team_id: "", away_team_id: "", match_date: "", venue_id: "" }]); setRoundResult(null); setSubmitError(null); }}>
                       Limpar
                     </button>
                   </div>
@@ -1540,10 +1540,10 @@ export function AdminChampionshipManagePage() {
 
             {/* Resultado */}
             {roundResult && (
-              <div style={{ backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "8px", padding: "1rem", marginTop: "1rem" }}>
+              <div style={{ backgroundColor: "var(--c-brand)", border: "1px solid #313244", borderRadius: "8px", padding: "1rem", marginTop: "1rem" }}>
                 <div style={{ display: "flex", gap: "1.5rem", marginBottom: "0.75rem" }}>
-                  <span style={{ color: "#a6e3a1", fontWeight: 700, fontSize: "0.875rem" }}>✓ {roundResult.created} criadas</span>
-                  {roundResult.errors > 0 && <span style={{ color: "#f38ba8", fontWeight: 700, fontSize: "0.875rem" }}>✗ {roundResult.errors} erros</span>}
+                  <span style={{ color: "var(--c-positive)", fontWeight: 700, fontSize: "0.875rem" }}>✓ {roundResult.created} criadas</span>
+                  {roundResult.errors > 0 && <span style={{ color: "var(--c-negative)", fontWeight: 700, fontSize: "0.875rem" }}>✗ {roundResult.errors} erros</span>}
                   <span style={{ color: "#ffffff", fontSize: "0.875rem" }}>Total: {roundResult.total}</span>
                 </div>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.8rem" }}>
@@ -1561,12 +1561,12 @@ export function AdminChampionshipManagePage() {
                       return (
                         <tr key={r.row} style={{ backgroundColor: r.success ? "#1a2e1f" : "#2a1a1f" }}>
                           <td style={{ padding: "0.4rem 0.75rem", color: "#ffffff" }}>{r.row + 1}</td>
-                          <td style={{ padding: "0.4rem 0.75rem", color: "#cdd6f4" }}>{teamName(r.home_team_id)}</td>
-                          <td style={{ padding: "0.4rem 0.75rem", color: "#cdd6f4" }}>{teamName(r.away_team_id)}</td>
+                          <td style={{ padding: "0.4rem 0.75rem", color: "var(--c-text)" }}>{teamName(r.home_team_id)}</td>
+                          <td style={{ padding: "0.4rem 0.75rem", color: "var(--c-text)" }}>{teamName(r.away_team_id)}</td>
                           <td style={{ padding: "0.4rem 0.75rem" }}>
                             {r.success
-                              ? <span style={{ color: "#a6e3a1", fontWeight: 600 }}>✓ OK</span>
-                              : <span style={{ color: "#f38ba8" }}>✗ {r.error}</span>}
+                              ? <span style={{ color: "var(--c-positive)", fontWeight: 600 }}>✓ OK</span>
+                              : <span style={{ color: "var(--c-negative)" }}>✗ {r.error}</span>}
                           </td>
                         </tr>
                       );

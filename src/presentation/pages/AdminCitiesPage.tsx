@@ -107,23 +107,23 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
 
         {/* ── FORMULÁRIO INLINE ── */}
         {showForm && (
-          <section style={S.formCard}>
-            <h2 style={S.formTitle}>Nova cidade</h2>
-            <form onSubmit={e => void handleCreate(e)} style={S.form}>
-              <div style={S.fieldGroup}>
+          <section className="card">
+            <h2 className="section-heading">Nova cidade</h2>
+            <form onSubmit={e => void handleCreate(e)} className="form-body">
+              <div className="form-field-group">
                 <label className="form-label">Nome *</label>
                 <input
-                  style={S.input}
+                  className="form-input"
                   value={newName}
                   onChange={e => setNewName(e.target.value)}
                   placeholder="Ex: Uberlândia"
                   autoFocus
                 />
               </div>
-              <div style={S.fieldGroup}>
+              <div className="form-field-group">
                 <label className="form-label">Estado *</label>
                 <select
-                  style={S.select}
+                  className="form-select"
                   value={newStateId}
                   onChange={e => setNewStateId(e.target.value)}
                 >
@@ -133,8 +133,8 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
                   ))}
                 </select>
               </div>
-              {formError && <p style={S.errorText}>{formError}</p>}
-              <div style={S.formActions}>
+              {formError && <p className="error-text">{formError}</p>}
+              <div className="form-actions">
                 <button
                   type="submit"
                   style={{ ...S.btnPrimary, opacity: submitting ? 0.6 : 1 }}
@@ -144,7 +144,7 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
                 </button>
                 <button
                   type="button"
-                  style={S.btnSecondary}
+                  className="btn btn-secondary"
                   onClick={() => { setShowForm(false); setFormError(null); }}
                 >
                   Cancelar
@@ -155,14 +155,14 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
         )}
 
         {successMsg && (
-          <div style={S.successBanner}>✅ {successMsg}</div>
+          <div className="form-success">✅ {successMsg}</div>
         )}
 
         {/* ── FILTRO ── */}
-        <div style={S.filterBar}>
-          <label style={S.filterLabel}>Filtrar por estado</label>
+        <div className="filter-bar">
+          <label className="form-label">Filtrar por estado</label>
           <select
-            style={{ ...S.select, width: "220px" }}
+            className="form-select" style={{ width: "220px" }}
             value={filterStateId}
             onChange={e => setFilterStateId(e.target.value)}
           >
@@ -172,20 +172,20 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
             ))}
           </select>
           {filterStateId && (
-            <span style={S.filterCount}>{displayed.length} resultado{displayed.length !== 1 ? "s" : ""}</span>
+            <span className="page-info">{displayed.length} resultado{displayed.length !== 1 ? "s" : ""}</span>
           )}
         </div>
 
         {/* ── LISTA ── */}
         {loading ? (
-          <p style={S.statusText}>Carregando…</p>
+          <p className="status-chip">Carregando…</p>
         ) : loadError ? (
-          <p style={S.errorText}>{loadError}</p>
+          <p className="error-text">{loadError}</p>
         ) : displayed.length === 0 ? (
-          <div style={S.emptyState}>
-            <p style={S.emptyTitle}>Nenhuma cidade encontrada.</p>
+          <div className="muted">
+            <p className="muted">Nenhuma cidade encontrada.</p>
             {!filterStateId && (
-              <p style={S.emptyHint}>Clique em "Nova cidade" para começar.</p>
+              <p className="muted">Clique em "Nova cidade" para começar.</p>
             )}
           </div>
         ) : (
@@ -193,21 +193,21 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
             <table className="data-table">
               <thead>
                 <tr>
-                  <th style={S.th}>Nome</th>
-                  <th style={S.th}>Estado</th>
-                  <th style={S.th}>UF</th>
+                  <th >Nome</th>
+                  <th >Estado</th>
+                  <th >UF</th>
                 </tr>
               </thead>
               <tbody>
                 {displayed.map((city, i) => {
                   const state = stateMap[city.state_id];
                   return (
-                    <tr key={city.id} style={{ backgroundColor: i % 2 === 0 ? "#18265b" : "#18265b" }}>
-                      <td style={S.td}>{city.name}</td>
-                      <td style={{ ...S.td, color: "#ffffff" }}>{state?.name ?? "—"}</td>
-                      <td style={S.td}>
+                    <tr key={city.id} style={{ backgroundColor: i % 2 === 0 ? "var(--c-brand)" : "#18265b" }}>
+                      <td >{city.name}</td>
+                      <td style={{ color: "#ffffff" }}>{state?.name ?? "—"}</td>
+                      <td >
                         {state ? (
-                          <span style={S.badge}>{state.code}</span>
+                          <span className="badge">{state.code}</span>
                         ) : "—"}
                       </td>
                     </tr>

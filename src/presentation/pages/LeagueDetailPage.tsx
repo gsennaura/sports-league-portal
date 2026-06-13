@@ -94,7 +94,7 @@ function SeriesCard({ series }: { series: ChampSeries }) {
             </span>
           )}
           {series.division && (
-            <span style={{ ...cardStyles.badge, color: "#cba6f7", backgroundColor: "#201a2a", border: "1px solid #4a2a6a" }}>
+            <span style={{ ...cardStyles.badge, color: "var(--c-action)", backgroundColor: "#201a2a", border: "1px solid #4a2a6a" }}>
               {series.division}
             </span>
           )}
@@ -133,7 +133,7 @@ function SeriesCard({ series }: { series: ChampSeries }) {
           {lastVice && (
             <div style={cardStyles.podiumRow}>
               <span style={cardStyles.podiumSilver}>🥈</span>
-              <span style={{ ...cardStyles.podiumName, color: "#cdd6f4", opacity: 0.75 }}>{lastVice}</span>
+              <span style={{ ...cardStyles.podiumName, color: "var(--c-text)", opacity: 0.75 }}>{lastVice}</span>
             </div>
           )}
         </div>
@@ -224,7 +224,7 @@ export function LeagueDetailPage({ getLeague, listChampionships, getUpcomingMatc
                     src={currentLogoUrl ?? NO_LEAGUE_PHOTO}
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO; }}
                     alt={`Logo ${league.name}`}
-                    style={{ width: 108, height: 108, objectFit: "contain", borderRadius: 12, background: "#18265b" }}
+                    style={{ width: 108, height: 108, objectFit: "contain", borderRadius: 12, background: "var(--c-brand)" }}
                   />
                   {isAdmin && leagueRepository && (
                     <>
