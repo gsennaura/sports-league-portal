@@ -33,9 +33,9 @@
 
 /* S.legend e S.sectionTitle em ~50 arquivos */
 .section-heading {
-  font-size: var(--text-sm);
+  font-size: 0.82rem;
   font-weight: var(--fw-bold);
-  color: var(--c-text);
+  color: var(--c-brand);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 0 0.5rem;
@@ -66,4 +66,21 @@
 @media (max-width: 600px) {
   .page-title       { font-size: var(--text-lg); }
   .page-title--hero { font-size: var(--text-xl); }
+}
+
+/* ── Contexto page-card (fundo branco) ─────────────────────────── */
+/* Garante contraste adequado para texto fora de seções escuras */
+
+.page-card .page-container .page-title,
+.page-card .page-container h1,
+.page-card .page-container h2:not(.mbd-day-heading):not(.news-carousel__heading):not(.year-group__heading) {
+  color: var(--c-brand);
+}
+
+.page-card .page-container .muted {
+  color: #475569;
+}
+
+.page-card .page-container .error-text {
+  color: #b91c1c;
 }
