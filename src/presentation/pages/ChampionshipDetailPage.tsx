@@ -27,27 +27,25 @@ function TopScorersTable({ scorers }: { scorers: TopScorerItem[] }) {
   if (scorers.length === 0) return null;
   return (
     <div style={{ marginBottom: "2rem" }}>
-      <h2 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: "0.75rem" }}>
-        ⚽ Artilharia
-      </h2>
-      <table style={{ width: "100%", borderCollapse: "collapse" as const, fontSize: "0.85rem" }}>
+      <h2 className="section-heading" style={{ marginBottom: "0.75rem" }}>⚽ Artilharia</h2>
+      <table className="scorer-table">
         <thead>
-          <tr style={{ borderBottom: "2px solid #313244" }}>
-            <th style={{ textAlign: "center" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600, width: "2rem" }}>#</th>
-            <th style={{ textAlign: "left" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600 }}>Atleta</th>
-            <th style={{ textAlign: "left" as const, padding: "0.35rem 0.5rem", color: "#ffffff", fontWeight: 600 }}>Time</th>
-            <th style={{ textAlign: "center" as const, padding: "0.35rem 0.5rem", color: "var(--c-positive)", fontWeight: 700, width: "3.5rem" }}>Gols</th>
+          <tr>
+            <th style={{ textAlign: "center", width: "2rem" }}>#</th>
+            <th className="text-left">Atleta</th>
+            <th className="text-left">Time</th>
+            <th style={{ textAlign: "center", color: "var(--c-positive)", width: "3.5rem" }}>Gols</th>
           </tr>
         </thead>
         <tbody>
           {scorers.map((s, i) => (
-            <tr key={s.athlete_id} style={{ borderBottom: "1px solid #18265b", background: i % 2 === 0 ? "transparent" : "#1a1a2e" }}>
-              <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: i === 0 ? "var(--c-warning)" : "#ffffff", fontWeight: i === 0 ? 900 : 500 }}>{i + 1}</td>
-              <td style={{ padding: "0.4rem 0.5rem", color: "var(--c-text)", fontWeight: 600 }}>
+            <tr key={s.athlete_id} className={i % 2 !== 0 ? "row-alt" : ""}>
+              <td style={{ color: i === 0 ? "var(--c-warning)" : undefined, fontWeight: i === 0 ? 900 : 500 }}>{i + 1}</td>
+              <td style={{ fontWeight: 600 }}>
                 <Link to={`/atletas/${s.athlete_id}`} style={{ color: "inherit", textDecoration: "none" }}>{s.athlete_name}</Link>
               </td>
-              <td style={{ padding: "0.4rem 0.5rem", color: "#ffffff" }}>{s.team_name}</td>
-              <td style={{ textAlign: "center" as const, padding: "0.4rem 0.5rem", color: "var(--c-positive)", fontWeight: 900, fontSize: "0.95rem" }}>{s.goals}</td>
+              <td>{s.team_name}</td>
+              <td style={{ color: "var(--c-positive)", fontWeight: 900, fontSize: "0.95rem" }}>{s.goals}</td>
             </tr>
           ))}
         </tbody>
@@ -120,83 +118,81 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
   return (
     <div style={{ marginBottom: "2rem" }}>
       {/* Row 1 — numeric stats */}
-      <div style={statStyles.strip}>
+      <div className="stat-strip">
         {numStats.map((s) => (
-          <div key={s.label} style={statStyles.card}>
-            <span style={{ ...statStyles.cardValue, color: s.color }}>{s.value}</span>
-            {s.sub && <span style={statStyles.cardSub}>{s.sub}</span>}
-            <span style={statStyles.cardLabel}>{s.label}</span>
+          <div key={s.label} className="stat-card">
+            <span className="stat-card__value" style={{ color: s.color }}>{s.value}</span>
+            {s.sub && <span className="stat-card__sub">{s.sub}</span>}
+            <span className="stat-card__label">{s.label}</span>
           </div>
         ))}
       </div>
 
-      {/* Row 2 — highlight cards (responsive auto grid) */}
-      <div style={statStyles.highlightRow}>
-        {/* Campeão — sempre primeiro */}
-        <div style={statStyles.highlightCard}>
-          <span style={{ ...statStyles.highlightTag, color: "var(--c-warning)" }}>🏆 Campeão</span>
+      {/* Row 2 — highlight cards */}
+      <div className="stat-highlight-row">
+        <div className="stat-highlight-card">
+          <span className="stat-highlight-tag" style={{ color: "var(--c-warning)" }}>🏆 Campeão</span>
           {isOngoing ? (
-            <span style={{ fontSize: "0.85rem", color: "#ffffff", fontStyle: "italic" }}>Em andamento</span>
+            <span style={{ fontSize: "0.85rem", color: "var(--c-text-muted)", fontStyle: "italic" }}>Em andamento</span>
           ) : champion ? (
-            <div style={statStyles.highlightTeam}>
+            <div className="stat-highlight-team">
               <Shield url={champion.logo} size={28} />
-              <span style={statStyles.highlightName}>{champion.name}</span>
+              <span className="stat-highlight-name">{champion.name}</span>
             </div>
           ) : (
-            <span style={{ fontSize: "0.85rem", color: "#ffffff", fontStyle: "italic" }}>A confirmar</span>
+            <span style={{ fontSize: "0.85rem", color: "var(--c-text-muted)", fontStyle: "italic" }}>A confirmar</span>
           )}
         </div>
 
-        {/* Vice-campeão */}
         {!isOngoing && (
-          <div style={statStyles.highlightCard}>
-            <span style={{ ...statStyles.highlightTag, color: "var(--c-action)" }}>🥈 Vice-campeão</span>
+          <div className="stat-highlight-card">
+            <span className="stat-highlight-tag" style={{ color: "var(--c-action)" }}>🥈 Vice-campeão</span>
             {runnerUp ? (
-              <div style={statStyles.highlightTeam}>
+              <div className="stat-highlight-team">
                 <Shield url={runnerUp.logo} size={28} />
-                <span style={statStyles.highlightName}>{runnerUp.name}</span>
+                <span className="stat-highlight-name">{runnerUp.name}</span>
               </div>
             ) : (
-              <span style={{ fontSize: "0.85rem", color: "#ffffff", fontStyle: "italic" }}>A confirmar</span>
+              <span style={{ fontSize: "0.85rem", color: "var(--c-text-muted)", fontStyle: "italic" }}>A confirmar</span>
             )}
           </div>
         )}
 
         {bestAttack && (
-          <div style={statStyles.highlightCard}>
-            <span style={{ ...statStyles.highlightTag, color: "var(--c-negative)" }}>⚽ Melhor ataque</span>
-            <div style={statStyles.highlightTeam}>
+          <div className="stat-highlight-card">
+            <span className="stat-highlight-tag" style={{ color: "var(--c-negative)" }}>⚽ Melhor ataque</span>
+            <div className="stat-highlight-team">
               <Shield url={bestAttack.logo} size={28} />
-              <span style={statStyles.highlightName}>{bestAttack.name}</span>
+              <span className="stat-highlight-name">{bestAttack.name}</span>
             </div>
-            <span style={{ ...statStyles.highlightStat, color: "var(--c-negative)" }}>
-              {bestAttack.goals} <span style={statStyles.highlightStatLabel}>gols</span>
+            <span className="stat-highlight-stat" style={{ color: "var(--c-negative)" }}>
+              {bestAttack.goals} <span className="stat-highlight-stat__label">gols</span>
             </span>
           </div>
         )}
 
         {bestDefense && (
-          <div style={statStyles.highlightCard}>
-            <span style={{ ...statStyles.highlightTag, color: "var(--c-positive)" }}>🛡 Melhor defesa</span>
-            <div style={statStyles.highlightTeam}>
+          <div className="stat-highlight-card">
+            <span className="stat-highlight-tag" style={{ color: "var(--c-positive)" }}>🛡 Melhor defesa</span>
+            <div className="stat-highlight-team">
               <Shield url={bestDefense.logo} size={28} />
-              <span style={statStyles.highlightName}>{bestDefense.name}</span>
+              <span className="stat-highlight-name">{bestDefense.name}</span>
             </div>
-            <span style={{ ...statStyles.highlightStat, color: "var(--c-positive)" }}>
-              {bestDefense.against} <span style={statStyles.highlightStatLabel}>sofridos</span>
+            <span className="stat-highlight-stat" style={{ color: "var(--c-positive)" }}>
+              {bestDefense.against} <span className="stat-highlight-stat__label">sofridos</span>
             </span>
           </div>
         )}
 
         {bestAprov && (
-          <div style={statStyles.highlightCard}>
-            <span style={{ ...statStyles.highlightTag, color: "var(--c-link)" }}>📈 Melhor aproveitamento</span>
-            <div style={statStyles.highlightTeam}>
+          <div className="stat-highlight-card">
+            <span className="stat-highlight-tag" style={{ color: "var(--c-link)" }}>📈 Melhor aproveitamento</span>
+            <div className="stat-highlight-team">
               <Shield url={bestAprov.logo} size={28} />
-              <span style={statStyles.highlightName}>{bestAprov.name}</span>
+              <span className="stat-highlight-name">{bestAprov.name}</span>
             </div>
-            <span style={{ ...statStyles.highlightStat, color: "var(--c-link)" }}>
-              {Math.round(aprov(bestAprov) * 100)}% <span style={statStyles.highlightStatLabel}>aprov.</span>
+            <span className="stat-highlight-stat" style={{ color: "var(--c-link)" }}>
+              {Math.round(aprov(bestAprov) * 100)}% <span className="stat-highlight-stat__label">aprov.</span>
             </span>
           </div>
         )}
@@ -204,91 +200,6 @@ function ChampionshipStats({ detail }: { detail: ChampionshipDetail }) {
     </div>
   );
 }
-
-const statStyles: Record<string, React.CSSProperties> = {
-  strip: {
-    display: "flex",
-    flexWrap: "wrap" as const,
-    gap: "0.4rem",
-    marginBottom: "0.6rem",
-  },
-  card: {
-    background: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    padding: "0.35rem 0.75rem",
-    display: "flex",
-    flexDirection: "row" as const,
-    alignItems: "baseline",
-    gap: "0.45rem",
-  },
-  cardLabel: {
-    fontSize: "0.65rem",
-    fontWeight: 700,
-    color: "#ffffff",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.04em",
-  },
-  cardValue: {
-    fontSize: "1rem",
-    fontWeight: 800,
-    lineHeight: 1,
-  },
-  cardSub: {
-    fontSize: "0.65rem",
-    color: "#ffffff",
-  },
-  // Highlight row
-  highlightRow: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(155px, 1fr))",
-    gap: "0.5rem",
-  },
-  highlightCard: {
-    background: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "10px",
-    padding: "0.45rem 0.65rem",
-    display: "flex",
-    flexDirection: "column" as const,
-    justifyContent: "space-between",
-    gap: "0.25rem",
-    minHeight: "4.5rem",
-  },
-  highlightTag: {
-    fontSize: "0.6rem",
-    fontWeight: 800,
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.06em",
-    color: "#ffffff",
-  },
-  highlightTeam: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-    flex: 1,
-  },
-  highlightName: {
-    fontSize: "0.80rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    lineHeight: 1.2,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  highlightStat: {
-    fontSize: "0.9rem",
-    fontWeight: 800,
-    lineHeight: 1,
-    marginTop: "0.1rem",
-  },
-  highlightStatLabel: {
-    fontSize: "0.65rem",
-    fontWeight: 400,
-    color: "#ffffff",
-  },
-};
 
 interface ChampionshipDetailPageProps {
   getChampionshipDetail: GetChampionshipDetail;
@@ -502,37 +413,38 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
             </div>
           )}
 
-          <div style={styles.champHeader}>
-            <div style={styles.champTitleBlock}>
+          <div className="champ-header">
+            <div style={{ flex: 1, minWidth: 0 }}>
               <h1 className="page-title">
                 {detail.nickname ?? detail.name}
               </h1>
               {detail.nickname && (
-                <p style={styles.champFullName}>{detail.name}</p>
+                <p className="champ-full-name">{detail.name}</p>
               )}
-              <div style={styles.champBadges}>
+              <div className="champ-badges">
                 {detail.level && (
-                  <span style={{ ...styles.badge, ...levelColor[detail.level] }}>
+                  <span className={`champ-badge champ-badge--${detail.level in levelColor ? detail.level : "default"}`}>
                     {levelLabel[detail.level] ?? detail.level}
                   </span>
                 )}
                 {detail.division && (
-                  <span style={{ ...styles.badge, color: "var(--c-action)", backgroundColor: "#201a2a", border: "1px solid #4a2a6a" }}>
+                  <span className="champ-badge champ-badge--division">
                     {detail.division}
                   </span>
                 )}
-                <span style={styles.scopeBadge}>{detail.scope}</span>
+                <span className="champ-badge champ-badge--scope">{detail.scope}</span>
                 {isAdmin && (
                   <Link
                     to={`/admin/campeonatos/${detail.id}/gerenciar`}
-                    style={{ background: "var(--c-border)", color: "var(--c-text)", border: "1px solid #45475a", borderRadius: 8, padding: "0.3rem 0.8rem", fontSize: "0.78rem", fontWeight: 600, textDecoration: "none" }}
+                    className="champ-badge champ-badge--default"
+                    style={{ textDecoration: "none" }}
                   >
                     ✏️ Gerenciar
                   </Link>
                 )}
               </div>
             </div>
-            <div style={styles.champYearBlock}>
+            <div style={{ flexShrink: 0, display: "flex", alignItems: "center", paddingTop: "0.25rem" }}>
               {siblings.length > 1 ? (
                 <button
                   onClick={() => setEditionModalOpen(true)}
@@ -542,7 +454,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
                   <span style={{ fontSize: "0.62rem", fontWeight: 700, color: "var(--c-link)", letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.65 }}>edições ▾</span>
                 </button>
               ) : (
-                <span style={styles.yearLarge}>{detail.year}</span>
+                <span className="champ-year">{detail.year}</span>
               )}
             </div>
           </div>
@@ -551,11 +463,11 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
 
           {/* ─── Classificação Geral — botão + modal ────────────────── */}
           {detail.overall_standings.length > 0 && (
-            <div style={{ marginBottom: "1.5rem" }}>
+            <div className="champ-action-row">
               <button
                 onClick={handleOpenStandings}
                 disabled={standingsLoading}
-                style={{ background: "#1a1f3a", border: "1px solid #2a3a6a", borderRadius: 8, color: standingsLoading ? "#ffffff" : "var(--c-link)", fontWeight: 600, fontSize: "0.85rem", padding: "0.45rem 1rem", cursor: standingsLoading ? "default" : "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+                className="champ-action-btn"
               >
                 {standingsLoading ? "⏳ Carregando..." : "📊 Ver classificação geral"}
               </button>
@@ -700,33 +612,33 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
 
           {sortedPhases.length > 0 && currentPhase && (
             <>
-              <div style={styles.phaseNav}>
+              <div className="phase-nav">
                 <button
-                  style={{ ...styles.navBtn, ...(canPrev ? {} : styles.navBtnDisabled) }}
+                  className="phase-nav__btn"
                   onClick={() => canPrev && handlePhaseChange(phaseIdx - 1)}
                   disabled={!canPrev}
                   aria-label="Fase anterior"
                 >←</button>
-                <div style={styles.phaseNavCenter}>
-                  <div style={styles.phaseNavTitleRow}>
-                    <span style={styles.phaseNavName}>{currentPhase.name}</span>
+                <div className="phase-nav__center">
+                  <div className="phase-nav__title-row">
+                    <span className="phase-nav__name">{currentPhase.name}</span>
                     {sortedPhases.length > 1 && (
-                      <span style={styles.phaseNavCounter}>{phaseIdx + 1}/{sortedPhases.length}</span>
+                      <span className="phase-nav__counter">{phaseIdx + 1}/{sortedPhases.length}</span>
                     )}
-                    <span style={currentPhase.status === "finalizado" ? styles.statusFinalizado : styles.statusEmAndamento}>
+                    <span className={currentPhase.status === "finalizado" ? "phase-status phase-status--done" : "phase-status phase-status--ongoing"}>
                       {currentPhase.status === "finalizado" ? "Finalizado" : "Em andamento"}
                     </span>
                   </div>
                 </div>
                 <button
-                  style={{ ...styles.navBtn, ...(canNext ? {} : styles.navBtnDisabled) }}
+                  className="phase-nav__btn"
                   onClick={() => canNext && handlePhaseChange(phaseIdx + 1)}
                   disabled={!canNext}
                   aria-label="Próxima fase"
                 >→</button>
               </div>
 
-              <div style={styles.groupsGrid}>
+              <div className="groups-grid">
                 {phaseLoading
                   ? <PageLoader />
                   : currentPhase.phase_type === "knockout"
@@ -753,30 +665,30 @@ function Palmares({ siblings, currentYear }: { siblings: SiblingEdition[]; curre
   if (withChamp.length === 0) return null;
 
   return (
-    <section style={edStyles.palmSection}>
-      <div style={edStyles.palmHeader}>
-        <span style={edStyles.palmTitle}>🏆 Histórico</span>
-        <div style={edStyles.palmDivider} />
+    <section className="palmares">
+      <div className="palmares__header">
+        <span className="palmares__title">🏆 Histórico</span>
+        <div className="palmares__divider" />
       </div>
-      <div style={edStyles.palmList}>
+      <div className="palmares__list">
         {withChamp.map((s) => {
           const isCurrent = s.year === currentYear;
           return (
-            <div key={s.edition_id} style={{ ...edStyles.palmRow, ...(isCurrent ? edStyles.palmRowCurrent : {}) }}>
-              <span style={edStyles.palmYear}>{s.year}</span>
-              <div style={edStyles.palmTeams}>
-                <div style={edStyles.palmChamp}>
-                  <span style={edStyles.palmGold}>🥇</span>
-                  <span style={edStyles.palmTeamName}>{s.champion_team_name}</span>
+            <div key={s.edition_id} className={`palmares__row${isCurrent ? " palmares__row--current" : ""}`}>
+              <span className="palmares__year">{s.year}</span>
+              <div className="palmares__teams">
+                <div className="palmares__team-row">
+                  <span>🥇</span>
+                  <span className="palmares__team-name">{s.champion_team_name}</span>
                 </div>
                 {s.runner_up_team_name && (
-                  <div style={edStyles.palmVice}>
-                    <span style={edStyles.palmSilver}>🥈</span>
-                    <span style={{ ...edStyles.palmTeamName, color: "#ffffff", opacity: 0.8 }}>{s.runner_up_team_name}</span>
+                  <div className="palmares__team-row">
+                    <span>🥈</span>
+                    <span className="palmares__team-name palmares__team-name--vice">{s.runner_up_team_name}</span>
                   </div>
                 )}
               </div>
-              {isCurrent && <span style={edStyles.palmCurrentBadge}>Esta edição</span>}
+              {isCurrent && <span className="palmares__badge">Esta edição</span>}
             </div>
           );
         })}
@@ -787,10 +699,10 @@ function Palmares({ siblings, currentYear }: { siblings: SiblingEdition[]; curre
 
 function KnockoutGroupCard({ group }: { group: GroupDetail }) {
   return (
-    <div style={styles.groupCard}>
-      <div style={styles.groupHeader}>
-        <h3 style={styles.groupTitle}>{group.name}</h3>
-        <span style={styles.knockoutBadge}>Mata-a-mata</span>
+    <div className="group-card">
+      <div className="group-card__header">
+        <h3 className="group-card__title">{group.name}</h3>
+        <span className="knockout-badge">Mata-a-mata</span>
       </div>
       <MatchRoundList matches={group.matches} teams={group.teams} knockout />
     </div>
@@ -799,14 +711,14 @@ function KnockoutGroupCard({ group }: { group: GroupDetail }) {
 
 function GroupCard({ group }: { group: GroupDetail }) {
   return (
-    <div style={styles.groupCard}>
-      <div style={styles.groupHeader}>
-        <h3 style={styles.groupTitle}>{group.name}</h3>
+    <div className="group-card">
+      <div className="group-card__header">
+        <h3 className="group-card__title">{group.name}</h3>
       </div>
       <MatchRoundList matches={group.matches} teams={group.teams} />
       {group.standings.length > 0 && (
         <>
-          <div style={styles.standingsDivider} />
+          <div className="group-card__divider" />
           <StandingsTable standings={group.standings} teams={group.teams} />
         </>
       )}
@@ -832,18 +744,17 @@ function MatchRoundList({
   }
 
   if (rounds.size === 0) {
-    return <p style={styles.noMatches}>Nenhuma partida registrada.</p>;
+    return <p className="muted" style={{ textAlign: "center", padding: "1rem 0" }}>Nenhuma partida registrada.</p>;
   }
 
   const legLabel = (round: number) =>
     knockout ? (round === 1 ? "Jogo de ida" : round === 2 ? "Jogo de volta" : `Jogo ${round}`) : `Rodada ${round}`;
 
   return (
-    <div style={styles.rounds}>
-      {[...rounds.entries()].map(([round, roundMatches]) => {
-        return (
-        <div key={round} style={styles.round}>
-          <div style={styles.roundHeader}>{legLabel(round)}</div>
+    <div className="rounds">
+      {[...rounds.entries()].map(([round, roundMatches]) => (
+        <div key={round}>
+          <div className="round__header">{legLabel(round)}</div>
           {roundMatches.map((m) => {
             const home = teamMap.get(m.home_team_id) ?? m.home_team_id.slice(0, 8);
             const away = teamMap.get(m.away_team_id) ?? m.away_team_id.slice(0, 8);
@@ -860,47 +771,44 @@ function MatchRoundList({
               return `${h}h${min}`;
             })();
             return (
-              <Link key={m.id} to={`/partidas/${m.id}`} style={styles.matchLink}>
-                <div style={styles.matchCard}>
-                  <div style={styles.matchCardRow}>
-                    {/* Col 1 — data e hora */}
-                    <div style={styles.mDateCol}>
-                      {dateLabel && <span style={styles.mDateLabel}>{dateLabel}</span>}
-                      {timeLabel && <span style={styles.mTimeLabel}>{timeLabel}</span>}
-                    </div>
-
-                    {/* Col 2 — times + placar */}
-                    <div style={styles.mTeamsCol}>
-                      <div style={styles.mTeamRow}>
-                        <span style={styles.mScoreSlot}>
-                          {hasScore ? `${m.home_score}${hasPenalty ? ` (${m.home_penalty_score})` : ""}` : ""}
-                        </span>
-                        <Shield url={m.home_club_logo_url} />
-                        <span style={styles.mTeamName}>{home}</span>
-                      </div>
-                      <div style={styles.mTeamRow}>
-                        <span style={styles.mScoreSlot}>
-                          {hasScore ? `${m.away_score}${hasPenalty ? ` (${m.away_penalty_score})` : ""}` : ""}
-                        </span>
-                        <Shield url={m.away_club_logo_url} />
-                        <span style={styles.mTeamName}>{away}</span>
-                      </div>
-                    </div>
-
-                    {/* Col 3 — estádio */}
-                    {m.venue_name && (
-                      <div style={styles.mVenueCol}>
-                        <span style={styles.mVenueLabel}>{m.venue_name}</span>
-                      </div>
-                    )}
+              <Link key={m.id} to={`/partidas/${m.id}`} className="match-entry">
+                <div className="match-entry__row">
+                  {/* Col 1 — data e hora */}
+                  <div className="match-entry__date-col">
+                    {dateLabel && <span className="match-entry__date-label">{dateLabel}</span>}
+                    {timeLabel && <span className="match-entry__time-label">{timeLabel}</span>}
                   </div>
+
+                  {/* Col 2 — times + placar */}
+                  <div className="match-entry__teams-col">
+                    <div className="match-entry__team-row">
+                      <span className="match-entry__score">
+                        {hasScore ? `${m.home_score}${hasPenalty ? ` (${m.home_penalty_score})` : ""}` : ""}
+                      </span>
+                      <Shield url={m.home_club_logo_url} />
+                      <span className="match-entry__team-name">{home}</span>
+                    </div>
+                    <div className="match-entry__team-row">
+                      <span className="match-entry__score">
+                        {hasScore ? `${m.away_score}${hasPenalty ? ` (${m.away_penalty_score})` : ""}` : ""}
+                      </span>
+                      <Shield url={m.away_club_logo_url} />
+                      <span className="match-entry__team-name">{away}</span>
+                    </div>
+                  </div>
+
+                  {/* Col 3 — estádio */}
+                  {m.venue_name && (
+                    <div className="match-entry__venue-col">
+                      <span className="match-entry__venue-label">{m.venue_name}</span>
+                    </div>
+                  )}
                 </div>
               </Link>
             );
           })}
         </div>
-        );
-      })}
+      ))}
     </div>
   );
 }
@@ -926,42 +834,46 @@ function StandingsTable({ standings, teams, showAprov = false, eliminatedTeamIds
       }));
 
   return (
-    <div style={styles.tableWrapper}>
-      <table style={styles.table}>
+    <div className="champ-standings">
+      <table>
         <thead>
           <tr>
-            <th style={{ ...styles.th, color: "#ffffff" }}>#</th>
-            <th style={{ ...styles.th, textAlign: "left" }}>Time</th>
-            <th style={{ ...styles.th, color: "var(--c-link)" }} title="Pontos">Pts</th>
-            <th style={styles.th} title="Vitórias">V</th>
-            <th style={styles.th} title="Empates">E</th>
-            <th style={styles.th} title="Derrotas">D</th>
-            <th style={styles.th} title="Gols Marcados">GM</th>
-            <th style={styles.th} title="Gols Sofridos">GS</th>
-            {showAprov && <th style={{ ...styles.th, color: "var(--c-positive)" }} title="Saldo de Gols">SG</th>}
-            <th style={styles.th} title="Partidas">J</th>
-            {showAprov && <th style={{ ...styles.th, color: "var(--c-warning)" }} title="Aproveitamento">Aprov.</th>}
+            <th>#</th>
+            <th style={{ textAlign: "left" }}>Time</th>
+            <th style={{ color: "var(--c-link)" }} title="Pontos">Pts</th>
+            <th title="Vitórias">V</th>
+            <th title="Empates">E</th>
+            <th title="Derrotas">D</th>
+            <th title="Gols Marcados">GM</th>
+            <th title="Gols Sofridos">GS</th>
+            {showAprov && <th style={{ color: "var(--c-positive)" }} title="Saldo de Gols">SG</th>}
+            <th title="Partidas">J</th>
+            {showAprov && <th style={{ color: "var(--c-warning)" }} title="Aproveitamento">Aprov.</th>}
           </tr>
         </thead>
         <tbody>
           {rows.map((s, i) => (
-            <tr key={s.team_id} style={{ ...(i % 2 === 0 ? styles.rowEven : styles.rowOdd), ...(eliminatedTeamIds?.has(s.team_id) ? { backgroundColor: "rgba(243, 139, 168, 0.10)" } : {}) }}>
-              <td style={{ ...styles.td, color: "#ffffff" }}>{i + 1}</td>
-              <td style={{ ...styles.td, textAlign: "left" }}>
+            <tr
+              key={s.team_id}
+              className={i % 2 !== 0 ? "row-odd" : ""}
+              style={eliminatedTeamIds?.has(s.team_id) ? { backgroundColor: "rgba(243, 139, 168, 0.10)" } : undefined}
+            >
+              <td>{i + 1}</td>
+              <td style={{ textAlign: "left" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
                   <Shield url={s.club_logo_url} size={16} />
-                  <Link to={`/times/${toSlugPath(s.team_name, s.team_id)}`} style={styles.teamLink}>{s.team_name}</Link>
+                  <Link to={`/times/${toSlugPath(s.team_name, s.team_id)}`} className="team-link">{s.team_name}</Link>
                 </div>
               </td>
-              <td style={{ ...styles.td, fontWeight: 700, color: "var(--c-link)" }}>{s.points}</td>
-              <td style={styles.td}>{s.wins}</td>
-              <td style={styles.td}>{s.draws}</td>
-              <td style={styles.td}>{s.losses}</td>
-              <td style={styles.td}>{s.goals_for}</td>
-              <td style={styles.td}>{s.goals_against}</td>
-              {showAprov && <td style={{ ...styles.td, color: s.goal_difference >= 0 ? "var(--c-positive)" : "var(--c-negative)" }}>{s.goal_difference > 0 ? "+" : ""}{s.goal_difference}</td>}
-              <td style={styles.td}>{s.matches_played}</td>
-              {showAprov && <td style={{ ...styles.td, fontWeight: 700, color: "var(--c-warning)" }}>{aprovPct(s)}%</td>}
+              <td style={{ fontWeight: 700, color: "var(--c-link)" }}>{s.points}</td>
+              <td>{s.wins}</td>
+              <td>{s.draws}</td>
+              <td>{s.losses}</td>
+              <td>{s.goals_for}</td>
+              <td>{s.goals_against}</td>
+              {showAprov && <td style={{ color: s.goal_difference >= 0 ? "var(--c-positive)" : "var(--c-negative)" }}>{s.goal_difference > 0 ? "+" : ""}{s.goal_difference}</td>}
+              <td>{s.matches_played}</td>
+              {showAprov && <td style={{ fontWeight: 700, color: "var(--c-warning)" }}>{aprovPct(s)}%</td>}
             </tr>
           ))}
         </tbody>
@@ -997,16 +909,16 @@ function OverallStandings({ standings, phases }: { standings: StandingEntry[]; p
   const hasEliminated = eliminatedTeamIds.size > 0;
 
   return (
-    <section style={{ ...styles.phase, marginTop: "3rem" }}>
-      <div style={styles.overallHeader}>
-        <span style={styles.overallTitle}>Classificação Geral</span>
+    <section className="overall-section">
+      <div className="overall-section__header">
+        <span className="overall-section__title">Classificação Geral</span>
       </div>
-      <div style={styles.groupCard}>
+      <div className="group-card">
         <StandingsTable standings={rows} teams={[]} showAprov eliminatedTeamIds={eliminatedTeamIds} />
       </div>
       {hasEliminated && (
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "0.75rem", fontSize: "0.75rem", color: "#ffffff" }}>
-          <span style={{ display: "inline-block", width: "12px", height: "12px", backgroundColor: "rgba(243, 139, 168, 0.35)", border: "1px solid rgba(243, 139, 168, 0.5)", borderRadius: "2px", flexShrink: 0 }} />
+        <div className="eliminated-legend">
+          <span className="eliminated-legend__dot" />
           <span>Time eliminado — não está na última fase do campeonato</span>
         </div>
       )}
@@ -1014,504 +926,3 @@ function OverallStandings({ standings, phases }: { standings: StandingEntry[]; p
   );
 }
 
-const styles: Record<string, React.CSSProperties> = {
-  status: { color: "#cdd6f4" },
-  champHeader: {
-    display: "flex",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    gap: "1rem",
-    marginBottom: "2rem",
-    paddingBottom: "1.5rem",
-    borderBottom: "2px solid #313244",
-  },
-  champTitleBlock: {
-    flex: 1,
-    minWidth: 0,
-  },
-  champYearBlock: {
-    flexShrink: 0,
-    display: "flex",
-    alignItems: "center",
-    paddingTop: "0.25rem",
-  },
-  yearLarge: {
-    fontSize: "4rem",
-    fontWeight: 900,
-    color: "#89b4fa",
-    opacity: 0.3,
-    lineHeight: 1,
-    letterSpacing: "-0.03em",
-    userSelect: "none" as const,
-  },
-  champFullName: {
-    fontSize: "0.85rem",
-    color: "#ffffff",
-    margin: "0.15rem 0 0 0",
-  },
-  champBadges: {
-    display: "flex",
-    flexWrap: "wrap" as const,
-    gap: "0.4rem",
-    marginTop: "0.5rem",
-  },
-  badge: {
-    fontSize: "0.7rem",
-    fontWeight: 700,
-    borderRadius: "4px",
-    padding: "0.2rem 0.6rem",
-    letterSpacing: "0.04em",
-    whiteSpace: "nowrap" as const,
-  },
-  yearBadge: {
-    fontSize: "0.7rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    backgroundColor: "#313244",
-    borderRadius: "4px",
-    padding: "0.2rem 0.6rem",
-    whiteSpace: "nowrap" as const,
-  },
-  scopeBadge: {
-    fontSize: "0.7rem",
-    color: "#cdd6f4",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "4px",
-    padding: "0.2rem 0.6rem",
-    whiteSpace: "nowrap" as const,
-  },
-  // Phase navigator
-  phaseNav: {
-    display: "flex",
-    alignItems: "center",
-    gap: "1rem",
-    marginBottom: "1.5rem",
-  },
-  navBtn: {
-    background: "#18265b",
-    border: "1px solid #45475a",
-    borderRadius: "8px",
-    color: "#89b4fa",
-    fontSize: "1.4rem",
-    padding: "0.5rem 1.1rem",
-    cursor: "pointer",
-    flexShrink: 0,
-    lineHeight: 1,
-    fontWeight: 700,
-  },
-  navBtnDisabled: {
-    color: "#313244",
-    cursor: "default",
-    borderColor: "#18265b",
-    background: "transparent",
-  },
-  phaseNavCenter: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.2rem",
-  },
-  phaseNavTitleRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.6rem",
-    flexWrap: "wrap" as const,
-  },
-  phaseNavName: {
-    fontSize: "1rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-  },
-  phaseNavCounter: {
-    fontSize: "0.7rem",
-    color: "#ffffff",
-  },
-  // Overall standings header
-  overallHeader: {
-    display: "flex",
-    alignItems: "baseline",
-    marginBottom: "1rem",
-    borderBottom: "2px solid #f9e2af",
-    paddingBottom: "0.5rem",
-  },
-  overallTitle: {
-    fontSize: "1.05rem",
-    fontWeight: 800,
-    color: "#f9e2af",
-    letterSpacing: "0.01em",
-    textTransform: "uppercase" as const,
-  },
-  phase: {
-    marginBottom: "2.5rem",
-  },
-  phaseTitleRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.6rem",
-    marginBottom: "1rem",
-    borderBottom: "1px solid #313244",
-    paddingBottom: "0.5rem",
-  },
-  phaseTitle: {
-    fontSize: "1.125rem",
-    fontWeight: 600,
-    color: "#a6e3a1",
-    margin: 0,
-  },
-  statusEmAndamento: {
-    backgroundColor: "#1a2e1f",
-    border: "1px solid #2a4a2f",
-    borderRadius: "4px",
-    color: "#a6e3a1",
-    fontSize: "0.72rem",
-    fontWeight: 600,
-    padding: "0.15rem 0.5rem",
-    whiteSpace: "nowrap" as const,
-  },
-  statusFinalizado: {
-    backgroundColor: "#18265b",
-    border: "1px solid #45475a",
-    borderRadius: "4px",
-    color: "#cdd6f4",
-    fontSize: "0.72rem",
-    fontWeight: 600,
-    padding: "0.15rem 0.5rem",
-    whiteSpace: "nowrap" as const,
-  },
-  groupsGrid: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.5rem",
-  },
-  groupCard: {
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    padding: "1.25rem 1.5rem",
-  },
-  groupHeader: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: "1rem",
-    flexWrap: "wrap" as const,
-    gap: "0.5rem",
-  },
-  groupTitle: {
-    fontSize: "1rem",
-    fontWeight: 700,
-    color: "#89b4fa",
-    margin: 0,
-  },
-  standingsDivider: {
-    height: "1px",
-    backgroundColor: "#313244",
-    margin: "1rem 0",
-  },
-  matchLink: {
-    textDecoration: "none",
-    color: "inherit",
-    display: "block",
-  },
-  rounds: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.75rem",
-  },
-  round: {},
-  roundHeader: {
-    fontSize: "0.7rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.08em",
-    marginBottom: "0.375rem",
-  },
-  matchCard: {
-    borderBottom: "1px solid #18265b",
-    padding: "0.4rem 0",
-  },
-  matchCardRow: {
-    display: "grid",
-    gridTemplateColumns: "3rem 1fr auto",
-    alignItems: "center",
-    gap: "0.75rem",
-  },
-  mDateCol: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    gap: "0.1rem",
-    flexShrink: 0,
-  },
-  mDateLabel: {
-    fontSize: "0.75rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-  },
-  mTimeLabel: {
-    fontSize: "0.65rem",
-    color: "#cdd6f4",
-    fontWeight: 600,
-  },
-  mTeamsCol: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.2rem",
-    minWidth: 0,
-  },
-  mTeamRow: {
-    display: "grid",
-    gridTemplateColumns: "3rem 18px 1fr",
-    alignItems: "center",
-    gap: "0.4rem",
-  },
-  mScoreSlot: {
-    fontSize: "0.875rem",
-    fontWeight: 700,
-    color: "#a6e3a1",
-    textAlign: "right" as const,
-  },
-  mTeamName: {
-    fontSize: "0.875rem",
-    fontWeight: 600,
-    color: "#cdd6f4",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  mVenueCol: {
-    display: "flex",
-    alignItems: "center",
-    flexShrink: 0,
-    maxWidth: "7rem",
-  },
-  mVenueLabel: {
-    fontSize: "0.68rem",
-    color: "#cdd6f4",
-    textAlign: "right" as const,
-    lineHeight: 1.3,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  teamLink: {
-    textDecoration: "none",
-    color: "inherit",
-    transition: "color 0.15s",
-    fontSize: "0.875rem",
-    fontWeight: 600,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-  } as React.CSSProperties,
-  noMatches: {
-    color: "#cdd6f4",
-    fontSize: "0.875rem",
-    textAlign: "center" as const,
-    padding: "1rem 0",
-    margin: 0,
-  },
-  knockoutBadge: {
-    fontSize: "0.7rem",
-    fontWeight: 600,
-    color: "#fab387",
-    backgroundColor: "#2a1f1a",
-    border: "1px solid #45352a",
-    borderRadius: "4px",
-    padding: "0.15rem 0.5rem",
-    whiteSpace: "nowrap" as const,
-  },
-  tableWrapper: {
-    overflowX: "auto",
-  },
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    fontSize: "0.875rem",
-  },
-  th: {
-    padding: "0.5rem 0.75rem",
-    textAlign: "center",
-    color: "#cdd6f4",
-    fontWeight: 600,
-    borderBottom: "1px solid #313244",
-    whiteSpace: "nowrap" as const,
-  },
-  td: {
-    padding: "0.5rem 0.75rem",
-    textAlign: "center",
-    color: "#cdd6f4",
-  },
-  rowEven: {
-    backgroundColor: "transparent",
-  },
-  rowOdd: {
-    backgroundColor: "#18265b",
-  },
-};
-
-// ─── Edition navigator + histórico styles ──────────────────────────────────────
-const edStyles: Record<string, React.CSSProperties> = {
-  // Edition navigator
-  edNav: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    marginBottom: "1.5rem",
-    padding: "0.6rem 0.75rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "12px",
-    overflow: "hidden",
-  },
-  edNavLabel: {
-    fontSize: "0.63rem",
-    fontWeight: 800,
-    color: "#ffffff",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.08em",
-    flexShrink: 0,
-  },
-  edArrow: {
-    flexShrink: 0,
-    background: "#313244",
-    border: "1px solid #45475a",
-    borderRadius: "50%",
-    color: "#89b4fa",
-    fontSize: "1.2rem",
-    width: "28px",
-    height: "28px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    lineHeight: 1,
-    padding: 0,
-    fontWeight: 700,
-  },
-  edPills: {
-    display: "flex",
-    flexWrap: "nowrap" as const,
-    overflowX: "auto" as const,
-    gap: "0.4rem",
-    flex: 1,
-    scrollBehavior: "smooth" as const,
-    scrollbarWidth: "none" as const,
-  },
-  edPill: {
-    background: "transparent",
-    border: "1px solid #45475a",
-    borderRadius: "6px",
-    color: "#ffffff",
-    fontSize: "0.85rem",
-    fontWeight: 700,
-    padding: "0.4rem 1rem",
-    cursor: "pointer",
-    lineHeight: 1,
-    whiteSpace: "nowrap" as const,
-    flexShrink: 0,
-  },
-  edPillActive: {
-    background: "#1a3a6a",
-    border: "2px solid #89b4fa",
-    borderRadius: "6px",
-    color: "#89b4fa",
-    fontSize: "0.85rem",
-    fontWeight: 800,
-    padding: "0.4rem 1rem",
-    cursor: "default",
-    lineHeight: 1,
-    whiteSpace: "nowrap" as const,
-    flexShrink: 0,
-    boxShadow: "0 0 8px rgba(137,180,250,0.25)",
-  },
-
-  // Histórico
-  palmSection: {
-    marginTop: "3rem",
-  },
-  palmHeader: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.75rem",
-    marginBottom: "1rem",
-  },
-  palmTitle: {
-    fontSize: "1.05rem",
-    fontWeight: 800,
-    color: "#f9e2af",
-    letterSpacing: "0.01em",
-    textTransform: "uppercase" as const,
-    flexShrink: 0,
-  },
-  palmDivider: {
-    flex: 1,
-    height: "2px",
-    background: "linear-gradient(90deg, #f9e2af44 0%, transparent 100%)",
-    borderRadius: "1px",
-  },
-  palmList: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.35rem",
-  },
-  palmRow: {
-    display: "grid",
-    gridTemplateColumns: "3.5rem 1fr auto",
-    alignItems: "center",
-    gap: "0.75rem",
-    padding: "0.65rem 1rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "10px",
-  },
-  palmRowCurrent: {
-    backgroundColor: "#1a2238",
-    border: "1px solid #2a3a6a",
-    boxShadow: "0 0 0 1px #89b4fa33",
-  },
-  palmYear: {
-    fontSize: "1rem",
-    fontWeight: 800,
-    color: "#89b4fa",
-    textAlign: "center" as const,
-  },
-  palmTeams: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.2rem",
-  },
-  palmChamp: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-  },
-  palmVice: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-  },
-  palmGold: { fontSize: "0.9rem", flexShrink: 0 },
-  palmSilver: { fontSize: "0.9rem", flexShrink: 0 },
-  palmTeamName: {
-    fontSize: "0.88rem",
-    fontWeight: 700,
-    color: "#f9e2af",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  palmCurrentBadge: {
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    color: "#89b4fa",
-    backgroundColor: "#1a1f3a",
-    border: "1px solid #2a3a6a",
-    borderRadius: "20px",
-    padding: "0.2rem 0.6rem",
-    whiteSpace: "nowrap" as const,
-    letterSpacing: "0.04em",
-  },
-};
