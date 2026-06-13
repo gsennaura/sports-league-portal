@@ -185,9 +185,9 @@
 /* ── MatchesByDay ────────────────────────────────────────────────── */
 
 .mbd-day-nav { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; background: #f1f5fb; border-radius: 10px; padding: 0.6rem 0.85rem; border: 1px solid #dbe4f0; }
-.mbd-nav-btn { background: var(--c-brand); border: 1px solid #8fa6d8; border-radius: var(--radius-md); color: #ffffff; font-size: 1.1rem; padding: 0.4rem 0.9rem; cursor: pointer; flex-shrink: 0; line-height: 1; font-weight: 700; transition: border-color 0.15s, background 0.15s; }
-.mbd-nav-btn:hover:not(:disabled) { background: #2a3a7a; border-color: var(--c-brand); }
-.mbd-nav-btn:disabled { color: #a0aec0; cursor: default; background: #e2e8f0; border-color: #e2e8f0; }
+.mbd-nav-btn { background: var(--c-brand); border: 2px solid var(--c-link); border-radius: var(--radius-md); color: var(--c-link); font-size: 1.3rem; padding: 0.5rem 1.1rem; cursor: pointer; flex-shrink: 0; line-height: 1; font-weight: 900; transition: border-color 0.15s, background 0.15s; }
+.mbd-nav-btn:hover:not(:disabled) { background: rgba(137,180,250,0.12); border-color: var(--c-action); color: var(--c-action); }
+.mbd-nav-btn:disabled { color: var(--c-border); cursor: default; background: transparent; border-color: var(--c-border); }
 .mbd-day-label { flex: 1; }
 .mbd-day-heading { font-size: 1.05rem; font-weight: 800; color: var(--c-brand); text-transform: capitalize; }
 .mbd-day-counter { font-size: 0.78rem; font-weight: 500; color: #64748b; }

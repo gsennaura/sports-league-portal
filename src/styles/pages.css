@@ -742,9 +742,15 @@
   background: linear-gradient(90deg, var(--c-action), var(--c-link));
 }
 
-/* Override page-card white-context inside the dark champ-header */
-.champ-header .page-title {
+/* Override page-card white-context inside the dark champ-header — extra specificity needed */
+.page-card .champ-header .page-title {
   color: #ffffff;
+}
+
+/* Badges inside champ-header: all white text, standardized */
+.champ-header .champ-badge {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .champ-full-name {
@@ -843,7 +849,7 @@
 .stat-highlight-name {
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--c-text);
+  color: #ffffff;
   line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -873,21 +879,27 @@
 
 .phase-nav__btn {
   background: var(--c-brand);
-  border: 1px solid var(--c-border);
+  border: 2px solid var(--c-link);
   border-radius: var(--radius-lg);
   color: var(--c-link);
-  font-size: 1.4rem;
-  padding: 0.5rem 1.1rem;
+  font-size: 1.5rem;
+  padding: 0.55rem 1.2rem;
   cursor: pointer;
   flex-shrink: 0;
   line-height: 1;
-  font-weight: 700;
-  transition: border-color 0.15s;
+  font-weight: 900;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.phase-nav__btn:hover:not(:disabled) {
+  background: rgba(137, 180, 250, 0.12);
+  border-color: var(--c-action);
+  color: var(--c-action);
 }
 
 .phase-nav__btn:disabled {
   color: var(--c-border);
-  border-color: var(--c-brand);
+  border-color: var(--c-border);
   background: transparent;
   cursor: default;
 }
@@ -907,9 +919,9 @@
 }
 
 .phase-nav__name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--c-text);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--c-brand);
 }
 
 .phase-nav__counter {
@@ -1171,7 +1183,7 @@
 .palmares__title {
   font-size: 1.05rem;
   font-weight: 800;
-  color: var(--c-warning);
+  color: var(--c-brand);
   letter-spacing: 0.01em;
   text-transform: uppercase;
   flex-shrink: 0;
@@ -1180,7 +1192,7 @@
 .palmares__divider {
   flex: 1;
   height: 2px;
-  background: linear-gradient(90deg, rgba(249, 226, 175, 0.27) 0%, transparent 100%);
+  background: linear-gradient(90deg, rgba(24, 38, 91, 0.35) 0%, transparent 100%);
   border-radius: 1px;
 }
 
@@ -1254,7 +1266,7 @@
 
 /* Champ action buttons (artilharia, classificação, etc.) */
 .champ-action-row {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .champ-action-btn {

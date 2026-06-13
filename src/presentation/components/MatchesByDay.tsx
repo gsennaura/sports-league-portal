@@ -109,7 +109,7 @@ export function MatchesByDay({
 
   if (loading) return <PageLoader />;
   if (error) return <p className="error-text">{error}</p>;
-  if (sortedDates.length === 0) return <p className="muted">{emptyMessage}</p>;
+  if (sortedDates.length === 0) return <p className="empty-notice">{emptyMessage}</p>;
 
   return (
     <>

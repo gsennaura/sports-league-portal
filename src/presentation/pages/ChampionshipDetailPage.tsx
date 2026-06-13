@@ -494,10 +494,10 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
           )}
 
           {/* Artilharia — botão + modal */}
-          <div style={{ marginBottom: "1.5rem" }}>
+          <div className="champ-action-row">
             <button
               onClick={handleLoadScorers}
-              style={{ background: "#1a1f3a", border: "1px solid #2a3a6a", borderRadius: 8, color: "var(--c-action)", fontWeight: 600, fontSize: "0.85rem", padding: "0.45rem 1rem", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+              className="champ-action-btn champ-action-btn--action"
             >
               ⚽ Ver artilharia
             </button>
@@ -744,7 +744,7 @@ function MatchRoundList({
   }
 
   if (rounds.size === 0) {
-    return <p className="muted" style={{ textAlign: "center", padding: "1rem 0" }}>Nenhuma partida registrada.</p>;
+    return <p className="empty-notice">Nenhuma partida registrada.</p>;
   }
 
   const legLabel = (round: number) =>

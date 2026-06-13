@@ -61,6 +61,24 @@
   padding: 2rem;
 }
 
+/* Empty notice — mensagem proeminente de lista vazia */
+.empty-notice {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--c-text);
+  text-align: center;
+  padding: 1.75rem 1rem;
+  border: 1px dashed var(--c-border);
+  border-radius: var(--radius-lg);
+}
+
+/* Em contexto branco: text escuro legível */
+.page-card .page-container .empty-notice {
+  color: #475569;
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
 /* ── Responsividade base ────────────────────────────────────────── */
 
 @media (max-width: 600px) {
