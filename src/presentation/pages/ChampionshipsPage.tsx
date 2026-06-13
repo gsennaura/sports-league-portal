@@ -66,12 +66,12 @@ export function ChampionshipsPage({ listChampionships }: ChampionshipsPageProps)
   const series = toSeries(filtered);
 
   return (
-    <main style={S.page}>
+    <main className="page-container">
       {/* Hero */}
-      <div style={S.hero}>
+      <div className="hero">
         <span style={S.heroTrophy}>🏆</span>
         <div style={S.heroText}>
-          <h1 style={S.title}>Campeonatos</h1>
+          <h1 className="page-title">Campeonatos</h1>
           {!loading && !error && (
             <span style={S.count}>
               {toSeries(leagueChamps).length} competiç{toSeries(leagueChamps).length !== 1 ? "ões" : "ão"}
@@ -97,9 +97,9 @@ export function ChampionshipsPage({ listChampionships }: ChampionshipsPageProps)
       </div>
 
       {loading && <PageLoader />}
-      {error && <p style={S.errText}>{error}</p>}
+      {error && <p className="error-text">{error}</p>}
       {!loading && !error && series.length === 0 && (
-        <p style={S.muted}>Nenhum campeonato encontrado.</p>
+        <p className="muted">Nenhum campeonato encontrado.</p>
       )}
 
       {!loading && !error && series.length > 0 && (
@@ -140,22 +140,6 @@ export function ChampionshipsPage({ listChampionships }: ChampionshipsPageProps)
 }
 
 const S: Record<string, React.CSSProperties> = {
-  page: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "3rem 2rem 6rem",
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0",
-  },
-  hero: {
-    display: "flex",
-    alignItems: "center",
-    gap: "1.25rem",
-    marginBottom: "2.5rem",
-    paddingBottom: "1.5rem",
-    borderBottom: "2px solid #313244",
-  },
   heroTrophy: {
     fontSize: "3rem",
     lineHeight: 1,
@@ -166,14 +150,6 @@ const S: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "column" as const,
     gap: "0.25rem",
-  },
-  title: {
-    margin: 0,
-    fontSize: "2.2rem",
-    fontWeight: 900,
-    color: "#cdd6f4",
-    lineHeight: 1.1,
-    letterSpacing: "-0.02em",
   },
   count: {
     fontSize: "0.82rem",
@@ -202,8 +178,6 @@ const S: Record<string, React.CSSProperties> = {
     fontSize: "0.78rem",
     color: "#ffffff",
   },
-  muted: { color: "#ffffff", fontSize: "0.9rem", margin: 0 },
-  errText: { color: "#f38ba8", fontSize: "0.9rem", margin: 0 },
   championshipGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",

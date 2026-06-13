@@ -89,8 +89,8 @@ const S: Record<string, React.CSSProperties> = {
     right: 0,
     zIndex: 200,
     height: "64px",
-    backgroundColor: "rgba(13, 13, 23, 0.97)",
-    borderTop: "1px solid #313244",
+    backgroundColor: "var(--c-black-97)" as unknown as string,
+    borderTop: "1px solid var(--c-border)",
     backdropFilter: "blur(10px)",
   },
   inner: {
@@ -111,8 +111,8 @@ const S: Record<string, React.CSSProperties> = {
     left: 0,
     right: 0,
     zIndex: 200,
-    backgroundColor: "rgba(13, 13, 23, 0.97)",
-    borderTop: "1px solid #313244",
+    backgroundColor: "rgba(13,13,23,0.97)",
+    borderTop: "1px solid var(--c-border)",
     backdropFilter: "blur(10px)",
     display: "flex",
     flexDirection: "column" as const,
@@ -139,22 +139,22 @@ const S: Record<string, React.CSSProperties> = {
   apoioDividerMobile: {
     width: "1px",
     height: "14px",
-    backgroundColor: "#313244",
+    backgroundColor: "var(--c-border)",
   },
   brandLogoMobile: {
     height: "20px",
     width: "auto",
     objectFit: "contain" as const,
-    filter: "drop-shadow(0 1px 3px rgba(137,180,250,0.3))",
+    filter: "drop-shadow(0 1px 3px var(--c-link-30))",
   },
   brandNameMobile: {
-    color: "#89b4fa",
+    color: "var(--c-link)",
     fontWeight: 700,
     fontSize: "0.75rem",
     whiteSpace: "nowrap" as const,
   },
   devNameMobile: {
-    color: "#ffffff",
+    color: "var(--c-text)",
     fontSize: "0.58rem",
     fontWeight: 600,
     letterSpacing: "0.03em",
@@ -171,10 +171,10 @@ const S: Record<string, React.CSSProperties> = {
     height: "36px",
     width: "auto",
     objectFit: "contain" as const,
-    filter: "drop-shadow(0 1px 4px rgba(137,180,250,0.3))",
+    filter: "drop-shadow(0 1px 4px var(--c-link-30))",
   },
   brandName: {
-    color: "#89b4fa",
+    color: "var(--c-link)",
     fontWeight: 700,
     fontSize: "0.95rem",
     letterSpacing: "0.01em",
@@ -187,7 +187,7 @@ const S: Record<string, React.CSSProperties> = {
     flexShrink: 0,
   },
   apoioLabel: {
-    color: "#ffffff",
+    color: "var(--c-text)",
     fontSize: "0.6rem",
     fontWeight: 700,
     textTransform: "uppercase" as const,
@@ -208,7 +208,7 @@ const S: Record<string, React.CSSProperties> = {
   apoioDivider: {
     width: "1px",
     height: "24px",
-    backgroundColor: "#313244",
+    backgroundColor: "var(--c-border)",
   },
   devBlock: {
     display: "flex",
@@ -218,19 +218,19 @@ const S: Record<string, React.CSSProperties> = {
     flexShrink: 0,
   },
   devBy: {
-    color: "#ffffff",
+    color: "var(--c-text)",
     fontSize: "0.62rem",
     textTransform: "uppercase" as const,
     letterSpacing: "0.06em",
   },
   devName: {
-    color: "#ffffff",
+    color: "var(--c-text)",
     fontSize: "0.78rem",
     fontWeight: 700,
     letterSpacing: "0.04em",
   },
   devYear: {
-    color: "#45475a",
+    color: "var(--c-text-muted)",
     fontSize: "0.58rem",
   },
 };

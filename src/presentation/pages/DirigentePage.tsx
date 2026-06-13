@@ -163,16 +163,16 @@ export function DirigentePage() {
 
   if (dirigenteProfiles.filter((p) => p.is_active).length === 0) {
     return (
-      <div style={S.page}>
-        <h1 style={S.title}>Meu Time</h1>
+      <div className="page-container">
+        <h1 className="page-title">Meu Time</h1>
         <p style={S.empty}>Você não é dirigente de nenhum time. Aguarde aprovação do administrador.</p>
       </div>
     );
   }
 
   return (
-    <div style={S.page}>
-      <h1 style={S.title}>Meu Time</h1>
+    <div className="page-container">
+      <h1 className="page-title">Meu Time</h1>
 
       {/* Tabs */}
       <div style={S.tabs}>

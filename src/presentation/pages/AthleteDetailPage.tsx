@@ -439,7 +439,7 @@ export function AthleteDetailPage({
     return (
       <>
         <div style={S.accentBar} />
-        <main style={S.page}><PageLoader /></main>
+        <main className="page-container"><PageLoader /></main>
       </>
     );
   }
@@ -448,9 +448,9 @@ export function AthleteDetailPage({
     return (
       <>
         <div style={S.accentBar} />
-        <main style={S.page}>
+        <main className="page-container">
           <p style={S.errorText}>{error ?? "Atleta não encontrado."}</p>
-          <Link to="/atletas" style={S.backLink}>← Voltar para Atletas</Link>
+          <Link to="/atletas" className="back-link">← Voltar para Atletas</Link>
         </main>
       </>
     );
@@ -504,10 +504,10 @@ export function AthleteDetailPage({
       <div style={S.accentBar} />
 
       {/* Hero */}
-      <header style={S.hero}>
-        <div style={S.heroInner}>
+      <header className="hero">
+        <div className="hero__inner">
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.75rem" }}>
-            <Link to="/atletas" style={S.backLink}>← Atletas</Link>
+            <Link to="/atletas" className="back-link">← Atletas</Link>
             {isAdmin && (
               <div style={{ display: "flex", gap: "0.5rem" }}>
                 <Link
@@ -596,7 +596,7 @@ export function AthleteDetailPage({
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {/* ─── Estatísticas ─────────────────────────────────────── */}
         {stats && (stats.goals > 0 || stats.yellow_cards > 0 || stats.red_cards > 0 || stats.matches_played > 0) && (
           <section style={S.section}>

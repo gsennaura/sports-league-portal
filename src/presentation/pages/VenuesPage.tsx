@@ -76,9 +76,9 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
   return (
     <>
       {/* Hero */}
-      <header style={S.hero}>
+      <header className="hero">
         <div style={S.heroAccentBar} />
-        <div style={S.heroInner}>
+        <div className="hero__inner">
           <Link to="/" style={S.heroBack}>← Página Principal</Link>
           <span style={S.heroEyebrow}>🏟 Infraestrutura Esportiva</span>
           <h1 style={S.heroTitle}>Locais</h1>
@@ -89,9 +89,9 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
       </header>
 
       {/* Content */}
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <p style={S.status}>Carregando locais...</p>}
-        {error && <p style={S.error}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && !error && venues.length === 0 && (
           <p style={S.status}>Nenhum local cadastrado.</p>

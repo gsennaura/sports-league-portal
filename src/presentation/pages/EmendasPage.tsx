@@ -40,11 +40,11 @@ export function EmendasPage({ listEmendas, leagueId }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}><h1 style={S.title}>Emendas / Regulamento</h1></div>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner"><h1 className="page-title">Emendas / Regulamento</h1></div>
       </header>
-      <main style={S.page}>
+      <main className="page-container">
         {/* Year filter */}
         <div style={S.filters}>
           <button
@@ -60,10 +60,10 @@ export function EmendasPage({ listEmendas, leagueId }: Props) {
           ))}
         </div>
 
-        {loading && <p style={S.muted}>Carregando...</p>}
-        {error && <p style={S.error}>{error}</p>}
+        {loading && <p className="muted">Carregando...</p>}
+        {error && <p className="error-text">{error}</p>}
         {!loading && !error && emendas.length === 0 && (
-          <p style={S.muted}>Nenhuma emenda publicada.</p>
+          <p className="muted">Nenhuma emenda publicada.</p>
         )}
 
         {years.map((y) => (
@@ -102,16 +102,9 @@ export function EmendasPage({ listEmendas, leagueId }: Props) {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { background: "#18265b", borderBottom: "1px solid #313244" },
-  heroAccent: { height: "4px", background: "linear-gradient(90deg,#89dceb,#89b4fa)" },
-  heroInner: { maxWidth: 1100, margin: "0 auto", padding: "1.5rem 2rem" },
-  title: { margin: 0, fontSize: "1.8rem", fontWeight: 900, color: "#cdd6f4" },
-  page: { maxWidth: 1100, margin: "0 auto", padding: "2.5rem 2rem" },
   filters: { display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "2rem" },
   filterBtn: { padding: "0.4rem 0.9rem", borderRadius: "20px", border: "1px solid #45475a", background: "#18265b", color: "#ffffff", cursor: "pointer", fontSize: "0.8rem", fontWeight: 600 },
   filterBtnActive: { background: "#313244", borderColor: "#cba6f7", color: "#cba6f7" },
-  muted: { color: "#ffffff" },
-  error: { color: "#f38ba8" },
   yearGroup: { marginBottom: "2.5rem" },
   yearHeading: { margin: "0 0 0.75rem", fontSize: "1.1rem", fontWeight: 800, color: "#cba6f7", borderBottom: "1px solid #313244", paddingBottom: "0.4rem" },
   list: { display: "flex", flexDirection: "column", gap: "0.6rem" },

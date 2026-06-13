@@ -458,11 +458,11 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
   };
 
   return (
-    <main style={styles.page}>
-      <Link to={backLink} style={styles.back}>{backLabel}</Link>
+    <main className="page-container">
+      <Link to={backLink} className="back-link">{backLabel}</Link>
 
       {loading && <PageLoader />}
-      {error && <p style={styles.error}>{error}</p>}
+      {error && <p className="error-text">{error}</p>}
 
       {detail && (
         <>
@@ -504,7 +504,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
 
           <div style={styles.champHeader}>
             <div style={styles.champTitleBlock}>
-              <h1 style={styles.title}>
+              <h1 className="page-title">
                 {detail.nickname ?? detail.name}
               </h1>
               {detail.nickname && (
@@ -1015,27 +1015,7 @@ function OverallStandings({ standings, phases }: { standings: StandingEntry[]; p
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  page: {
-    maxWidth: "900px",
-    margin: "0 auto",
-    padding: "3rem 1.5rem",
-  },
-  back: {
-    display: "inline-block",
-    color: "#89b4fa",
-    textDecoration: "none",
-    fontSize: "0.9rem",
-    marginBottom: "2rem",
-  },
-  title: {
-    fontSize: "2.4rem",
-    fontWeight: 900,
-    color: "#cdd6f4",
-    margin: "0 0 0.2rem 0",
-    lineHeight: 1.1,
-  },
   status: { color: "#cdd6f4" },
-  error: { color: "#f38ba8" },
   champHeader: {
     display: "flex",
     alignItems: "flex-start",

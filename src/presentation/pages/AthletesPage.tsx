@@ -78,9 +78,9 @@ export function AthletesPage({ searchAthletes, getRandomAthletes }: AthletesPage
   return (
     <>
       {/* Hero */}
-      <header style={S.hero}>
+      <header className="hero">
         <div style={S.accentBar} />
-        <div style={S.heroInner}>
+        <div className="hero__inner">
           <Link to="/" style={S.heroBack}>← Página Principal</Link>
           <span style={S.eyebrow}>🏃 Gestão Esportiva</span>
           <h1 style={S.heroTitle}>Atletas</h1>
@@ -91,7 +91,7 @@ export function AthletesPage({ searchAthletes, getRandomAthletes }: AthletesPage
       </header>
 
       {/* Content */}
-      <main style={S.page}>
+      <main className="page-container">
         {/* Search bar */}
         <div style={S.searchBar}>
           <input
@@ -109,7 +109,7 @@ export function AthletesPage({ searchAthletes, getRandomAthletes }: AthletesPage
         </div>
 
         {/* States */}
-        {error && <p style={S.error}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
         {searched && !loading && !error && results !== null && results.length === 0 && (
           <p style={S.hint}>Nenhum atleta encontrado para "{query}".</p>
         )}

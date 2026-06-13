@@ -131,12 +131,12 @@ export function SolicitarVinculoPage() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   if (loading) {
-    return <main style={S.page}><p style={{ color: "#ffffff", padding: "2rem" }}>Carregando…</p></main>;
+    return <main className="page-container"><p style={{ color: "#ffffff", padding: "2rem" }}>Carregando…</p></main>;
   }
 
   if (pageError) {
     return (
-      <main style={S.page}>
+      <main className="page-container">
         <p style={{ color: "#f38ba8" }}>{pageError}</p>
         <Link to="/meu-perfil" style={{ color: "#89b4fa", fontSize: "0.875rem" }}>← Voltar ao perfil</Link>
       </main>
@@ -144,17 +144,17 @@ export function SolicitarVinculoPage() {
   }
 
   return (
-    <main style={S.page}>
+    <main className="page-container">
       <div style={S.container}>
 
         {/* ── Back link ──────────────────────────────────────────────────── */}
-        <Link to="/meu-perfil" style={S.backLink}>← Meu Perfil</Link>
+        <Link to="/meu-perfil" className="back-link">← Meu Perfil</Link>
 
         {/* ── Title ──────────────────────────────────────────────────────── */}
         <div style={S.titleRow}>
           <div>
-            <h1 style={S.title}>Solicitar Vínculo</h1>
-            <p style={S.subtitle}>Envie uma solicitação para ser vinculado a um time. O administrador irá aprovar.</p>
+            <h1 className="page-title">Solicitar Vínculo</h1>
+            <p className="page-subtitle">Envie uma solicitação para ser vinculado a um time. O administrador irá aprovar.</p>
           </div>
         </div>
 

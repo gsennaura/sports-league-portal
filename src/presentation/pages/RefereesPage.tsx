@@ -77,9 +77,9 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
   return (
     <>
       {/* Hero */}
-      <header style={S.hero}>
+      <header className="hero">
         <div style={S.accentBar} />
-        <div style={S.heroInner}>
+        <div className="hero__inner">
           <Link to="/" style={S.heroBack}>← Página Principal</Link>
           <span style={S.eyebrow}>⚖️ Gestão Esportiva</span>
           <h1 style={S.heroTitle}>Árbitros</h1>
@@ -90,7 +90,7 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
       </header>
 
       {/* Content */}
-      <main style={S.page}>
+      <main className="page-container">
         {/* Search bar */}
         <div style={S.searchBar}>
           <input
@@ -111,7 +111,7 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
         </div>
 
         {/* States */}
-        {error && <p style={S.error}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
         {!loading && searched && results !== null && results.length === 0 && (
           <p style={S.hint}>Nenhum árbitro encontrado para "{query}".</p>
         )}

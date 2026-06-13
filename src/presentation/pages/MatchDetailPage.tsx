@@ -122,7 +122,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
       <header style={S.header}>
         <div style={S.headerInner}>
           <div style={S.headerTopRow}>
-            <button onClick={() => navigate(-1)} style={S.back}>← Voltar</button>
+            <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
             {isAdmin && id && (
               <Link to={`/admin/partidas/${id}/editar`} style={S.editBtn}>
                 ✏️ Editar partida
@@ -144,7 +144,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
       </header>
 
       {/* ─── Content ────────────────────────────────────────────────────── */}
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <PageLoader />}
         {error && <p style={S.errorText}>{error}</p>}
 

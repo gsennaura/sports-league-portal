@@ -18,14 +18,14 @@ export function NewsPage({ listNews, leagueId }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}><h1 style={S.title}>Notícias</h1></div>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner"><h1 className="page-title">Notícias</h1></div>
       </header>
-      <main style={S.page}>
-        {loading && <p style={S.muted}>Carregando...</p>}
-        {error && <p style={S.error}>{error}</p>}
-        {!loading && !error && news.length === 0 && <p style={S.muted}>Nenhuma notícia publicada ainda.</p>}
+      <main className="page-container">
+        {loading && <p className="muted">Carregando...</p>}
+        {error && <p className="error-text">{error}</p>}
+        {!loading && !error && news.length === 0 && <p className="muted">Nenhuma notícia publicada ainda.</p>}
         <div style={S.grid}>
           {news.map((n) => (
             <Link key={n.id} to={`/noticias/${n.id}`} style={S.card}>
@@ -48,13 +48,6 @@ export function NewsPage({ listNews, leagueId }: Props) {
 }
 
 const S: Record<string, React.CSSProperties> = {
-  hero: { background: "#18265b", borderBottom: "1px solid #313244" },
-  heroAccent: { height: "4px", background: "linear-gradient(90deg,#89dceb,#89b4fa)" },
-  heroInner: { maxWidth: 1100, margin: "0 auto", padding: "1.5rem 2rem" },
-  title: { margin: 0, fontSize: "1.8rem", fontWeight: 900, color: "#cdd6f4" },
-  page: { maxWidth: 1100, margin: "0 auto", padding: "2.5rem 2rem" },
-  muted: { color: "#ffffff" },
-  error: { color: "#f38ba8" },
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1.5rem" },
   card: { background: "#18265b", border: "1px solid #313244", borderRadius: 12, overflow: "hidden", textDecoration: "none", display: "flex", flexDirection: "column" },
   img: { width: "100%", height: 180, objectFit: "cover", background: "#18265b" },

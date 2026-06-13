@@ -230,19 +230,19 @@ export function MyProfilePage() {
     (m) => m.membership_status === "pendente_aprovacao" || m.membership_status === "ativo"
   );
 
-  if (loading) return <div style={S.page}><p style={{ color: "#ffffff", padding: 40 }}>Carregando…</p></div>;
-  if (pageError) return <div style={S.page}><p style={{ color: "#f38ba8", padding: 40 }}>{pageError}</p></div>;
+  if (loading) return <div className="page-container"><p style={{ color: "#ffffff", padding: 40 }}>Carregando…</p></div>;
+  if (pageError) return <div className="page-container"><p style={{ color: "#f38ba8", padding: 40 }}>{pageError}</p></div>;
   if (!profile) return null;
 
   const initials = profile.name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
 
   return (
     <>
-      <div style={S.page}>
+      <div className="page-container">
         <div style={S.container}>
 
           {/* ── Hero ─────────────────────────────────────────────────────── */}
-          <div style={S.hero}>
+          <div className="hero">
             <div style={S.avatarWrap}>
               <div style={{ position: "relative", display: "inline-block" }}>
                 {(photoPreview ?? profile.photo_url)
@@ -389,7 +389,7 @@ export function MyProfilePage() {
             <h3 style={S.modalTitle}>Editar perfil</h3>
             <p style={S.modalSub}>Suas informações pessoais de atleta</p>
 
-            {saveError && <p style={S.error}>{saveError}</p>}
+            {saveError && <p className="error-text">{saveError}</p>}
             {saveOk && <p style={S.ok}>Salvo com sucesso!</p>}
 
             <div style={S.row2}>

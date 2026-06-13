@@ -244,9 +244,9 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
   return (
     <>
       {/* ─── Hero ──────────────────────────────────────────────── */}
-      <header style={S.hero}>
+      <header className="hero">
         <div style={S.heroAccentBar} />
-        <div style={S.heroInner}>
+        <div className="hero__inner">
           <Link to="/clubes" style={S.heroBack}>← Clubes</Link>
           {loading && !club && <PageLoader />}
           {club && (
@@ -324,8 +324,8 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
       </header>
 
       {/* ─── Content ───────────────────────────────────────────── */}
-      <main style={S.page}>
-        {error && <p style={S.error}>{error}</p>}
+      <main className="page-container">
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && club && (
           <div>

@@ -133,13 +133,13 @@ export function LiveMatchesPage({ getLiveWindowMatches }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
           <img src={minhaLigaLogo} alt="Minha Liga" style={S.heroLogo} />
-          <h1 style={S.title}>Ao Vivo</h1>
+          <h1 className="page-title">Ao Vivo</h1>
           {lastUpdated && (
-            <p style={S.subtitle}>
+            <p className="page-subtitle">
               Atualizado às{" "}
               {lastUpdated.toLocaleTimeString("pt-BR", {
                 hour: "2-digit",
@@ -151,7 +151,7 @@ export function LiveMatchesPage({ getLiveWindowMatches }: Props) {
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <PageLoader />}
         {error && <p style={S.errorMsg}>{error}</p>}
 

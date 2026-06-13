@@ -57,7 +57,7 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
     return (
       <>
         <div style={S.accentBar} />
-        <main style={S.page}><PageLoader /></main>
+        <main className="page-container"><PageLoader /></main>
       </>
     );
   }
@@ -66,9 +66,9 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
     return (
       <>
         <div style={S.accentBar} />
-        <main style={S.page}>
+        <main className="page-container">
           <p style={S.errorText}>{error ?? "Árbitro não encontrado."}</p>
-          <Link to="/arbitros" style={S.backLink}>← Voltar para Árbitros</Link>
+          <Link to="/arbitros" className="back-link">← Voltar para Árbitros</Link>
         </main>
       </>
     );
@@ -88,10 +88,10 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
       <div style={S.accentBar} />
 
       {/* Hero */}
-      <header style={S.hero}>
-        <div style={S.heroInner}>
+      <header className="hero">
+        <div className="hero__inner">
           <div style={S.heroTopRow}>
-            <Link to="/arbitros" style={S.backLink}>← Árbitros</Link>
+            <Link to="/arbitros" className="back-link">← Árbitros</Link>
             {isAdmin && (
               <Link to={`/admin/arbitros/${id}/editar`} style={S.adminBtnEdit}>
                 ✏️ Editar
@@ -126,7 +126,7 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {/* Notes */}
         {referee.notes && (
           <section style={S.section}>

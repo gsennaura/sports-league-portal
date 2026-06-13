@@ -200,9 +200,9 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
   return (
     <>
       {/* Hero */}
-      <header style={styles.hero}>
+      <header className="hero">
         <div style={styles.heroAccentBar} />
-        <div style={styles.heroInner}>
+        <div className="hero__inner">
           <Link to="/" style={styles.heroBack}>← Página Principal</Link>
           <span style={styles.heroEyebrow}>⚽ Gestão Esportiva</span>
           <h1 style={styles.heroTitle}>Clubes</h1>
@@ -211,7 +211,7 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
       </header>
 
       {/* Content */}
-      <main style={styles.page}>
+      <main className="page-container">
 
         {/* ── Filter panel ────────────────────────────────────────────────── */}
         <div style={styles.filterPanel}>
@@ -267,7 +267,7 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
 
         {/* ── Status messages ───────────────────────────────────────────── */}
         {loading && <p style={styles.status}>Carregando...</p>}
-        {error && <p style={styles.error}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && !error && (
           <>
@@ -309,23 +309,9 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  hero: {
-    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
-    borderBottom: "1px solid #313244",
-    paddingBottom: "2.5rem",
-    overflow: "hidden",
-  },
   heroAccentBar: {
     height: "4px",
     background: "linear-gradient(90deg, #89b4fa 0%, #cba6f7 50%, #a6e3a1 100%)",
-  },
-  heroInner: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "2rem 2rem 0",
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.5rem",
   },
   heroBack: {
     color: "#89b4fa",
@@ -355,13 +341,6 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: "1rem",
     color: "#cdd6f4",
     lineHeight: 1.6,
-  },
-
-  // Page
-  page: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "2.5rem 2rem 4rem",
   },
 
   // Filter panel
@@ -483,5 +462,4 @@ const styles: Record<string, React.CSSProperties> = {
   },
 
   status: { color: "#cdd6f4" },
-  error: { color: "#f38ba8" },
 };

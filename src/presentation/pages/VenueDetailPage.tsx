@@ -229,9 +229,9 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
   return (
     <>
       {/* ─── Hero ─────────────────────────────────────────────────── */}
-      <header style={S.hero}>
+      <header className="hero">
         <div style={S.heroAccentBar} />
-        <div style={S.heroInner}>
+        <div className="hero__inner">
           <Link to="/locais" style={S.heroBack}>← Locais</Link>
 
           {loading && <PageLoader />}
@@ -312,7 +312,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
       </header>
 
       {/* ─── Matches ──────────────────────────────────────────────── */}
-      <main style={S.page}>
+      <main className="page-container">
         {!loading && !error && (
           <>
             {/* Stats strip */}

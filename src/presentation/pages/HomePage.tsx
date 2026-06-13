@@ -35,9 +35,9 @@ function ChampionshipsSection({
   error: string | null;
 }) {
   if (loading) return <PageLoader />;
-  if (error) return <p style={S.errText}>{error}</p>;
+  if (error) return <p className="error-text">{error}</p>;
   const filtered = championships.filter((c) => !LEAGUE_ID || c.league_id === LEAGUE_ID);
-  if (filtered.length === 0) return <p style={S.muted}>Nenhum campeonato encontrado.</p>;
+  if (filtered.length === 0) return <p className="muted">Nenhum campeonato encontrado.</p>;
   return (
     <div style={S.champGrid}>
       {filtered.map((c) => (
@@ -96,7 +96,7 @@ export function HomePage({
   const { news } = useNews(listNews, LEAGUE_ID || undefined, 8);
 
   return (
-    <main style={S.page}>
+    <main className="page-container">
 
         {news.length > 0 && <NewsCarousel items={news} />}
 
@@ -171,14 +171,6 @@ function SectionDivider({
 
 const S: Record<string, React.CSSProperties> = {
   // ─── Page content ──────────────────────────────────────────
-  page: {
-    padding: "0 2rem 3rem",
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "1.5rem",
-  },
-  muted: { color: "#6b7280", fontSize: "0.9rem", margin: 0 },
-  errText: { color: "#dc2626", fontSize: "0.9rem", margin: 0 },
 
   // ─── Section divider ───────────────────────────────────────
   sectionDivider: {
