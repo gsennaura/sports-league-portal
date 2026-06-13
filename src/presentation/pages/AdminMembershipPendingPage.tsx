@@ -319,7 +319,7 @@ export function AdminMembershipPendingPage() {
 
   return (
     <>
-      <div style={S.page}>
+      <div className="page-container">
         <div style={S.container}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem", marginBottom: "0.25rem" }}>
             <h2 style={{ ...S.title, margin: 0 }}>Pendências de vínculo</h2>
@@ -362,7 +362,7 @@ export function AdminMembershipPendingPage() {
             </select>
           </div>
 
-          {error && <p style={S.error}>{error}</p>}
+          {error && <p className="error-text">{error}</p>}
           {loading && <p style={S.msg}>Carregando…</p>}
 
           {!loading && filtered.length === 0 && (
@@ -372,8 +372,8 @@ export function AdminMembershipPendingPage() {
           )}
 
           {!loading && filtered.length > 0 && (
-            <div style={S.tableWrap}>
-              <table style={S.table} className="pending-table">
+            <div className="table-wrap">
+              <table className="data-table pending-table">
                 <thead>
                   <tr>
                     <th style={S.th}>Nome</th>
@@ -452,13 +452,13 @@ export function AdminMembershipPendingPage() {
               Solicitação de vínculo com <strong>{editMembership.team_name ?? editMembership.team_id}</strong>
             </p>
 
-            {editError && <p style={S.error}>{editError}</p>}
+            {editError && <p className="error-text">{editError}</p>}
             {editLoading && <p style={S.msg}>Carregando dados...</p>}
 
             {editForm && (
               <>
                 <div style={S.fieldGroup}>
-                  <label style={S.label}>Nome *</label>
+                  <label className="form-label">Nome *</label>
                   <input
                     style={S.input}
                     value={editForm.name}
@@ -467,7 +467,7 @@ export function AdminMembershipPendingPage() {
                 </div>
 
                 <div style={S.fieldGroup}>
-                  <label style={S.label}>Apelido</label>
+                  <label className="form-label">Apelido</label>
                   <input
                     style={S.input}
                     value={editForm.nickname}
@@ -477,13 +477,13 @@ export function AdminMembershipPendingPage() {
 
                 <div style={S.row2}>
                   <div style={S.fieldGroup}>
-                    <label style={S.label}>Posição</label>
+                    <label className="form-label">Posição</label>
                     <select style={S.input} value={editForm.position} onChange={(e) => setEditForm({ ...editForm, position: e.target.value })}>
                       {POSITION_OPTIONS.map((p) => <option key={p} value={p}>{p || "Selecione..."}</option>)}
                     </select>
                   </div>
                   <div style={S.fieldGroup}>
-                    <label style={S.label}>Pé dominante</label>
+                    <label className="form-label">Pé dominante</label>
                     <select style={S.input} value={editForm.preferred_foot} onChange={(e) => setEditForm({ ...editForm, preferred_foot: e.target.value })}>
                       {FOOT_OPTIONS.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
                     </select>
@@ -492,17 +492,17 @@ export function AdminMembershipPendingPage() {
 
                 <div style={S.row2}>
                   <div style={S.fieldGroup}>
-                    <label style={S.label}>Altura (cm)</label>
+                    <label className="form-label">Altura (cm)</label>
                     <input style={S.input} type="number" min={100} max={250} value={editForm.height_cm} onChange={(e) => setEditForm({ ...editForm, height_cm: e.target.value })} />
                   </div>
                   <div style={S.fieldGroup}>
-                    <label style={S.label}>Peso (kg)</label>
+                    <label className="form-label">Peso (kg)</label>
                     <input style={S.input} type="number" min={30} max={200} step={0.1} value={editForm.weight_kg} onChange={(e) => setEditForm({ ...editForm, weight_kg: e.target.value })} />
                   </div>
                 </div>
 
                 <div style={S.fieldGroup}>
-                  <label style={S.label}>Foto</label>
+                  <label className="form-label">Foto</label>
                   <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                     {(photoPreviewUrl || editForm.photo_url) && (
                       <img
@@ -533,7 +533,7 @@ export function AdminMembershipPendingPage() {
 
                   {/* Liga */}
                   <div style={S.fieldGroup}>
-                    <label style={S.label}>Liga</label>
+                    <label className="form-label">Liga</label>
                     <select
                       style={{ ...S.input, ...(isLeagueAdmin && allLeagues.length <= 1 ? { opacity: 0.7, cursor: "not-allowed" } : {}) }}
                       value={editLeagueId}
@@ -552,7 +552,7 @@ export function AdminMembershipPendingPage() {
 
                   {/* Esporte */}
                   <div style={S.fieldGroup}>
-                    <label style={S.label}>Esporte</label>
+                    <label className="form-label">Esporte</label>
                     <select
                       style={{ ...S.input, opacity: !editLeagueId ? 0.5 : 1 }}
                       value={editSportId}
@@ -576,7 +576,7 @@ export function AdminMembershipPendingPage() {
 
                   {/* Categoria */}
                   <div style={S.fieldGroup}>
-                    <label style={S.label}>Categoria</label>
+                    <label className="form-label">Categoria</label>
                     <select
                       style={{ ...S.input, opacity: !editSportId ? 0.5 : 1 }}
                       value={editCategory}
@@ -595,7 +595,7 @@ export function AdminMembershipPendingPage() {
 
                   {/* Time */}
                   <div style={S.fieldGroup}>
-                    <label style={S.label}>Time</label>
+                    <label className="form-label">Time</label>
                     <select
                       style={{ ...S.input, opacity: !editCategory ? 0.5 : 1 }}
                       value={editForm.new_team_id}

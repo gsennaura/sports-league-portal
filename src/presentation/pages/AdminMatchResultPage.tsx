@@ -96,19 +96,19 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
     }
   }
 
-  if (loading) return <main style={S.page}><p style={S.muted}>Carregando...</p></main>;
+  if (loading) return <main className="page-container"><p className="muted">Carregando...</p></main>;
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <button onClick={() => navigate(-1)} style={S.back}>← Voltar</button>
-          <h1 style={S.title}>Resultado da Partida</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
+          <h1 className="page-title">Resultado da Partida</h1>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {match && (
           <div style={S.matchInfo}>
             <span style={S.teamName}>{match.home_team_name}</span>
@@ -128,7 +128,7 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
 
             <div style={S.scoreRow}>
               <div style={S.scoreField}>
-                <label style={S.label} htmlFor="home-score">
+                <label className="form-label" htmlFor="home-score">
                   {match?.home_team_name ?? "Mandante"}
                 </label>
                 <input
@@ -147,7 +147,7 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
               <span style={S.scoreSep}>–</span>
 
               <div style={S.scoreField}>
-                <label style={S.label} htmlFor="away-score">
+                <label className="form-label" htmlFor="away-score">
                   {match?.away_team_name ?? "Visitante"}
                 </label>
                 <input
@@ -175,7 +175,7 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
             {hasPenalties && (
               <div style={{ ...S.scoreRow, marginTop: "0.75rem" }}>
                 <div style={S.scoreField}>
-                  <label style={S.label} htmlFor="home-pen">Pênaltis mandante</label>
+                  <label className="form-label" htmlFor="home-pen">Pênaltis mandante</label>
                   <input
                     id="home-pen"
                     type="number"
@@ -188,7 +188,7 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
                 </div>
                 <span style={S.scoreSep}>–</span>
                 <div style={S.scoreField}>
-                  <label style={S.label} htmlFor="away-pen">Pênaltis visitante</label>
+                  <label className="form-label" htmlFor="away-pen">Pênaltis visitante</label>
                   <input
                     id="away-pen"
                     type="number"

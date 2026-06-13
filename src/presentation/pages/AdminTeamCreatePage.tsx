@@ -136,16 +136,16 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/times" style={S.back}>← Times</Link>
-          <h1 style={S.title}>Novo time</h1>
-          <p style={S.subtitle}>Cadastrar nova equipe</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/times" className="back-link">← Times</Link>
+          <h1 className="page-title">Novo time</h1>
+          <p className="page-subtitle">Cadastrar nova equipe</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <form onSubmit={handleSubmit} style={S.form} noValidate>
 
           {error && (
@@ -162,7 +162,7 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
               Selecione a liga para filtrar os clubes disponíveis. Ao salvar, o clube será registrado nesta liga.
             </p>
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="league">Liga</label>
+              <label className="form-label" htmlFor="league">Liga</label>
               <select
                 id="league"
                 style={{ ...S.input, ...S.select, maxWidth: "420px", ...(leagueIsLocked ? S.inputLocked : {}) }}
@@ -190,7 +190,7 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
                 : "Selecione uma liga para filtrar os clubes. Ou deixe sem clube para um time independente."}
             </p>
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="club">Clube</label>
+              <label className="form-label" htmlFor="club">Clube</label>
               <select
                 id="club"
                 style={{ ...S.input, ...S.select, maxWidth: "420px" }}
@@ -250,7 +250,7 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
             <legend style={S.legend}>Detalhes</legend>
             <div style={S.grid3}>
               <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="category">Categoria</label>
+                <label className="form-label" htmlFor="category">Categoria</label>
                 <select
                   id="category"
                   style={{ ...S.input, ...S.select }}
@@ -264,8 +264,8 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
                 </select>
               </div>
               <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="city">
-                  Cidade <span style={S.required}>*</span>
+                <label className="form-label" htmlFor="city">
+                  Cidade <span className="form-label">*</span>
                 </label>
                 <select
                   id="city"
@@ -282,8 +282,8 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
                 </select>
               </div>
               <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="sport">
-                  Esporte <span style={S.required}>*</span>
+                <label className="form-label" htmlFor="sport">
+                  Esporte <span className="form-label">*</span>
                 </label>
                 <select
                   id="sport"
@@ -306,8 +306,8 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
           <fieldset style={S.fieldset}>
             <legend style={S.legend}>Nome do time</legend>
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="name">
-                Nome do time <span style={S.required}>*</span>
+              <label className="form-label" htmlFor="name">
+                Nome do time <span className="form-label">*</span>
               </label>
               <input
                 id="name"

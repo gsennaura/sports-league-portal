@@ -19,18 +19,18 @@ function RefereePhoto({ url, name }: { url: string | null; name: string }) {
       onError={(e) => {
         (e.currentTarget as HTMLImageElement).src = NO_PHOTO;
       }}
-      style={S.photo}
+      className="person-card__photo"
     />
   );
 }
 
 function RefereeCard({ referee }: { referee: Referee }) {
   return (
-    <Link to={`/arbitros/${referee.id}`} style={S.card}>
+    <Link to={`/arbitros/${referee.id}`} className="person-card">
       <RefereePhoto url={referee.photo_url ?? null} name={referee.name} />
-      <div style={S.cardBody}>
-        <span style={S.cardName}>{referee.name}</span>
-        <span style={S.cardMeta}>
+      <div className="person-card__body">
+        <span className="person-card__name">{referee.name}</span>
+        <span className="person-card__meta">
           {referee.nickname ? `"${referee.nickname}"` : "Árbitro"}
         </span>
       </div>
@@ -78,12 +78,12 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
     <>
       {/* Hero */}
       <header className="hero">
-        <div style={S.accentBar} />
+        <div className="hero__bar" />
         <div className="hero__inner">
-          <Link to="/" style={S.heroBack}>← Página Principal</Link>
-          <span style={S.eyebrow}>⚖️ Gestão Esportiva</span>
-          <h1 style={S.heroTitle}>Árbitros</h1>
-          <p style={S.heroSub}>
+          <Link to="/" className="back-link">← Página Principal</Link>
+          <span className="hero__eyebrow">⚖️ Gestão Esportiva</span>
+          <h1 className="hero__title">Árbitros</h1>
+          <p className="hero__sub">
             Conheça os árbitros cadastrados. Use a busca para filtrar pelo nome.
           </p>
         </div>
@@ -92,7 +92,7 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
       {/* Content */}
       <main className="page-container">
         {/* Search bar */}
-        <div style={S.searchBar}>
+        <div className="search-bar">
           <input
             ref={inputRef}
             type="text"
@@ -103,9 +103,9 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
               if (!e.target.value.trim()) { setSearched(false); setResults(null); }
             }}
             onKeyDown={handleKeyDown}
-            style={S.input}
+            className="search-input"
           />
-          <button onClick={handleSearch} disabled={loading} style={S.btn}>
+          <button onClick={handleSearch} disabled={loading} className="btn btn-primary">
             {loading ? "Carregando…" : "Filtrar"}
           </button>
         </div>
@@ -113,12 +113,12 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
         {/* States */}
         {error && <p className="error-text">{error}</p>}
         {!loading && searched && results !== null && results.length === 0 && (
-          <p style={S.hint}>Nenhum árbitro encontrado para "{query}".</p>
+          <p className="muted">Nenhum árbitro encontrado para "{query}".</p>
         )}
 
         {/* Grid */}
         {!loading && displayed.length > 0 && (
-          <div style={S.grid}>
+          <div className="person-grid">
             {displayed.map((r) => (
               <RefereeCard key={r.id} referee={r} />
             ))}
@@ -131,138 +131,3 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
   );
 }
 
-const S: Record<string, React.CSSProperties> = {
-  hero: {
-    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
-    borderBottom: "1px solid #313244",
-    paddingBottom: "2.5rem",
-    overflow: "hidden",
-  },
-  accentBar: {
-    height: "4px",
-    background: "linear-gradient(90deg, #cba6f7 0%, #89b4fa 50%, #a6e3a1 100%)",
-  },
-  heroInner: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "2rem 2rem 0",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.5rem",
-  },
-  heroBack: {
-    color: "#89b4fa",
-    textDecoration: "none",
-    fontSize: "0.85rem",
-    marginBottom: "0.25rem",
-    alignSelf: "flex-start",
-  },
-  eyebrow: {
-    color: "#cba6f7",
-    fontSize: "0.82rem",
-    fontWeight: 600,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-  },
-  heroTitle: {
-    margin: 0,
-    fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-    fontWeight: 800,
-    color: "#cdd6f4",
-    lineHeight: 1.15,
-    letterSpacing: "-0.02em",
-  },
-  heroSub: {
-    margin: 0,
-    marginTop: "0.15rem",
-    fontSize: "1rem",
-    color: "#ffffff",
-    lineHeight: 1.6,
-  },
-  page: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "2.5rem 2rem 4rem",
-  },
-  searchBar: {
-    display: "flex",
-    gap: "0.75rem",
-    marginBottom: "2rem",
-  },
-  input: {
-    flex: 1,
-    padding: "0.6rem 1rem",
-    borderRadius: "8px",
-    border: "1px solid #313244",
-    background: "#18265b",
-    color: "#cdd6f4",
-    fontSize: "0.95rem",
-    outline: "none",
-  },
-  btn: {
-    padding: "0.6rem 1.4rem",
-    borderRadius: "8px",
-    border: "none",
-    background: "#cba6f7",
-    color: "#18265b",
-    fontWeight: 700,
-    fontSize: "0.9rem",
-    cursor: "pointer",
-    whiteSpace: "nowrap",
-  },
-  hint: {
-    color: "#ffffff",
-    fontSize: "0.9rem",
-  },
-  error: {
-    color: "#f38ba8",
-    fontSize: "0.9rem",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-    gap: "0.5rem",
-  },
-  card: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: "0.75rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    overflow: "hidden",
-    textDecoration: "none",
-    padding: "0.5rem 0.75rem 0.5rem 0",
-    transition: "border-color 0.15s",
-  },
-  photo: {
-    width: 44,
-    height: 44,
-    flexShrink: 0,
-    objectFit: "cover" as const,
-    backgroundColor: "#18265b",
-  },
-  cardBody: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.1rem",
-    minWidth: 0,
-  },
-  cardName: {
-    fontSize: "0.875rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    lineHeight: 1.3,
-    whiteSpace: "nowrap" as const,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  cardMeta: {
-    fontSize: "0.72rem",
-    color: "#ffffff",
-    whiteSpace: "nowrap" as const,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-};

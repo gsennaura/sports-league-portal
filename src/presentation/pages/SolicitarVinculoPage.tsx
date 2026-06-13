@@ -145,13 +145,13 @@ export function SolicitarVinculoPage() {
 
   return (
     <main className="page-container">
-      <div style={S.container}>
+      <div className="page-container--narrow">
 
         {/* ── Back link ──────────────────────────────────────────────────── */}
         <Link to="/meu-perfil" className="back-link">← Meu Perfil</Link>
 
         {/* ── Title ──────────────────────────────────────────────────────── */}
-        <div style={S.titleRow}>
+        <div style={{ marginBottom: "2rem" }}>
           <div>
             <h1 className="page-title">Solicitar Vínculo</h1>
             <p className="page-subtitle">Envie uma solicitação para ser vinculado a um time. O administrador irá aprovar.</p>
@@ -160,17 +160,17 @@ export function SolicitarVinculoPage() {
 
         {/* ── Vínculos atuais ────────────────────────────────────────────── */}
         {activeMemberships.length > 0 && (
-          <div style={S.card}>
-            <h2 style={S.cardTitle}>Seus vínculos atuais</h2>
-            <div style={S.membershipList}>
+          <div className="card">
+            <h2 className="section-heading">Seus vínculos atuais</h2>
+            <div className="doc-list">
               {activeMemberships.map((m) => {
                 const status = m.membership_status ?? "sem_time";
                 return (
-                  <div key={m.id} style={S.membershipRow}>
+                  <div key={m.id} className="person-card">
                     <div>
-                      <span style={S.teamName}>{m.team_name ?? m.team_id}</span>
+                      <span className="person-card__name">{m.team_name ?? m.team_id}</span>
                       {m.team_sport_name && (
-                        <span style={S.sportLabel}> · {m.team_sport_name}</span>
+                        <span className="person-card__meta"> · {m.team_sport_name}</span>
                       )}
                     </div>
                     <span style={{ ...S.badge, color: STATUS_COLOR[status] ?? "#ffffff" }}>
@@ -184,8 +184,8 @@ export function SolicitarVinculoPage() {
         )}
 
         {/* ── Form card ──────────────────────────────────────────────────── */}
-        <div style={S.card}>
-          <h2 style={S.cardTitle}>Selecionar time</h2>
+        <div className="card">
+          <h2 className="section-heading">Selecionar time</h2>
 
           {msg && (
             <div style={msg.type === "ok" ? S.msgOk : S.msgErr}>
@@ -194,12 +194,12 @@ export function SolicitarVinculoPage() {
           )}
 
           <form onSubmit={(e) => void handleSubmit(e)}>
-            <div style={S.grid}>
+            <div className="form-field-group--2">
               {/* Liga */}
-              <div style={S.field}>
-                <label style={S.label}>Liga</label>
+              <div className="form-field">
+                <label className="form-label">Liga</label>
                 <select
-                  style={S.select}
+                  className="form-select"
                   value={selectedLeague}
                   onChange={(e) => {
                     setSelectedLeague(e.target.value);
@@ -214,10 +214,10 @@ export function SolicitarVinculoPage() {
               </div>
 
               {/* Esporte */}
-              <div style={S.field}>
-                <label style={S.label}>Esporte</label>
+              <div className="form-field">
+                <label className="form-label">Esporte</label>
                 <select
-                  style={S.select}
+                  className="form-select"
                   value={selectedSport}
                   onChange={(e) => {
                     setSelectedSport(e.target.value);
@@ -232,10 +232,10 @@ export function SolicitarVinculoPage() {
               </div>
 
               {/* Categoria */}
-              <div style={S.field}>
-                <label style={S.label}>Categoria</label>
+              <div className="form-field">
+                <label className="form-label">Categoria</label>
                 <select
-                  style={S.select}
+                  className="form-select"
                   value={selectedCategory}
                   onChange={(e) => { setSelectedCategory(e.target.value); setSelectedTeamId(""); }}
                   disabled={categories.length === 0}
@@ -248,8 +248,8 @@ export function SolicitarVinculoPage() {
               </div>
 
               {/* Time */}
-              <div style={S.field}>
-                <label style={S.label}>Time *</label>
+              <div className="form-field">
+                <label className="form-label">Time *</label>
                 <select
                   style={{
                     ...S.select,
@@ -268,12 +268,12 @@ export function SolicitarVinculoPage() {
                   ))}
                 </select>
                 {teamOptions.length > 0 && !selectedTeamId && (
-                  <span style={S.hint}>{teamOptions.length} time{teamOptions.length !== 1 ? "s" : ""} disponível{teamOptions.length !== 1 ? "is" : ""}</span>
+                  <span className="muted">{teamOptions.length} time{teamOptions.length !== 1 ? "s" : ""} disponível{teamOptions.length !== 1 ? "is" : ""}</span>
                 )}
               </div>
             </div>
 
-            <div style={S.actions}>
+            <div className="form-actions">
               <button
                 type="submit"
                 style={{
@@ -285,7 +285,7 @@ export function SolicitarVinculoPage() {
               >
                 {submitting ? "Enviando…" : "Solicitar vínculo"}
               </button>
-              <Link to="/meu-perfil" style={S.btnSecondary}>
+              <Link to="/meu-perfil" className="btn btn-secondary">
                 Cancelar
               </Link>
             </div>

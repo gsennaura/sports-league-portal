@@ -97,10 +97,10 @@ export function AdminMatchesPage() {
     .filter(m => !q || m.home_team_name.toLowerCase().includes(q) || m.away_team_name.toLowerCase().includes(q) || (m.championship_name ?? "").toLowerCase().includes(q) || (m.league_name ?? "").toLowerCase().includes(q));
 
   return (
-    <div style={S.page}>
-      <div style={S.inner}>
-        <h1 style={S.title}>Partidas</h1>
-        <p style={S.subtitle}>Consulte e gerencie partidas agendadas e recentes.</p>
+    <div className="page-container">
+      <div className="hero__inner">
+        <h1 className="page-title">Partidas</h1>
+        <p className="page-subtitle">Consulte e gerencie partidas agendadas e recentes.</p>
 
         {/* Tabs */}
         <div style={S.tabRow}>
@@ -110,29 +110,29 @@ export function AdminMatchesPage() {
 
         {/* Filters */}
         <div style={S.filters}>
-          <div style={S.field}>
-            <label style={S.label}>Liga</label>
+          <div className="form-field">
+            <label className="form-label">Liga</label>
             <select style={S.input} value={filterLeague} onChange={e => setFilterLeague(e.target.value)}>
               <option value="">Todas as ligas</option>
               {leagueOptions.map(l => <option key={l} value={l}>{l}</option>)}
             </select>
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Esporte</label>
+          <div className="form-field">
+            <label className="form-label">Esporte</label>
             <select style={S.input} value={filterSport} onChange={e => setFilterSport(e.target.value)}>
               <option value="">Todos os esportes</option>
               {sportOptions.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Categoria</label>
+          <div className="form-field">
+            <label className="form-label">Categoria</label>
             <select style={S.input} value={filterCategory} onChange={e => setFilterCategory(e.target.value)}>
               <option value="">Todas as categorias</option>
               {categoryOptions.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Buscar time</label>
+          <div className="form-field">
+            <label className="form-label">Buscar time</label>
             <input
               style={{ ...S.input, width: "200px" }}
               placeholder="Nome do time…"
@@ -140,8 +140,8 @@ export function AdminMatchesPage() {
               onChange={e => setFilterTeam(e.target.value)}
             />
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Buscar campeonato</label>
+          <div className="form-field">
+            <label className="form-label">Buscar campeonato</label>
             <input
               style={{ ...S.input, width: "220px" }}
               placeholder="Nome do campeonato…"
@@ -149,8 +149,8 @@ export function AdminMatchesPage() {
               onChange={e => setSearchText(e.target.value)}
             />
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Janela ({days} dias)</label>
+          <div className="form-field">
+            <label className="form-label">Janela ({days} dias)</label>
             <select
               style={S.input}
               value={days}
@@ -172,7 +172,7 @@ export function AdminMatchesPage() {
           ) : filtered.length === 0 ? (
             <div style={S.empty}>Nenhuma partida encontrada.</div>
           ) : (
-            <table style={S.table}>
+            <table className="data-table">
               <thead>
                 <tr>
                   <th style={S.th}>Data</th>

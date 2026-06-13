@@ -47,11 +47,11 @@ export function AdminVenuesPage({ listVenues }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <div style={S.heroRow}>
-            <h1 style={S.title}>Locais</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <div className="hero__row">
+            <h1 className="page-title">Locais</h1>
             <div style={{ display: "flex", gap: "0.5rem" }}>
               <Link to="/admin/locais/importar" style={{ ...S.btnNew, backgroundColor: "#fab387" }}>⬆ Importar CSV</Link>
               <Link to="/admin/locais/novo" style={S.btnNew}>+ Novo local</Link>
@@ -68,13 +68,13 @@ export function AdminVenuesPage({ listVenues }: Props) {
           </div>
         </div>
       </header>
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <p style={S.hint}>Carregando...</p>}
-        {error && <p style={S.error}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
         {!loading && !error && (
           <>
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>Nome</th>

@@ -165,7 +165,7 @@ export function DirigentePage() {
     return (
       <div className="page-container">
         <h1 className="page-title">Meu Time</h1>
-        <p style={S.empty}>Você não é dirigente de nenhum time. Aguarde aprovação do administrador.</p>
+        <p className="muted">Você não é dirigente de nenhum time. Aguarde aprovação do administrador.</p>
       </div>
     );
   }
@@ -175,7 +175,7 @@ export function DirigentePage() {
       <h1 className="page-title">Meu Time</h1>
 
       {/* Tabs */}
-      <div style={S.tabs}>
+      <div className="filter-pills">
         <button style={{ ...S.tab, ...(activeTab === "solicitacoes" ? S.tabActive : {}) }} onClick={() => setActiveTab("solicitacoes")}>
           Solicitações
         </button>
@@ -185,27 +185,27 @@ export function DirigentePage() {
       </div>
 
       {teams.map((team) => (
-        <div key={team.teamId} style={S.card}>
-          <h2 style={S.teamName}>{team.teamName ?? team.teamId}</h2>
+        <div key={team.teamId} className="card">
+          <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--c-link)", marginTop: 0, marginBottom: 12 }}>{team.teamName ?? team.teamId}</h2>
 
           {/* ── Solicitações Tab ── */}
           {activeTab === "solicitacoes" && (
             <>
-              <h3 style={S.sectionTitle}>Solicitações de vínculo pendentes</h3>
-              {team.loadingPendings && <p style={S.hint}>Carregando...</p>}
-              {team.errorPendings && <p style={S.errorText}>{team.errorPendings}</p>}
+              <h3 className="section-heading">Solicitações de vínculo pendentes</h3>
+              {team.loadingPendings && <p className="muted">Carregando...</p>}
+              {team.errorPendings && <p className="error-text">{team.errorPendings}</p>}
               {!team.loadingPendings && !team.errorPendings && team.pendings.length === 0 && (
-                <p style={S.empty}>Nenhuma solicitação pendente.</p>
+                <p className="muted">Nenhuma solicitação pendente.</p>
               )}
               {team.pendings.map((m) => (
-                <div key={m.id} style={S.memberRow}>
-                  <div style={S.memberInfo}>
-                    <span style={S.memberName}>{m.athlete_id}</span>
-                    <span style={S.memberDate}>via {m.requested_by}</span>
+                <div key={m.id} className="person-card" style={{ borderRadius: 0, borderLeft: "none", borderRight: "none", borderTop: "none", padding: "0.6rem 0", background: "transparent" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <span className="person-card__name">{m.athlete_id}</span>
+                    <span className="person-card__meta">via {m.requested_by}</span>
                   </div>
-                  <div style={S.actions}>
-                    <button style={S.approveBtn} disabled={actioning === m.id} onClick={() => handleAction(team.teamId, m.id, "approve")}>Aprovar</button>
-                    <button style={S.rejectBtn} disabled={actioning === m.id} onClick={() => handleAction(team.teamId, m.id, "reject")}>Recusar</button>
+                  <div className="form-actions">
+                    <button className="btn btn-success" disabled={actioning === m.id} onClick={() => handleAction(team.teamId, m.id, "approve")}>Aprovar</button>
+                    <button className="btn btn-danger" disabled={actioning === m.id} onClick={() => handleAction(team.teamId, m.id, "reject")}>Recusar</button>
                   </div>
                   {actionMsg?.id === m.id && <p style={actionMsg.type === "ok" ? S.successText : S.errorText}>{actionMsg.text}</p>}
                 </div>
@@ -216,17 +216,17 @@ export function DirigentePage() {
           {/* ── Elenco Tab ── */}
           {activeTab === "elenco" && (
             <>
-              <h3 style={S.sectionTitle}>Elenco ativo</h3>
-              {team.loadingRoster && <p style={S.hint}>Carregando...</p>}
-              {team.errorRoster && <p style={S.errorText}>{team.errorRoster}</p>}
-              {!team.loadingRoster && team.roster.length === 0 && <p style={S.empty}>Nenhum atleta no elenco.</p>}
+              <h3 className="section-heading">Elenco ativo</h3>
+              {team.loadingRoster && <p className="muted">Carregando...</p>}
+              {team.errorRoster && <p className="error-text">{team.errorRoster}</p>}
+              {!team.loadingRoster && team.roster.length === 0 && <p className="muted">Nenhum atleta no elenco.</p>}
               {team.roster.map((r) => (
-                <div key={r.history_id} style={S.memberRow}>
-                  <div style={S.memberInfo}>
-                    <span style={S.memberName}>{r.athlete_name}{r.nickname ? ` (${r.nickname})` : ""}</span>
-                    <span style={S.memberDate}>{r.position ?? "—"}{r.jersey_number ? ` · #${r.jersey_number}` : ""}</span>
+                <div key={r.history_id} className="person-card" style={{ borderRadius: 0, borderLeft: "none", borderRight: "none", borderTop: "none", padding: "0.6rem 0", background: "transparent" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <span className="person-card__name">{r.athlete_name}{r.nickname ? ` (${r.nickname})` : ""}</span>
+                    <span className="person-card__meta">{r.position ?? "—"}{r.jersey_number ? ` · #${r.jersey_number}` : ""}</span>
                   </div>
-                  <button style={S.rejectBtn} onClick={() => handleRemoveAthlete(team.teamId, r.athlete_id)}>Remover</button>
+                  <button className="btn btn-danger" onClick={() => handleRemoveAthlete(team.teamId, r.athlete_id)}>Remover</button>
                 </div>
               ))}
 
@@ -237,16 +237,16 @@ export function DirigentePage() {
               {/* Add athlete */}
               <h3 style={{ ...S.sectionTitle, marginTop: 16 }}>Adicionar atleta</h3>
               <input
-                style={S.input}
+                className="search-input"
                 value={athleteSearch[team.teamId] ?? ""}
                 onChange={(e) => searchAthletes(team.teamId, e.target.value)}
                 placeholder="Buscar atleta por nome…"
               />
               {(athleteResults[team.teamId] ?? []).map((a) => (
-                <div key={a.id} style={S.memberRow}>
-                  <span style={S.memberName}>{a.name}{a.nickname ? ` (${a.nickname})` : ""} <span style={{ color: "#ffffff", fontSize: ".8rem" }}>{a.position ?? ""}</span></span>
+                <div key={a.id} className="person-card" style={{ borderRadius: 0, borderLeft: "none", borderRight: "none", borderTop: "none", padding: "0.6rem 0", background: "transparent" }}>
+                  <span className="person-card__name">{a.name}{a.nickname ? ` (${a.nickname})` : ""} <span style={{ color: "#ffffff", fontSize: ".8rem" }}>{a.position ?? ""}</span></span>
                   <button
-                    style={S.approveBtn}
+                    className="btn btn-success"
                     disabled={addingAthlete === a.id}
                     onClick={() => handleAddAthlete(team.teamId, a.id)}
                   >

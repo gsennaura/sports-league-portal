@@ -40,16 +40,16 @@ export function AdminImportHistoryPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/importar" style={S.back}>← Central de Importações</Link>
-          <h1 style={S.title}>Histórico de Importações</h1>
-          <p style={S.subtitle}>Registro de todas as operações de importação em lote.</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/importar" className="back-link">← Central de Importações</Link>
+          <h1 className="page-title">Histórico de Importações</h1>
+          <p className="page-subtitle">Registro de todas as operações de importação em lote.</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {error && (
           <div style={S.errorBanner}>
             <span>⚠ {error}</span>
@@ -64,8 +64,8 @@ export function AdminImportHistoryPage() {
         )}
 
         {!loading && logs.length > 0 && (
-          <div style={S.tableWrap}>
-            <table style={S.table}>
+          <div className="table-wrap">
+            <table className="data-table">
               <thead>
                 <tr>
                   {["Data / Hora", "Operação", "Total", "Criados", "Erros"].map((h) => (

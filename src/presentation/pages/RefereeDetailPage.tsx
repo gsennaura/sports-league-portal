@@ -56,7 +56,7 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
   if (loading) {
     return (
       <>
-        <div style={S.accentBar} />
+        <div className="hero__bar" />
         <main className="page-container"><PageLoader /></main>
       </>
     );
@@ -65,7 +65,7 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
   if (error || !referee) {
     return (
       <>
-        <div style={S.accentBar} />
+        <div className="hero__bar" />
         <main className="page-container">
           <p style={S.errorText}>{error ?? "Árbitro não encontrado."}</p>
           <Link to="/arbitros" className="back-link">← Voltar para Árbitros</Link>
@@ -85,7 +85,7 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
   return (
     <>
       {/* Accent bar */}
-      <div style={S.accentBar} />
+      <div className="hero__bar" />
 
       {/* Hero */}
       <header className="hero">

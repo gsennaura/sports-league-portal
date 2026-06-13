@@ -147,15 +147,15 @@ export function AdminClubLeagueRegistrationPage({ manageClubLeagueRegistrations 
         </div>
       )}
 
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <h1 style={S.title}>Clubes Filiados</h1>
-          {currentLeague && <p style={S.subtitle}>{currentLeague.name}</p>}
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <h1 className="page-title">Clubes Filiados</h1>
+          {currentLeague && <p className="page-subtitle">{currentLeague.name}</p>}
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {/* Toolbar: league selector + Filiar button */}
         <div style={S.toolbar}>
           <select

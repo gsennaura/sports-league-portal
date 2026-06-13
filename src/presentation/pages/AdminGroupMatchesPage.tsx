@@ -262,11 +262,11 @@ export function AdminGroupMatchesPage() {
 
   // ── Render ────────────────────────────────────────────────────────────────
 
-  if (loading) return <main style={S.page}><p style={{ color: "#cdd6f4" }}>Carregando…</p></main>;
+  if (loading) return <main className="page-container"><p style={{ color: "#cdd6f4" }}>Carregando…</p></main>;
 
   if (error) {
     return (
-      <main style={S.page}>
+      <main className="page-container">
         <p style={{ color: "#f38ba8" }}>{error}</p>
         <Link to={backUrl} style={{ color: "#89b4fa" }}>← Voltar</Link>
       </main>
@@ -276,14 +276,14 @@ export function AdminGroupMatchesPage() {
   return (
     <>
       {/* ── Header ───────────────────────────────────────────────────────── */}
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to={backUrl} style={S.back}>← {champName}</Link>
-          <div style={S.heroRow}>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to={backUrl} className="back-link">← {champName}</Link>
+          <div className="hero__row">
             <div>
               <p style={S.breadcrumb}>{phaseName}</p>
-              <h1 style={S.title}>{groupName}</h1>
+              <h1 className="page-title">{groupName}</h1>
             </div>
             <div style={S.headerActions}>
               <button
@@ -328,7 +328,7 @@ export function AdminGroupMatchesPage() {
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
 
         {/* ── Error banner ──────────────────────────────────────────────── */}
         {submitError && (
@@ -367,8 +367,8 @@ export function AdminGroupMatchesPage() {
                 Essa configuração some ao recarregar a página.
               </p>
               <div style={S.rcFields}>
-                <div style={S.field}>
-                  <label style={S.label}>Data da Rodada 1</label>
+                <div className="form-field">
+                  <label className="form-label">Data da Rodada 1</label>
                   <input
                     type="date"
                     style={S.input}
@@ -376,8 +376,8 @@ export function AdminGroupMatchesPage() {
                     onChange={e => setRcRound1Date(e.target.value)}
                   />
                 </div>
-                <div style={S.field}>
-                  <label style={S.label}>Hora padrão</label>
+                <div className="form-field">
+                  <label className="form-label">Hora padrão</label>
                   <input
                     type="time"
                     style={{ ...S.input, maxWidth: "130px" }}
@@ -386,8 +386,8 @@ export function AdminGroupMatchesPage() {
                     disabled={!rcRound1Date}
                   />
                 </div>
-                <div style={S.field}>
-                  <label style={S.label}>Intervalo (dias)</label>
+                <div className="form-field">
+                  <label className="form-label">Intervalo (dias)</label>
                   <input
                     type="number"
                     style={{ ...S.input, maxWidth: "90px" }}
@@ -417,8 +417,8 @@ export function AdminGroupMatchesPage() {
             <h2 style={S.formTitle}>Nova partida</h2>
             <form onSubmit={(e) => void handleAddMatch(e)}>
               <div style={S.formGrid}>
-                <div style={S.field}>
-                  <label style={S.label}>Mandante</label>
+                <div className="form-field">
+                  <label className="form-label">Mandante</label>
                   <select
                     style={S.input}
                     value={matchHomeId}
@@ -432,8 +432,8 @@ export function AdminGroupMatchesPage() {
                     ))}
                   </select>
                 </div>
-                <div style={S.field}>
-                  <label style={S.label}>Visitante</label>
+                <div className="form-field">
+                  <label className="form-label">Visitante</label>
                   <select
                     style={S.input}
                     value={matchAwayId}
@@ -446,8 +446,8 @@ export function AdminGroupMatchesPage() {
                     ))}
                   </select>
                 </div>
-                <div style={S.field}>
-                  <label style={S.label}>Rodada</label>
+                <div className="form-field">
+                  <label className="form-label">Rodada</label>
                   <input
                     type="number"
                     style={{ ...S.input, maxWidth: "100px" }}
@@ -468,8 +468,8 @@ export function AdminGroupMatchesPage() {
                     required
                   />
                 </div>
-                <div style={S.field}>
-                  <label style={S.label}>Data (opcional)</label>
+                <div className="form-field">
+                  <label className="form-label">Data (opcional)</label>
                   <input
                     type="date"
                     style={S.input}
@@ -477,8 +477,8 @@ export function AdminGroupMatchesPage() {
                     onChange={e => setMatchDatePart(e.target.value)}
                   />
                 </div>
-                <div style={S.field}>
-                  <label style={S.label}>Hora (opcional)</label>
+                <div className="form-field">
+                  <label className="form-label">Hora (opcional)</label>
                   <input
                     type="time"
                     style={{ ...S.input, maxWidth: "140px" }}
@@ -488,7 +488,7 @@ export function AdminGroupMatchesPage() {
                   />
                 </div>
                 <div style={{ ...S.field, gridColumn: "span 3" } as React.CSSProperties}>
-                  <label style={S.label}>Estádio (opcional)</label>
+                  <label className="form-label">Estádio (opcional)</label>
                   <select
                     style={{ ...S.input, maxWidth: "360px" }}
                     value={matchVenueId}
@@ -556,7 +556,7 @@ export function AdminGroupMatchesPage() {
                           <span style={S.awayTeam}>{teamName(m.away_team_id)}</span>
                         </div>
                         <div style={S.editControls}>
-                          <div style={S.field}>
+                          <div className="form-field">
                             <label style={S.labelSm}>Rodada</label>
                             <input
                               type="number"
@@ -578,7 +578,7 @@ export function AdminGroupMatchesPage() {
                               autoFocus
                             />
                           </div>
-                          <div style={S.field}>
+                          <div className="form-field">
                             <label style={S.labelSm}>Data</label>
                             <input
                               type="date"
@@ -587,7 +587,7 @@ export function AdminGroupMatchesPage() {
                               onChange={e => setEditDatePart(e.target.value)}
                             />
                           </div>
-                          <div style={S.field}>
+                          <div className="form-field">
                             <label style={S.labelSm}>Hora</label>
                             <input
                               type="time"

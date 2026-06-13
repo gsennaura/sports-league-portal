@@ -127,20 +127,20 @@ export function AdminTeamsPage({ listTeams, deleteTeam }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <div style={S.heroRow}>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <div className="hero__row">
             <div>
-              <h1 style={S.title}>Times</h1>
-              <p style={S.subtitle}>Gerenciamento de equipes</p>
+              <h1 className="page-title">Times</h1>
+              <p className="page-subtitle">Gerenciamento de equipes</p>
             </div>
             <Link to="/admin/times/novo" style={S.btnNew}>+ Novo time</Link>
           </div>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <div style={S.toolbar}>
           <select
             style={S.filterSelect}
@@ -181,8 +181,8 @@ export function AdminTeamsPage({ listTeams, deleteTeam }: Props) {
 
         {!loading && !error && (
           <>
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>Nome</th>

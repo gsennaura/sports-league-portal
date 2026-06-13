@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { ListEmendas } from "@application/use_cases/ListEmendas";
 import type { Emenda, EmendaRefType } from "@domain/entities/Emenda";
 import { EMENDA_REF_TYPE_LABELS } from "@domain/entities/Emenda";
@@ -46,15 +46,15 @@ export function EmendasPage({ listEmendas, leagueId }: Props) {
       </header>
       <main className="page-container">
         {/* Year filter */}
-        <div style={S.filters}>
+        <div className="filter-pills">
           <button
-            style={{ ...S.filterBtn, ...(yearFilter === "" ? S.filterBtnActive : {}) }}
+            className={yearFilter === "" ? "filter-pill filter-pill--active" : "filter-pill"}
             onClick={() => setYearFilter("")}
           >Todos os anos</button>
           {YEAR_RANGE.map((y) => (
             <button
               key={y}
-              style={{ ...S.filterBtn, ...(yearFilter === y ? S.filterBtnActive : {}) }}
+              className={yearFilter === y ? "filter-pill filter-pill--active" : "filter-pill"}
               onClick={() => setYearFilter(y)}
             >{y}</button>
           ))}
@@ -67,26 +67,26 @@ export function EmendasPage({ listEmendas, leagueId }: Props) {
         )}
 
         {years.map((y) => (
-          <div key={y} style={S.yearGroup}>
-            <h2 style={S.yearHeading}>{y}</h2>
-            <div style={S.list}>
+          <div key={y} className="year-group">
+            <h2 className="year-group__heading">{y}</h2>
+            <div className="doc-list">
               {byYear[y].map((e) => (
-                <div key={e.id} style={S.card}>
-                  <div style={S.cardTop}>
-                    <span style={{ ...S.typeBadge, color: REF_COLORS[e.ref_type] }}>
+                <div key={e.id} className="doc-card">
+                  <div className="doc-card__top">
+                    <span className="badge" style={{ color: REF_COLORS[e.ref_type], textTransform: "uppercase", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.04em" }}>
                       {EMENDA_REF_TYPE_LABELS[e.ref_type]}
                     </span>
                   </div>
-                  <h3 style={S.cardTitle}>{e.title}</h3>
-                  {e.description && <p style={S.cardDesc}>{e.description}</p>}
-                  <div style={S.cardActions}>
+                  <h3 className="doc-card__title">{e.title}</h3>
+                  {e.description && <p className="doc-card__desc">{e.description}</p>}
+                  <div className="doc-card__actions">
                     {e.file_url && (
-                      <a href={e.file_url} target="_blank" rel="noopener noreferrer" style={S.btnFile}>
+                      <a href={e.file_url} target="_blank" rel="noopener noreferrer" className="doc-card__btn">
                         📄 Baixar documento
                       </a>
                     )}
                     {e.external_url && (
-                      <a href={e.external_url} target="_blank" rel="noopener noreferrer" style={S.btnExternal}>
+                      <a href={e.external_url} target="_blank" rel="noopener noreferrer" className="doc-card__btn doc-card__btn--external">
                         🔗 Acessar link
                       </a>
                     )}
@@ -101,19 +101,4 @@ export function EmendasPage({ listEmendas, leagueId }: Props) {
   );
 }
 
-const S: Record<string, React.CSSProperties> = {
-  filters: { display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "2rem" },
-  filterBtn: { padding: "0.4rem 0.9rem", borderRadius: "20px", border: "1px solid #45475a", background: "#18265b", color: "#ffffff", cursor: "pointer", fontSize: "0.8rem", fontWeight: 600 },
-  filterBtnActive: { background: "#313244", borderColor: "#cba6f7", color: "#cba6f7" },
-  yearGroup: { marginBottom: "2.5rem" },
-  yearHeading: { margin: "0 0 0.75rem", fontSize: "1.1rem", fontWeight: 800, color: "#cba6f7", borderBottom: "1px solid #313244", paddingBottom: "0.4rem" },
-  list: { display: "flex", flexDirection: "column", gap: "0.6rem" },
-  card: { background: "#18265b", border: "1px solid #313244", borderRadius: 10, padding: "1rem 1.25rem", display: "flex", flexDirection: "column", gap: "0.4rem" },
-  cardTop: { display: "flex", alignItems: "center", gap: "0.5rem" },
-  typeBadge: { fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em" },
-  cardTitle: { margin: 0, fontSize: "0.97rem", fontWeight: 700, color: "#cdd6f4" },
-  cardDesc: { margin: 0, fontSize: "0.82rem", color: "#ffffff", lineHeight: 1.45 },
-  cardActions: { display: "flex", gap: "0.75rem", marginTop: "0.25rem" },
-  btnFile: { padding: "0.42rem 1rem", borderRadius: "8px", background: "#313244", color: "#cdd6f4", textDecoration: "none", fontSize: "0.8rem", fontWeight: 600 },
-  btnExternal: { padding: "0.42rem 1rem", borderRadius: "8px", background: "transparent", border: "1px solid #45475a", color: "#89b4fa", textDecoration: "none", fontSize: "0.8rem", fontWeight: 600 },
-};
+// (styles migrados para src/styles/pages.css)

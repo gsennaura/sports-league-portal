@@ -59,15 +59,15 @@ export function AdminUsersPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <h1 style={S.title}>Usuários</h1>
-          <p style={S.subtitle}>{users.length} usuário{users.length !== 1 ? "s" : ""} cadastrado{users.length !== 1 ? "s" : ""}</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <h1 className="page-title">Usuários</h1>
+          <p className="page-subtitle">{users.length} usuário{users.length !== 1 ? "s" : ""} cadastrado{users.length !== 1 ? "s" : ""}</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <div style={S.toolbar}>
           <input
             style={S.search}
@@ -93,8 +93,8 @@ export function AdminUsersPage() {
 
         {!loading && !error && (
           <>
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>Nome</th>
@@ -115,7 +115,7 @@ export function AdminUsersPage() {
                   ) : (
                     filtered.map((u) => (
                       <tr key={u.id} style={S.trRow}>
-                        <td style={S.td}>{u.name ?? <span style={S.muted}>—</span>}</td>
+                        <td style={S.td}>{u.name ?? <span className="muted">—</span>}</td>
                         <td style={S.td}>{u.email}</td>
                         <td style={S.td}>
                           <span

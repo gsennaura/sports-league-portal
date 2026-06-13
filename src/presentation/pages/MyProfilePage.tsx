@@ -336,29 +336,29 @@ export function MyProfilePage() {
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".75rem" }}>
                 <div style={S.fieldGroup}>
-                  <label style={S.label}>Liga</label>
-                  <select style={S.input} value={selectedLeague} onChange={(e) => { setSelectedLeague(e.target.value); setSelectedSport(""); setSelectedCategory(""); setSelectedTeamId(""); }}>
+                  <label className="form-label">Liga</label>
+                  <select className="search-input" value={selectedLeague} onChange={(e) => { setSelectedLeague(e.target.value); setSelectedSport(""); setSelectedCategory(""); setSelectedTeamId(""); }}>
                     <option value="">Todas as ligas</option>
                     {leagues.map((lg) => <option key={lg.id} value={lg.id}>{lg.name}</option>)}
                   </select>
                 </div>
                 <div style={S.fieldGroup}>
-                  <label style={S.label}>Esporte</label>
-                  <select style={S.input} value={selectedSport} onChange={(e) => { setSelectedSport(e.target.value); setSelectedCategory(""); setSelectedTeamId(""); }}>
+                  <label className="form-label">Esporte</label>
+                  <select className="search-input" value={selectedSport} onChange={(e) => { setSelectedSport(e.target.value); setSelectedCategory(""); setSelectedTeamId(""); }}>
                     <option value="">Todos os esportes</option>
                     {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
                   </select>
                 </div>
                 <div style={S.fieldGroup}>
-                  <label style={S.label}>Categoria</label>
-                  <select style={S.input} value={selectedCategory} onChange={(e) => { setSelectedCategory(e.target.value); setSelectedTeamId(""); }} disabled={availableCategories.length === 0}>
+                  <label className="form-label">Categoria</label>
+                  <select className="search-input" value={selectedCategory} onChange={(e) => { setSelectedCategory(e.target.value); setSelectedTeamId(""); }} disabled={availableCategories.length === 0}>
                     <option value="">Todas as categorias</option>
                     {availableCategories.map((c) => <option key={c} value={c}>{CATEGORY_LABEL[c] ?? c}</option>)}
                   </select>
                 </div>
                 <div style={S.fieldGroup}>
-                  <label style={S.label}>Time</label>
-                  <select style={S.input} value={selectedTeamId} onChange={(e) => setSelectedTeamId(e.target.value)} disabled={filteredTeams.length === 0}>
+                  <label className="form-label">Time</label>
+                  <select className="search-input" value={selectedTeamId} onChange={(e) => setSelectedTeamId(e.target.value)} disabled={filteredTeams.length === 0}>
                     <option value="">Selecione um time</option>
                     {filteredTeams.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
                   </select>
@@ -394,13 +394,13 @@ export function MyProfilePage() {
 
             <div style={S.row2}>
               <div style={S.fieldGroup}>
-                <label style={S.label}>Apelido / Nome de guerra</label>
-                <input style={S.input} value={editForm.nickname} placeholder="Como te chamam em campo"
+                <label className="form-label">Apelido / Nome de guerra</label>
+                <input className="search-input" value={editForm.nickname} placeholder="Como te chamam em campo"
                   onChange={(e) => setEditForm({ ...editForm, nickname: e.target.value })} />
               </div>
               <div style={S.fieldGroup}>
-                <label style={S.label}>Posição</label>
-                <select style={S.input} value={editForm.position}
+                <label className="form-label">Posição</label>
+                <select className="search-input" value={editForm.position}
                   onChange={(e) => setEditForm({ ...editForm, position: e.target.value })}>
                   <option value="">Selecione...</option>
                   {POSITIONS.map((p) => <option key={p} value={p}>{p}</option>)}
@@ -410,16 +410,16 @@ export function MyProfilePage() {
 
             <div style={S.row2}>
               <div style={S.fieldGroup}>
-                <label style={S.label}>Pé dominante</label>
-                <select style={S.input} value={editForm.preferred_foot}
+                <label className="form-label">Pé dominante</label>
+                <select className="search-input" value={editForm.preferred_foot}
                   onChange={(e) => setEditForm({ ...editForm, preferred_foot: e.target.value })}>
                   <option value="">Selecione...</option>
                   {FOOT_OPTIONS.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
                 </select>
               </div>
               <div style={S.fieldGroup}>
-                <label style={S.label}>Telefone</label>
-                <input style={S.input} type="tel" value={editForm.phone}
+                <label className="form-label">Telefone</label>
+                <input className="search-input" type="tel" value={editForm.phone}
                   onChange={(e) => setEditForm({ ...editForm, phone: maskPhone(e.target.value) })}
                   placeholder="(00) 00000-0000" maxLength={16} />
               </div>
@@ -427,19 +427,19 @@ export function MyProfilePage() {
 
             <div style={S.row2}>
               <div style={S.fieldGroup}>
-                <label style={S.label}>Altura (cm)</label>
-                <input style={S.input} type="number" min={100} max={250} value={editForm.height_cm}
+                <label className="form-label">Altura (cm)</label>
+                <input className="search-input" type="number" min={100} max={250} value={editForm.height_cm}
                   onChange={(e) => setEditForm({ ...editForm, height_cm: e.target.value })} />
               </div>
               <div style={S.fieldGroup}>
-                <label style={S.label}>Peso (kg)</label>
-                <input style={S.input} type="number" min={30} max={200} step={0.1} value={editForm.weight_kg}
+                <label className="form-label">Peso (kg)</label>
+                <input className="search-input" type="number" min={30} max={200} step={0.1} value={editForm.weight_kg}
                   onChange={(e) => setEditForm({ ...editForm, weight_kg: e.target.value })} />
               </div>
             </div>
 
             <div style={S.fieldGroup}>
-              <label style={S.label}>Foto de perfil</label>
+              <label className="form-label">Foto de perfil</label>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 {(photoPreview ?? editForm as unknown as Record<string,unknown>)  && (photoPreview
                   ? <img src={photoPreview} alt="preview" style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover", border: "2px solid #45475a" }} />

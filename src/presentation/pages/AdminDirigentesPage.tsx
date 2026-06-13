@@ -147,15 +147,15 @@ export function AdminDirigentesPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <h1 style={S.title}>Gerenciar Dirigentes</h1>
-          <p style={S.subtitle}>Vincule usuários como dirigentes de times</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <h1 className="page-title">Gerenciar Dirigentes</h1>
+          <p className="page-subtitle">Vincule usuários como dirigentes de times</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
 
         {/* ── Solicitações Pendentes ──────────────────────────── */}
         {pending.length > 0 && (
@@ -204,7 +204,7 @@ export function AdminDirigentesPage() {
 
             {/* User search combobox */}
             <div style={S.fieldGroup}>
-              <label style={S.label}>Usuário <span style={S.required}>*</span></label>
+              <label className="form-label">Usuário <span className="form-label">*</span></label>
               <div style={S.comboWrap}>
                 {selectedUser ? (
                   <div style={S.selectedChip}>
@@ -259,7 +259,7 @@ export function AdminDirigentesPage() {
 
             {/* Team dropdown */}
             <div style={S.fieldGroup}>
-              <label style={S.label}>Time <span style={S.required}>*</span></label>
+              <label className="form-label">Time <span className="form-label">*</span></label>
               <select
                 style={S.select}
                 value={selectedTeamId}
@@ -275,7 +275,7 @@ export function AdminDirigentesPage() {
 
             {/* Title */}
             <div style={S.fieldGroup}>
-              <label style={S.label}>Cargo / Título <span style={S.optional}>(opcional)</span></label>
+              <label className="form-label">Cargo / Título <span style={S.optional}>(opcional)</span></label>
               <input
                 type="text"
                 style={S.select}

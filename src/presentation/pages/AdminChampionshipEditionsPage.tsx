@@ -107,14 +107,14 @@ export function AdminChampionshipEditionsPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/campeonatos" style={S.back}>← Campeonatos</Link>
-          <div style={S.heroRow}>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/campeonatos" className="back-link">← Campeonatos</Link>
+          <div className="hero__row">
             <div>
-              <h1 style={S.title}>{champLabel}</h1>
-              {champSub && <p style={S.subtitle}>{champSub}</p>}
+              <h1 className="page-title">{champLabel}</h1>
+              {champSub && <p className="page-subtitle">{champSub}</p>}
             </div>
             <Link to={`/admin/campeonatos/${champId}/nova-edicao`} style={S.btnNew}>
               + Nova Edição
@@ -123,7 +123,7 @@ export function AdminChampionshipEditionsPage() {
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <p style={S.hint}>Carregando edições…</p>}
         {error && <p style={S.errorText}>{error}</p>}
 
@@ -149,8 +149,8 @@ export function AdminChampionshipEditionsPage() {
         )}
 
         {!loading && !error && editions.length > 0 && (
-          <div style={S.tableWrap}>
-            <table style={S.table}>
+          <div className="table-wrap">
+            <table className="data-table">
               <thead>
                 <tr>
                   <th style={S.th}>Ano</th>

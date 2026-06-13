@@ -87,11 +87,11 @@ export function AdminChampionshipsPage({ listChampionships }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <div style={S.heroRow}>
-            <h1 style={S.title}>Campeonatos</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <div className="hero__row">
+            <h1 className="page-title">Campeonatos</h1>
             <Link to="/admin/campeonatos/novo" style={S.btnNew}>+ Novo campeonato</Link>
           </div>
           <div style={S.searchWrap}>
@@ -116,13 +116,13 @@ export function AdminChampionshipsPage({ listChampionships }: Props) {
           </div>
         </div>
       </header>
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <p style={S.hint}>Carregando...</p>}
-        {error && <p style={S.error}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
         {!loading && !error && (
           <>
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>Campeonato</th>

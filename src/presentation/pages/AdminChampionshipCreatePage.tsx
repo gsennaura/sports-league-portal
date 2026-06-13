@@ -111,14 +111,14 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/campeonatos" style={S.back}>← Campeonatos</Link>
-          <h1 style={S.title}>Novo Campeonato</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/campeonatos" className="back-link">← Campeonatos</Link>
+          <h1 className="page-title">Novo Campeonato</h1>
         </div>
       </header>
-      <main style={S.page}>
+      <main className="page-container">
         <form onSubmit={handleSubmit} style={S.form} noValidate>
 
           {/* Liga vinculada — primeiro campo */}
@@ -269,7 +269,7 @@ function Field({ label, htmlFor, children, style }: {
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", ...style }}>
-      <label htmlFor={htmlFor} style={S.label}>{label}</label>
+      <label htmlFor={htmlFor} className="form-label">{label}</label>
       {children}
     </div>
   );

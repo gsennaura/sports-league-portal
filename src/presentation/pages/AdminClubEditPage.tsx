@@ -120,14 +120,14 @@ export function AdminClubEditPage({ updateClub }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/clubes" style={S.back}>← Clubes</Link>
-          <h1 style={S.title}>Editar Clube</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/clubes" className="back-link">← Clubes</Link>
+          <h1 className="page-title">Editar Clube</h1>
         </div>
       </header>
-      <main style={S.page}>
+      <main className="page-container">
         <form onSubmit={handleSubmit} style={S.form} noValidate>
           <fieldset style={S.fieldset}>
             <legend style={S.legend}>Informações básicas</legend>
@@ -272,7 +272,7 @@ function Field({ label, htmlFor, children, style }: {
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", ...style }}>
-      <label htmlFor={htmlFor} style={S.label}>{label}</label>
+      <label htmlFor={htmlFor} className="form-label">{label}</label>
       {children}
     </div>
   );

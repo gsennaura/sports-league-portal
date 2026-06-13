@@ -157,7 +157,7 @@ export function RoundSharePage() {
           <div id="round-card" style={S.card}>
 
             {/* Top accent bar */}
-            <div style={S.accentBar} />
+            <div className="hero__bar" />
 
             {/* Header: logos + championship info */}
             <div style={S.header}>
@@ -275,7 +275,7 @@ export function RoundSharePage() {
             </div>
 
             {/* Bottom accent bar */}
-            <div style={S.accentBar} />
+            <div className="hero__bar" />
           </div>
         )}
       </div>

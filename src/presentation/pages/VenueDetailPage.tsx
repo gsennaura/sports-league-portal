@@ -232,7 +232,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
       <header className="hero">
         <div style={S.heroAccentBar} />
         <div className="hero__inner">
-          <Link to="/locais" style={S.heroBack}>← Locais</Link>
+          <Link to="/locais" className="back-link">← Locais</Link>
 
           {loading && <PageLoader />}
           {error && <p style={S.errorText}>{error}</p>}
@@ -286,7 +286,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
               {/* Right: info */}
               <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", minWidth: 0 }}>
                 <span style={S.heroEyebrow}>🏟 Local</span>
-                <h1 style={S.heroTitle}>{venue.name}</h1>
+                <h1 className="hero__title">{venue.name}</h1>
                 {venue.nickname && (
                   <p style={S.heroNickname}>"{venue.nickname}"</p>
                 )}
@@ -332,9 +332,9 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
             {championships.length > 0 && (
               <section style={S.champSection}>
                 <h2 style={S.sectionTitle}>Campeonatos neste local</h2>
-                <div style={S.champGrid}>
+                <div className="champ-grid">
                   {championships.map((c) => (
-                    <div key={c.id} style={S.champCard}>
+                    <div key={c.id} className="champ-card">
                       <span style={S.champCardName}>{c.name}</span>
                       <span style={S.champCardCount}>{c.count} partida{c.count !== 1 ? "s" : ""}</span>
                     </div>

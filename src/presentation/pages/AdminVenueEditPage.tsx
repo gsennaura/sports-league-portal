@@ -144,15 +144,15 @@ export function AdminVenueEditPage({ updateVenue }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/locais" style={S.back}>← Locais</Link>
-          <h1 style={S.title}>Editar Local</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/locais" className="back-link">← Locais</Link>
+          <h1 className="page-title">Editar Local</h1>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <form onSubmit={handleSubmit} style={S.form} noValidate>
 
           <fieldset style={S.fieldset}>
@@ -340,7 +340,7 @@ function Field({
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", ...style }}>
-      <label htmlFor={htmlFor} style={S.label}>{label}</label>
+      <label htmlFor={htmlFor} className="form-label">{label}</label>
       {children}
     </div>
   );

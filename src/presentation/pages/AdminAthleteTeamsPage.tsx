@@ -109,24 +109,24 @@ export function AdminAthleteTeamsPage({ getAthleteTeamHistory, addAthleteToTeam,
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/atletas" style={S.back}>← Atletas</Link>
-          <div style={S.heroRow}>
-            <h1 style={S.title}>Histórico de Times</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/atletas" className="back-link">← Atletas</Link>
+          <div className="hero__row">
+            <h1 className="page-title">Histórico de Times</h1>
             <button style={S.btnAdd} onClick={() => { setShowAdd(true); setAddError(null); }}>+ Adicionar ao time</button>
           </div>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <p style={S.hint}>Carregando…</p>}
         {error && <p style={S.errorTxt}>{error}</p>}
 
         {!loading && !error && (
-          <div style={S.tableWrap}>
-            <table style={S.table}>
+          <div className="table-wrap">
+            <table className="data-table">
               <thead>
                 <tr>
                   <th style={S.th}>Status</th>

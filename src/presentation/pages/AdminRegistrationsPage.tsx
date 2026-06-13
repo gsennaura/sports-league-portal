@@ -333,7 +333,7 @@ export function AdminRegistrationsPage({
   }
 
   if (!isAdmin && !isLeagueAdmin) {
-    return <div style={S.page}><div style={S.inner}><p style={{ color: "#f38ba8" }}>Acesso restrito a administradores.</p></div></div>;
+    return <div className="page-container"><div className="hero__inner"><p style={{ color: "#f38ba8" }}>Acesso restrito a administradores.</p></div></div>;
   }
 
   const toRegisterRows = rows.filter(
@@ -354,10 +354,10 @@ export function AdminRegistrationsPage({
 
   return (
     <>
-    <div style={S.page}>
-      <div style={S.inner}>
-      <h1 style={S.title}>Inscrições em Campeonatos</h1>
-      <p style={S.subtitle}>Selecione a liga, o campeonato e o time para gerenciar inscrições.</p>
+    <div className="page-container">
+      <div className="hero__inner">
+      <h1 className="page-title">Inscrições em Campeonatos</h1>
+      <p className="page-subtitle">Selecione a liga, o campeonato e o time para gerenciar inscrições.</p>
 
       {/* Selectors */}
       <div style={S.card}>
@@ -367,8 +367,8 @@ export function AdminRegistrationsPage({
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div style={S.row}>
               {/* Liga */}
-              <div style={S.field}>
-                <label style={S.label}>Liga</label>
+              <div className="form-field">
+                <label className="form-label">Liga</label>
                 <select
                   style={{ ...S.select, ...(isLeagueAdmin ? { opacity: 0.7, cursor: "not-allowed" } : {}) }}
                   value={selectedLeagueId}
@@ -388,8 +388,8 @@ export function AdminRegistrationsPage({
               </div>
 
               {/* Campeonato */}
-              <div style={S.field}>
-                <label style={S.label}>Campeonato</label>
+              <div className="form-field">
+                <label className="form-label">Campeonato</label>
                 <select
                   style={{ ...S.select, opacity: !selectedLeagueId ? 0.5 : 1 }}
                   value={selectedChampId}
@@ -413,8 +413,8 @@ export function AdminRegistrationsPage({
 
             <div style={S.row}>
               {/* Time */}
-              <div style={S.field}>
-                <label style={S.label}>Time</label>
+              <div className="form-field">
+                <label className="form-label">Time</label>
                 <select
                   style={{ ...S.select, opacity: !selectedChampId ? 0.5 : 1 }}
                   value={selectedTeamId}
@@ -467,7 +467,7 @@ export function AdminRegistrationsPage({
                 : "Nenhum atleta encontrado para esta combinação."}
             </div>
           ) : (
-            <table style={S.table}>
+            <table className="data-table">
               <thead>
                 <tr>
                   <th style={{ ...S.th, width: "40px" }}></th>

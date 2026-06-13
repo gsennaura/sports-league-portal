@@ -29,7 +29,7 @@ function Field({ label, htmlFor, children }: { label: string; htmlFor: string; c
     : label;
   return (
     <div style={S.fieldGroup}>
-      <label htmlFor={htmlFor} style={S.label}>{labelNode}</label>
+      <label htmlFor={htmlFor} className="form-label">{labelNode}</label>
       {children}
     </div>
   );
@@ -149,11 +149,11 @@ export function AdminAthleteEditPage({ updateAthlete, deleteAthlete, athleteRepo
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/atletas" style={S.back}>← Atletas</Link>
-          <h1 style={S.title}>Editar Atleta</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/atletas" className="back-link">← Atletas</Link>
+          <h1 className="page-title">Editar Atleta</h1>
           <div style={S.subNav}>
             <Link to={`/admin/atletas/${id}/times`} style={S.subLink}>Gerenciar Times</Link>
             <Link to={`/admin/atletas/${id}/ligas`} style={S.subLink}>Gerenciar Ligas</Link>
@@ -162,7 +162,7 @@ export function AdminAthleteEditPage({ updateAthlete, deleteAthlete, athleteRepo
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <form onSubmit={handleSubmit} style={S.form} noValidate>
 
           {/* Photo */}

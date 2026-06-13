@@ -50,7 +50,7 @@ function Field({ label, htmlFor, children }: { label: string; htmlFor: string; c
     : label;
   return (
     <div style={S.fieldGroup}>
-      <label htmlFor={htmlFor} style={S.label}>{labelNode}</label>
+      <label htmlFor={htmlFor} className="form-label">{labelNode}</label>
       {children}
     </div>
   );
@@ -220,15 +220,15 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/atletas" style={S.back}>← Atletas</Link>
-          <h1 style={S.title}>Novo Atleta</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/atletas" className="back-link">← Atletas</Link>
+          <h1 className="page-title">Novo Atleta</h1>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <form onSubmit={handleSubmit} style={S.form} noValidate>
 
           {/* ── Informações do usuário ────────────── */}

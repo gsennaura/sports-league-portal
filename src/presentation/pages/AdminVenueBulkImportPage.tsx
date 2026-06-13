@@ -270,16 +270,16 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
   // ────────────────────────────────────────────
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/locais" style={S.back}>← Locais</Link>
-          <h1 style={S.title}>Importar Locais via CSV</h1>
-          <p style={S.subtitle}>Carregue um CSV, revise e edite os dados antes de salvar.</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/locais" className="back-link">← Locais</Link>
+          <h1 className="page-title">Importar Locais via CSV</h1>
+          <p className="page-subtitle">Carregue um CSV, revise e edite os dados antes de salvar.</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
 
         {/* ── UPLOAD ── */}
         {!rows.length && !results && (
@@ -429,8 +429,8 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
               </button>
             </div>
 
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>#</th>
@@ -570,8 +570,8 @@ export function AdminVenueBulkImportPage({ createVenue }: Props) {
               )}
             </div>
 
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>#</th>

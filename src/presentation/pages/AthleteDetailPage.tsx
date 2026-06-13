@@ -438,7 +438,7 @@ export function AthleteDetailPage({
   if (loading) {
     return (
       <>
-        <div style={S.accentBar} />
+        <div className="hero__bar" />
         <main className="page-container"><PageLoader /></main>
       </>
     );
@@ -447,7 +447,7 @@ export function AthleteDetailPage({
   if (error || !detail) {
     return (
       <>
-        <div style={S.accentBar} />
+        <div className="hero__bar" />
         <main className="page-container">
           <p style={S.errorText}>{error ?? "Atleta não encontrado."}</p>
           <Link to="/atletas" className="back-link">← Voltar para Atletas</Link>
@@ -501,7 +501,7 @@ export function AthleteDetailPage({
   return (
     <>
       {/* Accent bar */}
-      <div style={S.accentBar} />
+      <div className="hero__bar" />
 
       {/* Hero */}
       <header className="hero">

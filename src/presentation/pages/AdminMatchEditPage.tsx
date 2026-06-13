@@ -191,19 +191,19 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
     }
   }
 
-  if (loading) return <main style={S.page}><p style={S.muted}>Carregando...</p></main>;
+  if (loading) return <main className="page-container"><p className="muted">Carregando...</p></main>;
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <button onClick={() => navigate(-1)} style={S.back}>← Voltar</button>
-          <h1 style={S.title}>Editar Partida</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
+          <h1 className="page-title">Editar Partida</h1>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {match && (
           <div style={S.matchInfo}>
             <span style={S.teamName}>{match.home_team_name}</span>
@@ -225,7 +225,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
 
             <div style={S.scoreRow}>
               <div style={S.scoreField}>
-                <label style={S.label} htmlFor="home-score">
+                <label className="form-label" htmlFor="home-score">
                   {match?.home_team_name ?? "Mandante"}
                 </label>
                 <input
@@ -242,7 +242,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
               <span style={S.scoreSep}>–</span>
 
               <div style={S.scoreField}>
-                <label style={S.label} htmlFor="away-score">
+                <label className="form-label" htmlFor="away-score">
                   {match?.away_team_name ?? "Visitante"}
                 </label>
                 <input
@@ -269,7 +269,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
             {hasPenalties && (
               <div style={{ ...S.scoreRow, marginTop: "0.75rem" }}>
                 <div style={S.scoreField}>
-                  <label style={S.label} htmlFor="home-pen">Pênaltis mandante</label>
+                  <label className="form-label" htmlFor="home-pen">Pênaltis mandante</label>
                   <input
                     id="home-pen"
                     type="number"
@@ -282,7 +282,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
                 </div>
                 <span style={S.scoreSep}>–</span>
                 <div style={S.scoreField}>
-                  <label style={S.label} htmlFor="away-pen">Pênaltis visitante</label>
+                  <label className="form-label" htmlFor="away-pen">Pênaltis visitante</label>
                   <input
                     id="away-pen"
                     type="number"
@@ -303,7 +303,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
 
             <div style={S.fieldRow}>
               <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="match-date">Data e hora</label>
+                <label className="form-label" htmlFor="match-date">Data e hora</label>
                 <input
                   id="match-date"
                   type="datetime-local"
@@ -314,7 +314,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
               </div>
 
               <div style={{ ...S.fieldGroup, maxWidth: "120px" }}>
-                <label style={S.label} htmlFor="round-number">Rodada</label>
+                <label className="form-label" htmlFor="round-number">Rodada</label>
                 <input
                   id="round-number"
                   type="number"
@@ -333,7 +333,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
             <legend style={S.legend}>Estádio</legend>
 
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="venue-id">Local da partida</label>
+              <label className="form-label" htmlFor="venue-id">Local da partida</label>
               <select
                 id="venue-id"
                 style={S.selectInput}
@@ -356,7 +356,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
             <legend style={S.legend}>Status da Partida</legend>
 
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="match-status">Status</label>
+              <label className="form-label" htmlFor="match-status">Status</label>
               <select
                 id="match-status"
                 style={S.selectInput}

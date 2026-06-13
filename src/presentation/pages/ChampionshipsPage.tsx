@@ -69,11 +69,11 @@ export function ChampionshipsPage({ listChampionships }: ChampionshipsPageProps)
     <main className="page-container">
       {/* Hero */}
       <div className="hero">
-        <span style={S.heroTrophy}>🏆</span>
-        <div style={S.heroText}>
+        <span className="hero__trophy">🏆</span>
+        <div className="hero__text">
           <h1 className="page-title">Campeonatos</h1>
           {!loading && !error && (
-            <span style={S.count}>
+            <span className="hero__count">
               {toSeries(leagueChamps).length} competiç{toSeries(leagueChamps).length !== 1 ? "ões" : "ão"}
             </span>
           )}
@@ -81,16 +81,16 @@ export function ChampionshipsPage({ listChampionships }: ChampionshipsPageProps)
       </div>
 
       {/* Search */}
-      <div style={S.searchWrap}>
+      <div className="search-bar search-bar--wrap">
         <input
-          style={S.search}
+          className="search-input"
           type="search"
           placeholder="🔍  Buscar por nome…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         {query && (
-          <span style={S.searchHint}>
+          <span className="muted">
             {series.length} resultado{series.length !== 1 ? "s" : ""} para "{search}"
           </span>
         )}
@@ -103,18 +103,18 @@ export function ChampionshipsPage({ listChampionships }: ChampionshipsPageProps)
       )}
 
       {!loading && !error && series.length > 0 && (
-        <div style={S.championshipGrid}>
+        <div className="champ-grid">
           {series.map(({ rep: c, count }) => (
             <Link
               key={c.id}
               to={`/campeonatos/${c.id}${c.edition_id ? `?edicao=${c.edition_id}` : ""}`}
-              style={S.champCard}
+              className="champ-card"
             >
-              <div style={S.champCardAccent} />
-              <div style={S.champCardBody}>
-                <span style={S.champName}>{c.nickname ?? c.name}</span>
-                {c.nickname && <span style={S.champFullName}>{c.name}</span>}
-                <div style={S.champBadges}>
+              <div className="champ-card__accent" />
+              <div className="champ-card__body">
+                <span className="champ-card__name">{c.nickname ?? c.name}</span>
+                {c.nickname && <span className="champ-card__full-name">{c.name}</span>}
+                <div className="champ-card__badges">
                   {c.level && (
                     <span style={{ ...S.badge, ...(LEVEL_COLOR[c.level] ?? {}) }}>
                       {LEVEL_LABEL[c.level] ?? c.level}
@@ -126,11 +126,11 @@ export function ChampionshipsPage({ listChampionships }: ChampionshipsPageProps)
                     </span>
                   )}
                   {count > 1 && (
-                    <span style={S.editionCount}>{count} edições</span>
+                    <span className="champ-card__edition-count">{count} edições</span>
                   )}
                 </div>
               </div>
-              <span style={S.champArrow}>›</span>
+              <span className="champ-card__arrow">›</span>
             </Link>
           ))}
         </div>

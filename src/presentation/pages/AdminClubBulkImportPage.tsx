@@ -594,16 +594,16 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/clubes" style={S.back}>← Clubes</Link>
-          <h1 style={S.title}>Importar Clubes em Bulk</h1>
-          <p style={S.subtitle}>Upload CSV → Resolve cidades → Resolve locais → Revisa → Importa</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/clubes" className="back-link">← Clubes</Link>
+          <h1 className="page-title">Importar Clubes em Bulk</h1>
+          <p className="page-subtitle">Upload CSV → Resolve cidades → Resolve locais → Revisa → Importa</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
 
         {/* ── STEP 1: UPLOAD ── */}
         {showUpload && (
@@ -689,8 +689,8 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
               </button>
             </div>
 
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>Nome *</th>
@@ -903,8 +903,8 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
               </div>
             </div>
 
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>#</th>

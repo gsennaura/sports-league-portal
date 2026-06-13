@@ -29,7 +29,7 @@ function MatchCard({ match, onClick }: { match: MatchDetail; onClick: () => void
 
   return (
     <div
-      style={S.card}
+      className="person-card"
       onClick={onClick}
       role="button"
       tabIndex={0}

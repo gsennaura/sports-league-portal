@@ -53,14 +53,14 @@ export function AdminUserCreatePage() {
   return (
     <div style={{ minHeight: "100vh", backgroundImage: `url(${bgSports})`, backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed" }}>
       <div style={{ minHeight: "100vh", background: "rgba(0,0,0,0.55)" }}>
-      <header style={S.hero}>
-        <div style={S.heroInner}>
+      <header className="hero">
+        <div className="hero__inner">
           <nav style={S.breadcrumb}>
             <Link to="/admin/usuarios" style={S.breadcrumbLink}>Usuários</Link>
             <span style={S.breadcrumbSep}>/</span>
             <span>Novo usuário</span>
           </nav>
-          <h1 style={S.heroTitle}>Criar usuário</h1>
+          <h1 className="hero__title">Criar usuário</h1>
         </div>
       </header>
 
@@ -75,7 +75,7 @@ export function AdminUserCreatePage() {
 
           <form onSubmit={handleSubmit} style={S.form} noValidate>
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="email">E-mail</label>
+              <label className="form-label" htmlFor="email">E-mail</label>
               <input
                 id="email"
                 type="email"
@@ -89,7 +89,7 @@ export function AdminUserCreatePage() {
             </div>
 
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="role">Perfil</label>
+              <label className="form-label" htmlFor="role">Perfil</label>
               <select
                 id="role"
                 value={role}
@@ -103,7 +103,7 @@ export function AdminUserCreatePage() {
             </div>
 
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="password">Senha</label>
+              <label className="form-label" htmlFor="password">Senha</label>
               <input
                 id="password"
                 type="password"
@@ -117,7 +117,7 @@ export function AdminUserCreatePage() {
             </div>
 
             <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="confirmPassword">Confirmar senha</label>
+              <label className="form-label" htmlFor="confirmPassword">Confirmar senha</label>
               <input
                 id="confirmPassword"
                 type="password"

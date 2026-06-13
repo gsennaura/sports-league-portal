@@ -312,7 +312,7 @@ export function CadastroPage() {
 
   if (completed) {
     return (
-      <div style={S.page}>
+      <div className="page-container">
         <div style={S.card}>
           <div style={{ textAlign: "center", padding: "1.5rem 0" }}>
             <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>✅</div>
@@ -352,14 +352,14 @@ export function CadastroPage() {
   }
 
   return (
-    <div style={S.page}>
+    <div className="page-container">
       <div style={S.card}>
         <div style={S.header}>
-          <h1 style={S.title}>Criar conta</h1>
+          <h1 className="page-title">Criar conta</h1>
           <StepIndicator step={step} userType={userType} />
         </div>
 
-        {error && <p style={S.error}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {/* ── Step 1: Conta ── */}
         {step === 1 && (

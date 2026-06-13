@@ -142,11 +142,11 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <div style={S.heroRow}>
-            <h1 style={S.title}>Atletas</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <div className="hero__row">
+            <h1 className="page-title">Atletas</h1>
             <div style={{ display: "flex", gap: "0.75rem" }}>
               <Link to="/admin/atletas/importar" style={{ ...S.btnNew, background: "none", border: "1px solid #89b4fa", color: "#89b4fa" }}>⬆ Importar CSV</Link>
               <Link to="/admin/atletas/novo" style={S.btnNew}>+ Novo atleta</Link>
@@ -155,7 +155,7 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {/* Cascade filter bar */}
         <div style={S.toolbar}>
           <select
@@ -210,7 +210,7 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
           )}
         </div>
 
-        {error && <p style={S.error}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
         {deleteError && (
           <p style={{ ...S.error, backgroundColor: "#2a1a1f", border: "1px solid #5a2a30", borderRadius: "6px", padding: "0.75rem 1rem" }}>
             ⚠ {deleteError}
@@ -225,8 +225,8 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
               <p style={S.hint}>{teamAthletes.length === 0 ? "Nenhum atleta ativo neste time." : "Nenhum atleta encontrado para o filtro."}</p>
             )}
             {!loadingAthletes && filteredTeamAthletes.length > 0 && (
-              <div style={S.tableWrap}>
-                <table style={S.table}>
+              <div className="table-wrap">
+                <table className="data-table">
                   <thead>
                     <tr>
                       <th style={S.th}>Foto</th>
@@ -279,8 +279,8 @@ export function AdminAthletesPage({ searchAthletes, deleteAthlete }: Props) {
               <p style={S.hint}>Nenhum atleta encontrado para "{query}".</p>
             )}
             {results && results.length > 0 && (
-              <div style={S.tableWrap}>
-                <table style={S.table}>
+              <div className="table-wrap">
+                <table className="data-table">
                   <thead>
                     <tr>
                       <th style={S.th}>Foto</th>

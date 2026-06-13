@@ -316,7 +316,7 @@ export function AdminTeamBulkRegistrationPage({
 
   if (!isAdmin) {
     return (
-      <div style={S.page}><div style={S.inner}>
+      <div className="page-container"><div className="hero__inner">
         <p style={{ color: "#f38ba8" }}>Acesso restrito a administradores.</p>
       </div></div>
     );
@@ -335,9 +335,9 @@ export function AdminTeamBulkRegistrationPage({
 
   return (
     <>
-    <div style={S.page}>
-      <div style={S.inner}>
-      <Link to={`/admin/times/${teamId}/editar`} style={S.back}>
+    <div className="page-container">
+      <div className="hero__inner">
+      <Link to={`/admin/times/${teamId}/editar`} className="back-link">
         ← Voltar para o time
       </Link>
 
@@ -345,8 +345,8 @@ export function AdminTeamBulkRegistrationPage({
         <div style={S.loader}>Carregando...</div>
       ) : (
         <>
-          <h1 style={S.title}>Inscrição em Lote — {teamName}</h1>
-          <p style={S.subtitle}>Inscreva ou desinscreva atletas do elenco em uma edição de campeonato.</p>
+          <h1 className="page-title">Inscrição em Lote — {teamName}</h1>
+          <p className="page-subtitle">Inscreva ou desinscreva atletas do elenco em uma edição de campeonato.</p>
         </>
       )}
 
@@ -355,7 +355,7 @@ export function AdminTeamBulkRegistrationPage({
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
           {/* Liga */}
           <div style={{ flex: "1 1 220px" }}>
-            <label style={S.label}>Liga</label>
+            <label className="form-label">Liga</label>
             <select
               style={S.select}
               value={selectedLeagueId}
@@ -373,7 +373,7 @@ export function AdminTeamBulkRegistrationPage({
 
           {/* Campeonato */}
           <div style={{ flex: "1 1 280px" }}>
-            <label style={S.label}>
+            <label className="form-label">
               Campeonato
               {teamCategory && (
                 <span style={{ color: "#ffffff", fontWeight: 400, marginLeft: "6px" }}>
@@ -426,7 +426,7 @@ export function AdminTeamBulkRegistrationPage({
               Nenhum atleta ativo encontrado neste time ou o time não participa desta edição.
             </div>
           ) : (
-            <table style={S.table}>
+            <table className="data-table">
               <thead>
                 <tr>
                   <th style={{ ...S.th, width: "40px" }}></th>

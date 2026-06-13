@@ -247,7 +247,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
       <header className="hero">
         <div style={S.heroAccentBar} />
         <div className="hero__inner">
-          <Link to="/clubes" style={S.heroBack}>← Clubes</Link>
+          <Link to="/clubes" className="back-link">← Clubes</Link>
           {loading && !club && <PageLoader />}
           {club && (
             <>
@@ -296,7 +296,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                   )}
                 </div>
                 <div>
-                  <h1 style={S.heroTitle}>{club.name}</h1>
+                  <h1 className="hero__title">{club.name}</h1>
                   {(club.nickname || club.acronym) && (
                     <p style={S.heroNickname}>
                       {club.nickname && <span>{club.nickname}</span>}
@@ -305,7 +305,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                   )}
                 </div>
               </div>
-              <p style={S.heroSub}>
+              <p className="hero__sub">
                 {[
                   club.city_name && `📍 ${club.city_name}`,
                   club.founded_at && `🗓 Fundado em ${club.founded_at.slice(0, 4)}`,

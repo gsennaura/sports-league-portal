@@ -86,12 +86,12 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin" style={S.back}>← Admin</Link>
-          <div style={S.heroRow}>
-            <h1 style={S.title}>Cidades</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin" className="back-link">← Admin</Link>
+          <div className="hero__row">
+            <h1 className="page-title">Cidades</h1>
             <button
               style={{ ...S.btnPrimary, ...(showForm ? S.btnActive : {}) }}
               onClick={() => { setShowForm(f => !f); setFormError(null); setSuccessMsg(null); }}
@@ -99,11 +99,11 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
               {showForm ? "✕ Cancelar" : "+ Nova cidade"}
             </button>
           </div>
-          <p style={S.subtitle}>{cities.length} cidade{cities.length !== 1 ? "s" : ""} cadastrada{cities.length !== 1 ? "s" : ""}</p>
+          <p className="page-subtitle">{cities.length} cidade{cities.length !== 1 ? "s" : ""} cadastrada{cities.length !== 1 ? "s" : ""}</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
 
         {/* ── FORMULÁRIO INLINE ── */}
         {showForm && (
@@ -111,7 +111,7 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
             <h2 style={S.formTitle}>Nova cidade</h2>
             <form onSubmit={e => void handleCreate(e)} style={S.form}>
               <div style={S.fieldGroup}>
-                <label style={S.label}>Nome *</label>
+                <label className="form-label">Nome *</label>
                 <input
                   style={S.input}
                   value={newName}
@@ -121,7 +121,7 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
                 />
               </div>
               <div style={S.fieldGroup}>
-                <label style={S.label}>Estado *</label>
+                <label className="form-label">Estado *</label>
                 <select
                   style={S.select}
                   value={newStateId}
@@ -189,8 +189,8 @@ export function AdminCitiesPage({ createCity, listCities, listStates }: Props) {
             )}
           </div>
         ) : (
-          <div style={S.tableWrap}>
-            <table style={S.table}>
+          <div className="table-wrap">
+            <table className="data-table">
               <thead>
                 <tr>
                   <th style={S.th}>Nome</th>

@@ -9,7 +9,7 @@ interface Props {
 function Field({ label, htmlFor, required, children }: { label: string; htmlFor: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div style={S.fieldGroup}>
-      <label htmlFor={htmlFor} style={S.label}>
+      <label htmlFor={htmlFor} className="form-label">
         {label}{required && <span style={{ color: "#f38ba8" }}> *</span>}
       </label>
       {children}
@@ -62,15 +62,15 @@ export function AdminRefereeCreatePage({ createReferee }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/arbitros" style={S.back}>← Árbitros</Link>
-          <h1 style={S.title}>Novo Árbitro</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/arbitros" className="back-link">← Árbitros</Link>
+          <h1 className="page-title">Novo Árbitro</h1>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <form onSubmit={handleSubmit} style={S.form} noValidate>
 
           <fieldset style={S.fieldset}>

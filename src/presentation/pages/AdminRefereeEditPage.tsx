@@ -18,7 +18,7 @@ const NO_PHOTO =
 function Field({ label, htmlFor, children }: { label: string; htmlFor: string; children: React.ReactNode }) {
   return (
     <div style={S.fieldGroup}>
-      <label htmlFor={htmlFor} style={S.label}>{label}</label>
+      <label htmlFor={htmlFor} className="form-label">{label}</label>
       {children}
     </div>
   );
@@ -118,12 +118,12 @@ export function AdminRefereeEditPage({ updateReferee, deleteReferee, refereeRepo
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/arbitros" style={S.back}>← Árbitros</Link>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/arbitros" className="back-link">← Árbitros</Link>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem" }}>
-            <h1 style={S.title}>Editar Árbitro</h1>
+            <h1 className="page-title">Editar Árbitro</h1>
             <div style={{ display: "flex", gap: "0.5rem" }}>
               <Link to={`/arbitros/${id}`} style={S.subLink}>Ver Perfil Público</Link>
             </div>
@@ -131,7 +131,7 @@ export function AdminRefereeEditPage({ updateReferee, deleteReferee, refereeRepo
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <form onSubmit={handleSubmit} style={S.form} noValidate>
 
           {/* Photo */}

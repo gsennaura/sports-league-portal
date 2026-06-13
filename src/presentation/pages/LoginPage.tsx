@@ -34,13 +34,13 @@ export function LoginPage() {
   }
 
   return (
-    <div style={S.page}>
+    <div className="page-container">
       <div style={S.overlay} />
       <div style={S.card}>
-        <h2 style={S.title}>Entrar</h2>
-        {error && <p style={S.error}>{error}</p>}
+        <h2 className="page-title">Entrar</h2>
+        {error && <p className="error-text">{error}</p>}
         <form onSubmit={handleSubmit} style={S.form}>
-          <label style={S.label}>
+          <label className="form-label">
             Email
             <input
               type="email"
@@ -51,7 +51,7 @@ export function LoginPage() {
               style={S.input}
             />
           </label>
-          <label style={S.label}>
+          <label className="form-label">
             Senha
             <input
               type="password"

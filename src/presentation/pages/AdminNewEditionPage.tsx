@@ -234,22 +234,22 @@ export function AdminNewEditionPage() {
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/campeonatos" style={S.back}>← Campeonatos</Link>
-          <div style={S.heroRow}>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/campeonatos" className="back-link">← Campeonatos</Link>
+          <div className="hero__row">
             <div>
-              <h1 style={S.title}>Nova Edição</h1>
+              <h1 className="page-title">Nova Edição</h1>
               {champ && (
-                <p style={S.subtitle}>{champLabel}{champ.division ? ` · ${champ.division}` : ""}</p>
+                <p className="page-subtitle">{champLabel}{champ.division ? ` · ${champ.division}` : ""}</p>
               )}
             </div>
           </div>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <p style={S.hint}>Carregando…</p>}
         {error && <p style={S.errorText}>{error}</p>}
 

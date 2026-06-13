@@ -117,15 +117,15 @@ export function AdminLeagueAdminsPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <h1 style={S.title}>Admins de Liga</h1>
-          <p style={S.subtitle}>{assignments.length} atribuiç{assignments.length !== 1 ? "ões" : "ão"} ativa{assignments.length !== 1 ? "s" : ""}</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <h1 className="page-title">Admins de Liga</h1>
+          <p className="page-subtitle">{assignments.length} atribuiç{assignments.length !== 1 ? "ões" : "ão"} ativa{assignments.length !== 1 ? "s" : ""}</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {/* Assign form */}
         <section style={S.card}>
           <h2 style={S.sectionTitle}>Atribuir Admin de Liga</h2>
@@ -214,8 +214,8 @@ export function AdminLeagueAdminsPage() {
         {error && <p style={S.errorText}>{error}</p>}
 
         {!loading && !error && (
-          <div style={S.tableWrap}>
-            <table style={S.table}>
+          <div className="table-wrap">
+            <table className="data-table">
               <thead>
                 <tr>
                   <th style={S.th}>Usuário</th>
@@ -234,7 +234,7 @@ export function AdminLeagueAdminsPage() {
                 ) : (
                   assignments.map((a) => (
                     <tr key={a.id} style={S.trRow}>
-                      <td style={S.td}>{a.userName ?? <span style={S.muted}>—</span>}</td>
+                      <td style={S.td}>{a.userName ?? <span className="muted">—</span>}</td>
                       <td style={S.td}>{a.userEmail}</td>
                       <td style={S.td}>
                         <span style={S.leagueBadge}>{a.leagueName}</span>

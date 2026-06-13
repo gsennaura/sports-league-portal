@@ -56,16 +56,16 @@ const CARDS: ImportCard[] = [
 export function AdminImportHubPage() {
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin" style={S.back}>← Admin</Link>
-          <h1 style={S.title}>Central de Importações</h1>
-          <p style={S.subtitle}>Todas as operações de importação em lote em um só lugar.</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin" className="back-link">← Admin</Link>
+          <h1 className="page-title">Central de Importações</h1>
+          <p className="page-subtitle">Todas as operações de importação em lote em um só lugar.</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <section>
           <div style={S.grid}>
             {CARDS.map((card) => (

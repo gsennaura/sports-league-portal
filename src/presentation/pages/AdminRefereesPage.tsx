@@ -42,15 +42,15 @@ export function AdminRefereesPage({ listReferees, deleteReferee }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <h1 style={S.title}>Árbitros</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <h1 className="page-title">Árbitros</h1>
           <Link to="/admin/arbitros/novo" style={S.btnNew}>+ Novo árbitro</Link>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <input
           type="text"
           placeholder="Filtrar por nome..."
@@ -59,14 +59,14 @@ export function AdminRefereesPage({ listReferees, deleteReferee }: Props) {
           style={S.searchInput}
         />
 
-        {loading && <p style={S.muted}>Carregando...</p>}
+        {loading && <p className="muted">Carregando...</p>}
         {error && <p style={S.errorText}>{error}</p>}
 
         {!loading && !error && filtered.length === 0 && (
-          <p style={S.muted}>Nenhum árbitro encontrado.</p>
+          <p className="muted">Nenhum árbitro encontrado.</p>
         )}
 
-        <div style={S.table}>
+        <div className="data-table">
           {filtered.map((r) => (
             <div key={r.id} style={S.row}>
               <img

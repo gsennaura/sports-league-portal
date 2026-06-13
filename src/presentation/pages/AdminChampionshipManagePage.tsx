@@ -789,14 +789,14 @@ export function AdminChampionshipManagePage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to={id ? `/admin/campeonatos/${id}/edicoes` : "/admin/campeonatos"} style={S.back}>← Edições</Link>
-          <div style={S.heroRow}>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to={id ? `/admin/campeonatos/${id}/edicoes` : "/admin/campeonatos"} className="back-link">← Edições</Link>
+          <div className="hero__row">
             <div>
-              <h1 style={S.title}>{champ.name}</h1>
-              {champ.nickname && <span style={S.subtitle}>{champ.nickname}</span>}
+              <h1 className="page-title">{champ.name}</h1>
+              {champ.nickname && <span className="page-subtitle">{champ.nickname}</span>}
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
               <div style={S.champMeta}>
@@ -839,7 +839,7 @@ export function AdminChampionshipManagePage() {
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
 
         {/* ── Erro global de submit ─────────────────────────────────── */}
         {submitError && (

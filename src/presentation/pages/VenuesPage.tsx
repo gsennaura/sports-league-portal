@@ -79,10 +79,10 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
       <header className="hero">
         <div style={S.heroAccentBar} />
         <div className="hero__inner">
-          <Link to="/" style={S.heroBack}>← Página Principal</Link>
+          <Link to="/" className="back-link">← Página Principal</Link>
           <span style={S.heroEyebrow}>🏟 Infraestrutura Esportiva</span>
-          <h1 style={S.heroTitle}>Locais</h1>
-          <p style={S.heroSub}>
+          <h1 className="hero__title">Locais</h1>
+          <p className="hero__sub">
             Estádios, campos e ginásios cadastrados na plataforma.
           </p>
         </div>

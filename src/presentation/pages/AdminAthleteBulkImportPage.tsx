@@ -211,16 +211,16 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/atletas" style={S.back}>← Atletas</Link>
-          <h1 style={S.title}>Importar Atletas em Lote</h1>
-          <p style={S.subtitle}>Cadastre múltiplos atletas de uma vez via arquivo CSV.</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/atletas" className="back-link">← Atletas</Link>
+          <h1 className="page-title">Importar Atletas em Lote</h1>
+          <p className="page-subtitle">Cadastre múltiplos atletas de uma vez via arquivo CSV.</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {/* Instructions */}
         <section style={S.card}>
           <h2 style={S.sectionTitle}>Formato do CSV</h2>
@@ -358,8 +358,8 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
               </div>
             </div>
             {submitError && <p style={S.errorMsg}>{submitError}</p>}
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={{ ...S.th, width: "32px" }}>#</th>
@@ -452,8 +452,8 @@ export function AdminAthleteBulkImportPage({ bulkImportAthletes, addAthleteToTea
               <span style={S.summaryOk}>✓ Criados: {summary.created}</span>
               {summary.errors > 0 && <span style={S.summaryErr}>✗ Erros: {summary.errors}</span>}
             </div>
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
                     <th style={S.th}>#</th>
