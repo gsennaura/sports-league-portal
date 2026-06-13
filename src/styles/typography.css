@@ -1,0 +1,69 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TYPOGRAPHY.CSS — Hierarquia tipográfica do sports-league-portal
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Títulos de página ──────────────────────────────────────────── */
+
+/* Admin: 1.5rem/bold — S.title em ~30 arquivos */
+.page-title {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--c-text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Portal público: 2.2rem/black — ChampionshipsPage, ClubsPage, etc. */
+.page-title--hero {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-black);
+}
+
+/* ── Subtítulo ──────────────────────────────────────────────────── */
+
+/* S.subtitle em ~20 arquivos */
+.page-subtitle {
+  font-size: var(--text-sm);
+  color: var(--c-text-muted);
+  margin: 0.2rem 0 0;
+  line-height: 1.4;
+}
+
+/* ── Cabeçalho de seção (uppercase small-caps) ──────────────────── */
+
+/* S.legend e S.sectionTitle em ~50 arquivos */
+.section-heading {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-text);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 0.5rem;
+  line-height: 1;
+}
+
+/* ── Texto corrido e auxiliar ───────────────────────────────────── */
+
+.muted {
+  color: var(--c-text-muted);
+  font-size: var(--text-sm);
+}
+
+.error-text {
+  color: var(--c-negative);
+  font-size: var(--text-sm);
+}
+
+.empty-state {
+  color: var(--c-text-muted);
+  font-size: var(--text-base);
+  text-align: center;
+  padding: 2rem;
+}
+
+/* ── Responsividade base ────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .page-title       { font-size: var(--text-lg); }
+  .page-title--hero { font-size: var(--text-xl); }
+}

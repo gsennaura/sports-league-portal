@@ -1,0 +1,152 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ADMIN.CSS — Componentes específicos do painel admin
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Tabela de dados ────────────────────────────────────────────── */
+
+/* S.tableWrap em ~21 arquivos */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--c-border);
+}
+
+/* S.table em ~25 arquivos */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+/* S.th em ~133 ocorrências */
+.data-table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  border-bottom: 1px solid var(--c-border);
+  white-space: nowrap;
+  background: var(--c-brand);
+}
+
+/* S.td em ~108 ocorrências */
+.data-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--c-border);
+  color: var(--c-text);
+  vertical-align: middle;
+}
+
+/* S.tdMuted em ~31 ocorrências */
+.data-table td.muted,
+.td-muted {
+  color: var(--c-text-muted);
+  font-size: var(--text-xs);
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tr:hover td {
+  background: var(--c-white-08);
+}
+
+/* ── Colunas responsivas ────────────────────────────────────────── */
+
+/* .pending-col-hide-mobile já existe em index.css — mantido aqui para consistência */
+@media (max-width: 600px) {
+  .col-hide-mobile { display: none; }
+  .data-table td,
+  .data-table th   { padding: 0.45rem 0.5rem; font-size: var(--text-xs); }
+}
+
+/* ── Action buttons inline de tabela ───────────────────────────── */
+
+.action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--c-border);
+  background: transparent;
+  color: var(--c-text-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.action-btn:hover {
+  color: var(--c-text);
+  border-color: var(--c-text-muted);
+}
+
+.action-btn--danger:hover {
+  color: var(--c-negative);
+  border-color: var(--c-negative);
+}
+
+.action-btn--success:hover {
+  color: var(--c-positive);
+  border-color: var(--c-positive);
+}
+
+/* ── Status chips (inline em tabelas) ───────────────────────────── */
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+}
+
+.status-chip--active   { color: var(--c-positive); background: var(--c-positive-10); }
+.status-chip--inactive { color: var(--c-text-muted); background: var(--c-border); }
+.status-chip--pending  { color: var(--c-warning);  background: var(--c-warning-10); }
+.status-chip--error    { color: var(--c-negative); background: var(--c-negative-10); }
+
+/* ── Import progress bar ────────────────────────────────────────── */
+
+.import-bar {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--c-border);
+  overflow: hidden;
+}
+
+.import-bar__fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--c-action), var(--c-link));
+  transition: width 0.3s ease;
+}
+
+/* ── Painel de seção admin ──────────────────────────────────────── */
+
+.admin-panel {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.admin-panel__header {
+  background: var(--c-brand);
+  border-bottom: 1px solid var(--c-border);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.admin-panel__body {
+  padding: 1.25rem;
+}

@@ -1,0 +1,197 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FORMS.CSS — Formulários do sports-league-portal
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Input e Select ─────────────────────────────────────────────── */
+
+/* S.input — IDÊNTICO em ~40 arquivos */
+.form-input {
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  color: var(--c-text);
+  font-size: var(--text-base);
+  font-family: inherit;
+  padding: 0.55rem 0.75rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+.form-input:focus {
+  border-color: var(--c-link);
+}
+
+.form-input::placeholder {
+  color: var(--c-text-muted);
+}
+
+.form-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* S.select */
+.form-select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ── Label ──────────────────────────────────────────────────────── */
+
+/* S.label em ~40 arquivos */
+.form-label {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  color: var(--c-text);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* ── Fieldset e legend ──────────────────────────────────────────── */
+
+/* S.fieldset + S.legend em ~30 arquivos */
+.form-fieldset {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin: 0;
+}
+
+.form-legend {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  color: var(--c-text);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0 0.5rem;
+}
+
+/* ── Hint e erro de campo ───────────────────────────────────────── */
+
+/* S.hint em ~32 arquivos */
+.form-hint {
+  color: var(--c-text-muted);
+  font-size: var(--text-xs);
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+.form-field-error {
+  color: var(--c-negative);
+  font-size: var(--text-xs);
+  margin-top: 0.25rem;
+}
+
+/* ── Agrupamentos ───────────────────────────────────────────────── */
+
+/* S.field */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* S.fieldGroup em ~56 arquivos */
+.form-field-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.form-field-group--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.form-field-group--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* S.actions em ~27 arquivos */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+/* ── Mensagens de feedback ──────────────────────────────────────── */
+
+/* S.errorMsg / S.successMsg em múltiplos arquivos */
+.form-error {
+  color: var(--c-negative);
+  background: var(--c-negative-10);
+  border: 1px solid var(--c-negative-35);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.form-success {
+  color: var(--c-positive);
+  background: var(--c-positive-10);
+  border: 1px solid var(--c-positive-35);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.form-warning {
+  color: var(--c-warning);
+  background: var(--c-warning-10);
+  border: 1px solid var(--c-warning-25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+/* ── Search bar ─────────────────────────────────────────────────── */
+
+.search-input {
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-full);
+  color: var(--c-text);
+  font-size: var(--text-base);
+  font-family: inherit;
+  padding: 0.55rem 1.1rem;
+  outline: none;
+  width: 100%;
+  max-width: 420px;
+  transition: border-color 0.15s;
+}
+
+.search-input:focus {
+  border-color: var(--c-link);
+}
+
+.search-input::placeholder {
+  color: var(--c-text-muted);
+}
+
+/* ── Responsividade ─────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .form-field-group,
+  .form-field-group--2,
+  .form-field-group--3 {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

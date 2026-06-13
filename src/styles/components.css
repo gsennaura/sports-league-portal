@@ -1,0 +1,187 @@
+/* ═══════════════════════════════════════════════════════════════════
+   COMPONENTS.CSS — Componentes reutilizáveis do sports-league-portal
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Back link ──────────────────────────────────────────────────── */
+
+/* S.back em ~25 arquivos: color: "#89b4fa", fontSize: "0.85rem" */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--c-link);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  margin-bottom: 0.75rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Botões ─────────────────────────────────────────────────────── */
+
+.btn {
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--fw-bold);
+  padding: 0.6rem 1.25rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+  line-height: 1;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-sm {
+  font-size: var(--text-sm);
+  padding: 0.35rem 0.75rem;
+}
+
+.btn-xs {
+  font-size: var(--text-xs);
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--radius-sm);
+}
+
+/* S.btnSubmit — backgroundColor: "#cba6f7", color: "#11111b" */
+.btn-primary {
+  background: var(--c-action);
+  color: var(--c-text-inverse);
+}
+
+/* S.btnCancel — transparent com borda */
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--c-border);
+  color: var(--c-text);
+}
+
+.btn-success {
+  background: var(--c-positive);
+  color: var(--c-text-inverse);
+}
+
+.btn-danger {
+  background: var(--c-negative);
+  color: var(--c-text-inverse);
+}
+
+.btn-warning {
+  background: var(--c-warning);
+  color: var(--c-text-inverse);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--c-link);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* ── Badges ─────────────────────────────────────────────────────── */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.55rem;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+/* action = roxo/destaque (--c-action) */
+.badge-action {
+  color: var(--c-action);
+  background: var(--c-action-12);
+  border: 1px solid color-mix(in srgb, var(--c-action) 40%, transparent);
+}
+
+/* info = azul (--c-link) */
+.badge-info {
+  color: var(--c-link);
+  background: var(--c-link-10);
+  border: 1px solid color-mix(in srgb, var(--c-link) 40%, transparent);
+}
+
+/* success = verde */
+.badge-success {
+  color: var(--c-positive);
+  background: var(--c-positive-12);
+  border: 1px solid color-mix(in srgb, var(--c-positive) 40%, transparent);
+}
+
+/* warning = amarelo */
+.badge-warning {
+  color: var(--c-warning);
+  background: var(--c-warning-10);
+  border: 1px solid color-mix(in srgb, var(--c-warning) 40%, transparent);
+}
+
+/* danger = vermelho */
+.badge-danger {
+  color: var(--c-negative);
+  background: var(--c-negative-12);
+  border: 1px solid color-mix(in srgb, var(--c-negative) 40%, transparent);
+}
+
+/* ── Card genérico ──────────────────────────────────────────────── */
+
+.card {
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card:hover {
+  border-color: var(--c-text-muted);
+}
+
+/* ── Photo / avatar ─────────────────────────────────────────────── */
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.avatar--lg {
+  width: 80px;
+  height: 80px;
+}
+
+/* ── Loader ─────────────────────────────────────────────────────── */
+
+.page-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  color: var(--c-text-muted);
+  font-size: var(--text-sm);
+}

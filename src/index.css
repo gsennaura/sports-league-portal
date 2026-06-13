@@ -1,3 +1,12 @@
+/* ── Design system ──────────────────────────────────────────────── */
+@import "./styles/tokens.css";
+@import "./styles/typography.css";
+@import "./styles/layout.css";
+@import "./styles/components.css";
+@import "./styles/forms.css";
+@import "./styles/admin.css";
+
+/* ── Reset e base ───────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -5,13 +14,13 @@
 }
 
 body {
-  background: #11111b;
-  color: #cdd6f4;
+  background: var(--c-bg);
+  color: var(--c-text);
   font-family: system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
 
-/* ── Pending memberships table ── */
+/* ── Legado: pending memberships (migrar na Fase 5) ─────────────── */
 .pending-col-hide-mobile { }
 @media (max-width: 600px) {
   .pending-col-hide-mobile { display: none; }
