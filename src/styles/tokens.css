@@ -10,7 +10,7 @@
      6 CORES BASE — thematic (troque aqui para criar um novo tema)
      ───────────────────────────────────────────────────────────────── */
   --c-brand:    #18265b;  /* superfícies: nav, hero, inputs, admin bg  */
-  --c-text:     #cdd6f4;  /* texto primário sobre fundos escuros        */
+  --c-text:     #ffffff;  /* texto primário sobre fundos escuros        */
   --c-border:   #313244;  /* bordas, separadores, tabelas               */
   --c-action:   #cba6f7;  /* CTA, btnSubmit, badges de destaque         */
   --c-positive: #a6e3a1;  /* sucesso, confirmação, ação positiva        */

@@ -945,7 +945,6 @@
 }
 
 .phase-status--done {
-  background: var(--c-brand);
   border: 1px solid var(--c-border);
   color: var(--c-text-muted);
 }
@@ -1266,7 +1265,7 @@
 
 /* Champ action buttons (artilharia, classificação, etc.) */
 .champ-action-row {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.1rem;
 }
 
 .champ-action-btn {
