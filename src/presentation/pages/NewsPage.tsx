@@ -25,15 +25,15 @@ export function NewsPage({ listNews, leagueId }: Props) {
         {loading && <p className="muted">Carregando...</p>}
         {error && <p className="error-text">{error}</p>}
         {!loading && !error && news.length === 0 && <p className="muted">Nenhuma notícia publicada ainda.</p>}
-        <div className="person-grid">
+        <div className="news-grid">
           {news.map((n) => (
-            <Link key={n.id} to={`/noticias/${n.id}`} className="person-card">
+            <Link key={n.id} to={`/noticias/${n.id}`} className="news-grid__card">
               {n.image_url ? (
                 <img src={n.image_url} alt={n.title} className="news-grid__img" />
               ) : (
                 <div className="news-grid__placeholder" />
               )}
-              <div className="person-card__body">
+              <div className="news-grid__body">
                 <span className="news-grid__date">{formatDate(n.published_at ?? n.created_at)}</span>
                 <h2 className="news-grid__title">{n.title}</h2>
                 {n.summary && <p className="news-grid__summary">{n.summary}</p>}

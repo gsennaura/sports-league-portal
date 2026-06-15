@@ -92,7 +92,7 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
       {/* Content */}
       <main className="page-container">
         {/* Search bar */}
-        <div className="search-bar">
+        <div className="clubs-filter">
           <input
             ref={inputRef}
             type="text"
@@ -103,11 +103,13 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
               if (!e.target.value.trim()) { setSearched(false); setResults(null); }
             }}
             onKeyDown={handleKeyDown}
-            className="search-input"
+            className="clubs-filter__input"
           />
-          <button onClick={handleSearch} disabled={loading} className="btn btn-primary">
-            {loading ? "Carregando…" : "Filtrar"}
-          </button>
+          <div className="clubs-filter__buttons">
+            <button onClick={handleSearch} disabled={loading} className="clubs-filter__btn-search">
+              {loading ? "Carregando…" : "Filtrar"}
+            </button>
+          </div>
         </div>
 
         {/* States */}

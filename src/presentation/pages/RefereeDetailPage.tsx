@@ -99,28 +99,31 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
             )}
           </div>
 
-          <div className="hero__inner">
+          <div className="ref-profile">
             <img
               src={referee.photo_url ?? NO_PHOTO}
               alt={referee.name}
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).src = NO_PHOTO;
               }}
-              className="avatar avatar--lg"
+              className="ref-profile__photo"
             />
-            <div className="hero__text">
+            <div className="ref-profile__info">
+              <span className="hero__eyebrow">⚖️ Árbitro</span>
               <h1 className="page-title">{referee.name}</h1>
               {referee.nickname && (
-                <p className="muted">"{referee.nickname}"</p>
+                <p className="hero__sub" style={{ fontStyle: "italic" }}>"{referee.nickname}"</p>
               )}
-              <div className="form-field-group">
-                {attrs.map(([label, value]) => (
-                  <div key={label} >
-                    <span className="form-label">{label}</span>
-                    <span >{value}</span>
-                  </div>
-                ))}
-              </div>
+              {attrs.length > 0 && (
+                <div className="ref-attrs">
+                  {attrs.map(([label, value]) => (
+                    <div key={label} className="ref-attr">
+                      <span className="ref-attr__label">{label}</span>
+                      <span className="ref-attr__value">{value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>

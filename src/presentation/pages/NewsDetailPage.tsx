@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { GetNewsDetail } from "@application/use_cases/GetNewsDetail";
 import type { NewsDetail } from "@domain/entities/News";
@@ -37,20 +37,20 @@ export function NewsDetailPage({ getNewsDetail }: Props) {
   return (
     <>
       {news.image_url && (
-        <div style={{ ...S.coverWrap }}>
-          <img src={news.image_url} alt={news.title}  />
-          <div  />
+        <div className="news-article__cover">
+          <img src={news.image_url} alt={news.title} />
+          <div className="news-article__cover-overlay" />
         </div>
       )}
       <main className="page-container">
         <Link to="/noticias" className="back-link">← Notícias</Link>
-        <article >
-          <span className="muted">{formatDate(news.published_at ?? news.created_at)}</span>
-          <h1 className="page-title">{news.title}</h1>
-          {news.summary && <p className="muted">{news.summary}</p>}
-          <hr  />
+        <article className="news-article">
+          <span className="news-article__date">{formatDate(news.published_at ?? news.created_at)}</span>
+          <h1 className="news-article__title">{news.title}</h1>
+          {news.summary && <p className="news-article__summary">{news.summary}</p>}
+          <hr className="news-article__divider" />
           <div
-            
+            className="news-article__content"
             dangerouslySetInnerHTML={{ __html: news.content.replace(/\n/g, "<br />") }}
           />
         </article>
@@ -58,14 +58,3 @@ export function NewsDetailPage({ getNewsDetail }: Props) {
     </>
   );
 }
-
-const S: Record<string, React.CSSProperties> = {
-  coverWrap: { position: "relative", width: "100%", maxHeight: 420, overflow: "hidden" },
-  cover: { width: "100%", maxHeight: 420, objectFit: "cover", display: "block" },
-  coverOverlay: { position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, #11111b 100%)" },
-  article: { display: "flex", flexDirection: "column", gap: "0.75rem" },
-  date: { fontSize: "0.72rem", color: "#89b4fa", textTransform: "uppercase", letterSpacing: "0.05em" },
-  summary: { margin: 0, fontSize: "1.05rem", color: "#ffffff", lineHeight: 1.55, fontStyle: "italic" },
-  divider: { border: "none", borderTop: "1px solid #313244", margin: "0.5rem 0" },
-  content: { fontSize: "0.95rem", color: "#cdd6f4", lineHeight: 1.8, whiteSpace: "pre-wrap" },
-};

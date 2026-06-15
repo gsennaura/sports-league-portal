@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { PageLoader } from "@presentation/components/PageLoader";
 import { Link, useParams } from "react-router-dom";
 import { extractId } from "@utils/slug";
@@ -11,17 +11,6 @@ import { API_BASE } from "@infrastructure/apiBase";
 
 const _RAW_BASE = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main";
 const NO_VENUE_PHOTO = `${_RAW_BASE}/venues/no_venue_photo.png`;
-
-function useMobile(breakpoint = 600) {
-  const [mobile, setMobile] = useState(() => window.innerWidth < breakpoint);
-  useEffect(() => {
-    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
-    const handler = (e: MediaQueryListEvent) => setMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, [breakpoint]);
-  return mobile;
-}
 
 interface City { id: string; name: string; }
 
@@ -65,24 +54,24 @@ function MatchRow({ match }: { match: ClubMatch }) {
   return (
     <Link to={`/partidas/${match.match_id}`} className="row-link">
       <div className="card">
-        <div className="match-team-row">
+        <div className="venue-match-card">
           {/* Col 1 — data e hora */}
-          <div >
-            {dateLabel && <span className="muted">{dateLabel}</span>}
-            {timeLabel && <span className="muted">{timeLabel}</span>}
+          <div className="venue-match-date-col">
+            {dateLabel && <span className="date-label">{dateLabel}</span>}
+            {timeLabel && <span className="time-label">{timeLabel}</span>}
           </div>
 
           {/* Col 2 — times + placar */}
-          <div >
-            <div className="match-team-row">
-              <span className="score-slot">
+          <div className="venue-match-teams-col">
+            <div className="venue-match-team-row">
+              <span className="venue-match-score">
                 {hasScore ? `${match.home_score}${hasPenalty ? ` (${match.home_penalty_score})` : ""}` : ""}
               </span>
               <Shield url={match.home_club_logo_url} />
               <span className="team-name">{match.home_team_name}</span>
             </div>
-            <div className="match-team-row">
-              <span className="score-slot">
+            <div className="venue-match-team-row">
+              <span className="venue-match-score">
                 {hasScore ? `${match.away_score}${hasPenalty ? ` (${match.away_penalty_score})` : ""}` : ""}
               </span>
               <Shield url={match.away_club_logo_url} />
@@ -91,9 +80,9 @@ function MatchRow({ match }: { match: ClubMatch }) {
           </div>
 
           {/* Col 3 — campeonato */}
-          <div >
-            <span className="muted">{match.championship_name}</span>
-            <span className="muted">{match.phase_name}</span>
+          <div className="venue-match-champ-col">
+            <span className="champ-label">{match.championship_name}</span>
+            <span className="phase-label">{match.phase_name}</span>
           </div>
         </div>
       </div>
@@ -128,11 +117,11 @@ function computeStats(matches: ClubMatch[]): VenueStats {
   return { total: matches.length, homeWins, awayWins, draws, goals };
 }
 
-function StatItem({ label, value, color, isMobile }: { label: string; value: number; color?: string; isMobile?: boolean }) {
+function StatItem({ label, value, color }: { label: string; value: number; color?: string }) {
   return (
-    <div style={{ ...S.statItem, minWidth: isMobile ? "3rem" : "4rem" }}>
-      <span style={{ ...S.statValue, color: color ?? "var(--c-text)", fontSize: isMobile ? "1.1rem" : "1.6rem" }}>{value}</span>
-      <span className="muted">{label}</span>
+    <div className="venue-stats-strip__item">
+      <span className="venue-stats-strip__value" style={color ? { color } : undefined}>{value}</span>
+      <span className="venue-stats-strip__label">{label}</span>
     </div>
   );
 }
@@ -142,7 +131,6 @@ function StatItem({ label, value, color, isMobile }: { label: string; value: num
 export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
   const { slug } = useParams<{ slug: string }>();
   const id = slug ? extractId(slug) : undefined;
-  const isMobile = useMobile();
   const { isAdmin } = useAuth();
 
   const [venue, setVenue] = useState<Venue | null>(null);
@@ -238,14 +226,14 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
           {error && <p className="error-text">{error}</p>}
 
           {venue && (
-            <div style={{ display: "flex", gap: "1.75rem", alignItems: "flex-start", marginTop: "0.5rem", flexWrap: "wrap" }}>
+            <div className="venue-hero-row">
               {/* Left: large photo */}
-              <div style={{ position: "relative", display: "inline-block", flexShrink: 0 }}>
+              <div className="venue-hero-photo">
                 <img
                   src={currentPhotoUrl ?? NO_VENUE_PHOTO}
                   onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_VENUE_PHOTO; }}
                   alt={`Foto ${venue.name}`}
-                  style={{ width: 260, height: 175, objectFit: "cover", borderRadius: 10, background: "var(--c-brand)", display: "block" }}
+                  className="venue-hero-photo__img"
                 />
                 {isAdmin && venueRepository && (
                   <>
@@ -260,22 +248,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
                       onClick={() => photoInputRef.current?.click()}
                       disabled={photoUploading}
                       title="Alterar foto do local"
-                      style={{
-                        position: "absolute",
-                        bottom: "6px",
-                        right: "6px",
-                        width: "28px",
-                        height: "28px",
-                        borderRadius: "50%",
-                        backgroundColor: photoUploading ? "#45475a" : "#cba6f7",
-                        border: "2px solid #18265b",
-                        cursor: photoUploading ? "not-allowed" : "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "0.75rem",
-                        padding: 0,
-                      }}
+                      className="photo-upload-btn"
                     >
                       ✏️
                     </button>
@@ -284,7 +257,7 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
               </div>
 
               {/* Right: info */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", minWidth: 0 }}>
+              <div className="venue-hero-info">
                 <span className="hero__eyebrow">🏟 Local</span>
                 <h1 className="hero__title">{venue.name}</h1>
                 {venue.nickname && (
@@ -317,14 +290,14 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
           <>
             {/* Stats strip */}
             {matches.length > 0 && (
-              <div style={{ ...S.statsStrip, padding: isMobile ? "0.6rem 1rem" : "1rem 1.5rem" }}>
-                <StatItem label="Jogos" value={stats.total} isMobile={isMobile} />
-                <div style={{ ...S.statDivider, height: isMobile ? "1.5rem" : "2.5rem" }} />
-                <StatItem label="Mandante" value={stats.homeWins} color="#89b4fa" isMobile={isMobile} />
-                <StatItem label="Empates" value={stats.draws} color="#f9e2af" isMobile={isMobile} />
-                <StatItem label="Visitante" value={stats.awayWins} color="#cba6f7" isMobile={isMobile} />
-                <div style={{ ...S.statDivider, height: isMobile ? "1.5rem" : "2.5rem" }} />
-                <StatItem label="Gols" value={stats.goals} color="#a6e3a1" isMobile={isMobile} />
+              <div className="venue-stats-strip">
+                <StatItem label="Jogos" value={stats.total} />
+                <div className="venue-stats-strip__divider" />
+                <StatItem label="Mandante" value={stats.homeWins} color="#89b4fa" />
+                <StatItem label="Empates" value={stats.draws} color="#f9e2af" />
+                <StatItem label="Visitante" value={stats.awayWins} color="#cba6f7" />
+                <div className="venue-stats-strip__divider" />
+                <StatItem label="Gols" value={stats.goals} color="#a6e3a1" />
               </div>
             )}
 
@@ -367,19 +340,19 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="pagination">
+                  <div className="venue-pagination">
                     <button
-                      style={{ ...S.pageBtn, ...(page === 1 ? S.pageBtnDisabled : {}) }}
+                      className="venue-page-btn"
                       onClick={() => setPage((p) => Math.max(1, p - 1))}
                       disabled={page === 1}
                     >
                       ← Anterior
                     </button>
-                    <span className="page-info">
+                    <span className="venue-page-info">
                       {page} / {totalPages}
                     </span>
                     <button
-                      style={{ ...S.pageBtn, ...(page === totalPages ? S.pageBtnDisabled : {}) }}
+                      className="venue-page-btn"
                       onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                       disabled={page === totalPages}
                     >
@@ -395,301 +368,3 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
     </>
   );
 }
-
-// ─── Styles ──────────────────────────────────────────────────────────────────
-
-const S: Record<string, React.CSSProperties> = {
-  hero: {
-    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
-    borderBottom: "1px solid #313244",
-    paddingBottom: "2rem",
-    overflow: "hidden",
-  },
-  heroAccentBar: {
-    height: "4px",
-    background: "linear-gradient(90deg, #89b4fa 0%, #cba6f7 50%, #a6e3a1 100%)",
-  },
-  heroInner: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "2rem 2rem 2rem",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.4rem",
-  },
-  heroBack: {
-    color: "#89b4fa",
-    textDecoration: "none",
-    fontSize: "0.85rem",
-    marginBottom: "0.25rem",
-    alignSelf: "flex-start",
-  },
-  heroEyebrow: {
-    color: "#89b4fa",
-    fontSize: "0.82rem",
-    fontWeight: 600,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-  },
-  heroTitle: {
-    margin: 0,
-    fontSize: "clamp(1.6rem, 4vw, 2.5rem)",
-    fontWeight: 800,
-    color: "#cdd6f4",
-    lineHeight: 1.15,
-    letterSpacing: "-0.02em",
-  },
-  heroNickname: {
-    margin: 0,
-    fontSize: "1rem",
-    color: "#89b4fa",
-    fontStyle: "italic",
-  },
-  infoRow: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "0.5rem",
-    marginTop: "0.6rem",
-  },
-  infoChip: {
-    background: "#313244",
-    color: "#ffffff",
-    borderRadius: "0.4rem",
-    padding: "0.2rem 0.65rem",
-    fontSize: "0.82rem",
-  },
-
-  page: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "2.5rem 2rem 4rem",
-  },
-  status: {
-    color: "#ffffff",
-    fontSize: "0.95rem",
-  },
-  errorText: {
-    color: "#f38ba8",
-    fontSize: "0.95rem",
-  },
-  sectionTitle: {
-    margin: "0 0 1.5rem",
-    fontSize: "1.2rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    display: "flex",
-    alignItems: "center",
-    gap: "0.6rem",
-  },
-  matchCount: {
-    background: "#313244",
-    color: "#89b4fa",
-    borderRadius: "1rem",
-    padding: "0.1rem 0.6rem",
-    fontSize: "0.82rem",
-    fontWeight: 600,
-  },
-
-  // Date groups
-  dateGroup: {
-    marginBottom: "1.5rem",
-  },
-  dateHeading: {
-    margin: "0 0 0.6rem",
-    fontSize: "0.82rem",
-    fontWeight: 600,
-    color: "#89b4fa",
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
-  },
-  matchList: {
-    background: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    overflow: "hidden",
-    padding: "0.2rem 0.75rem",
-  },
-
-  // Match row
-  matchLink: {
-    textDecoration: "none",
-    color: "inherit",
-    display: "block",
-  },
-  matchCard: {
-    borderBottom: "1px solid #18265b",
-    padding: "0.4rem 0",
-  },
-  matchCardRow: {
-    display: "grid",
-    gridTemplateColumns: "3rem 1fr auto",
-    alignItems: "center",
-    gap: "0.75rem",
-  },
-  mDateCol: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    gap: "0.1rem",
-    flexShrink: 0,
-  },
-  mDateLabel: {
-    fontSize: "0.75rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-  },
-  mTimeLabel: {
-    fontSize: "0.65rem",
-    color: "#cdd6f4",
-    fontWeight: 600,
-  },
-  mTeamsCol: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.2rem",
-    minWidth: 0,
-  },
-  mTeamRow: {
-    display: "grid",
-    gridTemplateColumns: "3rem 18px 1fr",
-    alignItems: "center",
-    gap: "0.4rem",
-  },
-  mScoreSlot: {
-    fontSize: "0.875rem",
-    fontWeight: 700,
-    color: "#a6e3a1",
-    textAlign: "right" as const,
-  },
-  mTeamName: {
-    fontSize: "0.875rem",
-    fontWeight: 600,
-    color: "#cdd6f4",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  mChampCol: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "flex-end",
-    flexShrink: 0,
-    maxWidth: "7rem",
-  },
-  mChampLabel: {
-    fontSize: "0.68rem",
-    color: "#cdd6f4",
-    textAlign: "right" as const,
-    lineHeight: 1.3,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  mPhaseLabel: {
-    fontSize: "0.62rem",
-    color: "#ffffff",
-    textAlign: "right" as const,
-  },
-
-  // Stats strip
-  statsStrip: {
-    display: "flex",
-    alignItems: "center",
-    background: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "10px",
-    padding: "1rem 1.5rem",
-    marginBottom: "1.75rem",
-    flexWrap: "wrap" as const,
-  },
-  statItem: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    flex: 1,
-    gap: "0.2rem",
-    minWidth: "4rem",
-  },
-  statValue: {
-    fontSize: "1.6rem",
-    fontWeight: 800,
-    lineHeight: 1,
-    letterSpacing: "-0.02em",
-  },
-  statLabel: {
-    fontSize: "0.68rem",
-    color: "#ffffff",
-    fontWeight: 600,
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.06em",
-  },
-  statDivider: {
-    width: "1px",
-    height: "2.5rem",
-    background: "#313244",
-    margin: "0 0.5rem",
-    flexShrink: 0,
-  },
-
-  // Pagination
-  pagination: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "1rem",
-    marginTop: "1.5rem",
-    paddingTop: "1rem",
-    borderTop: "1px solid #313244",
-  },
-  pageBtn: {
-    background: "#313244",
-    color: "#cdd6f4",
-    border: "1px solid #45475a",
-    borderRadius: "6px",
-    padding: "0.4rem 1rem",
-    fontSize: "0.85rem",
-    fontWeight: 600,
-    cursor: "pointer",
-  },
-  pageBtnDisabled: {
-    opacity: 0.35,
-    cursor: "default",
-  },
-  pageInfo: {
-    color: "#ffffff",
-    fontSize: "0.88rem",
-    fontWeight: 600,
-    minWidth: "4rem",
-    textAlign: "center" as const,
-  },
-
-  // Championships section
-  champSection: {
-    marginBottom: "2.5rem",
-  },
-  champGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-    gap: "0.75rem",
-  },
-  champCard: {
-    background: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    padding: "0.75rem 1rem",
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.25rem",
-  },
-  champCardName: {
-    fontSize: "0.9rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    lineHeight: 1.3,
-  },
-  champCardCount: {
-    fontSize: "0.72rem",
-    color: "#89b4fa",
-    fontWeight: 600,
-  },
-};

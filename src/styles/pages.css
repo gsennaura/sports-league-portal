@@ -2085,3 +2085,383 @@
   color: var(--c-link);
   border-bottom-color: var(--c-link);
 }
+
+/* ─── Venue cards (list page) ────────────────────────────────────── */
+
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.venue-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(24, 38, 91, 0.15);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+
+.venue-card:hover {
+  border-color: var(--c-action);
+  box-shadow: 0 4px 18px rgba(24, 38, 91, 0.28);
+  transform: translateY(-2px);
+}
+
+.venue-card__img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  background: var(--c-brand);
+  display: block;
+}
+
+.venue-card__body {
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.venue-card__name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.venue-card__sub {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Venue city group header ────────────────────────────────────── */
+
+.venue-city-heading {
+  margin: 0 0 0.85rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-brand);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--c-brand);
+}
+
+/* ─── Venue detail — stats strip ─────────────────────────────────── */
+
+.venue-stats-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.75rem;
+  gap: 0.25rem;
+}
+
+.venue-stats-strip__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 0.2rem;
+  min-width: 3.5rem;
+}
+
+.venue-stats-strip__value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c-text);
+}
+
+.venue-stats-strip__label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.venue-stats-strip__divider {
+  width: 1px;
+  background: var(--c-border);
+  margin: 0 0.25rem;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+/* ─── Venue detail — hero photo wrapper ─────────────────────────── */
+
+.venue-hero-photo {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.venue-hero-photo__img {
+  width: 260px;
+  height: 175px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--c-brand);
+  display: block;
+  max-width: 100%;
+}
+
+.venue-hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.venue-hero-row {
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.photo-upload-btn {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--c-action);
+  border: 2px solid var(--c-brand);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  padding: 0;
+  transition: background-color 0.15s;
+}
+
+.photo-upload-btn:disabled {
+  background-color: var(--c-text-muted);
+  cursor: not-allowed;
+}
+
+/* ─── Venue detail — match rows ──────────────────────────────────── */
+
+.venue-match-card {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.venue-match-card:last-child {
+  border-bottom: none;
+}
+
+.venue-match-date-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.venue-match-date-col .date-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #cdd6f4;
+}
+
+.venue-match-date-col .time-label {
+  font-size: 0.65rem;
+  color: #cdd6f4;
+  font-weight: 600;
+}
+
+.venue-match-teams-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.venue-match-team-row {
+  display: grid;
+  grid-template-columns: 2.5rem 18px 1fr;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.venue-match-score {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--c-positive);
+  text-align: right;
+}
+
+.venue-match-champ-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  max-width: 8rem;
+}
+
+.venue-match-champ-col .champ-label {
+  font-size: 0.68rem;
+  color: #cdd6f4;
+  text-align: right;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.venue-match-champ-col .phase-label {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: right;
+}
+
+/* ─── Venue detail — pagination ──────────────────────────────────── */
+
+.venue-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.venue-page-btn {
+  background: var(--c-brand);
+  color: #ffffff;
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.venue-page-btn:hover:not(:disabled) {
+  background: #1a2e70;
+}
+
+.venue-page-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.venue-page-info {
+  color: #1e293b;
+  font-size: 0.88rem;
+  font-weight: 600;
+  min-width: 4rem;
+  text-align: center;
+}
+
+/* ─── Referee profile (detail page) ─────────────────────────────── */
+
+.ref-profile {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.ref-profile__photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--c-brand);
+  flex-shrink: 0;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.ref-profile__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.ref-attrs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.ref-attr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+}
+
+.ref-attr__label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ref-attr__value {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* ─── Person card polish ─────────────────────────────────────────── */
+
+.person-card {
+  box-shadow: 0 2px 8px rgba(24, 38, 91, 0.14);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+
+.person-card:hover {
+  box-shadow: 0 4px 16px rgba(24, 38, 91, 0.28);
+  transform: translateY(-2px);
+}
+
+.person-card__photo {
+  border-radius: 6px 0 0 6px;
+  height: 60px;
+  width: 60px;
+}
+
+/* ─── Fix muted inside dark cards ───────────────────────────────── */
+
+.card .muted,
+.data-list .muted {
+  color: rgba(255, 255, 255, 0.75);
+}

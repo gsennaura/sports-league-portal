@@ -17,27 +17,25 @@ interface VenuesPageProps {
   listVenues: ListVenues;
 }
 
-function VenueCard({ venue }: { venue: Venue; cityName: string }) {
+function VenueCard({ venue, cityName }: { venue: Venue; cityName: string }) {
   return (
-    <Link to={`/locais/${toSlugPath(venue.name, venue.id)}`} style={{ textDecoration: "none" }}>
-      <div className="card">
-        <img
-          src={venue.photo_url ?? NO_VENUE_PHOTO}
-          onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_VENUE_PHOTO; }}
-          alt={venue.name}
-          style={{ width: 72, height: 52, objectFit: "cover", borderRadius: 6, flexShrink: 0, background: "var(--c-brand)" }}
-        />
-        <div >
-          {venue.nickname
-            ? (
-              <>
-                <span className="team-name">{venue.nickname}</span>
-                <span className="muted">{venue.name}</span>
-              </>
-            )
-            : <span className="team-name">{venue.name}</span>
-          }
-        </div>
+    <Link to={`/locais/${toSlugPath(venue.name, venue.id)}`} className="venue-card">
+      <img
+        src={venue.photo_url ?? NO_VENUE_PHOTO}
+        onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_VENUE_PHOTO; }}
+        alt={venue.name}
+        className="venue-card__img"
+      />
+      <div className="venue-card__body">
+        <span className="venue-card__name">
+          {venue.nickname ?? venue.name}
+        </span>
+        {venue.nickname && (
+          <span className="venue-card__sub">{venue.name}</span>
+        )}
+        {cityName && (
+          <span className="venue-card__sub">📍 {cityName}</span>
+        )}
       </div>
     </Link>
   );
@@ -100,8 +98,8 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
         {!loading && !error && venues.length > 0 && (
           cities.map((city) => (
             <section key={city} className="page-section">
-              <h2 className="section-heading">{city}</h2>
-              <div className="form-field-group">
+              <h2 className="venue-city-heading">🏙 {city}</h2>
+              <div className="venue-grid">
                 {byCity.get(city)!.map((v) => (
                   <VenueCard
                     key={v.id}

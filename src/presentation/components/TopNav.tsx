@@ -19,7 +19,6 @@ const BASE_NAV_ITEMS: NavItem[] = [
     label: "Explorar",
     children: [
       { label: "Clubes",   href: "/clubes" },
-      { label: "Atletas",  href: "/atletas" },
       { label: "Árbitros", href: "/arbitros" },
       { label: "Locais",   href: "/locais" },
     ],
