@@ -149,7 +149,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
         {!loading && match && (
           <>
             {match.match_date && (
-              <p className="match-meta">{formatDateTime(match.match_date)}</p>
+              <div className="match-date-badge">📅 {formatDateTime(match.match_date)}</div>
             )}
 
             <div className="score-card">
@@ -190,15 +190,15 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
 
             {/* ─── Meta info ──────────────────────────────────────────── */}
             {(match.venue_name || match.city_name) && (
-              <p className="muted">
+              <div className="match-venue-badge">
                 📍{" "}
                 {match.venue_id
-                  ? <Link to={`/locais/${toSlugPath(match.venue_name!, match.venue_id!)}`} className="row-link">{match.venue_name}</Link>
+                  ? <Link to={`/locais/${toSlugPath(match.venue_name!, match.venue_id!)}`}>{match.venue_name}</Link>
                   : match.venue_name
                 }
                 {match.venue_name && match.city_name && " — "}
                 {match.city_name}
-              </p>
+              </div>
             )}
 
             <Section title="Linha do Tempo">

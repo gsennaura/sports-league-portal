@@ -644,8 +644,6 @@
 .score-team {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
   flex: 1;
 }
 
@@ -690,7 +688,7 @@
 }
 
 .stats-pct {
-  font-size: 0.68rem;
+  font-size: 1.10rem;
   color: var(--c-text);
 }
 
@@ -1675,14 +1673,51 @@
   color: var(--c-text);
 }
 
-/* Match date meta */
-.match-meta {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--c-link);
+/* Match date highlight badge */
+.match-date-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: var(--c-brand);
+  color: #ffffff;
+  border-radius: 2rem;
+  padding: 0.55rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 800;
   text-transform: capitalize;
-  text-align: center;
-  margin-bottom: 0.25rem;
+  letter-spacing: 0.02em;
+  width: fit-content;
+  margin: 0 auto 0.25rem;
+  box-shadow: 0 2px 8px rgba(24, 38, 91, 0.25);
+}
+
+/* Match venue highlight badge */
+.match-venue-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  background: #eff6ff;
+  color: var(--c-brand);
+  border: 1.5px solid #bfdbfe;
+  border-radius: 2rem;
+  padding: 0.4rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: fit-content;
+  margin: 0.25rem auto 0;
+}
+
+.match-venue-badge a {
+  color: var(--c-brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.match-venue-badge a:hover {
+  text-decoration: underline;
 }
 
 /* Away team right-aligned */
