@@ -124,7 +124,7 @@ export function MatchesByDay({
           ←
         </button>
         <div className="mbd-day-label">
-          <span className="mbd-day-heading" style={accent ? { color: accent } : undefined}>
+          <span className="mbd-day-heading">
             {formatDateHeading(currentDate!)}
             <span className="mbd-day-counter"> | {dayIndex + 1}/{sortedDates.length}</span>
           </span>
