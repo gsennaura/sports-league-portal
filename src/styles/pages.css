@@ -1644,7 +1644,7 @@
 }
 
 .match-section__body .muted {
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--c-text);
 }
 
 /* Match date meta */
