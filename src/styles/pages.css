@@ -1650,13 +1650,27 @@
 }
 
 .match-section__title {
-  font-size: 0.72rem;
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: var(--c-brand);
-  margin-bottom: 0.5rem;
-  padding: 0 0.25rem;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #c7d2fe;
+}
+
+.match-section__title::before {
+  content: "";
+  display: block;
+  width: 4px;
+  height: 1.1rem;
+  background: var(--c-action);
+  border-radius: 3px;
+  flex-shrink: 0;
 }
 
 .match-section__body {
