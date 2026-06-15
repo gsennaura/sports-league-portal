@@ -79,14 +79,11 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
   const [clubCats, setClubCats] = useState<Map<string, string[]>>(new Map());
   const [sportOptions, setSportOptions] = useState<string[]>([]);
   const [catOptions, setCatOptions] = useState<string[]>([]);
-  const [leagues, setLeagues] = useState<{ id: string; name: string }[]>([]);
 
-  // ── Filter inputs ─────────────────────────────────────────────────────────
+  // ── Filter inputs ──────────────────────────────────────────────────
   const [inputName, setInputName] = useState("");
-  const [inputCity, setInputCity] = useState("");
   const [inputSport, setInputSport] = useState("");
   const [inputCategory, setInputCategory] = useState("");
-  const [inputLeague, setInputLeague] = useState("");
 
   // ── Search results ────────────────────────────────────────────────────────
   const [hasSearched, setHasSearched] = useState(false);
@@ -96,14 +93,12 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
   // ── Load ──────────────────────────────────────────────────────────────────
   useEffect(() => {
     type RawTeam = { club_id: string | null; sport_name: string | null; category: string | null };
-    type RawLeague = { id: string; name: string };
 
     Promise.all([
       listClubs.execute(LEAGUE_ID || undefined),
       fetch(`${API_BASE}/teams`).then((r) => (r.ok ? (r.json() as Promise<RawTeam[]>) : [])),
-      fetch(`${API_BASE}/leagues?`).then((r) => (r.ok ? (r.json() as Promise<RawLeague[]>) : [])),
     ])
-      .then(([clubsData, teamsData, leaguesData]) => {
+      .then(([clubsData, teamsData]) => {
         setClubs(clubsData);
 
         // Build sport & category maps per club
@@ -130,9 +125,6 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
         setClubCats(catsMap);
         setSportOptions([...allSports].sort((a, b) => a.localeCompare(b, "pt-BR")));
         setCatOptions([...allCats].sort((a, b) => a.localeCompare(b, "pt-BR")));
-        setLeagues(
-          (leaguesData as RawLeague[]).sort((a, b) => a.name.localeCompare(b.name, "pt-BR")),
-        );
         setLoading(false);
       })
       .catch((err: unknown) => {
@@ -143,26 +135,11 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
 
   // ── Derived ──────────────────────────────────────────────────────────────
   const randomClubs = useMemo(() => sampleN(clubs, 20), [clubs]);
-  const cityOptions = useMemo(
-    () =>
-      [...new Set(clubs.map((c) => c.city_name).filter((n) => Boolean(n) && n !== "–"))].sort(
-        (a, b) => a.localeCompare(b, "pt-BR"),
-      ),
-    [clubs],
-  );
 
   // ── Handlers ─────────────────────────────────────────────────────────────
   async function handleSearch() {
     setSearching(true);
     try {
-      let leagueClubIds: Set<string> | null = null;
-      if (inputLeague) {
-        const r = await fetch(`${API_BASE}/leagues/${inputLeague}/clubs`);
-        if (r.ok) {
-          const data = (await r.json()) as Array<{ club_id: string }>;
-          leagueClubIds = new Set(data.map((d) => d.club_id));
-        }
-      }
       const nameLower = stripAccents(inputName.trim());
       const result = clubs.filter((c) => {
         if (
@@ -171,10 +148,8 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
           !stripAccents(c.nickname ?? "").includes(nameLower)
         )
           return false;
-        if (inputCity && c.city_name !== inputCity) return false;
         if (inputSport && !(clubSports.get(c.id) ?? []).includes(inputSport)) return false;
         if (inputCategory && !(clubCats.get(c.id) ?? []).includes(inputCategory)) return false;
-        if (leagueClubIds && !leagueClubIds.has(c.id)) return false;
         return true;
       });
       setFilteredClubs(result);
@@ -186,10 +161,8 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
 
   function handleReset() {
     setInputName("");
-    setInputCity("");
     setInputSport("");
     setInputCategory("");
-    setInputLeague("");
     setHasSearched(false);
     setFilteredClubs([]);
   }
@@ -227,11 +200,6 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
 
           {/* Selects row */}
           <div className="clubs-filter__selects">
-            <select value={inputCity} onChange={(e) => setInputCity(e.target.value)} className="clubs-filter__select">
-              <option value="">Cidade</option>
-              {cityOptions.map((city) => <option key={city} value={city}>{city}</option>)}
-            </select>
-
             <select value={inputSport} onChange={(e) => setInputSport(e.target.value)} className="clubs-filter__select">
               <option value="">Esporte</option>
               {sportOptions.map((s) => <option key={s} value={s}>{s}</option>)}
@@ -240,11 +208,6 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
             <select value={inputCategory} onChange={(e) => setInputCategory(e.target.value)} className="clubs-filter__select">
               <option value="">Categoria</option>
               {catOptions.map((c) => <option key={c} value={c}>{categoryLabel[c] ?? c}</option>)}
-            </select>
-
-            <select value={inputLeague} onChange={(e) => setInputLeague(e.target.value)} className="clubs-filter__select">
-              <option value="">Liga</option>
-              {leagues.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
             </select>
           </div>
 
