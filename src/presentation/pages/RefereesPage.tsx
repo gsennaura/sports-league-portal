@@ -9,6 +9,7 @@ const NO_PHOTO =
 
 interface RefereesPageProps {
   listReferees: ListReferees;
+  leagueId?: string;
 }
 
 function RefereePhoto({ url, name }: { url: string | null; name: string }) {
@@ -38,7 +39,7 @@ function RefereeCard({ referee }: { referee: Referee }) {
   );
 }
 
-export function RefereesPage({ listReferees }: RefereesPageProps) {
+export function RefereesPage({ listReferees, leagueId }: RefereesPageProps) {
   const [query, setQuery] = useState("");
   const [allReferees, setAllReferees] = useState<Referee[]>([]);
   const [results, setResults] = useState<Referee[] | null>(null);
@@ -48,7 +49,7 @@ export function RefereesPage({ listReferees }: RefereesPageProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    listReferees.execute().then(setAllReferees).catch(() => setError("Erro ao carregar árbitros.")).finally(() => setLoading(false));
+    listReferees.execute(undefined, leagueId).then(setAllReferees).catch(() => setError("Erro ao carregar árbitros.")).finally(() => setLoading(false));
   }, [listReferees]);
 
   const handleSearch = async () => {

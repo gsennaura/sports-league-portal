@@ -4,7 +4,7 @@ import type { RefereeRepository } from "@domain/repositories/RefereeRepository";
 export class ListReferees {
   constructor(private readonly repository: RefereeRepository) {}
 
-  execute(name?: string): Promise<Referee[]> {
-    return this.repository.listAll(name);
+  execute(name?: string, leagueId?: string): Promise<Referee[]> {
+    return this.repository.listAll(name, leagueId);
   }
 }

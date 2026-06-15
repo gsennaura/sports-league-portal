@@ -40,8 +40,9 @@ export class ApiVenueRepository implements VenueRepository {
     return response.json() as Promise<Venue>;
   }
 
-  async listAll(): Promise<Venue[]> {
-    const response = await fetch(`${this.baseUrl}/venues`);
+  async listAll(leagueId?: string): Promise<Venue[]> {
+    const qs = leagueId ? `?league_id=${encodeURIComponent(leagueId)}` : "";
+    const response = await fetch(`${this.baseUrl}/venues${qs}`);
     if (!response.ok) throw new Error(`Falha ao buscar locais: ${response.status}`);
     return response.json() as Promise<Venue[]>;
   }

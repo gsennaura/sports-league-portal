@@ -144,7 +144,7 @@ export function App() {
             <Route path="/emendas" element={<EmendasPage listEmendas={listEmendas} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
             <Route path="/campeonatos" element={<ChampionshipsPage listChampionships={listChampionships} />} />
             <Route path="/campeonatos/:id" element={<ChampionshipDetailPage getChampionshipDetail={getChampionshipDetail} updateChampionshipPodium={updateChampionshipPodium} loadPhaseGroups={loadPhaseGroups} getEditionTopScorers={getEditionTopScorers} />} />
-            <Route path="/locais" element={<VenuesPage listVenues={listVenues} />} />
+            <Route path="/locais" element={<VenuesPage listVenues={listVenues} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
             <Route path="/locais/:slug" element={<VenueDetailPage getVenueMatches={getVenueMatches} venueRepository={venueRepository} />} />
             <Route path="/clubes" element={<ClubsPage listClubs={listClubs} />} />
             <Route path="/clubes/:slug" element={<ClubDetailPage getClub={getClub} getClubMatches={getClubMatches} getClubTitles={getClubTitles} getClubTeams={getClubTeams} clubRepository={clubRepository} />} />
@@ -153,7 +153,7 @@ export function App() {
             <Route path="/ao-vivo" element={<LiveMatchesPage getLiveWindowMatches={getLiveWindowMatches} />} />
             <Route path="/atletas" element={<Navigate to="/" replace />} />
             <Route path="/atletas/:id" element={<Navigate to="/" replace />} />
-            <Route path="/arbitros" element={<RefereesPage listReferees={listReferees} />} />
+            <Route path="/arbitros" element={<RefereesPage listReferees={listReferees} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
             <Route path="/arbitros/:id" element={<RefereeDetailPage getRefereeDetail={getRefereeDetail} getRefereeMatches={getRefereeMatches} />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/cadastro" element={<CadastroPage />} />

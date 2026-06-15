@@ -18,7 +18,7 @@ export interface UpdateRefereeInput extends CreateRefereeInput {
 }
 
 export interface RefereeRepository {
-  listAll(name?: string): Promise<Referee[]>;
+  listAll(name?: string, leagueId?: string): Promise<Referee[]>;
   getById(id: string): Promise<Referee>;
   create(input: CreateRefereeInput): Promise<Referee>;
   update(input: UpdateRefereeInput): Promise<Referee>;

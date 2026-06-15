@@ -15,6 +15,7 @@ interface City {
 
 interface VenuesPageProps {
   listVenues: ListVenues;
+  leagueId?: string;
 }
 
 function VenueCard({ venue, cityName }: { venue: Venue; cityName: string }) {
@@ -41,7 +42,7 @@ function VenueCard({ venue, cityName }: { venue: Venue; cityName: string }) {
   );
 }
 
-export function VenuesPage({ listVenues }: VenuesPageProps) {
+export function VenuesPage({ listVenues, leagueId }: VenuesPageProps) {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [cityMap, setCityMap] = useState<Map<string, string>>(new Map());
   const [loading, setLoading] = useState(true);
@@ -49,7 +50,7 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
 
   useEffect(() => {
     Promise.all([
-      listVenues.execute(),
+      listVenues.execute(leagueId),
       fetch(`${API_BASE}/cities`).then((r) => r.json() as Promise<City[]>),
     ])
       .then(([vs, cities]) => {
