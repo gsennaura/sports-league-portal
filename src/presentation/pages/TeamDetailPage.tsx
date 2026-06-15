@@ -162,41 +162,68 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
     }
   };
   return (
-    <main style={styles.page}>
-      <Link to="/clubes" style={styles.back}>← Clubes</Link>
+    <>
+      {/* ─── Hero ──────────────────────────────────────────────── */}
+      <header style={styles.hero}>
+        <div style={styles.heroAccentBar} />
+        <div style={styles.heroInner}>
+          {team?.club_id && team?.club_name ? (
+            <Link to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`} style={styles.heroBack}>
+              ← {team.club_name}
+            </Link>
+          ) : (
+            <Link to="/clubes" style={styles.heroBack}>← Clubes</Link>
+          )}
+          {loading && !team && <PageLoader />}
+          {team && (
+            <>
+              <div style={styles.heroTopRow}>
+                <div style={styles.heroShieldWrap}>
+                  <Shield url={team.club_logo_url ?? null} size={96} />
+                </div>
+                <div>
+                  <h1 style={styles.heroTitle}>{team.name}</h1>
+                  <div style={styles.heroTagRow}>
+                    {team.sport_name && (
+                      <span style={styles.heroTagSport}>{team.sport_name}</span>
+                    )}
+                    {team.category && (
+                      <span style={styles.heroTagCat}>
+                        {categoryLabel[team.category] ?? team.category}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+              {[team.city_name, team.venue_name, team.president, team.founded_at].some(Boolean) && (
+                <p style={styles.heroSub}>
+                  {[
+                    team.city_name && `📍 ${team.city_name}`,
+                    team.venue_name && `🏟 ${team.venue_name}`,
+                    team.president && `👤 ${team.president}`,
+                    team.founded_at && `🗓 ${formatDate(team.founded_at)}`,
+                  ].filter(Boolean).join("  ·  ")}
+                </p>
+              )}
+              {team.club_id && team.club_name && (
+                <Link
+                  to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`}
+                  style={styles.heroClubLink}
+                >
+                  🏛 Ver página do clube
+                </Link>
+              )}
+            </>
+          )}
+        </div>
+      </header>
 
-      {loading && <PageLoader />}
+      {/* ─── Content ───────────────────────────────────────────── */}
+      <main style={styles.page}>
       {error && <p style={styles.error}>{error}</p>}
 
       {!loading && !error && (
         <>
-          <div style={styles.titleRow}>
-            {team?.club_logo_url && (
-              <Shield url={team.club_logo_url} size={56} />
-            )}
-            <h1 style={styles.title}>{team?.name || "Time"}</h1>
-          </div>
-
-          {team && (
-            <div style={styles.infoCard}>
-              <InfoRow label="Cidade" value={team.city_name} />
-              {team.venue_name && <InfoRow label="Estádio / Arena" value={team.venue_name} />}
-              {team.president && <InfoRow label="Presidente" value={team.president} />}
-              {team.founded_at && <InfoRow label="Fundação" value={formatDate(team.founded_at)} />}
-              {team.category && (
-                <div style={styles.infoRow}>
-                  <span style={styles.infoLabel}>Categoria</span>
-                  <span style={styles.infoValue}>{categoryLabel[team.category] ?? team.category}</span>
-                </div>
-              )}
-              {team.club_id && team.club_name && (
-                <div style={styles.infoRow}>
-                  <span style={styles.infoLabel}>Clube</span>
-                  <Link to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`} style={styles.clubLink}>{team.club_name}</Link>
-                </div>
-              )}
-            </div>
-          )}
 
           {/* Elenco */}
           <section style={styles.rosterSection}>
@@ -497,7 +524,8 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
           )}
         </>
       )}
-    </main>
+      </main>
+    </>
   );
 }
 
@@ -657,61 +685,102 @@ function groupByChampionship(matches: TeamMatch[]): [string, TeamMatch[]][] {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  page: {
-    maxWidth: "860px",
+  // ─── Hero ────────────────────────────────────────────────────
+  hero: {
+    background: "linear-gradient(160deg, #1e1e2e 0%, #181825 60%, #11111b 100%)",
+    borderBottom: "1px solid #313244",
+    paddingBottom: "2.5rem",
+    overflow: "hidden",
+  },
+  heroAccentBar: {
+    height: "4px",
+    background: "linear-gradient(90deg, #cba6f7 0%, #89b4fa 50%, #a6e3a1 100%)",
+  },
+  heroInner: {
+    maxWidth: "1100px",
     margin: "0 auto",
-    padding: "3rem 1.5rem",
-  },
-  back: {
-    display: "inline-block",
-    color: "#89b4fa",
-    textDecoration: "none",
-    fontSize: "0.9rem",
-    marginBottom: "2rem",
-  },
-  titleRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.85rem",
-    marginBottom: "1rem",
-  },
-  title: {
-    fontSize: "1.75rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    margin: 0,
-  },
-  infoCard: {
-    backgroundColor: "#1e1e2e",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    padding: "1rem 1.25rem",
-    marginBottom: "2rem",
-    display: "flex",
-    flexWrap: "wrap" as const,
-    gap: "0.75rem 2rem",
-  },
-  infoRow: {
+    padding: "2rem 2rem 0",
     display: "flex",
     flexDirection: "column" as const,
-    gap: "2px",
+    gap: "0.5rem",
   },
-  infoLabel: {
-    fontSize: "0.65rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.07em",
-  },
-  infoValue: {
-    fontSize: "0.9rem",
-    color: "#cdd6f4",
-  },
-  clubLink: {
-    fontSize: "0.9rem",
+  heroBack: {
     color: "#89b4fa",
     textDecoration: "none",
+    fontSize: "0.85rem",
+    marginBottom: "0.4rem",
+    alignSelf: "flex-start" as const,
+  },
+  heroTopRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "1.4rem",
+  },
+  heroShieldWrap: {
+    flexShrink: 0,
+    width: 96,
+    height: 96,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "rgba(255,255,255,0.04)",
+    borderRadius: "12px",
+    border: "1px solid #313244",
+    padding: "8px",
+  },
+  heroTitle: {
+    margin: 0,
+    fontSize: "clamp(1.6rem, 4vw, 2.4rem)",
+    fontWeight: 800,
+    color: "#cdd6f4",
+    lineHeight: 1.15,
+    letterSpacing: "-0.02em",
+  },
+  heroTagRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.45rem",
+    flexWrap: "wrap" as const,
+    marginTop: "0.45rem",
+  },
+  heroTagSport: {
+    backgroundColor: "#313244",
+    borderRadius: "6px",
+    color: "#cdd6f4",
+    fontSize: "0.78rem",
+    fontWeight: 700,
+    padding: "0.2rem 0.6rem",
+    letterSpacing: "0.03em",
+  },
+  heroTagCat: {
+    backgroundColor: "#1a2e4a",
+    border: "1px solid #2a4a6a",
+    borderRadius: "6px",
+    color: "#89b4fa",
+    fontSize: "0.78rem",
+    fontWeight: 700,
+    padding: "0.2rem 0.6rem",
+    letterSpacing: "0.03em",
+  },
+  heroSub: {
+    margin: 0,
+    fontSize: "0.92rem",
+    color: "#a6adc8",
+    lineHeight: 1.6,
+  },
+  heroClubLink: {
+    color: "#cba6f7",
+    textDecoration: "none",
+    fontSize: "0.83rem",
     fontWeight: 600,
+    alignSelf: "flex-start" as const,
+    marginTop: "0.2rem",
+  },
+  // ─── Page ────────────────────────────────────────────────────
+  page: {
+    maxWidth: "1100px",
+    margin: "0 auto",
+    padding: "2.5rem 2rem 4rem",
   },
   status: { color: "#cdd6f4" },
   error: { color: "#f38ba8" },

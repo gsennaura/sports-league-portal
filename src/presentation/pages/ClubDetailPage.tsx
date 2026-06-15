@@ -361,17 +361,6 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
             {/* ─── Tab: Times ──────────────────────────────────── */}
             {activeTab === "times" && (
               <div>
-                <div style={S.teamsConceptBanner}>
-                  <span style={S.teamsConceptIcon}>👕</span>
-                  <div>
-                    <div style={S.teamsConceptTitle}>O que são times?</div>
-                    <div style={S.teamsConceptText}>
-                      Cada time representa um grupo de atletas que compete em uma modalidade e categoria específica.
-                      Um clube pode ter vários times — por exemplo, futebol amador, sub-17 ou master —
-                      cada um disputando suas próprias competições.
-                    </div>
-                  </div>
-                </div>
                 {teams.length === 0 ? (
                   <p style={S.empty}>Nenhum time cadastrado.</p>
                 ) : (
@@ -381,8 +370,22 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                       const cat = t.category ? (categoryLabel[t.category] ?? t.category) : null;
                       return (
                         <Link key={t.id} to={`/times/${toSlugPath(t.name, t.id)}`} style={S.teamCard}>
-                          <span style={S.teamCardSport}>{sport}</span>
-                          {cat && <span style={S.teamCardCat}>{cat}</span>}
+                          <div style={S.teamCardLogoWrap}>
+                            <img
+                              src={currentLogoUrl ?? club?.logo_url ?? NO_SHIELD}
+                              onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_SHIELD; }}
+                              style={{ width: 40, height: 40, objectFit: "contain" }}
+                              alt=""
+                            />
+                          </div>
+                          <div style={S.teamCardBody}>
+                            <span style={S.teamCardName}>{t.name}</span>
+                            <div style={S.teamCardMeta}>
+                              <span style={S.teamCardSport}>{sport}</span>
+                              {cat && <span style={S.teamCardCat}>{cat}</span>}
+                            </div>
+                          </div>
+                          <span style={S.teamCardArrow}>›</span>
                         </Link>
                       );
                     })}
@@ -505,10 +508,14 @@ const S: Record<string, React.CSSProperties> = {
     gap: "1.2rem",
   },
   heroShield: {
-    width: 72,
-    height: 72,
+    width: 96,
+    height: 96,
     objectFit: "contain" as const,
     flexShrink: 0,
+    borderRadius: "10px",
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid #313244",
+    padding: "6px",
   },
   heroTitle: {
     margin: 0,
@@ -581,28 +588,75 @@ const S: Record<string, React.CSSProperties> = {
   // Teams grid
   teamsGrid: {
     display: "flex",
-    flexWrap: "wrap" as const,
+    flexDirection: "column" as const,
     gap: "0.5rem",
   },
   teamCard: {
-    display: "inline-flex",
+    display: "flex",
     alignItems: "center",
-    gap: "0.35rem",
+    gap: "1rem",
     backgroundColor: "#1e1e2e",
     border: "1px solid #313244",
-    borderRadius: "6px",
-    padding: "0.4rem 0.85rem",
+    borderRadius: "10px",
+    padding: "0.75rem 1rem",
     textDecoration: "none",
+    transition: "border-color 0.15s, background 0.15s",
+  },
+  teamCardLogoWrap: {
+    width: 52,
+    height: 52,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "rgba(255,255,255,0.03)",
+    borderRadius: "8px",
+    border: "1px solid #313244",
+    flexShrink: 0,
+    padding: "4px",
+  },
+  teamCardBody: {
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column" as const,
+    gap: "0.3rem",
+  },
+  teamCardName: {
+    fontSize: "1rem",
+    fontWeight: 700,
+    color: "#cdd6f4",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap" as const,
+  },
+  teamCardMeta: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.4rem",
+    flexWrap: "wrap" as const,
   },
   teamCardSport: {
-    fontSize: "0.85rem",
+    fontSize: "0.75rem",
     fontWeight: 600,
-    color: "#cdd6f4",
+    color: "#a6adc8",
+    backgroundColor: "#313244",
+    borderRadius: "4px",
+    padding: "0.1rem 0.45rem",
   },
   teamCardCat: {
-    fontSize: "0.72rem",
+    fontSize: "0.75rem",
     color: "#89b4fa",
-    fontWeight: 500,
+    fontWeight: 600,
+    backgroundColor: "#1a2e4a",
+    border: "1px solid #2a4a6a",
+    borderRadius: "4px",
+    padding: "0.1rem 0.45rem",
+  },
+  teamCardArrow: {
+    color: "#45475a",
+    fontSize: "1.4rem",
+    lineHeight: 1,
+    flexShrink: 0,
   },
 
   // Match groups
