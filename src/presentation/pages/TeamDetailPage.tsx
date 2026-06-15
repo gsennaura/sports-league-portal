@@ -162,43 +162,58 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
     }
   };
   return (
-    <main style={styles.page}>
-      <Link to="/clubes" style={styles.back}>← Clubes</Link>
-
-      {loading && <PageLoader />}
-      {error && <p style={styles.error}>{error}</p>}
-
-      {!loading && !error && (
-        <>
-          <div style={styles.titleRow}>
-            {team?.club_logo_url && (
-              <Shield url={team.club_logo_url} size={56} />
-            )}
-            <h1 style={styles.title}>{team?.name || "Time"}</h1>
-          </div>
-
-          {team && (
-            <div style={styles.infoCard}>
-              <InfoRow label="Cidade" value={team.city_name} />
-              {team.venue_name && <InfoRow label="Estádio / Arena" value={team.venue_name} />}
-              {team.president && <InfoRow label="Presidente" value={team.president} />}
-              {team.founded_at && <InfoRow label="Fundação" value={formatDate(team.founded_at)} />}
-              {team.category && (
-                <div style={styles.infoRow}>
-                  <span style={styles.infoLabel}>Categoria</span>
-                  <span style={styles.infoValue}>{categoryLabel[team.category] ?? team.category}</span>
-                </div>
-              )}
-              {team.club_id && team.club_name && (
-                <div style={styles.infoRow}>
-                  <span style={styles.infoLabel}>Clube</span>
-                  <Link to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`} style={styles.clubLink}>{team.club_name}</Link>
-                </div>
-              )}
-            </div>
+    <>
+      {/* ─── Hero ──────────────────────────────────────────────── */}
+      <header className="hero">
+        <div className="hero__bar" />
+        <div className="hero__inner">
+          {team?.club_id && team?.club_name ? (
+            <Link to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`} className="back-link">
+              ← {team.club_name}
+            </Link>
+          ) : (
+            <Link to="/clubes" className="back-link">← Clubes</Link>
           )}
+          {loading && !team && <PageLoader />}
+          {team && (
+            <>
+              <div className="hero__row">
+                <div style={{ position: "relative", flexShrink: 0 }}>
+                  <Shield url={team.club_logo_url} size={72} />
+                </div>
+                <div>
+                  <h1 className="hero__title">{team.name}</h1>
+                  <p className="muted" style={{ marginTop: "0.3rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" as const }}>
+                    {team.sport_name && <span className="badge">{team.sport_name}</span>}
+                    {team.category && <span className="badge badge-info">{categoryLabel[team.category] ?? team.category}</span>}
+                  </p>
+                </div>
+              </div>
+              <p className="hero__sub">
+                {[
+                  team.city_name && `📍 ${team.city_name}`,
+                  team.venue_name && `🏟 ${team.venue_name}`,
+                  team.president && `👤 ${team.president}`,
+                  team.founded_at && `📅 ${formatDate(team.founded_at)}`,
+                ].filter(Boolean).join("  ·  ")}
+              </p>
+              {team.club_id && team.club_name && (
+                <Link to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`} style={{ color: "#89b4fa", fontSize: "0.85rem", textDecoration: "none", marginTop: "0.5rem", display: "inline-block" }}>
+                  🏛 Ver página do clube
+                </Link>
+              )}
+            </>
+          )}
+        </div>
+      </header>
 
-          {/* Elenco */}
+      {/* ─── Main ──────────────────────────────────────────────── */}
+      <main style={styles.page}>
+        {error && <p style={styles.error}>{error}</p>}
+
+        {!loading && !error && (
+          <>
+            {/* Elenco */}
           <section style={styles.rosterSection}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
               <h2 style={{ ...styles.seasonTitle, margin: 0 }}>Elenco ({athletes.length})</h2>
@@ -497,7 +512,8 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
           )}
         </>
       )}
-    </main>
+      </main>
+    </>
   );
 }
 

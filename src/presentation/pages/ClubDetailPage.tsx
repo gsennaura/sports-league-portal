@@ -361,28 +361,31 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
             {/* ─── Tab: Times ──────────────────────────────────── */}
             {activeTab === "times" && (
               <div>
-                <div className="form-warning">
-                  <span >👕</span>
-                  <div>
-                    <div className="section-heading">O que são times?</div>
-                    <div className="muted">
-                      Cada time representa um grupo de atletas que compete em uma modalidade e categoria específica.
-                      Um clube pode ter vários times — por exemplo, futebol amador, sub-17 ou master —
-                      cada um disputando suas próprias competições.
-                    </div>
-                  </div>
-                </div>
                 {teams.length === 0 ? (
                   <p className="muted">Nenhum time cadastrado.</p>
                 ) : (
-                  <div className="form-field-group">
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {teams.map((t) => {
                       const sport = t.sport_name ?? "Esporte";
                       const cat = t.category ? (categoryLabel[t.category] ?? t.category) : null;
                       return (
-                        <Link key={t.id} to={`/times/${toSlugPath(t.name, t.id)}`} className="card">
-                          <span className="muted">{sport}</span>
-                          {cat && <span className="muted">{cat}</span>}
+                        <Link key={t.id} to={`/times/${toSlugPath(t.name, t.id)}`} style={S.teamCard}>
+                          <div style={S.teamCardLogo}>
+                            <img
+                              src={currentLogoUrl ?? club?.logo_url ?? NO_SHIELD}
+                              onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_SHIELD; }}
+                              style={{ width: 40, height: 40, objectFit: "contain" as const }}
+                              alt=""
+                            />
+                          </div>
+                          <div style={S.teamCardBody}>
+                            <span style={S.teamCardName}>{t.name}</span>
+                            <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" as const, marginTop: "0.2rem" }}>
+                              <span className="badge">{sport}</span>
+                              {cat && <span className="badge badge-info">{cat}</span>}
+                            </div>
+                          </div>
+                          <span style={S.teamCardArrow}>›</span>
                         </Link>
                       );
                     })}
@@ -581,18 +584,51 @@ const S: Record<string, React.CSSProperties> = {
   // Teams grid
   teamsGrid: {
     display: "flex",
-    flexWrap: "wrap" as const,
+    flexDirection: "column" as const,
     gap: "0.5rem",
   },
   teamCard: {
-    display: "inline-flex",
+    display: "flex",
     alignItems: "center",
-    gap: "0.35rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "6px",
-    padding: "0.4rem 0.85rem",
+    gap: "0.85rem",
+    backgroundColor: "var(--c-brand)",
+    border: "1px solid var(--c-border)",
+    borderRadius: "8px",
+    padding: "0.65rem 0.85rem",
     textDecoration: "none",
+    transition: "border-color 0.15s",
+  },
+  teamCardLogo: {
+    width: 52,
+    height: 52,
+    flexShrink: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "8px",
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid var(--c-border)",
+    padding: "4px",
+    overflow: "hidden" as const,
+  },
+  teamCardBody: {
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column" as const,
+  },
+  teamCardName: {
+    fontSize: "1rem",
+    fontWeight: 700,
+    color: "var(--c-text)",
+    whiteSpace: "nowrap" as const,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  teamCardArrow: {
+    fontSize: "1.4rem",
+    color: "var(--c-text-muted)",
+    flexShrink: 0,
   },
   teamCardSport: {
     fontSize: "0.85rem",
