@@ -147,46 +147,46 @@ export function AdminDirigentesPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <h1 style={S.title}>Gerenciar Dirigentes</h1>
-          <p style={S.subtitle}>Vincule usuários como dirigentes de times</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <h1 className="page-title">Gerenciar Dirigentes</h1>
+          <p className="page-subtitle">Vincule usuários como dirigentes de times</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
 
         {/* ── Solicitações Pendentes ──────────────────────────── */}
         {pending.length > 0 && (
-          <section style={{ ...S.card, borderColor: "#f9e2af" }}>
-            <h2 style={{ ...S.sectionTitle, color: "#f9e2af" }}>
+          <section style={{ ...S.card, borderColor: "var(--c-warning)" }}>
+            <h2 style={{ ...S.sectionTitle, color: "var(--c-warning)" }}>
               Solicitações Pendentes ({pending.length})
             </h2>
             {pending.map((p) => {
               const u = users.find((x) => x.id === p.user_id);
               const t = teams.find((x) => x.id === p.team_id);
               return (
-                <div key={p.id} style={S.row}>
-                  <div style={S.rowInfo}>
-                    <span style={S.rowMain}>{u?.name ?? u?.email ?? p.user_id}</span>
-                    {u?.name && <span style={S.rowSub}>{u.email}</span>}
-                    <span style={S.rowSub}>Time: {t?.name ?? p.team_id}</span>
-                    {p.title && <span style={S.rowSub}>Cargo: {p.title}</span>}
+                <div key={p.id} className="form-field-group">
+                  <div className="muted">
+                    <span className="team-name">{u?.name ?? u?.email ?? p.user_id}</span>
+                    {u?.name && <span className="muted">{u.email}</span>}
+                    <span className="muted">Time: {t?.name ?? p.team_id}</span>
+                    {p.title && <span className="muted">Cargo: {p.title}</span>}
                     {pendingMsg?.id === p.id && (
-                      <span style={{ color: pendingMsg.type === "ok" ? "#a6e3a1" : "#f38ba8", fontSize: "0.8rem" }}>
+                      <span style={{ color: pendingMsg.type === "ok" ? "var(--c-positive)" : "var(--c-negative)", fontSize: "0.8rem" }}>
                         {pendingMsg.text}
                       </span>
                     )}
                   </div>
                   <div style={{ display: "flex", gap: "8px" }}>
                     <button
-                      style={{ ...S.btnAction, background: "#a6e3a1", color: "#18265b" }}
+                      style={{ ...S.btnAction, background: "var(--c-positive)", color: "var(--c-brand)" }}
                       disabled={processingPending === p.id}
                       onClick={() => void handlePendingAction(p.id, "aprovar")}
                     >Aprovar</button>
                     <button
-                      style={S.btnAction}
+                      className="btn btn-secondary"
                       disabled={processingPending === p.id}
                       onClick={() => void handlePendingAction(p.id, "rejeitar")}
                     >Rejeitar</button>
@@ -198,24 +198,24 @@ export function AdminDirigentesPage() {
         )}
 
         {/* ── Vincular Dirigente ──────────────────────────────── */}
-        <section style={S.card}>
-          <h2 style={S.sectionTitle}>Vincular Dirigente</h2>
-          <form onSubmit={(e) => void handleCreate(e)} style={S.form}>
+        <section className="card">
+          <h2 className="section-heading">Vincular Dirigente</h2>
+          <form onSubmit={(e) => void handleCreate(e)} className="form-body">
 
             {/* User search combobox */}
-            <div style={S.fieldGroup}>
-              <label style={S.label}>Usuário <span style={S.required}>*</span></label>
-              <div style={S.comboWrap}>
+            <div className="form-field-group">
+              <label className="form-label">Usuário <span style={{ color: "var(--c-negative)" }}>*</span></label>
+              <div className="search-wrap">
                 {selectedUser ? (
-                  <div style={S.selectedChip}>
-                    <span style={S.chipText}>
+                  <div className="badge badge--success">
+                    <span className="muted">
                       {selectedUser.name
-                        ? <><strong>{selectedUser.name}</strong> <span style={S.chipEmail}>({selectedUser.email})</span></>
+                        ? <><strong>{selectedUser.name}</strong> <span className="badge">({selectedUser.email})</span></>
                         : selectedUser.email}
                     </span>
                     <button
                       type="button"
-                      style={S.chipClear}
+                      className="btn-edit"
                       onClick={() => { setSelectedUser(null); setUserSearch(""); }}
                       aria-label="Limpar usuário"
                     >×</button>
@@ -223,7 +223,7 @@ export function AdminDirigentesPage() {
                 ) : (
                   <input
                     type="text"
-                    style={S.searchInput}
+                    className="search-input"
                     placeholder="Buscar por nome ou e-mail…"
                     value={userSearch}
                     onChange={(e) => { setUserSearch(e.target.value); setSearchOpen(true); }}
@@ -233,35 +233,35 @@ export function AdminDirigentesPage() {
                   />
                 )}
                 {searchOpen && filteredUsers.length > 0 && !selectedUser && (
-                  <div style={S.dropdown}>
+                  <div className="modal-card">
                     {filteredUsers.map((u) => (
                       <button
                         key={u.id}
                         type="button"
-                        style={S.dropdownItem}
+                        className="row-link"
                         onMouseDown={() => {
                           setSelectedUser(u);
                           setUserSearch("");
                           setSearchOpen(false);
                         }}
                       >
-                        <span style={S.dropName}>{u.name ?? <em style={{ color: "#ffffff" }}>sem nome</em>}</span>
-                        <span style={S.dropEmail}>{u.email}</span>
+                        <span className="team-name">{u.name ?? <em style={{ color: "#ffffff" }}>sem nome</em>}</span>
+                        <span className="muted">{u.email}</span>
                       </button>
                     ))}
                   </div>
                 )}
                 {searchOpen && userSearch.trim().length >= 1 && filteredUsers.length === 0 && !selectedUser && (
-                  <div style={S.dropdownEmpty}>Nenhum usuário encontrado.</div>
+                  <div className="muted">Nenhum usuário encontrado.</div>
                 )}
               </div>
             </div>
 
             {/* Team dropdown */}
-            <div style={S.fieldGroup}>
-              <label style={S.label}>Time <span style={S.required}>*</span></label>
+            <div className="form-field-group">
+              <label className="form-label">Time <span style={{ color: "var(--c-negative)" }}>*</span></label>
               <select
-                style={S.select}
+                className="form-select"
                 value={selectedTeamId}
                 onChange={(e) => setSelectedTeamId(e.target.value)}
                 required
@@ -274,11 +274,11 @@ export function AdminDirigentesPage() {
             </div>
 
             {/* Title */}
-            <div style={S.fieldGroup}>
-              <label style={S.label}>Cargo / Título <span style={S.optional}>(opcional)</span></label>
+            <div className="form-field-group">
+              <label className="form-label">Cargo / Título <span className="muted">(opcional)</span></label>
               <input
                 type="text"
-                style={S.select}
+                className="form-select"
                 placeholder="Ex: Presidente, Técnico, Diretor…"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -286,7 +286,7 @@ export function AdminDirigentesPage() {
             </div>
 
             {createMsg && (
-              <p style={{ color: createMsg.type === "ok" ? "#a6e3a1" : "#f38ba8", fontSize: "0.875rem", margin: 0 }}>
+              <p style={{ color: createMsg.type === "ok" ? "var(--c-positive)" : "var(--c-negative)", fontSize: "0.875rem", margin: 0 }}>
                 {createMsg.type === "ok" ? "✓" : "⚠"} {createMsg.text}
               </p>
             )}
@@ -300,17 +300,17 @@ export function AdminDirigentesPage() {
                 {creating ? "Vinculando…" : "Vincular"}
               </button>
               {(selectedUser || selectedTeamId || title) && (
-                <button type="button" style={S.btnCancelLink} onClick={clearForm}>Limpar</button>
+                <button type="button" className="btn btn-secondary" onClick={clearForm}>Limpar</button>
               )}
             </div>
           </form>
         </section>
 
         {/* ── Dirigentes por time ─────────────────────────────── */}
-        <section style={S.card}>
-          <h2 style={S.sectionTitle}>Dirigentes por time</h2>
+        <section className="card">
+          <h2 className="section-heading">Dirigentes por time</h2>
           <select
-            style={{ ...S.select, marginBottom: "1rem" }}
+            className="form-select" style={{ marginBottom: "1rem" }}
             value={filterTeamId}
             onChange={(e) => setFilterTeamId(e.target.value)}
           >
@@ -325,17 +325,17 @@ export function AdminDirigentesPage() {
           {assignments.map((a) => {
             const u = users.find((x) => x.id === a.user_id);
             return (
-              <div key={a.id} style={S.row}>
-                <div style={S.rowInfo}>
-                  <span style={S.rowMain}>{u?.name ?? u?.email ?? a.user_id}</span>
-                  {u?.name && <span style={S.rowSub}>{u.email}</span>}
-                  {a.title && <span style={S.rowSub}>{a.title}</span>}
-                  <span style={{ ...S.rowSub, color: a.is_active ? "#a6e3a1" : "#f38ba8" }}>
+              <div key={a.id} className="form-field-group">
+                <div className="muted">
+                  <span className="team-name">{u?.name ?? u?.email ?? a.user_id}</span>
+                  {u?.name && <span className="muted">{u.email}</span>}
+                  {a.title && <span className="muted">{a.title}</span>}
+                  <span style={{ ...S.rowSub, color: a.is_active ? "var(--c-positive)" : "var(--c-negative)" }}>
                     {a.is_active ? "Ativo" : "Inativo"}
                   </span>
                 </div>
                 <button
-                  style={S.btnRemove}
+                  className="btn btn-danger"
                   disabled={deleting === a.id}
                   onClick={() => void handleDelete(a.id)}
                 >

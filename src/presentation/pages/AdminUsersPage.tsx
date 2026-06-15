@@ -59,25 +59,25 @@ export function AdminUsersPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <h1 style={S.title}>Usuários</h1>
-          <p style={S.subtitle}>{users.length} usuário{users.length !== 1 ? "s" : ""} cadastrado{users.length !== 1 ? "s" : ""}</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <h1 className="page-title">Usuários</h1>
+          <p className="page-subtitle">{users.length} usuário{users.length !== 1 ? "s" : ""} cadastrado{users.length !== 1 ? "s" : ""}</p>
         </div>
       </header>
 
-      <main style={S.page}>
-        <div style={S.toolbar}>
+      <main className="page-container">
+        <div className="toolbar">
           <input
-            style={S.search}
+            className="search-wrap"
             type="search"
             placeholder="Buscar por nome ou e-mail..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
           <select
-            style={S.select}
+            className="form-select"
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
           >
@@ -88,25 +88,25 @@ export function AdminUsersPage() {
           </select>
         </div>
 
-        {loading && <p style={S.hint}>Carregando...</p>}
-        {error && <p style={S.errorText}>{error}</p>}
+        {loading && <p className="muted">Carregando...</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && !error && (
           <>
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>Nome</th>
-                    <th style={S.th}>E-mail</th>
-                    <th style={S.th}>Perfil</th>
-                    <th style={S.th}>Status</th>
+                    <th >Nome</th>
+                    <th >E-mail</th>
+                    <th >Perfil</th>
+                    <th >Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filtered.length === 0 ? (
                     <tr>
-                      <td colSpan={4} style={S.empty}>
+                      <td colSpan={4} className="muted">
                         {search || roleFilter
                           ? "Nenhum usuário encontrado para este filtro."
                           : "Nenhum usuário cadastrado."}
@@ -114,21 +114,21 @@ export function AdminUsersPage() {
                     </tr>
                   ) : (
                     filtered.map((u) => (
-                      <tr key={u.id} style={S.trRow}>
-                        <td style={S.td}>{u.name ?? <span style={S.muted}>—</span>}</td>
-                        <td style={S.td}>{u.email}</td>
-                        <td style={S.td}>
+                      <tr key={u.id} >
+                        <td >{u.name ?? <span className="muted">—</span>}</td>
+                        <td >{u.email}</td>
+                        <td >
                           <span
                             style={{
                               ...S.badge,
-                              color: ROLE_COLOR[u.role] ?? "#cdd6f4",
+                              color: ROLE_COLOR[u.role] ?? "var(--c-text)",
                               borderColor: ROLE_COLOR[u.role] ?? "#45475a",
                             }}
                           >
                             {ROLE_LABEL[u.role] ?? u.role}
                           </span>
                         </td>
-                        <td style={S.td}>
+                        <td >
                           <span style={u.is_active ? S.active : S.inactive}>
                             {u.is_active ? "Ativo" : "Inativo"}
                           </span>
@@ -140,7 +140,7 @@ export function AdminUsersPage() {
               </table>
             </div>
 
-            <p style={S.count}>
+            <p className="page-info">
               {filtered.length} usuário{filtered.length !== 1 ? "s" : ""}
               {(search || roleFilter) && ` encontrado${filtered.length !== 1 ? "s" : ""}`}
             </p>

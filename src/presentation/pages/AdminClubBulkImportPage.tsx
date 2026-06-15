@@ -164,7 +164,7 @@ function CategoryPicker({
       {isOpen && (
         <>
           <div style={{ position: "fixed", inset: 0, zIndex: 99 }} onClick={() => setOpenId(null)} />
-          <div style={S.pickerPanel}>
+          <div className="card">
             {TEAM_CATEGORIES.map(cat => {
               const checked = categories.has(cat.key);
               return (
@@ -203,10 +203,10 @@ function ResolutionChip({
     <div style={{ ...S.chip, ...(checked ? (found ? S.chipOk : S.chipErr) : {}) }}>
       <span>{name}</span>
       {!checked && <span style={{ color: "#ffffff", fontSize: "0.7rem" }}>—</span>}
-      {found    && <span style={{ color: "#a6e3a1", fontSize: "0.75rem", fontWeight: 700 }}>✓</span>}
+      {found    && <span style={{ color: "var(--c-positive)", fontSize: "0.75rem", fontWeight: 700 }}>✓</span>}
       {checked && !found && (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
-          <span style={{ color: "#f38ba8", fontSize: "0.75rem", fontWeight: 700 }}>✗ não encontrado</span>
+          <span style={{ color: "var(--c-negative)", fontSize: "0.75rem", fontWeight: 700 }}>✗ não encontrado</span>
           {suggestion
             ? <span style={{ color: "#fab387", fontSize: "0.65rem" }}>Quis dizer: <em>{suggestion}</em>?</span>
             : <span style={{ color: "#ffffff", fontSize: "0.65rem" }}>Nenhum nome parecido</span>
@@ -255,16 +255,16 @@ function ResolutionPanel({
 
   return (
     <>
-      <div style={S.tableTopBar}>
-        <p style={S.rowCount}>{distinctNames.length} {entityLabel}{distinctNames.length !== 1 ? "s" : ""} única{distinctNames.length !== 1 ? "s" : ""}</p>
-        <button style={S.btnSecondary} onClick={onReload}>↩ Recarregar CSV</button>
+      <div className="table-top-bar">
+        <p className="page-info">{distinctNames.length} {entityLabel}{distinctNames.length !== 1 ? "s" : ""} única{distinctNames.length !== 1 ? "s" : ""}</p>
+        <button className="btn btn-secondary" onClick={onReload}>↩ Recarregar CSV</button>
       </div>
 
-      <div style={S.resolveCard}>
-        <div style={S.resolveHeader}>
+      <div className="card">
+        <div className="toolbar">
           <div>
-            <h2 style={S.resolveTitle}>{title}</h2>
-            <p style={S.resolveDesc}>
+            <h2 className="section-heading">{title}</h2>
+            <p className="muted">
               {totalChecked === 0
                 ? `Identifique as ${entityLabel}s no sistema antes de continuar.`
                 : allFound
@@ -282,18 +282,18 @@ function ResolutionPanel({
           </button>
         </div>
 
-        <div style={S.chipList}>
+        <div className="filter-bar">
           {distinctNames.map(name => (
             <ResolutionChip key={name} name={name} map={map} suggestions={suggestions} />
           ))}
         </div>
 
-        {resolveError && <p style={S.errorText}>{resolveError}</p>}
+        {resolveError && <p className="error-text">{resolveError}</p>}
       </div>
 
       {totalChecked > 0 && (
-        <div style={S.actions}>
-          <button style={S.btnBack} onClick={onBack}>← Voltar</button>
+        <div className="form-actions">
+          <button className="btn btn-secondary" onClick={onBack}>← Voltar</button>
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
             <button
               style={{ ...S.btnPrimary, opacity: canContinue ? 1 : 0.5 }}
@@ -305,12 +305,12 @@ function ResolutionPanel({
             </button>
             {mandatory && hasUnresolved && (
               <>
-                <button style={S.btnSecondary} onClick={onContinue}>Continuar mesmo assim</button>
-                <span style={S.hintWarn}>⚠ {entityLabel}s não encontradas vão causar falha nas linhas correspondentes.</span>
+                <button className="btn btn-secondary" onClick={onContinue}>Continuar mesmo assim</button>
+                <span className="muted">⚠ {entityLabel}s não encontradas vão causar falha nas linhas correspondentes.</span>
               </>
             )}
             {!mandatory && onSkip && (
-              <button style={S.btnSecondary} onClick={onSkip}>Pular resolução →</button>
+              <button className="btn btn-secondary" onClick={onSkip}>Pular resolução →</button>
             )}
           </div>
         </div>
@@ -594,16 +594,16 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/clubes" style={S.back}>← Clubes</Link>
-          <h1 style={S.title}>Importar Clubes em Bulk</h1>
-          <p style={S.subtitle}>Upload CSV → Resolve cidades → Resolve locais → Revisa → Importa</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/clubes" className="back-link">← Clubes</Link>
+          <h1 className="page-title">Importar Clubes em Bulk</h1>
+          <p className="page-subtitle">Upload CSV → Resolve cidades → Resolve locais → Revisa → Importa</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
 
         {/* ── STEP 1: UPLOAD ── */}
         {showUpload && (
@@ -614,22 +614,22 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
             onClick={() => fileRef.current?.click()}
           >
             <input ref={fileRef} type="file" accept=".csv" style={{ display: "none" }} onChange={handleFileChange} />
-            <div style={S.dropIcon}>📋</div>
-            <p style={S.dropTitle}>Arraste o CSV aqui ou clique para selecionar</p>
+            <div >📋</div>
+            <p className="section-heading">Arraste o CSV aqui ou clique para selecionar</p>
             {fileName
-              ? <p style={S.dropHint}>Arquivo selecionado: <strong>{fileName}</strong></p>
-              : <p style={S.dropHint}>Arquivo CSV com os clubes para importar</p>
+              ? <p className="muted">Arquivo selecionado: <strong>{fileName}</strong></p>
+              : <p className="muted">Arquivo CSV com os clubes para importar</p>
             }
-            {parseError && <p style={S.errorText}>{parseError}</p>}
+            {parseError && <p className="error-text">{parseError}</p>}
           </section>
         )}
 
         {showUpload && (
           <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", marginTop: "0.5rem" }}>
-            <button style={S.btnTemplate} onClick={e => { e.stopPropagation(); downloadTemplate(); }}>
+            <button className="btn btn-secondary" onClick={e => { e.stopPropagation(); downloadTemplate(); }}>
               ⬇ Baixar modelo CSV
             </button>
-            <p style={S.hint}>
+            <p className="muted">
               Colunas: <code>nome*</code>, <code>cidade*</code>, <code>local</code>,{" "}
               <code>sigla</code>, <code>apelido</code>, <code>fundacao</code>,{" "}
               <code>presidente</code>, <code>instituicao_vinculada</code>
@@ -677,34 +677,34 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
         {/* ── STEP 4: TABELA EDITÁVEL ── */}
         {showTable && (
           <>
-            <div style={S.tableTopBar}>
-              <p style={S.rowCount}>
+            <div className="table-top-bar">
+              <p className="page-info">
                 {rows.length} {rows.length === 1 ? "clube carregado" : "clubes carregados"}
               </p>
               <button
-                style={S.btnSecondary}
+                className="btn btn-secondary"
                 onClick={() => hasVenueColumn ? setVenueDone(false) : setCityDone(false)}
               >
                 ← Voltar
               </button>
             </div>
 
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>Nome *</th>
-                    <th style={S.th}>Cidade *</th>
-                    <th style={S.th}>Local</th>
-                    <th style={S.th}>Sigla</th>
-                    <th style={S.th}>Apelido</th>
-                    <th style={S.th}>Fundação</th>
-                    <th style={S.th}>Presidente</th>
-                    <th style={S.th}>Instituição</th>
-                    <th style={S.th}>Site</th>
-                    <th style={S.th}>Escudo</th>
-                    {createTeams && <th style={{ ...S.th, color: "#89b4fa" }}>Times ⚽</th>}
-                    <th style={S.th}>✕</th>
+                    <th >Nome *</th>
+                    <th >Cidade *</th>
+                    <th >Local</th>
+                    <th >Sigla</th>
+                    <th >Apelido</th>
+                    <th >Fundação</th>
+                    <th >Presidente</th>
+                    <th >Instituição</th>
+                    <th >Site</th>
+                    <th >Escudo</th>
+                    {createTeams && <th style={{ color: "var(--c-link)" }}>Times ⚽</th>}
+                    <th >✕</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -713,16 +713,16 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                     const cityErr  = !cityId;
                     return (
                       <tr key={row._id} style={{ ...S.tr, ...(cityErr ? S.trErr : {}) }}>
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.nome} onChange={e => updateRow(row._id, "nome", e.target.value)} />
+                        <td >
+                          <input className="cell-input" value={row.nome} onChange={e => updateRow(row._id, "nome", e.target.value)} />
                         </td>
                         <td style={{ ...S.td, ...(cityErr ? { backgroundColor: "#3a1e2e" } : {}) }}>
-                          <input style={{ ...S.cell, ...(cityErr ? { color: "#f38ba8" } : {}) }}
+                          <input style={{ ...S.cell, ...(cityErr ? { color: "var(--c-negative)" } : {}) }}
                             value={row.cidade} onChange={e => updateRow(row._id, "cidade", e.target.value)} />
                         </td>
-                        <td style={S.td}>
+                        <td >
                           <select
-                            style={S.venueSelect}
+                            className="form-select"
                             value={row.local}
                             onChange={e => updateRow(row._id, "local", e.target.value)}
                           >
@@ -732,25 +732,25 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                             ))}
                           </select>
                         </td>
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.sigla} onChange={e => updateRow(row._id, "sigla", e.target.value)} />
+                        <td >
+                          <input className="cell-input" value={row.sigla} onChange={e => updateRow(row._id, "sigla", e.target.value)} />
                         </td>
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.apelido} onChange={e => updateRow(row._id, "apelido", e.target.value)} />
+                        <td >
+                          <input className="cell-input" value={row.apelido} onChange={e => updateRow(row._id, "apelido", e.target.value)} />
                         </td>
-                        <td style={S.td}>
-                          <input style={S.cell} type="date" value={row.fundacao} onChange={e => updateRow(row._id, "fundacao", e.target.value)} />
+                        <td >
+                          <input className="cell-input" type="date" value={row.fundacao} onChange={e => updateRow(row._id, "fundacao", e.target.value)} />
                         </td>
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.presidente} onChange={e => updateRow(row._id, "presidente", e.target.value)} />
+                        <td >
+                          <input className="cell-input" value={row.presidente} onChange={e => updateRow(row._id, "presidente", e.target.value)} />
                         </td>
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.instituicao_vinculada} onChange={e => updateRow(row._id, "instituicao_vinculada", e.target.value)} />
+                        <td >
+                          <input className="cell-input" value={row.instituicao_vinculada} onChange={e => updateRow(row._id, "instituicao_vinculada", e.target.value)} />
                         </td>
-                        <td style={S.td}>
-                          <input style={S.cell} value={row.site} onChange={e => updateRow(row._id, "site", e.target.value)} placeholder="https://" />
+                        <td >
+                          <input className="cell-input" value={row.site} onChange={e => updateRow(row._id, "site", e.target.value)} placeholder="https://" />
                         </td>
-                        <td style={{ ...S.td, textAlign: "center" as const, minWidth: 48 }}>
+                        <td style={{ textAlign: "center" as const, minWidth: 48 }}>
                           {row.logo_url ? (
                             <img src={row.logo_url} alt="" style={{ width: 32, height: 32, objectFit: "contain", borderRadius: 4 }} />
                           ) : (
@@ -758,7 +758,7 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                           )}
                         </td>
                         {createTeams && (
-                          <td style={{ ...S.td, minWidth: 70, textAlign: "center" as const }}>
+                          <td style={{ minWidth: 70, textAlign: "center" as const }}>
                             <CategoryPicker
                               rowId={row._id}
                               categories={rowCategories[row._id] ?? new Set()}
@@ -768,8 +768,8 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                             />
                           </td>
                         )}
-                        <td style={S.td}>
-                          <button style={S.btnRemove} onClick={() => removeRow(row._id)}>✕</button>
+                        <td >
+                          <button className="btn btn-danger" onClick={() => removeRow(row._id)}>✕</button>
                         </td>
                       </tr>
                     );
@@ -778,14 +778,14 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
               </table>
             </div>
 
-            {saveError && <p style={S.errorText}>{saveError}</p>}
+            {saveError && <p className="error-text">{saveError}</p>}
 
             {/* ── League affiliation ── */}
-            <div style={S.leagueCard}>
-              <div style={S.teamsToggleRow}>
-                <span style={S.teamsToggleLabel}>🏆 Filiar clubes a uma liga</span>
+            <div className="card">
+              <div className="form-checkbox-label">
+                <span className="form-label">🏆 Filiar clubes a uma liga</span>
                 {affiliateLeagueId && leagues.find(l => l.id === affiliateLeagueId) && (
-                  <span style={{ color: "#89b4fa", fontSize: "0.78rem", fontWeight: 600 }}>
+                  <span style={{ color: "var(--c-link)", fontSize: "0.78rem", fontWeight: 600 }}>
                     {leagues.find(l => l.id === affiliateLeagueId)!.name}
                   </span>
                 )}
@@ -797,7 +797,7 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                     <select
                       value={affiliateLeagueId}
                       onChange={e => setAffiliateLeagueId(e.target.value)}
-                      style={S.sportSelect}
+                      className="form-select"
                     >
                       <option value="">— Não filiar a nenhuma liga —</option>
                       {leagues.map(l => (
@@ -810,37 +810,37 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
             </div>
 
             {/* ── Team creation options ── */}
-            <div style={S.teamsCard}>
-              <div style={S.teamsToggleRow}>
-                <label style={S.teamsToggleLabel}>
+            <div className="card">
+              <div className="form-checkbox-label">
+                <label className="form-label">
                   <input
                     type="checkbox"
                     checked={createTeams}
                     onChange={e => { setCreateTeams(e.target.checked); setOpenPickerId(null); }}
-                    style={{ accentColor: "#a6e3a1", width: 15, height: 15, cursor: "pointer" }}
+                    style={{ accentColor: "var(--c-positive)", width: 15, height: 15, cursor: "pointer" }}
                   />
                   <span>Criar times associados aos clubes importados?</span>
                 </label>
                 {createTeams && totalTeamsToBuild > 0 && (
-                  <span style={{ color: "#89b4fa", fontSize: "0.78rem", fontWeight: 600 }}>
+                  <span style={{ color: "var(--c-link)", fontSize: "0.78rem", fontWeight: 600 }}>
                     ⚽ {totalTeamsToBuild} time{totalTeamsToBuild !== 1 ? "s" : ""} configurado{totalTeamsToBuild !== 1 ? "s" : ""}
                   </span>
                 )}
               </div>
 
               {createTeams && (
-                <div style={S.teamsBody}>
-                  <div style={S.teamsRow}>
-                    <span style={S.teamsLabel}>Esporte:</span>
+                <div className="data-list">
+                  <div className="match-team-row">
+                    <span className="form-label">Esporte:</span>
                     {loadingSports
                       ? <span style={{ color: "#ffffff", fontSize: "0.85rem" }}>Carregando…</span>
                       : sports.length === 0
-                        ? <span style={{ color: "#f38ba8", fontSize: "0.85rem" }}>Nenhum esporte cadastrado</span>
+                        ? <span style={{ color: "var(--c-negative)", fontSize: "0.85rem" }}>Nenhum esporte cadastrado</span>
                         : (
                           <select
                             value={selectedSportId}
                             onChange={e => setSelectedSportId(e.target.value)}
-                            style={S.sportSelect}
+                            className="form-select"
                           >
                             {sports.map(s => (
                               <option key={s.id} value={s.id}>{s.name}</option>
@@ -849,8 +849,8 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                         )
                     }
                   </div>
-                  <div style={S.bulkCatRow}>
-                    <span style={S.teamsLabel}>Aplicar a todos:</span>
+                  <div className="form-field-group">
+                    <span className="form-label">Aplicar a todos:</span>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
                       {TEAM_CATEGORIES.map(cat => {
                         const allHave  = rows.length > 0 && rows.every(r => (rowCategories[r._id] ?? new Set()).has(cat.key));
@@ -872,7 +872,7 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
               )}
             </div>
 
-            <div style={S.actions}>
+            <div className="form-actions">
               <button
                 style={{ ...S.btnPrimary, opacity: saving ? 0.6 : 1 }}
                 onClick={() => void handleSave()}
@@ -883,7 +883,7 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                   : `⬆ Importar ${rows.length} clube${rows.length !== 1 ? "s" : ""}${affiliateLeagueId ? ` → ${leagues.find(l => l.id === affiliateLeagueId)?.short_name ?? "liga"}` : ""}${totalTeamsToBuild > 0 ? ` + ${totalTeamsToBuild} time${totalTeamsToBuild !== 1 ? "s" : ""}` : ""}`
                 }
               </button>
-              <button style={S.btnSecondary} onClick={resetAll}>✕ Cancelar</button>
+              <button className="btn btn-secondary" onClick={resetAll}>✕ Cancelar</button>
             </div>
           </>
         )}
@@ -891,40 +891,40 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
         {/* ── STEP 5: RESULTADOS ── */}
         {showResults && (
           <>
-            <div style={S.resultsHeader}>
-              <h2 style={S.resultsTitle}>Resultado da importação</h2>
-              <div style={S.resultsSummary}>
-                <span style={S.badgeOk}>✓ {successCount} clube{successCount !== 1 ? "s" : ""} importado{successCount !== 1 ? "s" : ""}</span>
-                {failCount > 0 && <span style={S.badgeErr}>✗ {failCount} com erro</span>}
-                {teamsOkCount > 0 && <span style={S.badgeTeam}>⚽ {teamsOkCount} time{teamsOkCount !== 1 ? "s" : ""} criado{teamsOkCount !== 1 ? "s" : ""}</span>}
-                {teamsErrCount > 0 && <span style={S.badgeErr}>⚠ {teamsErrCount} time{teamsErrCount !== 1 ? "s" : ""} com erro</span>}
-                {leagueOkCount > 0 && <span style={S.badgeTeam}>🏆 {leagueOkCount} filiado{leagueOkCount !== 1 ? "s" : ""}</span>}
-                {leagueErrCount > 0 && <span style={S.badgeErr}>⚠ {leagueErrCount} erro{leagueErrCount !== 1 ? "s" : ""} de filiação</span>}
+            <div className="toolbar">
+              <h2 className="section-heading">Resultado da importação</h2>
+              <div className="form-field-group">
+                <span className="badge badge--success">✓ {successCount} clube{successCount !== 1 ? "s" : ""} importado{successCount !== 1 ? "s" : ""}</span>
+                {failCount > 0 && <span className="badge badge--danger">✗ {failCount} com erro</span>}
+                {teamsOkCount > 0 && <span className="badge">⚽ {teamsOkCount} time{teamsOkCount !== 1 ? "s" : ""} criado{teamsOkCount !== 1 ? "s" : ""}</span>}
+                {teamsErrCount > 0 && <span className="badge badge--danger">⚠ {teamsErrCount} time{teamsErrCount !== 1 ? "s" : ""} com erro</span>}
+                {leagueOkCount > 0 && <span className="badge">🏆 {leagueOkCount} filiado{leagueOkCount !== 1 ? "s" : ""}</span>}
+                {leagueErrCount > 0 && <span className="badge badge--danger">⚠ {leagueErrCount} erro{leagueErrCount !== 1 ? "s" : ""} de filiação</span>}
               </div>
             </div>
 
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>#</th>
-                    <th style={S.th}>Nome</th>
-                    <th style={S.th}>Status</th>
-                    <th style={S.th}>Times</th>
-                    <th style={S.th}>Detalhe</th>
+                    <th >#</th>
+                    <th >Nome</th>
+                    <th >Status</th>
+                    <th >Times</th>
+                    <th >Detalhe</th>
                   </tr>
                 </thead>
                 <tbody>
                   {results!.map(r => (
                     <tr key={r.row} style={{ ...S.tr, ...(r.success ? {} : S.trErr) }}>
-                      <td style={S.td}>{r.row}</td>
-                      <td style={S.td}>{r.nome}</td>
-                      <td style={S.td}>
+                      <td >{r.row}</td>
+                      <td >{r.nome}</td>
+                      <td >
                         <span style={r.success ? S.badgeOk : S.badgeErr}>
                           {r.success ? "✓ ok" : "✗ erro"}
                         </span>
                       </td>
-                      <td style={S.td}>
+                      <td >
                         {r.success && (
                           <span style={r.teamErrors?.length ? S.badgeErr : (r.teamsCreated ? S.badgeTeam : { color: "#ffffff", fontSize: "0.78rem" })}>
                             {r.teamsCreated
@@ -933,11 +933,11 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
                           </span>
                         )}
                       </td>
-                      <td style={{ ...S.td, color: r.success ? "#a6e3a1" : "#f38ba8" }}>
+                      <td style={{ color: r.success ? "var(--c-positive)" : "var(--c-negative)" }}>
                         {r.success ? (
                           <>
                             {r.teamErrors?.length ? r.teamErrors.join("; ") : "Criado com sucesso"}
-                            {r.leagueError && <span style={{ color: "#f38ba8", marginLeft: "0.5rem" }}>⚠ Liga: {r.leagueError}</span>}
+                            {r.leagueError && <span style={{ color: "var(--c-negative)", marginLeft: "0.5rem" }}>⚠ Liga: {r.leagueError}</span>}
                           </>
                         ) : r.error}
                       </td>
@@ -947,9 +947,9 @@ export function AdminClubBulkImportPage({ createClub }: Props) {
               </table>
             </div>
 
-            <div style={S.actions}>
-              <Link to="/admin/clubes" style={S.btnPrimary}>Ver clubes →</Link>
-              <button style={S.btnSecondary} onClick={resetAll}>⬆ Importar mais</button>
+            <div className="form-actions">
+              <Link to="/admin/clubes" className="btn btn-primary">Ver clubes →</Link>
+              <button className="btn btn-secondary" onClick={resetAll}>⬆ Importar mais</button>
             </div>
           </>
         )}

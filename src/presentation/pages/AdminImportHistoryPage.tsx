@@ -40,53 +40,53 @@ export function AdminImportHistoryPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/importar" style={S.back}>← Central de Importações</Link>
-          <h1 style={S.title}>Histórico de Importações</h1>
-          <p style={S.subtitle}>Registro de todas as operações de importação em lote.</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/importar" className="back-link">← Central de Importações</Link>
+          <h1 className="page-title">Histórico de Importações</h1>
+          <p className="page-subtitle">Registro de todas as operações de importação em lote.</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {error && (
-          <div style={S.errorBanner}>
+          <div className="form-error">
             <span>⚠ {error}</span>
-            <button style={S.errClose} onClick={() => setError(null)}>×</button>
+            <button className="error-banner__close" onClick={() => setError(null)}>×</button>
           </div>
         )}
 
-        {loading && <p style={S.hint}>Carregando...</p>}
+        {loading && <p className="muted">Carregando...</p>}
 
         {!loading && logs.length === 0 && (
-          <p style={S.hint}>Nenhuma importação registrada ainda.</p>
+          <p className="muted">Nenhuma importação registrada ainda.</p>
         )}
 
         {!loading && logs.length > 0 && (
-          <div style={S.tableWrap}>
-            <table style={S.table}>
+          <div className="table-wrap">
+            <table className="data-table">
               <thead>
                 <tr>
                   {["Data / Hora", "Operação", "Total", "Criados", "Erros"].map((h) => (
-                    <th key={h} style={S.th}>{h}</th>
+                    <th key={h} >{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {logs.map((log) => (
-                  <tr key={log.id} style={S.tr}>
-                    <td style={S.td}>{formatDate(log.created_at)}</td>
-                    <td style={S.td}>
-                      <span style={S.opBadge}>
+                  <tr key={log.id} >
+                    <td >{formatDate(log.created_at)}</td>
+                    <td >
+                      <span className="badge">
                         {OPERATION_LABEL[log.operation] ?? log.operation}
                       </span>
                     </td>
-                    <td style={{ ...S.td, ...S.num }}>{log.total}</td>
-                    <td style={{ ...S.td, ...S.num, color: log.created > 0 ? "#a6e3a1" : "#cdd6f4" }}>
+                    <td style={{ ...S.num }}>{log.total}</td>
+                    <td style={{ ...S.num, color: log.created > 0 ? "var(--c-positive)" : "var(--c-text)" }}>
                       {log.created}
                     </td>
-                    <td style={{ ...S.td, ...S.num, color: log.errors > 0 ? "#f38ba8" : "#cdd6f4" }}>
+                    <td style={{ ...S.num, color: log.errors > 0 ? "var(--c-negative)" : "var(--c-text)" }}>
                       {log.errors}
                     </td>
                   </tr>

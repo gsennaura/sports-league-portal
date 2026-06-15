@@ -262,55 +262,55 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <Link to="/admin/times" style={S.back}>← Times</Link>
+            <Link to="/admin/times" className="back-link">← Times</Link>
             <Link
               to={`/admin/times/${id}/inscricoes`}
-              style={{ fontSize: "13px", color: "#cba6f7", textDecoration: "none", padding: "4px 10px", border: "1px solid #cba6f7", borderRadius: "5px" }}
+              style={{ fontSize: "13px", color: "var(--c-action)", textDecoration: "none", padding: "4px 10px", border: "1px solid #cba6f7", borderRadius: "5px" }}
             >
               📋 Inscrições em Campeonato
             </Link>
           </div>
-          <h1 style={S.title}>Editar time</h1>
-          <p style={S.subtitle}>Atualizar dados da equipe e vínculo com clube</p>
-          <div style={S.tabBar}>
+          <h1 className="page-title">Editar time</h1>
+          <p className="page-subtitle">Atualizar dados da equipe e vínculo com clube</p>
+          <div className="tab-bar">
             <button style={{ ...S.tab, ...(activeTab === "dados" ? S.tabActive : {}) }} onClick={() => switchTab("dados")}>Dados</button>
             <button style={{ ...S.tab, ...(activeTab === "atletas" ? S.tabActive : {}) }} onClick={() => switchTab("atletas")}>Atletas</button>
           </div>
         </div>
       </header>
 
-      <main style={S.page}>
-        {loading && activeTab === "dados" && <p style={{ color: "#cdd6f4" }}>Carregando...</p>}
+      <main className="page-container">
+        {loading && activeTab === "dados" && <p style={{ color: "var(--c-text)" }}>Carregando...</p>}
 
         {!loading && activeTab === "dados" && (
-          <form onSubmit={handleSubmit} style={S.form} noValidate>
+          <form onSubmit={handleSubmit} className="form-body" noValidate>
 
             {error && (
-              <div style={S.errorBanner}>
+              <div className="form-error">
                 <span>⚠ {error}</span>
-                <button type="button" style={S.errClose} onClick={() => setError(null)}>×</button>
+                <button type="button" className="error-banner__close" onClick={() => setError(null)}>×</button>
               </div>
             )}
 
             {success && (
-              <div style={S.successBanner}>✓ Time atualizado com sucesso. Redirecionando...</div>
+              <div className="form-success">✓ Time atualizado com sucesso. Redirecionando...</div>
             )}
 
             {/* ── Identificação ─────────────────────────────────── */}
-            <fieldset style={S.fieldset}>
-              <legend style={S.legend}>Identificação</legend>
-              <div style={S.grid2}>
-                <div style={S.fieldGroup}>
-                  <label style={S.label} htmlFor="name">
-                    Nome do time <span style={S.required}>*</span>
+            <fieldset className="form-fieldset">
+              <legend className="form-legend">Identificação</legend>
+              <div className="form-field-group--2">
+                <div className="form-field-group">
+                  <label className="form-label" htmlFor="name">
+                    Nome do time <span style={{ color: "var(--c-negative)" }}>*</span>
                   </label>
                   <input
                     id="name"
-                    style={S.input}
+                    className="form-input"
                     type="text"
                     placeholder="Ex: Uberaba Sport Club Principal"
                     value={name}
@@ -319,11 +319,11 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                     autoFocus
                   />
                 </div>
-                <div style={S.fieldGroup}>
-                  <label style={S.label} htmlFor="category">Categoria</label>
+                <div className="form-field-group">
+                  <label className="form-label" htmlFor="category">Categoria</label>
                   <select
                     id="category"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                   >
@@ -337,16 +337,16 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
             </fieldset>
 
             {/* ── Esporte e Localização ─────────────────────────── */}
-            <fieldset style={S.fieldset}>
-              <legend style={S.legend}>Esporte e Localização</legend>
-              <div style={S.grid2}>
-                <div style={S.fieldGroup}>
-                  <label style={S.label} htmlFor="sport">
-                    Esporte <span style={S.required}>*</span>
+            <fieldset className="form-fieldset">
+              <legend className="form-legend">Esporte e Localização</legend>
+              <div className="form-field-group--2">
+                <div className="form-field-group">
+                  <label className="form-label" htmlFor="sport">
+                    Esporte <span style={{ color: "var(--c-negative)" }}>*</span>
                   </label>
                   <select
                     id="sport"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={sportId}
                     onChange={(e) => setSportId(e.target.value)}
                     required
@@ -357,13 +357,13 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                     ))}
                   </select>
                 </div>
-                <div style={S.fieldGroup}>
-                  <label style={S.label} htmlFor="city">
-                    Cidade <span style={S.required}>*</span>
+                <div className="form-field-group">
+                  <label className="form-label" htmlFor="city">
+                    Cidade <span style={{ color: "var(--c-negative)" }}>*</span>
                   </label>
                   <select
                     id="city"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={cityId}
                     onChange={(e) => setCityId(e.target.value)}
                     required
@@ -378,16 +378,16 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
             </fieldset>
 
             {/* ── Clube vinculado ────────────────────────────────── */}
-            <fieldset style={S.fieldset}>
-              <legend style={S.legend}>Clube vinculado</legend>
-              <p style={S.fieldHint}>
+            <fieldset className="form-fieldset">
+              <legend className="form-legend">Clube vinculado</legend>
+              <p className="muted">
                 Opcional. Vincule este time a um clube existente. Times sem clube são independentes.
               </p>
-              <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="club">Clube</label>
+              <div className="form-field-group">
+                <label className="form-label" htmlFor="club">Clube</label>
                 <select
                   id="club"
-                  style={{ ...S.input, ...S.select, maxWidth: "420px" }}
+                  className="form-select" style={{ maxWidth: "420px" }}
                   value={clubId}
                   onChange={(e) => setClubId(e.target.value)}
                 >
@@ -399,7 +399,7 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                 {clubId && (
                   <button
                     type="button"
-                    style={S.clearBtn}
+                    className="btn btn-secondary"
                     onClick={() => setClubId("")}
                   >
                     Remover vínculo com clube
@@ -408,7 +408,7 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
               </div>
             </fieldset>
 
-            <div style={S.actions}>
+            <div className="form-actions">
               <button
                 type="submit"
                 style={{ ...S.btnSave, ...(submitting ? S.btnDisabled : {}) }}
@@ -416,47 +416,47 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
               >
                 {submitting ? "Salvando…" : "Salvar alterações"}
               </button>
-              <Link to="/admin/times" style={S.btnCancel}>Cancelar</Link>
+              <Link to="/admin/times" className="btn btn-secondary">Cancelar</Link>
             </div>
           </form>
         )}
 
         {activeTab === "atletas" && (
           <div>
-            <div style={S.athletesHeader}>
-              <label style={{ color: "#cdd6f4", fontSize: "0.875rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+            <div className="toolbar">
+              <label style={{ color: "var(--c-text)", fontSize: "0.875rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
                 <input type="checkbox" checked={showAllHistory} onChange={(e) => setShowAllHistory(e.target.checked)} />
                 Ver histórico completo
               </label>
-              <button style={S.btnAddAthlete} onClick={openAddModal}>
+              <button className="btn btn-success" onClick={openAddModal}>
                 + Adicionar atleta
               </button>
             </div>
-            {athletesLoading && <p style={{ color: "#cdd6f4" }}>Carregando…</p>}
+            {athletesLoading && <p style={{ color: "var(--c-text)" }}>Carregando…</p>}
             {!athletesLoading && (
-              <div style={S.tableWrap}>
-                <table style={S.table}>
+              <div className="table-wrap">
+                <table className="data-table">
                   <thead><tr>
-                    <th style={S.th}>Status</th>
-                    <th style={S.th}>Atleta</th>
-                    <th style={S.th}>Entrada</th>
-                    <th style={S.th}>Saída</th>
-                    <th style={S.th}>Camisa</th>
-                    <th style={S.th}>Ações</th>
+                    <th >Status</th>
+                    <th >Atleta</th>
+                    <th >Entrada</th>
+                    <th >Saída</th>
+                    <th >Camisa</th>
+                    <th >Ações</th>
                   </tr></thead>
                   <tbody>
                     {visibleAthletes.length === 0 ? (
-                      <tr><td colSpan={6} style={S.empty}>Nenhum atleta encontrado.</td></tr>
+                      <tr><td colSpan={6} className="muted">Nenhum atleta encontrado.</td></tr>
                     ) : visibleAthletes.map((a) => (
-                      <tr key={a.id} style={S.trRow}>
-                        <td style={S.td}><div style={activeDotStyle(a.is_active)} /></td>
-                        <td style={S.td}><Link to={`/atletas/${a.athlete_id}`} style={S.rowLink}>{a.athlete_name ?? athleteMap[a.athlete_id]?.name ?? a.athlete_id}{(a.athlete_nickname ?? athleteMap[a.athlete_id]?.nickname) ? <span style={S.nickBadge}>{a.athlete_nickname ?? athleteMap[a.athlete_id]!.nickname}</span> : null}</Link></td>
-                        <td style={S.tdMuted}>{a.start_date}</td>
-                        <td style={S.tdMuted}>{a.is_active ? <span style={S.activeBadge}>Ativo</span> : (a.end_date ?? "—")}</td>
-                        <td style={S.tdMuted}>{a.jersey_number ?? "—"}</td>
-                        <td style={S.td}>
+                      <tr key={a.id} >
+                        <td ><div style={activeDotStyle(a.is_active)} /></td>
+                        <td ><Link to={`/atletas/${a.athlete_id}`} className="row-link">{a.athlete_name ?? athleteMap[a.athlete_id]?.name ?? a.athlete_id}{(a.athlete_nickname ?? athleteMap[a.athlete_id]?.nickname) ? <span className="badge">{a.athlete_nickname ?? athleteMap[a.athlete_id]!.nickname}</span> : null}</Link></td>
+                        <td className="td-muted">{a.start_date}</td>
+                        <td className="td-muted">{a.is_active ? <span className="badge badge--success">Ativo</span> : (a.end_date ?? "—")}</td>
+                        <td className="td-muted">{a.jersey_number ?? "—"}</td>
+                        <td >
                           {a.is_active && (
-                            <button style={S.btnExit} onClick={() => { setExitEntry(a); setExitDate(""); setExitError(null); }}>
+                            <button className="btn btn-secondary" onClick={() => { setExitEntry(a); setExitDate(""); setExitError(null); }}>
                               Registrar saída
                             </button>
                           )}
@@ -473,13 +473,13 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
 
       {/* ── Add Athlete Modal ───────────────────────────────── */}
       {addMode !== null && (
-        <div style={S.overlay}>
-          <div style={S.modal}>
+        <div className="modal-overlay">
+          <div className="modal-card">
 
             {/* ── Choice step ── */}
             {addMode === "choice" && (
               <>
-                <h2 style={S.modalTitle}>Adicionar Atleta</h2>
+                <h2 className="modal-title">Adicionar Atleta</h2>
                 <p style={{ color: "#ffffff", fontSize: "0.875rem", marginBottom: "1.25rem" }}>
                   Como deseja adicionar o atleta a este time?
                 </p>
@@ -492,7 +492,7 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                     <span style={{ fontSize: "0.8rem", fontWeight: 400, opacity: 0.85 }}>Buscar por nome, CPF ou e-mail</span>
                   </button>
                   <button
-                    style={{ ...S.btnSave, backgroundColor: "#a6e3a1", textAlign: "left", padding: "0.75rem 1rem", display: "flex", flexDirection: "column", gap: "2px" }}
+                    style={{ ...S.btnSave, backgroundColor: "var(--c-positive)", textAlign: "left", padding: "0.75rem 1rem", display: "flex", flexDirection: "column", gap: "2px" }}
                     onClick={() => navigate("/admin/atletas/novo", { state: { prefilledTeamId: id } })}
                   >
                     <span style={{ fontWeight: 700 }}>Criar novo atleta</span>
@@ -508,11 +508,11 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
             {/* ── Existing athlete search step ── */}
             {addMode === "existing" && (
               <>
-                <h2 style={S.modalTitle}>Buscar atleta existente</h2>
+                <h2 className="modal-title">Buscar atleta existente</h2>
                 <form onSubmit={handleAddAthlete} style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                   <div style={{ display: "flex", gap: "0.5rem" }}>
                     <input
-                      style={{ ...S.input, flex: 1 }}
+                      className="form-input" style={{ flex: 1 }}
                       placeholder="Nome, CPF (000.000.000-00) ou e-mail"
                       value={athleteSearch}
                       onChange={(e) => setAthleteSearch(e.target.value)}
@@ -531,7 +531,7 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                       {athleteSearchResults.map((a) => (
                         <div
                           key={a.id}
-                          style={{ padding: "0.5rem 0.85rem", cursor: "pointer", backgroundColor: selectedAthlete?.id === a.id ? "#313244" : "transparent", color: "#cdd6f4", fontSize: "0.875rem" }}
+                          style={{ padding: "0.5rem 0.85rem", cursor: "pointer", backgroundColor: selectedAthlete?.id === a.id ? "var(--c-border)" : "transparent", color: "var(--c-text)", fontSize: "0.875rem" }}
                           onClick={() => {
                           setSelectedAthlete(a);
                           // Fetch athlete's active teams
@@ -550,13 +550,13 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                   )}
                   {selectedAthlete && (
                     <div>
-                      <p style={{ color: "#a6e3a1", fontSize: "0.85rem", margin: "0 0 0.35rem" }}>✓ Selecionado: {selectedAthlete.name}</p>
+                      <p style={{ color: "var(--c-positive)", fontSize: "0.85rem", margin: "0 0 0.35rem" }}>✓ Selecionado: {selectedAthlete.name}</p>
                       {selectedAthleteTeams.length > 0 && (
-                        <div style={{ backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", padding: "0.5rem 0.85rem", fontSize: "0.8rem" }}>
+                        <div style={{ backgroundColor: "var(--c-brand)", border: "1px solid #313244", borderRadius: "6px", padding: "0.5rem 0.85rem", fontSize: "0.8rem" }}>
                           <p style={{ color: "#ffffff", margin: "0 0 0.35rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", fontSize: "0.72rem" }}>Times ativos atualmente</p>
                           <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.2rem" }}>
                             {selectedAthleteTeams.map((t) => (
-                              <li key={t.team_id} style={{ color: "#cdd6f4" }}>
+                              <li key={t.team_id} style={{ color: "var(--c-text)" }}>
                                 ⚽ {t.team_name ?? t.team_id}
                                 {t.team_sport_name && <span style={{ color: "#ffffff", marginLeft: "0.4rem" }}>({t.team_sport_name})</span>}
                               </li>
@@ -569,27 +569,27 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
                       )}
                     </div>
                   )}
-                  <div style={S.grid2}>
-                    <div style={S.fieldGroup}>
-                      <label style={S.label}>Data de entrada <span style={S.required}>*</span></label>
+                  <div className="form-field-group--2">
+                    <div className="form-field-group">
+                      <label className="form-label">Data de entrada <span style={{ color: "var(--c-negative)" }}>*</span></label>
                       <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
-                        <input type="date" style={{ ...S.input, flex: 1 }} value={addAthleteStart} onChange={(e) => setAddAthleteStart(e.target.value)} required />
+                        <input type="date" className="form-input" style={{ flex: 1 }} value={addAthleteStart} onChange={(e) => setAddAthleteStart(e.target.value)} required />
                         <button
                           type="button"
-                          style={{ flexShrink: 0, backgroundColor: "#313244", border: "1px solid #45475a", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.78rem", padding: "0.45rem 0.7rem", cursor: "pointer", whiteSpace: "nowrap" }}
+                          style={{ flexShrink: 0, backgroundColor: "var(--c-border)", border: "1px solid #45475a", borderRadius: "6px", color: "var(--c-text)", fontSize: "0.78rem", padding: "0.45rem 0.7rem", cursor: "pointer", whiteSpace: "nowrap" }}
                           onClick={() => setAddAthleteStart(new Date().toISOString().slice(0, 10))}
                         >
                           Hoje
                         </button>
                       </div>
                     </div>
-                    <div style={S.fieldGroup}>
-                      <label style={S.label}>Número da camisa</label>
-                      <input type="number" style={S.input} value={addAthleteJersey} onChange={(e) => setAddAthleteJersey(e.target.value)} min={0} />
+                    <div className="form-field-group">
+                      <label className="form-label">Número da camisa</label>
+                      <input type="number" className="form-input" value={addAthleteJersey} onChange={(e) => setAddAthleteJersey(e.target.value)} min={0} />
                     </div>
                   </div>
-                  {addAthleteError && <p style={S.mError}>{addAthleteError}</p>}
-                  <div style={S.modalActions}>
+                  {addAthleteError && <p className="error-text">{addAthleteError}</p>}
+                  <div className="modal-actions">
                     <button type="button" style={{ ...S.btnCancel, border: "1px solid #313244", borderRadius: "6px", padding: "0.4rem 0.85rem" }} onClick={() => setAddMode("choice")}>← Voltar</button>
                     <button type="submit" style={{ ...S.btnSave, ...(addAthleteSaving ? S.btnDisabled : {}) }} disabled={addAthleteSaving || !selectedAthlete}>
                       {addAthleteSaving ? "Adicionando…" : "Adicionar"}
@@ -605,16 +605,16 @@ export function AdminTeamEditPage({ updateTeam, getTeamAthletes, addAthleteToTea
 
       {/* ── Exit Modal ─────────────────────────────────────── */}
       {exitEntry && (
-        <div style={S.overlay}>
-          <div style={S.modal}>
-            <h2 style={S.modalTitle}>Registrar Saída</h2>
+        <div className="modal-overlay">
+          <div className="modal-card">
+            <h2 className="modal-title">Registrar Saída</h2>
             <form onSubmit={handleExit} style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-              <div style={S.fieldGroup}>
-                <label style={S.label}>Data de saída <span style={S.required}>*</span></label>
-                <input type="date" style={S.input} value={exitDate} onChange={(e) => setExitDate(e.target.value)} required />
+              <div className="form-field-group">
+                <label className="form-label">Data de saída <span style={{ color: "var(--c-negative)" }}>*</span></label>
+                <input type="date" className="form-input" value={exitDate} onChange={(e) => setExitDate(e.target.value)} required />
               </div>
-              {exitError && <p style={S.mError}>{exitError}</p>}
-              <div style={S.modalActions}>
+              {exitError && <p className="error-text">{exitError}</p>}
+              <div className="modal-actions">
                 <button type="button" style={{ ...S.btnCancel, border: "1px solid #313244", borderRadius: "6px", padding: "0.4rem 0.85rem" }} onClick={() => setExitEntry(null)}>Cancelar</button>
                 <button type="submit" style={{ ...S.btnSave, ...(exitSaving ? S.btnDisabled : {}) }} disabled={exitSaving}>
                   {exitSaving ? "Salvando…" : "Confirmar saída"}

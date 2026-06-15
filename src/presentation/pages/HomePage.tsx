@@ -35,22 +35,22 @@ function ChampionshipsSection({
   error: string | null;
 }) {
   if (loading) return <PageLoader />;
-  if (error) return <p style={S.errText}>{error}</p>;
+  if (error) return <p className="error-text">{error}</p>;
   const filtered = championships.filter((c) => !LEAGUE_ID || c.league_id === LEAGUE_ID);
-  if (filtered.length === 0) return <p style={S.muted}>Nenhum campeonato encontrado.</p>;
+  if (filtered.length === 0) return <p className="muted">Nenhum campeonato encontrado.</p>;
   return (
-    <div style={S.champGrid}>
+    <div className="champ-grid">
       {filtered.map((c) => (
-        <Link key={c.id} to={`/campeonatos/${c.id}`} style={S.champCard}>
-          <div style={S.champCardAccent} />
-          <div style={S.champBody}>
-            <span style={S.champName}>{c.name}</span>
-            <span style={S.champMeta}>{c.year} · {c.city_name}</span>
+        <Link key={c.id} to={`/campeonatos/${c.id}`} className="champ-card">
+          <div className="champ-card__accent" />
+          <div className="champ-card__body">
+            <span className="champ-card__name">{c.name}</span>
+            <span className="champ-card__meta">{c.year} · {c.city_name}</span>
             {c.champion_team_name && (
-              <span style={S.champChampion}>🏆 {c.champion_team_name}</span>
+              <span className="champ-card__champion">🏆 {c.champion_team_name}</span>
             )}
           </div>
-          <span style={S.champArrow}>›</span>
+          <span className="champ-card__arrow">›</span>
         </Link>
       ))}
     </div>
@@ -64,17 +64,17 @@ function PartnersSection({ partners, loading }: { partners: Partner[]; loading: 
   const active = [...partners].filter((p) => p.is_active).sort((a, b) => a.priority - b.priority);
   if (active.length === 0) return null;
   return (
-    <div style={S.apoioGrid}>
+    <div className="apoio-grid">
       {active.map((p) => {
         const inner = (
           <>
-            {p.logo_url && <img src={p.logo_url} alt={p.name} style={S.apoioLogo} />}
-            <span style={S.apoioName}>{p.name}</span>
+            {p.logo_url && <img src={p.logo_url} alt={p.name} className="apoio-card__logo" />}
+            <span className="apoio-card__name">{p.name}</span>
           </>
         );
         return p.external_url
-          ? <a key={p.id} href={p.external_url} target="_blank" rel="noopener noreferrer" style={S.apoioCard}>{inner}</a>
-          : <div key={p.id} style={S.apoioCard}>{inner}</div>;
+          ? <a key={p.id} href={p.external_url} target="_blank" rel="noopener noreferrer" className="apoio-card">{inner}</a>
+          : <div key={p.id} className="apoio-card">{inner}</div>;
       })}
     </div>
   );
@@ -96,7 +96,7 @@ export function HomePage({
   const { news } = useNews(listNews, LEAGUE_ID || undefined, 8);
 
   return (
-    <main style={S.page}>
+    <main className="page-container">
 
         {news.length > 0 && <NewsCarousel items={news} />}
 
@@ -155,9 +155,9 @@ function SectionDivider({
   return (
     <div style={{ ...S.sectionDivider, borderColor: accent + "55" }}>
       <div style={{ ...S.sectionAccentBar, background: accent }} />
-      <span style={{ ...S.sectionLabel, color: "#18265b" }}>{label}</span>
-      {sub && <span style={S.sectionSub}>{sub}</span>}
-      <div style={S.sectionRule} />
+      <span style={{ ...S.sectionLabel, color: "var(--c-brand)" }}>{label}</span>
+      {sub && <span className="section-divider__sub">{sub}</span>}
+      <div className="section-divider__rule" />
       {cta && (
         <Link to={cta.href} style={{ ...S.sectionCta, color: accent }}>
           {cta.label}
@@ -171,14 +171,6 @@ function SectionDivider({
 
 const S: Record<string, React.CSSProperties> = {
   // ─── Page content ──────────────────────────────────────────
-  page: {
-    padding: "0 2rem 3rem",
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "1.5rem",
-  },
-  muted: { color: "#6b7280", fontSize: "0.9rem", margin: 0 },
-  errText: { color: "#dc2626", fontSize: "0.9rem", margin: 0 },
 
   // ─── Section divider ───────────────────────────────────────
   sectionDivider: {

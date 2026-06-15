@@ -344,7 +344,7 @@ export function MatchTimeline({
   };
 
   if (events.length === 0 && !isAdmin) {
-    return <p style={{ color: "#cdd6f4", fontSize: "0.875rem", padding: "1.25rem 1rem", margin: 0 }}>Sem eventos registrados para esta partida.</p>;
+    return <p style={{ color: "#ffffff", fontSize: "0.875rem", padding: "1.25rem 1rem", margin: 0 }}>Sem eventos registrados para esta partida.</p>;
   }
 
   return (
@@ -358,7 +358,7 @@ export function MatchTimeline({
 
       {/* Periods */}
       {byPeriod.size === 0 ? (
-        <p style={{ color: "#cdd6f4", fontSize: "0.875rem", padding: "1rem 1rem 0.5rem", margin: 0 }}>Sem eventos registrados.</p>
+        <p style={{ color: "#ffffff", fontSize: "0.875rem", padding: "1rem 1rem 0.5rem", margin: 0 }}>Sem eventos registrados.</p>
       ) : (
         [...byPeriod.entries()].map(([period, evs]) => (
           <PeriodSection
@@ -433,7 +433,7 @@ const TS: Record<string, React.CSSProperties> = {
     fontWeight: 700,
     textTransform: "uppercase",
     letterSpacing: "0.08em",
-    color: "#cdd6f4",
+    color: "#ffffff",
     padding: "0.35rem 1rem",
     backgroundColor: "#18265b",
     borderBottom: "1px solid #313244",
@@ -482,14 +482,14 @@ const TS: Record<string, React.CSSProperties> = {
     alignItems: "center",
     gap: "0.35rem",
     fontSize: "0.8rem",
-    color: "#cdd6f4",
+    color: "#ffffff",
   },
   icon: { fontSize: "0.95rem", flexShrink: 0 },
   iconCenter: { fontSize: "0.95rem" },
-  labelCenter: { fontSize: "0.75rem", color: "#cdd6f4", fontWeight: 600 },
-  minCenter: { fontSize: "0.68rem", color: "#cdd6f4" },
-  eventLabel: { fontSize: "0.78rem", fontWeight: 600, color: "#cdd6f4" },
-  athleteName: { fontSize: "0.68rem", color: "#cdd6f4" },
+  labelCenter: { fontSize: "0.75rem", color: "#ffffff", fontWeight: 600 },
+  minCenter: { fontSize: "0.68rem", color: "#ffffff" },
+  eventLabel: { fontSize: "0.78rem", fontWeight: 600, color: "#ffffff" },
+  athleteName: { fontSize: "0.68rem", color: "#ffffff" },
   minute: {
     fontSize: "0.68rem",
     color: "#a6e3a1",
@@ -550,12 +550,12 @@ const TS: Record<string, React.CSSProperties> = {
   modalTitle: {
     fontSize: "0.95rem",
     fontWeight: 700,
-    color: "#cdd6f4",
+    color: "#ffffff",
   },
   closeBtn: {
     background: "none",
     border: "none",
-    color: "#cdd6f4",
+    color: "#ffffff",
     fontSize: "1.25rem",
     cursor: "pointer",
     lineHeight: 1,
@@ -577,7 +577,7 @@ const TS: Record<string, React.CSSProperties> = {
   label: {
     fontSize: "0.72rem",
     fontWeight: 700,
-    color: "#cdd6f4",
+    color: "#ffffff",
     textTransform: "uppercase",
     letterSpacing: "0.06em",
     marginBottom: "0.15rem",
@@ -588,7 +588,7 @@ const TS: Record<string, React.CSSProperties> = {
     backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "6px",
-    color: "#cdd6f4",
+    color: "#ffffff",
     fontSize: "0.85rem",
     padding: "0.4rem 0.6rem",
   },
@@ -597,7 +597,7 @@ const TS: Record<string, React.CSSProperties> = {
     backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "6px",
-    color: "#cdd6f4",
+    color: "#ffffff",
     fontSize: "0.85rem",
     padding: "0.4rem 0.6rem",
     boxSizing: "border-box",
@@ -611,7 +611,7 @@ const TS: Record<string, React.CSSProperties> = {
     backgroundColor: "#18265b",
     border: "1px solid #45475a",
     borderRadius: "6px",
-    color: "#cdd6f4",
+    color: "#ffffff",
     cursor: "pointer",
     fontSize: "0.78rem",
     fontWeight: 600,
@@ -630,7 +630,7 @@ const TS: Record<string, React.CSSProperties> = {
     backgroundColor: "transparent",
     border: "1px solid #45475a",
     borderRadius: "6px",
-    color: "#cdd6f4",
+    color: "#ffffff",
     cursor: "pointer",
     fontSize: "0.85rem",
     padding: "0.4rem 1rem",

@@ -22,7 +22,7 @@ export interface VenueRepository {
   create(payload: CreateVenuePayload): Promise<Venue>;
   update(payload: UpdateVenuePayload): Promise<Venue>;
   getById(id: string): Promise<Venue | null>;
-  listAll(): Promise<Venue[]>;
+  listAll(leagueId?: string): Promise<Venue[]>;
   getMatches(venueId: string): Promise<ClubMatch[]>;
   uploadPhoto(venueId: string, file: File): Promise<{ photo_url: string }>;
 }

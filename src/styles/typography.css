@@ -1,0 +1,104 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TYPOGRAPHY.CSS — Hierarquia tipográfica do sports-league-portal
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Títulos de página ──────────────────────────────────────────── */
+
+/* Admin: 1.5rem/bold — S.title em ~30 arquivos */
+.page-title {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--c-text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Portal público: 2.2rem/black — ChampionshipsPage, ClubsPage, etc. */
+.page-title--hero {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-black);
+}
+
+/* ── Subtítulo ──────────────────────────────────────────────────── */
+
+/* S.subtitle em ~20 arquivos */
+.page-subtitle {
+  font-size: var(--text-sm);
+  color: var(--c-text-muted);
+  margin: 0.2rem 0 0;
+  line-height: 1.4;
+}
+
+/* ── Cabeçalho de seção (uppercase small-caps) ──────────────────── */
+
+/* S.legend e S.sectionTitle em ~50 arquivos */
+.section-heading {
+  font-size: 0.82rem;
+  font-weight: var(--fw-bold);
+  color: var(--c-brand);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 0.5rem;
+  line-height: 1;
+}
+
+/* ── Texto corrido e auxiliar ───────────────────────────────────── */
+
+.muted {
+  color: var(--c-text-muted);
+  font-size: var(--text-sm);
+}
+
+.error-text {
+  color: var(--c-negative);
+  font-size: var(--text-sm);
+}
+
+.empty-state {
+  color: var(--c-text-muted);
+  font-size: var(--text-base);
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Empty notice — mensagem proeminente de lista vazia */
+.empty-notice {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--c-text);
+  text-align: center;
+  padding: 1.75rem 1rem;
+  border: 1px dashed var(--c-border);
+  border-radius: var(--radius-lg);
+}
+
+/* Em contexto branco: text escuro legível */
+.page-card .page-container .empty-notice {
+  color: #475569;
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+/* ── Responsividade base ────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .page-title       { font-size: var(--text-lg); }
+  .page-title--hero { font-size: var(--text-xl); }
+}
+
+/* ── Contexto page-card (fundo branco) ─────────────────────────── */
+/* Garante contraste adequado para texto fora de seções escuras */
+
+.page-card .page-container .page-title,
+.page-card .page-container h1,
+.page-card .page-container h2:not(.mbd-day-heading):not(.news-carousel__heading):not(.year-group__heading):not(.news-grid__title) {
+  color: var(--c-brand);
+}
+
+.page-card .page-container .muted {
+  color: #475569;
+}
+
+.page-card .page-container .error-text {
+  color: #b91c1c;
+}

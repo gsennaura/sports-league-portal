@@ -117,32 +117,32 @@ export function AdminLeagueAdminsPage() {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <h1 style={S.title}>Admins de Liga</h1>
-          <p style={S.subtitle}>{assignments.length} atribuiç{assignments.length !== 1 ? "ões" : "ão"} ativa{assignments.length !== 1 ? "s" : ""}</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <h1 className="page-title">Admins de Liga</h1>
+          <p className="page-subtitle">{assignments.length} atribuiç{assignments.length !== 1 ? "ões" : "ão"} ativa{assignments.length !== 1 ? "s" : ""}</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {/* Assign form */}
-        <section style={S.card}>
-          <h2 style={S.sectionTitle}>Atribuir Admin de Liga</h2>
-          <form onSubmit={(e) => void handleAssign(e)} style={S.form}>
+        <section className="card">
+          <h2 className="section-heading">Atribuir Admin de Liga</h2>
+          <form onSubmit={(e) => void handleAssign(e)} className="form-body">
             {/* User search combobox */}
-            <div style={S.comboWrap}>
+            <div className="search-wrap">
               {selectedUser ? (
-                <div style={S.selectedChip}>
-                  <span style={S.chipText}>
+                <div className="badge badge--success">
+                  <span className="muted">
                     {selectedUser.name
-                      ? <><strong>{selectedUser.name}</strong> <span style={S.chipEmail}>({selectedUser.email})</span></>
+                      ? <><strong>{selectedUser.name}</strong> <span className="badge">({selectedUser.email})</span></>
                       : selectedUser.email
                     }
                   </span>
                   <button
                     type="button"
-                    style={S.chipClear}
+                    className="btn-edit"
                     onClick={() => {
                       setSelectedUser(null);
                       setSelectedUserId("");
@@ -156,7 +156,7 @@ export function AdminLeagueAdminsPage() {
               ) : (
                 <input
                   type="text"
-                  style={S.searchInput}
+                  className="search-input"
                   placeholder="Buscar usuário por nome ou e-mail…"
                   value={userSearch}
                   onChange={(e) => { setUserSearch(e.target.value); setSearchOpen(true); }}
@@ -166,12 +166,12 @@ export function AdminLeagueAdminsPage() {
                 />
               )}
               {searchOpen && filteredUsers.length > 0 && !selectedUser && (
-                <div style={S.dropdown}>
+                <div className="modal-card">
                   {filteredUsers.map((u) => (
                     <button
                       key={u.id}
                       type="button"
-                      style={S.dropdownItem}
+                      className="row-link"
                       onMouseDown={() => {
                         setSelectedUser(u);
                         setSelectedUserId(u.id);
@@ -179,18 +179,18 @@ export function AdminLeagueAdminsPage() {
                         setSearchOpen(false);
                       }}
                     >
-                      <span style={S.dropName}>{u.name ?? <em style={{ color: "#ffffff" }}>sem nome</em>}</span>
-                      <span style={S.dropEmail}>{u.email}</span>
+                      <span className="team-name">{u.name ?? <em style={{ color: "#ffffff" }}>sem nome</em>}</span>
+                      <span className="muted">{u.email}</span>
                     </button>
                   ))}
                 </div>
               )}
               {searchOpen && userSearch.trim().length >= 1 && filteredUsers.length === 0 && !selectedUser && (
-                <div style={S.dropdownEmpty}>Nenhum usuário encontrado.</div>
+                <div className="muted">Nenhum usuário encontrado.</div>
               )}
             </div>
             <select
-              style={S.select}
+              className="form-select"
               value={selectedLeagueId}
               onChange={(e) => setSelectedLeagueId(e.target.value)}
               required
@@ -202,52 +202,52 @@ export function AdminLeagueAdminsPage() {
                   <option key={l.id} value={l.id}>{l.name}</option>
                 ))}
             </select>
-            <button type="submit" style={S.btnPrimary} disabled={assigning || !selectedUserId || !selectedLeagueId}>
+            <button type="submit" className="btn btn-primary" disabled={assigning || !selectedUserId || !selectedLeagueId}>
               {assigning ? "Atribuindo..." : "Atribuir"}
             </button>
           </form>
-          {assignError && <p style={S.errorText}>{assignError}</p>}
+          {assignError && <p className="error-text">{assignError}</p>}
         </section>
 
         {/* Assignments list */}
-        {loading && <p style={S.hint}>Carregando...</p>}
-        {error && <p style={S.errorText}>{error}</p>}
+        {loading && <p className="muted">Carregando...</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && !error && (
-          <div style={S.tableWrap}>
-            <table style={S.table}>
+          <div className="table-wrap">
+            <table className="data-table">
               <thead>
                 <tr>
-                  <th style={S.th}>Usuário</th>
-                  <th style={S.th}>E-mail</th>
-                  <th style={S.th}>Liga</th>
-                  <th style={S.th}>Status</th>
-                  <th style={S.th}>Desde</th>
-                  <th style={S.th}>Ações</th>
+                  <th >Usuário</th>
+                  <th >E-mail</th>
+                  <th >Liga</th>
+                  <th >Status</th>
+                  <th >Desde</th>
+                  <th >Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {assignments.length === 0 ? (
                   <tr>
-                    <td colSpan={6} style={S.empty}>Nenhum admin de liga atribuído.</td>
+                    <td colSpan={6} className="muted">Nenhum admin de liga atribuído.</td>
                   </tr>
                 ) : (
                   assignments.map((a) => (
-                    <tr key={a.id} style={S.trRow}>
-                      <td style={S.td}>{a.userName ?? <span style={S.muted}>—</span>}</td>
-                      <td style={S.td}>{a.userEmail}</td>
-                      <td style={S.td}>
-                        <span style={S.leagueBadge}>{a.leagueName}</span>
+                    <tr key={a.id} >
+                      <td >{a.userName ?? <span className="muted">—</span>}</td>
+                      <td >{a.userEmail}</td>
+                      <td >
+                        <span className="badge">{a.leagueName}</span>
                       </td>
-                      <td style={S.td}>
+                      <td >
                         <span style={a.is_active ? S.active : S.inactive}>
                           {a.is_active ? "Ativo" : "Inativo"}
                         </span>
                       </td>
-                      <td style={S.td}>{a.created_at}</td>
-                      <td style={S.td}>
+                      <td >{a.created_at}</td>
+                      <td >
                         <button
-                          style={S.btnDanger}
+                          className="btn btn-danger"
                           onClick={() => void handleRevoke(a.id)}
                         >
                           Revogar

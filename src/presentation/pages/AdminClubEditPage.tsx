@@ -115,27 +115,27 @@ export function AdminClubEditPage({ updateClub }: Props) {
   }
 
   if (loadingClub) {
-    return <main style={{ padding: "2rem 1.5rem", color: "#cdd6f4" }}>Carregando...</main>;
+    return <main style={{ padding: "2rem 1.5rem", color: "var(--c-text)" }}>Carregando...</main>;
   }
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/clubes" style={S.back}>← Clubes</Link>
-          <h1 style={S.title}>Editar Clube</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/clubes" className="back-link">← Clubes</Link>
+          <h1 className="page-title">Editar Clube</h1>
         </div>
       </header>
-      <main style={S.page}>
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Informações básicas</legend>
-            <div style={S.grid2}>
+      <main className="page-container">
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Informações básicas</legend>
+            <div className="form-field-group--2">
               <Field label="Nome do clube *" htmlFor="name">
                 <input
                   id="name"
-                  style={S.input}
+                  className="form-input"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   required
@@ -143,11 +143,11 @@ export function AdminClubEditPage({ updateClub }: Props) {
               </Field>
               <Field label="Cidade *" htmlFor="city">
                 {citiesLoading ? (
-                  <div style={{ ...S.input, color: "#cdd6f4" }}>Carregando...</div>
+                  <div className="form-input" style={{ color: "var(--c-text)" }}>Carregando...</div>
                 ) : (
                   <select
                     id="city"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={cityId}
                     onChange={e => setCityId(e.target.value)}
                     required
@@ -158,11 +158,11 @@ export function AdminClubEditPage({ updateClub }: Props) {
                 )}
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Presidente" htmlFor="president">
                 <input
                   id="president"
-                  style={S.input}
+                  className="form-input"
                   value={president}
                   onChange={e => setPresident(e.target.value)}
                 />
@@ -170,7 +170,7 @@ export function AdminClubEditPage({ updateClub }: Props) {
               <Field label="Local principal" htmlFor="venue">
                 <select
                   id="venue"
-                  style={{ ...S.input, ...S.select }}
+                  className="form-select"
                   value={venueId ?? ""}
                   onChange={e => setVenueId(e.target.value)}
                 >
@@ -181,14 +181,14 @@ export function AdminClubEditPage({ updateClub }: Props) {
             </div>
           </fieldset>
 
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Informações adicionais <span style={S.legendOpt}>(opcional)</span></legend>
-            <div style={S.grid2}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Informações adicionais <span className="form-legend">(opcional)</span></legend>
+            <div className="form-field-group--2">
               <Field label="Data de fundação" htmlFor="founded_at">
                 <input
                   id="founded_at"
                   type="date"
-                  style={S.input}
+                  className="form-input"
                   value={foundedAt}
                   onChange={e => setFoundedAt(e.target.value)}
                 />
@@ -196,18 +196,18 @@ export function AdminClubEditPage({ updateClub }: Props) {
               <Field label="Apelido" htmlFor="nickname">
                 <input
                   id="nickname"
-                  style={S.input}
+                  className="form-input"
                   value={nickname}
                   onChange={e => setNickname(e.target.value)}
                   placeholder="Ex: Galo, Fluzão"
                 />
               </Field>
             </div>
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Sigla" htmlFor="acronym">
                 <input
                   id="acronym"
-                  style={S.input}
+                  className="form-input"
                   value={acronym}
                   onChange={e => setAcronym(e.target.value)}
                   placeholder="Ex: CAM, FLA"
@@ -217,7 +217,7 @@ export function AdminClubEditPage({ updateClub }: Props) {
               <Field label="Instituição vinculada" htmlFor="linked_institution">
                 <input
                   id="linked_institution"
-                  style={S.input}
+                  className="form-input"
                   value={linkedInstitution}
                   onChange={e => setLinkedInstitution(e.target.value)}
                   placeholder="Ex: Prefeitura de Uberaba"
@@ -230,7 +230,7 @@ export function AdminClubEditPage({ updateClub }: Props) {
                   <img
                     src={logoPreview || logoUrl}
                     alt="escudo atual"
-                    style={{ width: 56, height: 56, objectFit: "contain", borderRadius: 4, background: "#313244" }}
+                    style={{ width: 56, height: 56, objectFit: "contain", borderRadius: 4, background: "var(--c-border)" }}
                     onError={e => { (e.target as HTMLImageElement).style.display = "none"; }}
                   />
                 )}
@@ -238,7 +238,7 @@ export function AdminClubEditPage({ updateClub }: Props) {
                   id="logo_file"
                   type="file"
                   accept="image/png,image/jpeg,image/webp"
-                  style={{ color: "#cdd6f4", fontSize: "0.85rem" }}
+                  style={{ color: "var(--c-text)", fontSize: "0.85rem" }}
                   onChange={e => {
                     const f = e.target.files?.[0] ?? null;
                     setLogoFile(f);
@@ -252,12 +252,12 @@ export function AdminClubEditPage({ updateClub }: Props) {
             </Field>
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✔ Clube atualizado! Redirecionando...</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✔ Clube atualizado! Redirecionando...</p>}
 
-          <div style={S.actions}>
-            <Link to="/admin/clubes" style={S.btnCancel}>Cancelar</Link>
-            <button type="submit" style={S.btnSubmit} disabled={submitting}>
+          <div className="form-actions">
+            <Link to="/admin/clubes" className="btn btn-secondary">Cancelar</Link>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando..." : "Salvar alterações"}
             </button>
           </div>
@@ -272,30 +272,9 @@ function Field({ label, htmlFor, children, style }: {
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", ...style }}>
-      <label htmlFor={htmlFor} style={S.label}>{label}</label>
+      <label htmlFor={htmlFor} className="form-label">{label}</label>
       {children}
     </div>
   );
 }
 
-const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
-  heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #cba6f7, #89b4fa)" },
-  heroInner: { maxWidth: "800px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
-  back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
-  title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
-  page: { maxWidth: "800px", margin: "0 auto", padding: "2rem 1.5rem 4rem" },
-  form: { display: "flex", flexDirection: "column", gap: "1.5rem" },
-  fieldset: { border: "1px solid #313244", borderRadius: "8px", padding: "1.25rem 1.5rem", margin: 0 },
-  legend: { fontSize: "0.84rem", fontWeight: 700, color: "#cdd6f4", textTransform: "uppercase", letterSpacing: "0.07em", padding: "0 0.5rem" },
-  legendOpt: { fontWeight: 400, color: "#cdd6f4", textTransform: "none", letterSpacing: "normal", fontSize: "0.8rem" },
-  grid2: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1rem", marginTop: "1rem" },
-  label: { fontSize: "0.83rem", fontWeight: 600, color: "#cdd6f4", textTransform: "uppercase", letterSpacing: "0.06em" },
-  input: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%" },
-  select: { cursor: "pointer", appearance: "auto" },
-  errorMsg: { color: "#f38ba8", backgroundColor: "#2a1a1f", border: "1px solid #5a2a30", borderRadius: "6px", padding: "0.75rem 1rem", fontSize: "0.875rem" },
-  successMsg: { color: "#a6e3a1", backgroundColor: "#1a2a1f", border: "1px solid #2a5a30", borderRadius: "6px", padding: "0.75rem 1rem", fontSize: "0.875rem" },
-  actions: { display: "flex", justifyContent: "flex-end", gap: "0.75rem", paddingTop: "0.5rem" },
-  btnCancel: { backgroundColor: "transparent", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", fontWeight: 500, padding: "0.6rem 1.25rem", textDecoration: "none", display: "inline-flex", alignItems: "center" },
-  btnSubmit: { backgroundColor: "#cba6f7", border: "none", borderRadius: "6px", color: "#11111b", fontSize: "0.9rem", fontWeight: 700, padding: "0.6rem 1.5rem", cursor: "pointer" },
-};

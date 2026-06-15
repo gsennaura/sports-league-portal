@@ -36,70 +36,70 @@ export function AdminLeaguesPage({ listLeagues }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <div style={S.heroRow}>
-            <h1 style={S.title}>Ligas</h1>
-            <Link to="/admin/ligas/novo" style={S.btnNew}>+ Nova liga</Link>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <div className="hero__row">
+            <h1 className="page-title">Ligas</h1>
+            <Link to="/admin/ligas/novo" className="btn btn-success">+ Nova liga</Link>
           </div>
-          <div style={S.searchWrap}>
+          <div className="search-wrap">
             <input
               type="search"
               placeholder="Pesquisar por nome, sigla, cidade ou presidente..."
               value={search}
               onChange={e => { setSearch(e.target.value); setPage(1); }}
-              style={S.searchInput}
+              className="search-input"
             />
           </div>
         </div>
       </header>
-      <main style={S.page}>
-        {loading && <p style={S.hint}>Carregando...</p>}
-        {error && <p style={S.error}>{error}</p>}
+      <main className="page-container">
+        {loading && <p className="muted">Carregando...</p>}
+        {error && <p className="error-text">{error}</p>}
         {!loading && !error && (
           <>
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>Nome</th>
-                    <th style={S.th}>Sigla</th>
-                    <th style={S.th}>Cidade</th>
-                    <th style={S.th}>Presidente</th>
-                    <th style={S.th}>Federada</th>
-                    <th style={S.th}></th>
+                    <th >Nome</th>
+                    <th >Sigla</th>
+                    <th >Cidade</th>
+                    <th >Presidente</th>
+                    <th >Federada</th>
+                    <th ></th>
                   </tr>
                 </thead>
                 <tbody>
                   {slice.length === 0 ? (
                     <tr>
-                      <td colSpan={6} style={S.empty}>Nenhuma liga cadastrada.</td>
+                      <td colSpan={6} className="muted">Nenhuma liga cadastrada.</td>
                     </tr>
                   ) : (
                     slice.map(lg => (
-                      <tr key={lg.id} style={S.trRow}>
-                        <td style={S.td}>
+                      <tr key={lg.id} >
+                        <td >
                           <Link
                             to={`/admin/ligas/${lg.id}/editar`}
                             state={{ league: lg }}
-                            style={S.rowLink}
+                            className="row-link"
                           >
                             {lg.name}
                           </Link>
                         </td>
-                        <td style={S.tdMono}>{lg.short_name}</td>
-                        <td style={S.td}>{lg.city_name || "—"}</td>
-                        <td style={S.tdMuted}>{lg.president ?? "—"}</td>
-                        <td style={S.td}>
+                        <td className="td-muted">{lg.short_name}</td>
+                        <td >{lg.city_name || "—"}</td>
+                        <td className="td-muted">{lg.president ?? "—"}</td>
+                        <td >
                           {lg.is_federated
-                            ? <span style={S.badgeGreen}>Sim</span>
-                            : <span style={S.badgeGray}>Não</span>}
+                            ? <span className="badge badge--success">Sim</span>
+                            : <span className="badge">Não</span>}
                         </td>
-                        <td style={{ ...S.td, textAlign: "right", whiteSpace: "nowrap" }}>
+                        <td style={{ textAlign: "right", whiteSpace: "nowrap" }}>
                           <Link
                             to={`/admin/ligas/${lg.id}/clubes`}
-                            style={S.btnFiliacao}
+                            className="btn btn-primary"
                           >
                             Filiações →
                           </Link>
@@ -111,12 +111,12 @@ export function AdminLeaguesPage({ listLeagues }: Props) {
               </table>
             </div>
 
-            <div style={S.footer}>
-              <span style={S.count}>
+            <div >
+              <span className="page-info">
                 {filtered.length} {filtered.length === 1 ? "liga" : "ligas"}{q ? " encontrada" : ""}
               </span>
               {totalPages > 1 && (
-                <div style={S.pagination}>
+                <div className="pagination">
                   <button
                     style={{ ...S.pgBtn, ...(page === 1 ? S.pgBtnDisabled : {}) }}
                     disabled={page === 1}
@@ -124,7 +124,7 @@ export function AdminLeaguesPage({ listLeagues }: Props) {
                   >
                     ‹ Anterior
                   </button>
-                  <span style={S.pgInfo}>{page} / {totalPages}</span>
+                  <span className="page-info">{page} / {totalPages}</span>
                   <button
                     style={{ ...S.pgBtn, ...(page === totalPages ? S.pgBtnDisabled : {}) }}
                     disabled={page === totalPages}

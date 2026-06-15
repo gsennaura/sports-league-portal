@@ -319,84 +319,84 @@ export function AdminMembershipPendingPage() {
 
   return (
     <>
-      <div style={S.page}>
-        <div style={S.container}>
+      <div className="page-container">
+        <div className="page-container">
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem", marginBottom: "0.25rem" }}>
             <h2 style={{ ...S.title, margin: 0 }}>Pendências de vínculo</h2>
             <Link
               to="/admin/atletas/novo"
-              style={{ background: "#cba6f7", color: "#18265b", border: "none", borderRadius: 8, padding: "0.45rem 1rem", fontWeight: 700, fontSize: "0.85rem", textDecoration: "none", whiteSpace: "nowrap" }}
+              style={{ background: "var(--c-action)", color: "var(--c-brand)", border: "none", borderRadius: 8, padding: "0.45rem 1rem", fontWeight: 700, fontSize: "0.85rem", textDecoration: "none", whiteSpace: "nowrap" }}
             >
               + Novo atleta
             </Link>
           </div>
-          <p style={S.sub}>
+          <p className="muted">
             Atletas aguardando aprovação de vínculo com um time.
             {items.length > 0 && ` (${items.length} total)`}
           </p>
 
           {/* ── Filters ── */}
-          <div style={S.filters}>
+          <div className="filter-bar">
             <input
-              style={S.searchInput}
+              className="search-input"
               type="search"
               placeholder="Buscar por nome do atleta..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <select style={S.select} value={filterLeague} onChange={(e) => setFilterLeague(e.target.value)} disabled={isLeagueAdmin && leagues.length <= 1}>
+            <select className="form-select" value={filterLeague} onChange={(e) => setFilterLeague(e.target.value)} disabled={isLeagueAdmin && leagues.length <= 1}>
               <option value="">Todas as ligas</option>
               {leagues.map((l) => <option key={l} value={l}>{l}</option>)}
             </select>
-            <select style={S.select} value={filterSport} onChange={(e) => setFilterSport(e.target.value)}>
+            <select className="form-select" value={filterSport} onChange={(e) => setFilterSport(e.target.value)}>
               <option value="">Todos os esportes</option>
               {sports.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
-            <select style={S.select} value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
+            <select className="form-select" value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
               <option value="">Todas as categorias</option>
               {categories.map((c) => <option key={c} value={c}>{CATEGORY_LABEL[c] ?? c}</option>)}
             </select>
-            <select style={S.select} value={filterTeam} onChange={(e) => setFilterTeam(e.target.value)}>
+            <select className="form-select" value={filterTeam} onChange={(e) => setFilterTeam(e.target.value)}>
               <option value="">Todos os times</option>
               {teams.map((t) => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
 
-          {error && <p style={S.error}>{error}</p>}
-          {loading && <p style={S.msg}>Carregando…</p>}
+          {error && <p className="error-text">{error}</p>}
+          {loading && <p className="muted">Carregando…</p>}
 
           {!loading && filtered.length === 0 && (
-            <div style={S.empty}>
+            <div className="muted">
               <p>{items.length === 0 ? "Nenhuma solicitação pendente" : "Nenhum resultado para os filtros aplicados"}</p>
             </div>
           )}
 
           {!loading && filtered.length > 0 && (
-            <div style={S.tableWrap}>
-              <table style={S.table} className="pending-table">
+            <div className="table-wrap">
+              <table className="data-table pending-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>Nome</th>
-                    <th style={S.th} className="pending-col-hide-mobile">Apelido</th>
-                    <th style={S.th}>Posição</th>
-                    <th style={S.th}>Time</th>
-                    <th style={{ ...S.th, textAlign: "center" }}>Ações</th>
+                    <th >Nome</th>
+                    <th  className="pending-col-hide-mobile">Apelido</th>
+                    <th >Posição</th>
+                    <th >Time</th>
+                    <th style={{ textAlign: "center" }}>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filtered.map((m) => (
-                    <tr key={m.id} style={S.tr}>
-                      <td style={S.td}>{m.athlete_name ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#ffffff" }} className="pending-col-hide-mobile">{m.athlete_nickname ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#ffffff" }}>{m.athlete_position ?? "—"}</td>
-                      <td style={S.td}>
-                        <span style={S.teamCell}>{m.team_name ?? "—"}</span>
-                        {m.team_sport_name && <span style={S.tag}>{m.team_sport_name}</span>}
+                    <tr key={m.id} >
+                      <td >{m.athlete_name ?? "—"}</td>
+                      <td style={{ color: "#ffffff" }} className="pending-col-hide-mobile">{m.athlete_nickname ?? "—"}</td>
+                      <td style={{ color: "#ffffff" }}>{m.athlete_position ?? "—"}</td>
+                      <td >
+                        <span >{m.team_name ?? "—"}</span>
+                        {m.team_sport_name && <span className="badge">{m.team_sport_name}</span>}
                       </td>
-                      <td style={{ ...S.td, textAlign: "center" }}>
-                        <div style={S.actionGroup}>
+                      <td style={{ textAlign: "center" }}>
+                        <div className="td-action">
                           <select
-                            style={S.actionSelect}
+                            className="form-select"
                             value={rowActions[m.id] ?? ""}
                             disabled={actioning === m.id}
                             onChange={(e) =>
@@ -411,7 +411,7 @@ export function AdminMembershipPendingPage() {
                             style={{
                               ...S.btnConfirm,
                               ...(rowActions[m.id] === "approve"
-                                ? { background: "#a6e3a1" }
+                                ? { background: "var(--c-positive)" }
                                 : rowActions[m.id] === "reject"
                                 ? { background: "#f38ba8" }
                                 : { opacity: 0.4, cursor: "not-allowed" }),
@@ -426,8 +426,7 @@ export function AdminMembershipPendingPage() {
                           </button>
                           <button
                             title="Editar atleta"
-                            style={S.btnEdit}
-                            className="action-btn"
+                            className="btn-edit"
                             onClick={() => openEdit(m)}
                           >
                             ✎
@@ -445,64 +444,64 @@ export function AdminMembershipPendingPage() {
 
       {/* ── Edit Modal ─────────────────────────────────────────────────────── */}
       {editMembership && (
-        <div style={S.overlay} onClick={() => setEditMembership(null)}>
-          <div style={S.modal} onClick={(e) => e.stopPropagation()}>
-            <h3 style={S.modalTitle}>Editar atleta</h3>
-            <p style={S.modalSub}>
+        <div className="modal-overlay" onClick={() => setEditMembership(null)}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title">Editar atleta</h3>
+            <p className="muted">
               Solicitação de vínculo com <strong>{editMembership.team_name ?? editMembership.team_id}</strong>
             </p>
 
-            {editError && <p style={S.error}>{editError}</p>}
-            {editLoading && <p style={S.msg}>Carregando dados...</p>}
+            {editError && <p className="error-text">{editError}</p>}
+            {editLoading && <p className="muted">Carregando dados...</p>}
 
             {editForm && (
               <>
-                <div style={S.fieldGroup}>
-                  <label style={S.label}>Nome *</label>
+                <div className="form-field-group">
+                  <label className="form-label">Nome *</label>
                   <input
-                    style={S.input}
+                    className="form-input"
                     value={editForm.name}
                     onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
                   />
                 </div>
 
-                <div style={S.fieldGroup}>
-                  <label style={S.label}>Apelido</label>
+                <div className="form-field-group">
+                  <label className="form-label">Apelido</label>
                   <input
-                    style={S.input}
+                    className="form-input"
                     value={editForm.nickname}
                     onChange={(e) => setEditForm({ ...editForm, nickname: e.target.value })}
                   />
                 </div>
 
-                <div style={S.row2}>
-                  <div style={S.fieldGroup}>
-                    <label style={S.label}>Posição</label>
-                    <select style={S.input} value={editForm.position} onChange={(e) => setEditForm({ ...editForm, position: e.target.value })}>
+                <div className="form-field-group--2">
+                  <div className="form-field-group">
+                    <label className="form-label">Posição</label>
+                    <select className="form-input" value={editForm.position} onChange={(e) => setEditForm({ ...editForm, position: e.target.value })}>
                       {POSITION_OPTIONS.map((p) => <option key={p} value={p}>{p || "Selecione..."}</option>)}
                     </select>
                   </div>
-                  <div style={S.fieldGroup}>
-                    <label style={S.label}>Pé dominante</label>
-                    <select style={S.input} value={editForm.preferred_foot} onChange={(e) => setEditForm({ ...editForm, preferred_foot: e.target.value })}>
+                  <div className="form-field-group">
+                    <label className="form-label">Pé dominante</label>
+                    <select className="form-input" value={editForm.preferred_foot} onChange={(e) => setEditForm({ ...editForm, preferred_foot: e.target.value })}>
                       {FOOT_OPTIONS.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
                     </select>
                   </div>
                 </div>
 
-                <div style={S.row2}>
-                  <div style={S.fieldGroup}>
-                    <label style={S.label}>Altura (cm)</label>
-                    <input style={S.input} type="number" min={100} max={250} value={editForm.height_cm} onChange={(e) => setEditForm({ ...editForm, height_cm: e.target.value })} />
+                <div className="form-field-group--2">
+                  <div className="form-field-group">
+                    <label className="form-label">Altura (cm)</label>
+                    <input className="form-input" type="number" min={100} max={250} value={editForm.height_cm} onChange={(e) => setEditForm({ ...editForm, height_cm: e.target.value })} />
                   </div>
-                  <div style={S.fieldGroup}>
-                    <label style={S.label}>Peso (kg)</label>
-                    <input style={S.input} type="number" min={30} max={200} step={0.1} value={editForm.weight_kg} onChange={(e) => setEditForm({ ...editForm, weight_kg: e.target.value })} />
+                  <div className="form-field-group">
+                    <label className="form-label">Peso (kg)</label>
+                    <input className="form-input" type="number" min={30} max={200} step={0.1} value={editForm.weight_kg} onChange={(e) => setEditForm({ ...editForm, weight_kg: e.target.value })} />
                   </div>
                 </div>
 
-                <div style={S.fieldGroup}>
-                  <label style={S.label}>Foto</label>
+                <div className="form-field-group">
+                  <label className="form-label">Foto</label>
                   <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                     {(photoPreviewUrl || editForm.photo_url) && (
                       <img
@@ -511,7 +510,7 @@ export function AdminMembershipPendingPage() {
                         style={{ width: 56, height: 56, borderRadius: "50%", objectFit: "cover", border: "2px solid #45475a" }}
                       />
                     )}
-                    <label style={S.btnUpload} htmlFor="athlete-photo-input">
+                    <label className="btn btn-secondary" htmlFor="athlete-photo-input">
                       {photoFile ? `📷 ${photoFile.name}` : "📷 Escolher foto"}
                     </label>
                     <input
@@ -529,11 +528,11 @@ export function AdminMembershipPendingPage() {
                 </div>
 
                 <div style={{ ...S.fieldGroup, marginTop: "0.5rem" }}>
-                  <label style={{ ...S.label, fontWeight: 600, color: "#cba6f7", marginBottom: 8 }}>Time da solicitação</label>
+                  <label style={{ ...S.label, fontWeight: 600, color: "var(--c-action)", marginBottom: 8 }}>Time da solicitação</label>
 
                   {/* Liga */}
-                  <div style={S.fieldGroup}>
-                    <label style={S.label}>Liga</label>
+                  <div className="form-field-group">
+                    <label className="form-label">Liga</label>
                     <select
                       style={{ ...S.input, ...(isLeagueAdmin && allLeagues.length <= 1 ? { opacity: 0.7, cursor: "not-allowed" } : {}) }}
                       value={editLeagueId}
@@ -551,10 +550,10 @@ export function AdminMembershipPendingPage() {
                   </div>
 
                   {/* Esporte */}
-                  <div style={S.fieldGroup}>
-                    <label style={S.label}>Esporte</label>
+                  <div className="form-field-group">
+                    <label className="form-label">Esporte</label>
                     <select
-                      style={{ ...S.input, opacity: !editLeagueId ? 0.5 : 1 }}
+                      className="form-input" style={{ opacity: !editLeagueId ? 0.5 : 1 }}
                       value={editSportId}
                       disabled={!editLeagueId}
                       onChange={(e) => {
@@ -575,10 +574,10 @@ export function AdminMembershipPendingPage() {
                   </div>
 
                   {/* Categoria */}
-                  <div style={S.fieldGroup}>
-                    <label style={S.label}>Categoria</label>
+                  <div className="form-field-group">
+                    <label className="form-label">Categoria</label>
                     <select
-                      style={{ ...S.input, opacity: !editSportId ? 0.5 : 1 }}
+                      className="form-input" style={{ opacity: !editSportId ? 0.5 : 1 }}
                       value={editCategory}
                       disabled={!editSportId}
                       onChange={(e) => {
@@ -594,10 +593,10 @@ export function AdminMembershipPendingPage() {
                   </div>
 
                   {/* Time */}
-                  <div style={S.fieldGroup}>
-                    <label style={S.label}>Time</label>
+                  <div className="form-field-group">
+                    <label className="form-label">Time</label>
                     <select
-                      style={{ ...S.input, opacity: !editCategory ? 0.5 : 1 }}
+                      className="form-input" style={{ opacity: !editCategory ? 0.5 : 1 }}
                       value={editForm.new_team_id}
                       disabled={!editCategory}
                       onChange={(e) => {
@@ -611,15 +610,15 @@ export function AdminMembershipPendingPage() {
                   </div>
 
                   {editForm.new_team_id !== editMembership.team_id && editForm.new_team_id && (
-                    <p style={S.teamChangeNotice}>
+                    <p className="form-warning">
                       ⚠ Time alterado para: <strong>{editForm.new_team_name || editForm.new_team_id}</strong>
                     </p>
                   )}
                 </div>
 
-                <div style={S.modalActions}>
-                  <button style={S.btnCancel} onClick={() => setEditMembership(null)} disabled={editSaving}>Cancelar</button>
-                  <button style={S.btnSave} onClick={saveEdit} disabled={editSaving || !editForm.name.trim()}>
+                <div className="modal-actions">
+                  <button className="btn btn-secondary" onClick={() => setEditMembership(null)} disabled={editSaving}>Cancelar</button>
+                  <button className="btn btn-primary" onClick={saveEdit} disabled={editSaving || !editForm.name.trim()}>
                     {editSaving ? "Salvando..." : "Salvar alterações"}
                   </button>
                 </div>

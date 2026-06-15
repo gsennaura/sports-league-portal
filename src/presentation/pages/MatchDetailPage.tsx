@@ -118,73 +118,71 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
 
   return (
     <>
-      {/* ─── Header ─────────────────────────────────────────────────────── */}
-      <header style={S.header}>
-        <div style={S.headerInner}>
-          <div style={S.headerTopRow}>
-            <button onClick={() => navigate(-1)} style={S.back}>← Voltar</button>
-            {isAdmin && id && (
-              <Link to={`/admin/partidas/${id}/editar`} style={S.editBtn}>
-                ✏️ Editar partida
-              </Link>
-            )}
-          </div>
-          {match && (
-            <div style={S.context}>
-              <span style={S.contextChamp}>
-                {match.championship_name} · {match.championship_year}
-                {match.division_name ? ` · ${match.division_name}` : ""}
-              </span>
-              <span style={S.contextPhase}>
-                {[match.phase_name, `Rodada ${match.round_number}`].join(" · ")}
-              </span>
-            </div>
+      {/* ─── Header ─────────────────────────────────────────────────────────────────── */}
+      <header className="match-header">
+        <div className="match-header__nav">
+          <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
+          {isAdmin && id && (
+            <Link to={`/admin/partidas/${id}/editar`} className="btn-edit">
+              ✏️ Editar partida
+            </Link>
           )}
         </div>
+        {match && (
+          <div className="match-header__context">
+            <span className="match-header__champ">
+              {match.championship_name} · {match.championship_year}
+              {match.division_name ? ` · ${match.division_name}` : ""}
+            </span>
+            <span className="match-header__phase">
+              {[match.phase_name, `Rodada ${match.round_number}`].join(" · ")}
+            </span>
+          </div>
+        )}
       </header>
 
       {/* ─── Content ────────────────────────────────────────────────────── */}
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <PageLoader />}
-        {error && <p style={S.errorText}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && match && (
           <>
             {match.match_date && (
-              <p style={S.dateTimeLine}>{formatDateTime(match.match_date)}</p>
+              <div className="match-date-badge">📅 {formatDateTime(match.match_date)}</div>
             )}
 
-            <div style={S.scoreCard}>
-              <div style={S.scoreGrid}>
+            <div className="score-card">
+              <div className="score-grid">
                 {/* Home team */}
-                <div style={S.teamBlock}>
+                <div className="score-team">
                   <Shield url={match.home_club_logo_url} size={48} />
-                  <Link to={`/times/${toSlugPath(match.home_team_name, match.home_team_id)}`} style={S.teamNameLink}>{match.home_team_name}</Link>
+                  <Link to={`/times/${toSlugPath(match.home_team_name, match.home_team_id)}`} className="row-link">{match.home_team_name}</Link>
                   {homeForm.length > 0 && <FormRow form={homeForm} />}
                 </div>
 
                 {/* Score */}
-                <div style={S.scoreCenterBlock}>
+                <div className="score-center">
                   {match.home_score !== null && match.away_score !== null ? (
                     <>
-                      <span style={S.bigScore}>
+                      <span className="score-big">
                         {match.home_score} × {match.away_score}
                       </span>
                       {match.home_penalty_score !== null && match.away_penalty_score !== null && (
-                        <span style={S.penaltyScore}>
+                        <span className="muted">
                           pên: {match.home_penalty_score} × {match.away_penalty_score}
                         </span>
                       )}
                     </>
                   ) : (
-                    <span style={S.vsText}>vs</span>
+                    <span className="score-sep">vs</span>
                   )}
                 </div>
 
                 {/* Away team */}
-                <div style={{ ...S.teamBlock, textAlign: "right" as const, alignItems: "flex-end" }}>
+                <div className="score-team score-team--away">
                   <Shield url={match.away_club_logo_url} size={48} />
-                  <Link to={`/times/${toSlugPath(match.away_team_name, match.away_team_id)}`} style={S.teamNameLink}>{match.away_team_name}</Link>
+                  <Link to={`/times/${toSlugPath(match.away_team_name, match.away_team_id)}`} className="row-link">{match.away_team_name}</Link>
                   {awayForm.length > 0 && <FormRow form={awayForm} />}
                 </div>
               </div>
@@ -192,15 +190,15 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
 
             {/* ─── Meta info ──────────────────────────────────────────── */}
             {(match.venue_name || match.city_name) && (
-              <p style={S.venueLine}>
+              <div className="match-venue-badge">
                 📍{" "}
                 {match.venue_id
-                  ? <Link to={`/locais/${toSlugPath(match.venue_name!, match.venue_id!)}`} style={S.venueLink}>{match.venue_name}</Link>
+                  ? <Link to={`/locais/${toSlugPath(match.venue_name!, match.venue_id!)}`}>{match.venue_name}</Link>
                   : match.venue_name
                 }
                 {match.venue_name && match.city_name && " — "}
                 {match.city_name}
-              </p>
+              </div>
             )}
 
             <Section title="Linha do Tempo">
@@ -240,7 +238,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
             {/* ─── Equipe de Arbitragem ────────────────────────────── */}
             <Section title="Equipe de Arbitragem">
               {!match.referees || match.referees.length === 0 ? (
-                <p style={S.placeholder}>Equipe de arbitragem não informada.</p>
+                <p className="muted">Equipe de arbitragem não informada.</p>
               ) : (
                 <RefereesSection referees={match.referees} />
               )}
@@ -249,7 +247,7 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
             {/* ─── Head to head ───────────────────────────────────────── */}
             <Section title="Histórico Entre os Times">
               {h2hGroups.length === 0 ? (
-                <p style={S.placeholder}>Nenhum confronto anterior encontrado.</p>
+                <p className="muted">Nenhum confronto anterior encontrado.</p>
               ) : (
                 <>
                   <H2HStats
@@ -259,8 +257,8 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
                     homeId={match.home_team_id}
                   />
                   {h2hGroups.map(([key, group]) => (
-                    <div key={key} style={S.h2hGroup}>
-                      <div style={S.h2hGroupHeader}>
+                    <div key={key} className="h2h-group">
+                      <div className="h2h-group__header">
                         {group[0].championship_name} · {group[0].championship_year}
                       </div>
                       {group.map((m) => (
@@ -285,41 +283,27 @@ const NO_REFEREE_PHOTO = "https://raw.githubusercontent.com/gsennaura/sports-man
 
 // ── RefereesSection ───────────────────────────────────────────────────────────
 function RefereesSection({ referees }: { referees: MatchReferee[] }) {
-  const ROLE_COLORS: Record<string, string> = {
-    main_referee: "#f9e2af",
-    assistant: "#89b4fa",
-    delegate: "#a6e3a1",
+  const ROLE_CLASS: Record<string, string> = {
+    main_referee: "referee-card__role--main",
+    assistant:    "referee-card__role--assistant",
+    delegate:     "referee-card__role--delegate",
   };
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "0.75rem" }}>
+    <div className="referees-grid">
       {referees.map((ref) => (
-        <Link
-          key={ref.id}
-          to={`/arbitros/${ref.referee_id}`}
-          style={{
-            display: "flex", alignItems: "center", gap: "0.65rem",
-            background: "#18265b", border: "1px solid #313244", borderRadius: "10px",
-            padding: "0.5rem 0.85rem 0.5rem 0.5rem", textDecoration: "none",
-            minWidth: "180px",
-          }}
-        >
+        <Link key={ref.id} to={`/arbitros/${ref.referee_id}`} className="referee-card">
           <img
             src={ref.referee_photo_url ?? NO_REFEREE_PHOTO}
             alt={ref.referee_name ?? ""}
             onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_REFEREE_PHOTO; }}
-            style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" as const, flexShrink: 0, backgroundColor: "#18265b" }}
+            className="referee-card__photo"
           />
-          <div style={{ display: "flex", flexDirection: "column" as const, gap: "0.15rem", minWidth: 0 }}>
-            <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#cdd6f4", whiteSpace: "nowrap" as const, overflow: "hidden", textOverflow: "ellipsis" }}>
+          <div className="referee-card__info">
+            <span className="referee-card__name">
               {ref.referee_nickname ?? ref.referee_name ?? "Árbitro"}
             </span>
-            <span style={{
-              fontSize: "0.68rem", fontWeight: 700, color: "#18265b",
-              background: ROLE_COLORS[ref.role] ?? "#cdd6f4",
-              borderRadius: "4px", padding: "0 5px", lineHeight: "1.5",
-              alignSelf: "flex-start",
-            }}>
+            <span className={`referee-card__role ${ROLE_CLASS[ref.role] ?? "referee-card__role--default"}`}>
               {ROLE_LABELS[ref.role]}
             </span>
           </div>
@@ -363,7 +347,7 @@ function RosterSection({
   if (!isMobile) {
     return (
       <Section title="Elencos">
-        <div style={S.rosterColumns}>
+        <div className="roster-grid">
           <RosterColumn
             teamName={homeTeamName}
             athletes={homeAthletes}
@@ -393,15 +377,15 @@ function RosterSection({
   return (
     <Section title="Elencos">
       {/* Tab bar */}
-      <div style={RS.tabBar}>
+      <div className="tab-bar">
         <button
-          style={{ ...RS.tab, ...(activeTab === "home" ? RS.tabActive : {}) }}
+          className={`tab-bar__btn${activeTab === "home" ? " tab-bar__btn--active" : ""}`}
           onClick={() => setActiveTab("home")}
         >
           {homeTeamName}
         </button>
         <button
-          style={{ ...RS.tab, ...(activeTab === "away" ? RS.tabActive : {}) }}
+          className={`tab-bar__btn${activeTab === "away" ? " tab-bar__btn--active" : ""}`}
           onClick={() => setActiveTab("away")}
         >
           {awayTeamName}
@@ -438,34 +422,7 @@ function RosterSection({
   );
 }
 
-// Tab styles (mobile roster)
-const RS: Record<string, React.CSSProperties> = {
-  tabBar: {
-    display: "flex",
-    borderBottom: "2px solid #313244",
-    marginBottom: "0.75rem",
-  },
-  tab: {
-    flex: 1,
-    background: "none",
-    border: "none",
-    borderBottom: "2px solid transparent",
-    marginBottom: "-2px",
-    color: "#ffffff",
-    fontSize: "0.85rem",
-    fontWeight: 600,
-    padding: "0.5rem 0.75rem",
-    cursor: "pointer",
-    textAlign: "center" as const,
-    whiteSpace: "nowrap" as const,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  tabActive: {
-    color: "#89b4fa",
-    borderBottomColor: "#89b4fa",
-  },
-};
+// Tab styles migrated to CSS classes (.tab-bar__btn, .tab-bar__btn--active)
 
 const FORM_COLORS: Record<FormResult, string> = {
   V: "#a6e3a1",
@@ -484,7 +441,7 @@ function FormRow({ form }: { form: FormResult[] }) {
             height: 20,
             borderRadius: "4px",
             backgroundColor: FORM_COLORS[r],
-            color: "#18265b",
+            color: "var(--c-brand)",
             fontSize: "0.65rem",
             fontWeight: 700,
             display: "flex",
@@ -569,16 +526,16 @@ function RosterColumn({
   };
 
   return (
-    <div style={{ ...S.rosterCol, alignItems: align === "right" ? "flex-end" : "flex-start" }}>
-      {!hideName && <span style={S.rosterColTitle}>{teamName}</span>}
+    <div className={`roster-col${align === "right" ? " roster-col--right" : ""}`}>
+      {!hideName && <span className="muted">{teamName}</span>}
       {sorted.length === 0 ? (
-        <span style={S.rosterEmpty}>Sem elenco cadastrado</span>
+        <span className="muted">Sem elenco cadastrado</span>
       ) : (
         sorted.map((a) => {
           const isOpen = popover?.athleteId === a.athlete_id;
           return (
             <div key={a.id} style={{ width: "100%" }}>
-              <div style={{ ...S.rosterRow, flexDirection: align === "right" ? "row-reverse" : "row", cursor: "default" }}>
+              <div className={`roster-row${align === "right" ? " roster-row--right" : ""}`}>
                 <Link
                   to={`/atletas/${a.athlete_id}`}
                   style={{ display: "flex", flexDirection: align === "right" ? "row-reverse" : "row", alignItems: "center", gap: "0.5rem", textDecoration: "none", flex: 1 }}
@@ -587,16 +544,16 @@ function RosterColumn({
                     src={a.athlete_photo_url || NO_ATHLETE_PHOTO}
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_ATHLETE_PHOTO; }}
                     alt={a.athlete_name ?? "Atleta"}
-                    style={S.rosterThumb}
+                    className="avatar"
                   />
-                  <div style={{ ...S.rosterInfo, alignItems: align === "right" ? "flex-end" : "flex-start" }}>
-                    <span style={S.rosterPlayerName}>{a.athlete_nickname ?? a.athlete_name ?? "—"}</span>
-                    <div style={S.rosterMeta}>
+                  <div className={`roster-info${align === "right" ? " roster-info--right" : ""}`}>
+                    <span className="team-name">{a.athlete_nickname ?? a.athlete_name ?? "—"}</span>
+                    <div className="muted">
                       {a.jersey_number != null && (
-                        <span style={S.jerseyNum}>#{a.jersey_number}</span>
+                        <span className="muted">#{a.jersey_number}</span>
                       )}
                       {a.athlete_position && (
-                        <span style={S.rosterPos}>{a.athlete_position}</span>
+                        <span className="muted">{a.athlete_position}</span>
                       )}
                     </div>
                   </div>
@@ -699,36 +656,36 @@ function H2HStats({
   const awayPct = 100 - homePct - drawPct;
 
   return (
-    <div style={S.statsBlock}>
+    <div className="stats-block">
       {/* Win bar */}
-      <div style={S.statsRow}>
-        <span style={S.statsTeamLabel}>{homeName}</span>
-        <span style={S.statsTeamLabel} />
-        <span style={{ ...S.statsTeamLabel, textAlign: "right" as const }}>{awayName}</span>
+      <div className="stats-row">
+        <span className="stats-team-label">{homeName}</span>
+        <span />
+        <span className="stats-team-label">{awayName}</span>
       </div>
-      <div style={S.statsRow}>
-        <span style={S.statsCount}>{homeWins}V</span>
-        <span style={S.statsCountCenter}>{draws}E</span>
-        <span style={{ ...S.statsCount, textAlign: "right" as const }}>{awayWins}V</span>
+      <div className="stats-row">
+        <span className="stats-count">{homeWins}V</span>
+        <span className="stats-count">{draws}E</span>
+        <span className="stats-count">{awayWins}V</span>
       </div>
-      <div style={S.winBar}>
-        {homePct > 0 && <div style={{ ...S.winBarHome, width: `${homePct}%` }} />}
-        {drawPct > 0 && <div style={{ ...S.winBarDraw, width: `${drawPct}%` }} />}
-        {awayPct > 0 && <div style={{ ...S.winBarAway, width: `${awayPct}%` }} />}
+      <div className="win-bar">
+        {homePct > 0 && <div className="win-bar__home" style={{ width: `${homePct}%` }} />}
+        {drawPct > 0 && <div className="win-bar__draw" style={{ width: `${drawPct}%` }} />}
+        {awayPct > 0 && <div className="win-bar__away" style={{ width: `${awayPct}%` }} />}
       </div>
-      <div style={S.statsRow}>
-        <span style={S.statsPct}>{homePct}%</span>
-        <span style={{ ...S.statsPct, textAlign: "center" as const }}>{drawPct}%</span>
-        <span style={{ ...S.statsPct, textAlign: "right" as const }}>{awayPct}%</span>
+      <div className="stats-row">
+        <span className="stats-pct">{homePct}%</span>
+        <span className="stats-pct">{drawPct}%</span>
+        <span className="stats-pct">{awayPct}%</span>
       </div>
 
-      <div style={S.statsDivider} />
+      <div  />
 
       {/* Goals */}
       <StatBar label="Gols marcados" homeVal={homeGoals} awayVal={awayGoals} />
       <StatBar label="Média de gols" homeVal={+(homeGoals / total).toFixed(1)} awayVal={+(awayGoals / total).toFixed(1)} />
 
-      <div style={S.statsFootnote}>{total} jogo{total !== 1 ? "s" : ""} no histórico</div>
+      <p className="stats-summary">{total} jogo{total !== 1 ? "s" : ""} no histórico</p>
     </div>
   );
 }
@@ -738,15 +695,15 @@ function StatBar({ label, homeVal, awayVal }: { label: string; homeVal: number; 
   const homePct = Math.round((homeVal / total) * 100);
   const awayPct = 100 - homePct;
   return (
-    <div style={S.statBarBlock}>
-      <div style={S.statBarHeader}>
-        <span style={S.statBarVal}>{homeVal}</span>
-        <span style={S.statBarLabel}>{label}</span>
-        <span style={{ ...S.statBarVal, textAlign: "right" as const }}>{awayVal}</span>
+    <div className="stat-bar">
+      <div className="stat-bar__header">
+        <span className="stats-pct">{homeVal}</span>
+        <span className="stats-pct">{label}</span>
+        <span className="stats-pct">{awayVal}</span>
       </div>
-      <div style={S.statBarTrack}>
-        {homePct > 0 && <div style={{ ...S.statBarFillHome, width: `${homePct}%` }} />}
-        {awayPct > 0 && <div style={{ ...S.statBarFillAway, width: `${awayPct}%` }} />}
+      <div className="stat-bar__track">
+        {homePct > 0 && <div className="stat-bar__home" style={{ width: `${homePct}%` }} />}
+        {awayPct > 0 && <div className="stat-bar__away" style={{ width: `${awayPct}%` }} />}
       </div>
     </div>
   );
@@ -754,9 +711,9 @@ function StatBar({ label, homeVal, awayVal }: { label: string; homeVal: number; 
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={S.section}>
-      <h2 style={S.sectionTitle}>{title}</h2>
-      <div style={S.sectionBody}>{children}</div>
+    <section className="match-section">
+      <h2 className="match-section__title">{title}</h2>
+      <div className="match-section__body">{children}</div>
     </section>
   );
 }
@@ -777,36 +734,33 @@ function H2HMatchRow({ match: m }: { match: HeadToHeadMatch }) {
   })();
 
   return (
-    <Link to={`/partidas/${m.id}`} style={S.h2hMatchLink}>
-      <div style={S.h2hCardRow}>
-        {/* Col 1 — data */}
-        <div style={S.h2hDateCol}>
-          {dateLabel && <span style={S.h2hDateLabel}>{dateLabel}</span>}
-          {timeLabel && <span style={S.h2hTimeLabel}>{timeLabel}</span>}
+    <Link to={`/partidas/${m.id}`} className="match-entry">
+      <div className="match-entry__row">
+        <div className="match-entry__date-col">
+          {dateLabel && <span className="match-entry__date-label">{dateLabel}</span>}
+          {timeLabel && <span className="match-entry__time-label">{timeLabel}</span>}
         </div>
-
-        {/* Col 2 — times + placar */}
-        <div style={S.h2hTeamsCol}>
-          <div style={S.h2hTeamRow}>
-            <span style={S.h2hScoreSlot}>
+        <div className="match-entry__teams-col">
+          <div className="match-entry__team-row">
+            <span className="match-entry__score">
               {hasScore ? `${m.home_score}${hasPenalty ? ` (${m.home_penalty_score})` : ""}` : ""}
             </span>
             <Shield url={m.home_club_logo_url ?? null} size={16} />
-            <span style={S.h2hTeamName}>{m.home_team_name}</span>
+            <span className="match-entry__team-name">{m.home_team_name}</span>
           </div>
-          <div style={S.h2hTeamRow}>
-            <span style={S.h2hScoreSlot}>
+          <div className="match-entry__team-row">
+            <span className="match-entry__score">
               {hasScore ? `${m.away_score}${hasPenalty ? ` (${m.away_penalty_score})` : ""}` : ""}
             </span>
             <Shield url={m.away_club_logo_url ?? null} size={16} />
-            <span style={S.h2hTeamName}>{m.away_team_name}</span>
+            <span className="match-entry__team-name">{m.away_team_name}</span>
           </div>
         </div>
-
-        {/* Col 3 — fase */}
-        <div style={S.h2hPhaseCol}>
-          <span style={S.h2hPhaseLabel}>{m.phase_name}</span>
-        </div>
+        {m.phase_name && (
+          <div className="match-entry__venue-col">
+            <span className="match-entry__venue-label">{m.phase_name}</span>
+          </div>
+        )}
       </div>
     </Link>
   );
@@ -928,429 +882,3 @@ const QS: Record<string, React.CSSProperties> = {
   },
 };
 
-const S: Record<string, React.CSSProperties> = {
-  header: {
-    backgroundColor: "#18265b",
-    borderBottom: "1px solid #313244",
-    padding: "1rem 1.5rem",
-  },
-  headerInner: {
-    maxWidth: "860px",
-    margin: "0 auto",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.5rem",
-  },
-  back: {
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    color: "#89b4fa",
-    fontSize: "0.9rem",
-    padding: 0,
-    textAlign: "left",
-    alignSelf: "flex-start",
-  },
-  headerTopRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  editBtn: {
-    background: "#313244",
-    border: "1px solid #45475a",
-    borderRadius: "6px",
-    padding: "0.3rem 0.75rem",
-    color: "#cdd6f4",
-    fontSize: "0.8rem",
-    fontWeight: 500,
-    textDecoration: "none",
-    whiteSpace: "nowrap",
-  },
-  context: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.2rem",
-  },
-  contextChamp: {
-    fontSize: "0.85rem",
-    fontWeight: 700,
-    color: "#cba6f7",
-  },
-  contextPhase: {
-    fontSize: "0.8rem",
-    color: "#cdd6f4",
-  },
-  page: {
-    maxWidth: "860px",
-    margin: "0 auto",
-    padding: "2rem 1.5rem",
-  },
-  status: { color: "#cdd6f4" },
-  errorText: { color: "#f38ba8" },
-
-  // ── Score card ──
-  scoreCard: {
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "10px",
-    padding: "1.5rem 1.5rem",
-    marginBottom: "0.5rem",
-  },
-  scoreGrid: {
-    display: "grid",
-    gridTemplateColumns: "minmax(0, 1fr) auto minmax(0, 1fr)",
-    alignItems: "center",
-    gap: "0.75rem",
-  },
-  teamBlock: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.25rem",
-  },
-  teamNameLink: {
-    fontSize: "1.1rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    textDecoration: "none",
-    display: "block",
-    wordBreak: "break-word",
-    overflowWrap: "anywhere",
-  } as React.CSSProperties,
-  teamCategory: {
-    fontSize: "0.7rem",
-    color: "#cdd6f4",
-    fontStyle: "italic",
-  },
-  scoreCenterBlock: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "0.3rem",
-  },
-  bigScore: {
-    fontSize: "2rem",
-    fontWeight: 900,
-    color: "#a6e3a1",
-    letterSpacing: "0.05em",
-    whiteSpace: "nowrap",
-  },
-  penaltyScore: {
-    fontSize: "0.75rem",
-    color: "#fab387",
-  },
-  vsText: {
-    fontSize: "1.25rem",
-    color: "#cdd6f4",
-    fontWeight: 500,
-  },
-  dateTimeLine: {
-    fontSize: "0.88rem",
-    color: "#89b4fa",
-    textAlign: "center" as const,
-    marginBottom: "0.75rem",
-    fontWeight: 600,
-    textTransform: "capitalize" as const,
-  },
-  venueLine: {
-    fontSize: "0.8rem",
-    color: "#cdd6f4",
-    textAlign: "center" as const,
-    marginBottom: "2rem",
-    marginTop: "0.4rem",
-  },
-  venueLink: {
-    color: "#89b4fa",
-    textDecoration: "none",
-    fontWeight: 600,
-  },
-  metaLine: {
-    fontSize: "0.8rem",
-    color: "#cdd6f4",
-    textAlign: "center",
-    marginBottom: "2rem",
-    padding: "0.25rem 0",
-  },
-
-  // ── Sections ──
-  section: {
-    marginBottom: "2rem",
-  },
-  sectionTitle: {
-    fontSize: "0.7rem",
-    fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.1em",
-    color: "#cdd6f4",
-    marginBottom: "0.5rem",
-  },
-  sectionBody: {
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    overflow: "hidden",
-  },
-  placeholder: {
-    color: "#cdd6f4",
-    fontSize: "0.875rem",
-    padding: "1.25rem 1rem",
-    margin: 0,
-  },
-
-  // ── Head to head ──
-  // ── H2H Stats ──
-  statsBlock: {
-    padding: "1.25rem 1rem 0.75rem",
-    borderBottom: "1px solid #313244",
-  },
-  statsRow: {
-    display: "grid",
-    gridTemplateColumns: "1fr auto 1fr",
-    gap: "0.5rem",
-    marginBottom: "0.2rem",
-  },
-  statsTeamLabel: {
-    fontSize: "0.72rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  statsCount: {
-    fontSize: "0.9rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-  },
-  statsCountCenter: {
-    fontSize: "0.9rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    textAlign: "center" as const,
-  },
-  winBar: {
-    display: "flex",
-    height: "8px",
-    borderRadius: "4px",
-    overflow: "hidden",
-    margin: "0.3rem 0",
-    backgroundColor: "#313244",
-  },
-  winBarHome: {
-    backgroundColor: "#89b4fa",
-    height: "100%",
-    transition: "width 0.3s",
-  },
-  winBarDraw: {
-    backgroundColor: "#ffffff",
-    height: "100%",
-  },
-  winBarAway: {
-    backgroundColor: "#f38ba8",
-    height: "100%",
-  },
-  statsPct: {
-    fontSize: "0.68rem",
-    color: "#cdd6f4",
-  },
-  statsDivider: {
-    height: "1px",
-    backgroundColor: "#313244",
-    margin: "0.75rem 0",
-  },
-  statBarBlock: {
-    marginBottom: "0.6rem",
-  },
-  statBarHeader: {
-    display: "grid",
-    gridTemplateColumns: "2rem 1fr 2rem",
-    gap: "0.5rem",
-    marginBottom: "0.2rem",
-    alignItems: "center",
-  },
-  statBarVal: {
-    fontSize: "0.85rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-  },
-  statBarLabel: {
-    fontSize: "0.7rem",
-    color: "#cdd6f4",
-    textAlign: "center" as const,
-  },
-  statBarTrack: {
-    display: "flex",
-    height: "5px",
-    borderRadius: "3px",
-    overflow: "hidden",
-    backgroundColor: "#313244",
-  },
-  statBarFillHome: {
-    backgroundColor: "#89b4fa",
-    height: "100%",
-  },
-  statBarFillAway: {
-    backgroundColor: "#f38ba8",
-    height: "100%",
-  },
-  statsFootnote: {
-    fontSize: "0.65rem",
-    color: "#cdd6f4",
-    textAlign: "center" as const,
-    marginTop: "0.5rem",
-  },
-
-  h2hGroup: {},
-  h2hGroupHeader: {
-    fontSize: "0.7rem",
-    fontWeight: 700,
-    color: "#89b4fa",
-    textTransform: "uppercase",
-    letterSpacing: "0.08em",
-    padding: "0.5rem 1rem",
-    backgroundColor: "#18265b",
-    borderBottom: "1px solid #313244",
-  },
-  h2hMatchLink: {
-    textDecoration: "none",
-    color: "inherit",
-    display: "block",
-  },
-  h2hCardRow: {
-    display: "grid",
-    gridTemplateColumns: "3rem 1fr auto",
-    alignItems: "center",
-    gap: "0.75rem",
-    padding: "0.45rem 1rem",
-    borderBottom: "1px solid #18265b",
-  },
-  h2hDateCol: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    gap: "0.1rem",
-    flexShrink: 0,
-  },
-  h2hDateLabel: {
-    fontSize: "0.75rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-  },
-  h2hTimeLabel: {
-    fontSize: "0.65rem",
-    color: "#cdd6f4",
-    fontWeight: 600,
-  },
-  h2hTeamsCol: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.2rem",
-    minWidth: 0,
-  },
-  h2hTeamRow: {
-    display: "grid",
-    gridTemplateColumns: "3rem 18px 1fr",
-    alignItems: "center",
-    gap: "0.4rem",
-  },
-  h2hScoreSlot: {
-    fontSize: "0.875rem",
-    fontWeight: 700,
-    color: "#a6e3a1",
-    textAlign: "right" as const,
-  },
-  h2hTeamName: {
-    fontSize: "0.875rem",
-    fontWeight: 600,
-    color: "#cdd6f4",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  h2hPhaseCol: {
-    display: "flex",
-    alignItems: "center",
-    flexShrink: 0,
-    maxWidth: "7rem",
-  },
-  h2hPhaseLabel: {
-    fontSize: "0.68rem",
-    color: "#cdd6f4",
-    textAlign: "right" as const,
-    lineHeight: 1.3,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-
-  // ── Rosters ──
-  rosterColumns: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: 0,
-  },
-  rosterCol: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.1rem",
-    padding: "0.75rem 0.75rem 1rem",
-  },
-  rosterColTitle: {
-    fontSize: "0.68rem",
-    fontWeight: 700,
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.08em",
-    color: "#89b4fa",
-    marginBottom: "0.4rem",
-  },
-  rosterEmpty: {
-    fontSize: "0.75rem",
-    color: "#ffffff",
-    fontStyle: "italic" as const,
-  },
-  rosterRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    textDecoration: "none",
-    color: "inherit",
-    padding: "0.3rem 0.25rem",
-    borderRadius: "4px",
-  },
-  rosterThumb: {
-    width: 28,
-    height: 28,
-    borderRadius: "50%",
-    objectFit: "cover" as const,
-    flexShrink: 0,
-    backgroundColor: "#313244",
-  },
-  rosterInfo: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.1rem",
-    minWidth: 0,
-  },
-  rosterPlayerName: {
-    fontSize: "0.78rem",
-    fontWeight: 600,
-    color: "#cdd6f4",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  rosterMeta: {
-    display: "flex",
-    gap: "0.3rem",
-    alignItems: "center",
-  },
-  jerseyNum: {
-    fontSize: "0.65rem",
-    color: "#a6e3a1",
-    fontWeight: 700,
-  },
-  rosterPos: {
-    fontSize: "0.65rem",
-    color: "#cdd6f4",
-  },
-};

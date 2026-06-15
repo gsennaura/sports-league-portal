@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toSlugPath } from "@utils/slug";
 import type { ListVenues } from "@application/use_cases/ListVenues";
@@ -15,35 +15,34 @@ interface City {
 
 interface VenuesPageProps {
   listVenues: ListVenues;
+  leagueId?: string;
 }
 
-function VenueCard({ venue }: { venue: Venue; cityName: string }) {
+function VenueCard({ venue, cityName }: { venue: Venue; cityName: string }) {
   return (
-    <Link to={`/locais/${toSlugPath(venue.name, venue.id)}`} style={{ textDecoration: "none" }}>
-      <div style={S.card}>
-        <img
-          src={venue.photo_url ?? NO_VENUE_PHOTO}
-          onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_VENUE_PHOTO; }}
-          alt={venue.name}
-          style={{ width: 72, height: 52, objectFit: "cover", borderRadius: 6, flexShrink: 0, background: "#18265b" }}
-        />
-        <div style={S.cardBody}>
-          {venue.nickname
-            ? (
-              <>
-                <span style={S.cardName}>{venue.nickname}</span>
-                <span style={S.cardFullName}>{venue.name}</span>
-              </>
-            )
-            : <span style={S.cardName}>{venue.name}</span>
-          }
-        </div>
+    <Link to={`/locais/${toSlugPath(venue.name, venue.id)}`} className="venue-card">
+      <img
+        src={venue.photo_url ?? NO_VENUE_PHOTO}
+        onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_VENUE_PHOTO; }}
+        alt={venue.name}
+        className="venue-card__img"
+      />
+      <div className="venue-card__body">
+        <span className="venue-card__name">
+          {venue.nickname ?? venue.name}
+        </span>
+        {venue.nickname && (
+          <span className="venue-card__sub">{venue.name}</span>
+        )}
+        {cityName && (
+          <span className="venue-card__sub">📍 {cityName}</span>
+        )}
       </div>
     </Link>
   );
 }
 
-export function VenuesPage({ listVenues }: VenuesPageProps) {
+export function VenuesPage({ listVenues, leagueId }: VenuesPageProps) {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [cityMap, setCityMap] = useState<Map<string, string>>(new Map());
   const [loading, setLoading] = useState(true);
@@ -51,7 +50,7 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
 
   useEffect(() => {
     Promise.all([
-      listVenues.execute(),
+      listVenues.execute(leagueId),
       fetch(`${API_BASE}/cities`).then((r) => r.json() as Promise<City[]>),
     ])
       .then(([vs, cities]) => {
@@ -76,32 +75,32 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
   return (
     <>
       {/* Hero */}
-      <header style={S.hero}>
-        <div style={S.heroAccentBar} />
-        <div style={S.heroInner}>
-          <Link to="/" style={S.heroBack}>← Página Principal</Link>
-          <span style={S.heroEyebrow}>🏟 Infraestrutura Esportiva</span>
-          <h1 style={S.heroTitle}>Locais</h1>
-          <p style={S.heroSub}>
+      <header className="hero">
+        <div className="hero__bar" />
+        <div className="hero__inner">
+          <Link to="/" className="back-link">← Página Principal</Link>
+          <span className="hero__eyebrow">🏟 Infraestrutura Esportiva</span>
+          <h1 className="hero__title">Locais</h1>
+          <p className="hero__sub">
             Estádios, campos e ginásios cadastrados na plataforma.
           </p>
         </div>
       </header>
 
       {/* Content */}
-      <main style={S.page}>
-        {loading && <p style={S.status}>Carregando locais...</p>}
-        {error && <p style={S.error}>{error}</p>}
+      <main className="page-container">
+        {loading && <p className="status-chip">Carregando locais...</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && !error && venues.length === 0 && (
-          <p style={S.status}>Nenhum local cadastrado.</p>
+          <p className="status-chip">Nenhum local cadastrado.</p>
         )}
 
         {!loading && !error && venues.length > 0 && (
           cities.map((city) => (
-            <section key={city} style={S.citySection}>
-              <h2 style={S.cityTitle}>{city}</h2>
-              <div style={S.grid}>
+            <section key={city} className="page-section">
+              <h2 className="venue-city-heading">🏙 {city}</h2>
+              <div className="venue-grid">
                 {byCity.get(city)!.map((v) => (
                   <VenueCard
                     key={v.id}
@@ -120,118 +119,3 @@ export function VenuesPage({ listVenues }: VenuesPageProps) {
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
-const S: Record<string, React.CSSProperties> = {
-  hero: {
-    background: "linear-gradient(160deg, #18265b 0%, #18265b 60%, #11111b 100%)",
-    borderBottom: "1px solid #313244",
-    paddingBottom: "2.5rem",
-    overflow: "hidden",
-  },
-  heroAccentBar: {
-    height: "4px",
-    background: "linear-gradient(90deg, #89b4fa 0%, #cba6f7 50%, #a6e3a1 100%)",
-  },
-  heroInner: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "2rem 2rem 0",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.5rem",
-  },
-  heroBack: {
-    color: "#89b4fa",
-    textDecoration: "none",
-    fontSize: "0.85rem",
-    marginBottom: "0.25rem",
-    alignSelf: "flex-start",
-  },
-  heroEyebrow: {
-    color: "#89b4fa",
-    fontSize: "0.82rem",
-    fontWeight: 600,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-  },
-  heroTitle: {
-    margin: 0,
-    fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-    fontWeight: 800,
-    color: "#cdd6f4",
-    lineHeight: 1.15,
-    letterSpacing: "-0.02em",
-  },
-  heroSub: {
-    margin: 0,
-    marginTop: "0.15rem",
-    fontSize: "1rem",
-    color: "#ffffff",
-    lineHeight: 1.6,
-  },
-
-  page: {
-    maxWidth: "1100px",
-    margin: "0 auto",
-    padding: "2.5rem 2rem 4rem",
-  },
-  status: {
-    color: "#ffffff",
-    fontSize: "0.95rem",
-  },
-  error: {
-    color: "#f38ba8",
-    fontSize: "0.95rem",
-  },
-
-  citySection: {
-    marginBottom: "2.5rem",
-  },
-  cityTitle: {
-    margin: "0 0 1rem",
-    fontSize: "1.15rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
-    borderBottom: "1px solid #313244",
-    paddingBottom: "0.5rem",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-    gap: "1rem",
-  },
-
-  // Card
-  card: {
-    background: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "0.65rem",
-    padding: "1rem 1.1rem",
-    display: "flex",
-    gap: "0.85rem",
-    alignItems: "flex-start",
-  },
-  cardIcon: {
-    fontSize: "1.6rem",
-    lineHeight: 1,
-    flexShrink: 0,
-    marginTop: "0.1rem",
-    color: "unset",
-  },
-  cardBody: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.2rem",
-    minWidth: 0,
-  },
-  cardName: {
-    color: "#cdd6f4",
-    fontWeight: 700,
-    fontSize: "0.97rem",
-    lineHeight: 1.3,
-  },
-  cardFullName: {
-    color: "#ffffff",
-    fontSize: "0.82rem",
-    lineHeight: 1.3,
-  },
-};

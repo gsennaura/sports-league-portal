@@ -27,210 +27,55 @@ export function Footer() {
 
   if (isMobile) {
     return (
-      <footer style={S.footerMobile}>
-        <div style={S.mobileTop}>
-          <span style={S.apoioLabel}>Apoio</span>
-          <img src={seteNosEsportesLogo} alt="7 nos Esportes" style={S.apoioLogoMobile} />
-          <div style={S.apoioDividerMobile} />
-          <img src={seteColinasLogo} alt="7 Colinas" style={S.apoioLogoMobile} />
+      <footer className="site-footer__mobile">
+        <div className="site-footer__mobile-top">
+          <span className="site-footer__apoio-label">Apoio</span>
+          <img src={seteNosEsportesLogo} alt="7 nos Esportes" className="site-footer__apoio-logo--mobile" />
+          <div className="site-footer__apoio-divider--mobile" />
+          <img src={seteColinasLogo} alt="7 Colinas" className="site-footer__apoio-logo--mobile" />
         </div>
-        <div style={S.mobileBottom}>
-          <div style={S.brand}>
+        <div className="site-footer__mobile-bottom">
+          <div className="site-footer__brand">
             <img
               src={footerLogo}
               alt={footerName}
-              style={S.brandLogoMobile}
+              className="site-footer__brand-logo--mobile"
               onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO; }}
             />
-            <span style={S.brandNameMobile}>{footerName}</span>
+            <span className="site-footer__brand-name--mobile">{footerName}</span>
           </div>
-          <span style={S.devNameMobile}>SENNA TECH LTDA © {year}</span>
+          <span className="site-footer__dev-name--mobile">SENNA TECH LTDA © {year}</span>
         </div>
       </footer>
     );
   }
 
   return (
-    <footer style={S.footer}>
-      <div style={S.inner}>
-        <div style={S.brand}>
+    <footer className="site-footer">
+      <div className="site-footer__inner">
+        <div className="site-footer__brand">
           <img
             src={footerLogo}
             alt={footerName}
-            style={S.brandLogo}
+            className="site-footer__brand-logo"
             onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO; }}
           />
-          <span style={S.brandName}>{footerName}</span>
+          <span className="site-footer__brand-name">{footerName}</span>
         </div>
-        <div style={S.apoioBlock}>
-          <span style={S.apoioLabel}>Apoio</span>
-          <div style={S.apoioLogos}>
-            <img src={seteNosEsportesLogo} alt="7 nos Esportes" style={S.apoioLogo} />
-            <div style={S.apoioDivider} />
-            <img src={seteColinasLogo} alt="7 Colinas" style={S.apoioLogo} />
+        <div className="site-footer__apoio">
+          <span className="site-footer__apoio-label">Apoio</span>
+          <div className="site-footer__apoio-logos">
+            <img src={seteNosEsportesLogo} alt="7 nos Esportes" className="site-footer__apoio-logo" />
+            <div className="site-footer__apoio-divider" />
+            <img src={seteColinasLogo} alt="7 Colinas" className="site-footer__apoio-logo" />
           </div>
         </div>
-        <div style={S.devBlock}>
-          <span style={S.devBy}>Desenvolvido por</span>
-          <span style={S.devName}>SENNA TECH LTDA</span>
-          <span style={S.devYear}>© {year}</span>
+        <div className="site-footer__dev">
+          <span className="site-footer__dev-by">Desenvolvido por</span>
+          <span className="site-footer__dev-name">SENNA TECH LTDA</span>
+          <span className="site-footer__dev-year">© {year}</span>
         </div>
       </div>
     </footer>
   );
 }
-
-const S: Record<string, React.CSSProperties> = {
-  // ─── Desktop ───────────────────────────────────────────────
-  footer: {
-    position: "fixed",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 200,
-    height: "64px",
-    backgroundColor: "rgba(13, 13, 23, 0.97)",
-    borderTop: "1px solid #313244",
-    backdropFilter: "blur(10px)",
-  },
-  inner: {
-    maxWidth: "1200px",
-    margin: "0 auto",
-    height: "100%",
-    padding: "0 2rem",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "1rem",
-  },
-
-  // ─── Mobile ────────────────────────────────────────────────
-  footerMobile: {
-    position: "fixed",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 200,
-    backgroundColor: "rgba(13, 13, 23, 0.97)",
-    borderTop: "1px solid #313244",
-    backdropFilter: "blur(10px)",
-    display: "flex",
-    flexDirection: "column" as const,
-    padding: "0.35rem 1rem 0.45rem",
-    gap: "0.25rem",
-  },
-  mobileTop: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.5rem",
-  },
-  mobileBottom: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  apoioLogoMobile: {
-    height: "20px",
-    width: "auto",
-    objectFit: "contain" as const,
-    opacity: 0.85,
-  },
-  apoioDividerMobile: {
-    width: "1px",
-    height: "14px",
-    backgroundColor: "#313244",
-  },
-  brandLogoMobile: {
-    height: "20px",
-    width: "auto",
-    objectFit: "contain" as const,
-    filter: "drop-shadow(0 1px 3px rgba(137,180,250,0.3))",
-  },
-  brandNameMobile: {
-    color: "#89b4fa",
-    fontWeight: 700,
-    fontSize: "0.75rem",
-    whiteSpace: "nowrap" as const,
-  },
-  devNameMobile: {
-    color: "#ffffff",
-    fontSize: "0.58rem",
-    fontWeight: 600,
-    letterSpacing: "0.03em",
-  },
-
-  // ─── Shared ────────────────────────────────────────────────
-  brand: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-    flexShrink: 0,
-  },
-  brandLogo: {
-    height: "36px",
-    width: "auto",
-    objectFit: "contain" as const,
-    filter: "drop-shadow(0 1px 4px rgba(137,180,250,0.3))",
-  },
-  brandName: {
-    color: "#89b4fa",
-    fontWeight: 700,
-    fontSize: "0.95rem",
-    letterSpacing: "0.01em",
-    whiteSpace: "nowrap" as const,
-  },
-  apoioBlock: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.75rem",
-    flexShrink: 0,
-  },
-  apoioLabel: {
-    color: "#ffffff",
-    fontSize: "0.6rem",
-    fontWeight: 700,
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.08em",
-  },
-  apoioLogos: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.6rem",
-  },
-  apoioLogo: {
-    height: "32px",
-    width: "auto",
-    objectFit: "contain" as const,
-    opacity: 0.9,
-    filter: "brightness(0.95)",
-  },
-  apoioDivider: {
-    width: "1px",
-    height: "24px",
-    backgroundColor: "#313244",
-  },
-  devBlock: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "flex-end",
-    gap: "0.1rem",
-    flexShrink: 0,
-  },
-  devBy: {
-    color: "#ffffff",
-    fontSize: "0.62rem",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.06em",
-  },
-  devName: {
-    color: "#ffffff",
-    fontSize: "0.78rem",
-    fontWeight: 700,
-    letterSpacing: "0.04em",
-  },
-  devYear: {
-    color: "#45475a",
-    fontSize: "0.58rem",
-  },
-};

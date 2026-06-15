@@ -79,29 +79,20 @@ function LeagueTopBanner() {
   if (!league) return null;
   return (
     <>
-      <div style={{ height: "6px", background: "linear-gradient(90deg, #047857 0%, #0d9488 50%, #0ea5e9 100%)" }} />
-      <a href="/" style={{
-        backgroundColor: "#ffffff",
-        borderBottom: "2px solid #e5e7eb",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "1.25rem",
-        padding: "0.85rem 2rem",
-        textDecoration: "none",
-        cursor: "pointer",
-      }}>
+      <div className="league-top-banner" />
+      <a href="/" className="league-top-banner__link">
         <img
           src={league.logo_url ?? NO_LEAGUE_PHOTO_NAV}
           onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_LEAGUE_PHOTO_NAV; }}
           alt={league.short_name}
-          style={{ height: "clamp(56px, 9vw, 80px)", width: "auto", objectFit: "contain", flexShrink: 0, filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.15))" }}
+          className="league-top-banner__logo"
+          style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.15))" }}
         />
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
-          <div style={{ fontWeight: 900, color: "#18265b", fontSize: "clamp(1.3rem, 3vw, 1.9rem)", letterSpacing: "0.04em", textTransform: "uppercase" as const, lineHeight: 1.05 }}>{league.short_name}</div>
-          <div style={{ color: "#374151", fontSize: "clamp(0.65rem, 1.2vw, 0.78rem)", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, lineHeight: 1 }}>{league.name}</div>
+        <div className="league-top-banner__info">
+          <div className="league-top-banner__name">{league.short_name}</div>
+          <div className="league-top-banner__full-name">{league.name}</div>
           {league.city_name && (
-            <div style={{ color: "#6b7280", fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.05em", marginTop: "0.1rem" }}>{league.city_name}{league.founded_year ? ` · Est. ${league.founded_year}` : ""}</div>
+            <div className="league-top-banner__city">{league.city_name}{league.founded_year ? ` · Est. ${league.founded_year}` : ""}</div>
           )}
         </div>
       </a>
@@ -117,18 +108,8 @@ const appBg: React.CSSProperties = {
   backgroundAttachment: "fixed",
 };
 
-const publicPageCard: React.CSSProperties = {
-  backgroundColor: "#ffffff",
-  borderRadius: "16px",
-  overflow: "hidden",
-  boxShadow: "0 8px 56px rgba(0,0,0,0.5)",
-  maxWidth: "1100px",
-  margin: "1rem auto 0",
-  minHeight: "calc(100vh - 8rem)",
-};
-
 function PublicLayout() {
-  return <div style={publicPageCard}><Outlet /></div>;
+  return <div className="page-card"><Outlet /></div>;
 }
 
 function TitleUpdater() {
@@ -163,7 +144,7 @@ export function App() {
             <Route path="/emendas" element={<EmendasPage listEmendas={listEmendas} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
             <Route path="/campeonatos" element={<ChampionshipsPage listChampionships={listChampionships} />} />
             <Route path="/campeonatos/:id" element={<ChampionshipDetailPage getChampionshipDetail={getChampionshipDetail} updateChampionshipPodium={updateChampionshipPodium} loadPhaseGroups={loadPhaseGroups} getEditionTopScorers={getEditionTopScorers} />} />
-            <Route path="/locais" element={<VenuesPage listVenues={listVenues} />} />
+            <Route path="/locais" element={<VenuesPage listVenues={listVenues} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
             <Route path="/locais/:slug" element={<VenueDetailPage getVenueMatches={getVenueMatches} venueRepository={venueRepository} />} />
             <Route path="/clubes" element={<ClubsPage listClubs={listClubs} />} />
             <Route path="/clubes/:slug" element={<ClubDetailPage getClub={getClub} getClubMatches={getClubMatches} getClubTitles={getClubTitles} getClubTeams={getClubTeams} clubRepository={clubRepository} />} />
@@ -172,7 +153,7 @@ export function App() {
             <Route path="/ao-vivo" element={<LiveMatchesPage getLiveWindowMatches={getLiveWindowMatches} />} />
             <Route path="/atletas" element={<Navigate to="/" replace />} />
             <Route path="/atletas/:id" element={<Navigate to="/" replace />} />
-            <Route path="/arbitros" element={<RefereesPage listReferees={listReferees} />} />
+            <Route path="/arbitros" element={<RefereesPage listReferees={listReferees} leagueId={import.meta.env.VITE_LEAGUE_ID} />} />
             <Route path="/arbitros/:id" element={<RefereeDetailPage getRefereeDetail={getRefereeDetail} getRefereeMatches={getRefereeMatches} />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/cadastro" element={<CadastroPage />} />

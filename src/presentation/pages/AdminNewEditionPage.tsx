@@ -234,35 +234,35 @@ export function AdminNewEditionPage() {
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/campeonatos" style={S.back}>← Campeonatos</Link>
-          <div style={S.heroRow}>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/campeonatos" className="back-link">← Campeonatos</Link>
+          <div className="hero__row">
             <div>
-              <h1 style={S.title}>Nova Edição</h1>
+              <h1 className="page-title">Nova Edição</h1>
               {champ && (
-                <p style={S.subtitle}>{champLabel}{champ.division ? ` · ${champ.division}` : ""}</p>
+                <p className="page-subtitle">{champLabel}{champ.division ? ` · ${champ.division}` : ""}</p>
               )}
             </div>
           </div>
         </div>
       </header>
 
-      <main style={S.page}>
-        {loading && <p style={S.hint}>Carregando…</p>}
-        {error && <p style={S.errorText}>{error}</p>}
+      <main className="page-container">
+        {loading && <p className="muted">Carregando…</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && !error && champ && (
-          <form onSubmit={handleSubmit} style={S.form} noValidate>
+          <form onSubmit={handleSubmit} className="form-body" noValidate>
 
             {/* ─── Ano ─────────────────────────────────────────── */}
-            <fieldset style={S.fieldset}>
-              <legend style={S.legend}>Ano da edição *</legend>
+            <fieldset className="form-fieldset">
+              <legend className="form-legend">Ano da edição *</legend>
               <div style={{ maxWidth: "180px" }}>
                 <input
                   type="number"
-                  style={S.input}
+                  className="form-input"
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
                   min={2000}
@@ -271,21 +271,21 @@ export function AdminNewEditionPage() {
                 />
               </div>
               {prevYear && (
-                <p style={S.hint}>Edição mais recente: {prevYear}</p>
+                <p className="muted">Edição mais recente: {prevYear}</p>
               )}
             </fieldset>
 
             {/* ─── Times da edição anterior ────────────────────── */}
-            <fieldset style={S.fieldset}>
-              <legend style={S.legend}>
+            <fieldset className="form-fieldset">
+              <legend className="form-legend">
                 Times{prevYear ? ` da edição ${prevYear}` : ""}
-                <span style={S.legendSub}> — desmarque quem não participará</span>
+                <span className="form-legend"> — desmarque quem não participará</span>
               </legend>
 
               {prevEditionTeams.length === 0 ? (
-                <p style={S.hint}>Nenhum time na edição anterior. Adicione abaixo.</p>
+                <p className="muted">Nenhum time na edição anterior. Adicione abaixo.</p>
               ) : (
-                <div style={S.teamGrid}>
+                <div className="form-field-group">
                   {prevEditionTeams.map((t) => {
                     const checked = selectedTeamIds.has(t.id);
                     return (
@@ -294,9 +294,9 @@ export function AdminNewEditionPage() {
                           type="checkbox"
                           checked={checked}
                           onChange={() => toggleTeam(t.id)}
-                          style={S.checkbox}
+                          className="form-checkbox"
                         />
-                        <span style={S.teamName}>{t.name}</span>
+                        <span className="team-name">{t.name}</span>
                       </label>
                     );
                   })}
@@ -305,26 +305,26 @@ export function AdminNewEditionPage() {
             </fieldset>
 
             {/* ─── Adicionar outros times ──────────────────────── */}
-            <fieldset style={S.fieldset}>
-              <legend style={S.legend}>Adicionar outros times</legend>
+            <fieldset className="form-fieldset">
+              <legend className="form-legend">Adicionar outros times</legend>
               {/* Filtros fixos: liga e categoria do campeonato */}
-              <div style={S.filterRow}>
-                <div style={S.filterItem}>
-                  <span style={S.filterLabel}>Liga</span>
-                  <span style={S.filterValue}>
+              <div className="filter-bar">
+                <div >
+                  <span className="form-label">Liga</span>
+                  <span className="muted">
                     {champ.league_id ? (leagueName ?? "Carregando…") : "Sem liga"}
                   </span>
                 </div>
-                <div style={S.filterItem}>
-                  <span style={S.filterLabel}>Categoria</span>
-                  <span style={S.filterValue}>
+                <div >
+                  <span className="form-label">Categoria</span>
+                  <span className="muted">
                     {champ.level ? (LEVEL_LABEL[champ.level] ?? champ.level) : "Sem categoria"}
                   </span>
                 </div>
               </div>
-              <div style={S.addRow}>
+              <div className="form-field-group">
                 <select
-                  style={{ ...S.input, ...S.select, flex: 1, maxWidth: "360px" }}
+                  className="form-select" style={{ flex: 1, maxWidth: "360px" }}
                   value={extraTeamId}
                   onChange={(e) => setExtraTeamId(e.target.value)}
                 >
@@ -348,11 +348,11 @@ export function AdminNewEditionPage() {
                 <div style={{ ...S.teamGrid, marginTop: "0.75rem" }}>
                   {addedExtras.map((t) => (
                     <div key={t.id} style={{ ...S.teamRow, justifyContent: "space-between" }}>
-                      <span style={S.teamName}>{t.name}</span>
+                      <span className="team-name">{t.name}</span>
                       <button
                         type="button"
                         onClick={() => removeExtra(t.id)}
-                        style={S.removeBtn}
+                        className="btn btn-danger"
                       >
                         ✕
                       </button>
@@ -363,15 +363,15 @@ export function AdminNewEditionPage() {
             </fieldset>
 
             {/* ─── Resumo e submit ─────────────────────────────── */}
-            <div style={S.submitArea}>
-              {submitError && <p style={S.errorText}>{submitError}</p>}
-              <p style={S.summaryText}>
+            <div className="form-actions">
+              {submitError && <p className="error-text">{submitError}</p>}
+              <p className="muted">
                 {selectedTeamIds.size} time{selectedTeamIds.size !== 1 ? "s" : ""} selecionado{selectedTeamIds.size !== 1 ? "s" : ""} para a edição {year}.
                 {selectedTeamIds.size > 0 && " Serão colocados em uma fase e grupo iniciais — reorganize depois no Gerenciar."}
               </p>
-              <div style={S.submitRow}>
-                <Link to="/admin/campeonatos" style={S.btnCancel}>Cancelar</Link>
-                <button type="submit" disabled={submitting} style={S.btnSubmit}>
+              <div className="form-actions">
+                <Link to="/admin/campeonatos" className="btn btn-secondary">Cancelar</Link>
+                <button type="submit" disabled={submitting} className="btn btn-primary">
                   {submitting ? "Criando…" : `Criar Edição ${year}`}
                 </button>
               </div>

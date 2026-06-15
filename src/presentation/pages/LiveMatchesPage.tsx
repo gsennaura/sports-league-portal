@@ -29,71 +29,71 @@ function MatchCard({ match, onClick }: { match: MatchDetail; onClick: () => void
 
   return (
     <div
-      style={S.card}
+      className="person-card"
       onClick={onClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" && onClick()}
     >
-      <div style={S.cardHeader}>
-        <span style={S.championship}>
+      <div className="toolbar">
+        <span className="muted">
           {match.championship_name} {match.championship_year}
         </span>
-        <div style={S.cardHeaderRight}>
+        <div className="toolbar">
           {match.round_number != null && (
-            <span style={S.round}>Rodada {match.round_number}</span>
+            <span className="page-section">Rodada {match.round_number}</span>
           )}
           {isLive ? (
-            <span style={S.liveTag}>
-              <span style={S.liveDotSmall} />
+            <span className="badge badge--danger">
+              <span  />
               AO VIVO
             </span>
           ) : (
-            <span style={S.matchTime}>
+            <span className="muted">
               {formatDate(match.match_date)} · {formatTime(match.match_date)}
             </span>
           )}
         </div>
       </div>
 
-      <div style={S.teams}>
+      <div className="form-field-group">
         {/* Home */}
-        <div style={S.teamSide}>
+        <div className="score-team">
           {match.home_club_logo_url && (
-            <img src={match.home_club_logo_url} alt="" style={S.logo} />
+            <img src={match.home_club_logo_url} alt="" className="avatar" />
           )}
-          <span style={S.teamName}>{match.home_team_name}</span>
+          <span className="team-name">{match.home_team_name}</span>
         </div>
 
         {/* Score / VS */}
-        <div style={S.scoreBox}>
+        <div className="score-box">
           {isLive || isFinished ? (
             <>
-              <span style={{ ...S.score, color: isLive ? "#a6e3a1" : "#cdd6f4" }}>
+              <span style={{ ...S.score, color: isLive ? "var(--c-positive)" : "var(--c-text)" }}>
                 {match.home_score ?? 0} – {match.away_score ?? 0}
               </span>
               {match.home_penalty_score != null && (
-                <span style={S.penalties}>
+                <span className="muted">
                   (pên: {match.home_penalty_score} – {match.away_penalty_score})
                 </span>
               )}
             </>
           ) : (
-            <span style={S.vs}>VS</span>
+            <span className="score-sep">VS</span>
           )}
         </div>
 
         {/* Away */}
         <div style={{ ...S.teamSide, justifyContent: "flex-end" }}>
-          <span style={S.teamName}>{match.away_team_name}</span>
+          <span className="team-name">{match.away_team_name}</span>
           {match.away_club_logo_url && (
-            <img src={match.away_club_logo_url} alt="" style={S.logo} />
+            <img src={match.away_club_logo_url} alt="" className="avatar" />
           )}
         </div>
       </div>
 
       {(match.venue_name || match.city_name) && (
-        <div style={S.venue}>
+        <div className="card">
           {[match.venue_name, match.city_name].filter(Boolean).join(" · ")}
         </div>
       )}
@@ -133,13 +133,13 @@ export function LiveMatchesPage({ getLiveWindowMatches }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <img src={minhaLigaLogo} alt="Minha Liga" style={S.heroLogo} />
-          <h1 style={S.title}>Ao Vivo</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <img src={minhaLigaLogo} alt="Minha Liga" className="avatar avatar--lg" />
+          <h1 className="page-title">Ao Vivo</h1>
           {lastUpdated && (
-            <p style={S.subtitle}>
+            <p className="page-subtitle">
               Atualizado às{" "}
               {lastUpdated.toLocaleTimeString("pt-BR", {
                 hour: "2-digit",
@@ -151,9 +151,9 @@ export function LiveMatchesPage({ getLiveWindowMatches }: Props) {
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {loading && <PageLoader />}
-        {error && <p style={S.errorMsg}>{error}</p>}
+        {error && <p className="form-error">{error}</p>}
 
         {!loading && (
           <>
@@ -162,7 +162,7 @@ export function LiveMatchesPage({ getLiveWindowMatches }: Props) {
             ))}
 
             {empty && (
-              <p style={S.emptyMsg}>Nenhuma partida em andamento no momento.</p>
+              <p className="muted">Nenhuma partida em andamento no momento.</p>
             )}
           </>
         )}

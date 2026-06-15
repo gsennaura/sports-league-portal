@@ -108,28 +108,30 @@ export function MatchesByDay({
   const canNext = dayIndex < sortedDates.length - 1;
 
   if (loading) return <PageLoader />;
-  if (error) return <p style={S.errText}>{error}</p>;
-  if (sortedDates.length === 0) return <p style={S.muted}>{emptyMessage}</p>;
+  if (error) return <p className="error-text">{error}</p>;
+  if (sortedDates.length === 0) return <p className="empty-notice">{emptyMessage}</p>;
 
   return (
     <>
-      <div style={{ ...S.dayNav, ...(accent ? { background: "rgba(166,227,161,0.05)", border: "1px solid rgba(166,227,161,0.18)", borderRadius: "10px", padding: "0.5rem 0.75rem" } : {}) }}>
+      <div className="mbd-day-nav" style={accent ? { background: "var(--c-positive-06)", border: "1px solid var(--c-positive-15)", borderRadius: "10px", padding: "0.5rem 0.75rem" } : undefined}>
         <button
-          style={{ ...S.navBtn, ...(canPrev ? (accent ? { borderColor: "rgba(166,227,161,0.4)", color: "#a6e3a1" } : {}) : S.navBtnDisabled) }}
+          className="mbd-nav-btn"
+          style={canPrev && accent ? { borderColor: "var(--c-positive-40)", color: "var(--c-positive)" } : undefined}
           onClick={() => canPrev && setDayIndex((i) => i - 1)}
           disabled={!canPrev}
           aria-label="Dia anterior"
         >
           ←
         </button>
-        <div style={S.dayLabel}>
-          <span style={{ ...S.dayHeading, ...(accent ? { color: accent } : {}) }}>
+        <div className="mbd-day-label">
+          <span className="mbd-day-heading">
             {formatDateHeading(currentDate!)}
-            <span style={S.dayCounter}> | {dayIndex + 1}/{sortedDates.length}</span>
+            <span className="mbd-day-counter"> | {dayIndex + 1}/{sortedDates.length}</span>
           </span>
         </div>
         <button
-          style={{ ...S.navBtn, ...(canNext ? (accent ? { borderColor: "rgba(166,227,161,0.4)", color: "#a6e3a1" } : {}) : S.navBtnDisabled) }}
+          className="mbd-nav-btn"
+          style={canNext && accent ? { borderColor: "var(--c-positive-40)", color: "var(--c-positive)" } : undefined}
           onClick={() => canNext && setDayIndex((i) => i + 1)}
           disabled={!canNext}
           aria-label="Próximo dia"
@@ -138,7 +140,7 @@ export function MatchesByDay({
         </button>
       </div>
 
-      <section style={S.dateSection}>
+      <section className="mbd-date-section">
         {champIds.map((champId) => {
           const champMatches = byChamp!.get(champId)!;
           const first = champMatches[0];
@@ -147,22 +149,22 @@ export function MatchesByDay({
             : first.championship_name;
 
           return (
-            <div key={champId} style={S.champBlock}>
-              <div style={S.champHeader}>
-                <span style={S.champName}>
+            <div key={champId} className="">
+              <div className="mbd-champ-header">
+                <span className="mbd-champ-name">
                   {champLabel}
                   {first.city_name && (
-                    <span style={S.champCity}> — {first.city_name}</span>
+                    <span className="mbd-champ-meta"> — {first.city_name}</span>
                   )}
                   {first.phase_name && (
-                    <span style={S.champPhase}> · {first.phase_name}</span>
+                    <span className="mbd-champ-meta"> · {first.phase_name}</span>
                   )}
                   {first.round_number != null && (
-                    <span style={S.champRound}> · Rodada {first.round_number}</span>
+                    <span className="mbd-champ-meta"> · Rodada {first.round_number}</span>
                   )}
                 </span>
               </div>
-              <div style={S.matchList}>
+              <div className="mbd-match-list">
                 {champMatches.map((match) => (
                   <UpcomingMatchCard key={match.id} match={match} />
                 ))}
@@ -176,84 +178,4 @@ export function MatchesByDay({
 }
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
-
-const S: Record<string, React.CSSProperties> = {
-  muted: { color: "#cdd6f4", fontSize: "0.9rem", margin: 0 },
-  errText: { color: "#f38ba8", fontSize: "0.9rem", margin: 0 },
-  dayNav: {
-    display: "flex",
-    alignItems: "center",
-    gap: "1rem",
-    marginBottom: "1.25rem",
-  },
-  navBtn: {
-    background: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "6px",
-    color: "#cdd6f4",
-    fontSize: "1.1rem",
-    padding: "0.4rem 0.85rem",
-    cursor: "pointer",
-    flexShrink: 0,
-    lineHeight: 1,
-  },
-  navBtnDisabled: {
-    color: "#cdd6f4",
-    cursor: "default",
-    borderColor: "#18265b",
-  },
-  dayLabel: {
-    flex: 1,
-  },
-  dayHeading: {
-    fontSize: "0.95rem",
-    fontWeight: 700,
-    color: "#18265b",
-    textTransform: "capitalize" as const,
-  },
-  dayCounter: {
-    fontSize: "0.72rem",
-    fontWeight: 400,
-    color: "#18265b",
-  },
-  dateSection: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "1.25rem",
-  },
-  champBlock: {},
-  champHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "0.5rem",
-    gap: "0.5rem",
-    paddingBottom: "0.35rem",
-    borderBottom: "1px solid #313244",
-  },
-  champName: {
-    fontSize: "0.8rem",
-    fontWeight: 600,
-    color: "#18265b",
-  },
-  champCity: {
-    fontWeight: 400,
-    color: "#18265b",
-    fontSize: "0.78rem",
-  },
-  champPhase: {
-    fontWeight: 500,
-    color: "#18265b",
-    fontSize: "0.78rem",
-  },
-  champRound: {
-    fontWeight: 400,
-    color: "#18265b",
-    fontSize: "0.75rem",
-  },
-  matchList: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.5rem",
-  },
-};
+// (migrado para src/styles/components.css — classes mbd-*)

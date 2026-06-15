@@ -51,9 +51,9 @@ function formatDate(d: string | null): string {
 }
 
 function statusBadge(status: string | null, hasScore: boolean): React.ReactNode {
-  if (hasScore) return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#a6e3a1", color: "#18265b" }}>Finalizada</span>;
-  if (status === "live") return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#f38ba8", color: "#18265b" }}>Ao vivo</span>;
-  return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "#313244", color: "#cdd6f4" }}>Agendada</span>;
+  if (hasScore) return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "var(--c-positive)", color: "var(--c-brand)" }}>Finalizada</span>;
+  if (status === "live") return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "var(--c-negative)", color: "var(--c-brand)" }}>Ao vivo</span>;
+  return <span style={{ padding: "2px 7px", borderRadius: "4px", fontSize: "11px", fontWeight: 600, background: "var(--c-border)", color: "var(--c-text)" }}>Agendada</span>;
 }
 
 export function AdminMatchesPage() {
@@ -97,62 +97,62 @@ export function AdminMatchesPage() {
     .filter(m => !q || m.home_team_name.toLowerCase().includes(q) || m.away_team_name.toLowerCase().includes(q) || (m.championship_name ?? "").toLowerCase().includes(q) || (m.league_name ?? "").toLowerCase().includes(q));
 
   return (
-    <div style={S.page}>
-      <div style={S.inner}>
-        <h1 style={S.title}>Partidas</h1>
-        <p style={S.subtitle}>Consulte e gerencie partidas agendadas e recentes.</p>
+    <div className="page-container">
+      <div className="hero__inner">
+        <h1 className="page-title">Partidas</h1>
+        <p className="page-subtitle">Consulte e gerencie partidas agendadas e recentes.</p>
 
         {/* Tabs */}
-        <div style={S.tabRow}>
+        <div className="tab-bar">
           <button style={tab === "upcoming" ? S.tabActive : S.tab} onClick={() => setTab("upcoming")}>Próximas</button>
           <button style={tab === "recent"   ? S.tabActive : S.tab} onClick={() => setTab("recent")}>Recentes</button>
         </div>
 
         {/* Filters */}
-        <div style={S.filters}>
-          <div style={S.field}>
-            <label style={S.label}>Liga</label>
-            <select style={S.input} value={filterLeague} onChange={e => setFilterLeague(e.target.value)}>
+        <div className="filter-bar">
+          <div className="form-field">
+            <label className="form-label">Liga</label>
+            <select className="form-input" value={filterLeague} onChange={e => setFilterLeague(e.target.value)}>
               <option value="">Todas as ligas</option>
               {leagueOptions.map(l => <option key={l} value={l}>{l}</option>)}
             </select>
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Esporte</label>
-            <select style={S.input} value={filterSport} onChange={e => setFilterSport(e.target.value)}>
+          <div className="form-field">
+            <label className="form-label">Esporte</label>
+            <select className="form-input" value={filterSport} onChange={e => setFilterSport(e.target.value)}>
               <option value="">Todos os esportes</option>
               {sportOptions.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Categoria</label>
-            <select style={S.input} value={filterCategory} onChange={e => setFilterCategory(e.target.value)}>
+          <div className="form-field">
+            <label className="form-label">Categoria</label>
+            <select className="form-input" value={filterCategory} onChange={e => setFilterCategory(e.target.value)}>
               <option value="">Todas as categorias</option>
               {categoryOptions.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Buscar time</label>
+          <div className="form-field">
+            <label className="form-label">Buscar time</label>
             <input
-              style={{ ...S.input, width: "200px" }}
+              className="form-input" style={{ width: "200px" }}
               placeholder="Nome do time…"
               value={filterTeam}
               onChange={e => setFilterTeam(e.target.value)}
             />
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Buscar campeonato</label>
+          <div className="form-field">
+            <label className="form-label">Buscar campeonato</label>
             <input
-              style={{ ...S.input, width: "220px" }}
+              className="form-input" style={{ width: "220px" }}
               placeholder="Nome do campeonato…"
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
             />
           </div>
-          <div style={S.field}>
-            <label style={S.label}>Janela ({days} dias)</label>
+          <div className="form-field">
+            <label className="form-label">Janela ({days} dias)</label>
             <select
-              style={S.input}
+              className="form-input"
               value={days}
               onChange={e => setDays(Number(e.target.value))}
             >
@@ -166,22 +166,22 @@ export function AdminMatchesPage() {
         </div>
 
         {/* Table */}
-        <div style={S.card}>
+        <div className="card">
           {loading ? (
-            <div style={S.loader}>Carregando partidas…</div>
+            <div className="muted">Carregando partidas…</div>
           ) : filtered.length === 0 ? (
-            <div style={S.empty}>Nenhuma partida encontrada.</div>
+            <div className="muted">Nenhuma partida encontrada.</div>
           ) : (
-            <table style={S.table}>
+            <table className="data-table">
               <thead>
                 <tr>
-                  <th style={S.th}>Data</th>
-                  <th style={S.th}>Partida</th>
-                  <th style={{ ...S.th, textAlign: "center" as const }}>Placar</th>
-                  <th style={S.th}>Campeonato / Fase</th>
-                  <th style={S.th}>Local</th>
-                  <th style={S.th}>Status</th>
-                  <th style={S.th}>Ações</th>
+                  <th >Data</th>
+                  <th >Partida</th>
+                  <th style={{ textAlign: "center" as const }}>Placar</th>
+                  <th >Campeonato / Fase</th>
+                  <th >Local</th>
+                  <th >Status</th>
+                  <th >Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -189,8 +189,8 @@ export function AdminMatchesPage() {
                   const hasScore = m.home_score !== null && m.away_score !== null;
                   return (
                     <tr key={m.id}>
-                      <td style={S.tdMuted}>{formatDate(m.match_date)}</td>
-                      <td style={S.td}>
+                      <td className="td-muted">{formatDate(m.match_date)}</td>
+                      <td >
                         <span style={{ fontWeight: 600 }}>{m.home_team_name}</span>
                         <span style={{ color: "#ffffff", margin: "0 6px" }}>vs</span>
                         <span style={{ fontWeight: 600 }}>{m.away_team_name}</span>
@@ -198,24 +198,24 @@ export function AdminMatchesPage() {
                       <td style={{ ...S.scoreCell, textAlign: "center" as const }}>
                         {hasScore ? `${m.home_score} – ${m.away_score}` : "— – —"}
                       </td>
-                      <td style={S.tdMuted}>
+                      <td className="td-muted">
                         {m.championship_name}{m.championship_year ? ` ${m.championship_year}` : ""}
                         {m.phase_name ? <><br /><span style={{ fontSize: "12px", color: "#ffffff" }}>{m.phase_name}</span></> : null}
                       </td>
-                      <td style={S.tdMuted}>{m.venue_name ?? "—"}</td>
-                      <td style={S.td}>{statusBadge(m.status, hasScore)}</td>
-                      <td style={S.td}>
+                      <td className="td-muted">{m.venue_name ?? "—"}</td>
+                      <td >{statusBadge(m.status, hasScore)}</td>
+                      <td >
                         {!hasScore && (
                           <Link
                             to={`/admin/partidas/${m.id}/resultado`}
-                            style={{ ...S.actionLink, background: "#89b4fa", color: "#18265b" }}
+                            style={{ ...S.actionLink, background: "var(--c-link)", color: "var(--c-brand)" }}
                           >
                             Resultado
                           </Link>
                         )}
                         <Link
                           to={`/admin/partidas/${m.id}/editar`}
-                          style={{ ...S.actionLink, background: "#313244", color: "#cdd6f4" }}
+                          style={{ ...S.actionLink, background: "var(--c-border)", color: "var(--c-text)" }}
                         >
                           Editar
                         </Link>

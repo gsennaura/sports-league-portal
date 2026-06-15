@@ -37,70 +37,70 @@ export function AdminClubsPage({ listClubs }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <div style={S.heroRow}>
-            <h1 style={S.title}>Clubes</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <div className="hero__row">
+            <h1 className="page-title">Clubes</h1>
             <div style={{ display: "flex", gap: "0.5rem" }}>
-              <Link to="/admin/clubes/importar" style={{ ...S.btnNew, backgroundColor: "#cba6f7" }}>⬆ Importar CSV</Link>
-              <Link to="/admin/clubes/novo" style={S.btnNew}>+ Novo clube</Link>
+              <Link to="/admin/clubes/importar" style={{ ...S.btnNew, backgroundColor: "var(--c-action)" }}>⬆ Importar CSV</Link>
+              <Link to="/admin/clubes/novo" className="btn btn-success">+ Novo clube</Link>
             </div>
           </div>
-          <div style={S.searchWrap}>
+          <div className="search-wrap">
             <input
               type="search"
               placeholder="Pesquisar por nome, cidade ou presidente..."
               value={search}
               onChange={e => { setSearch(e.target.value); setPage(1); }}
-              style={S.searchInput}
+              className="search-input"
             />
           </div>
         </div>
       </header>
-      <main style={S.page}>
-        {loading && <p style={S.hint}>Carregando...</p>}
-        {error && <p style={S.error}>{error}</p>}
+      <main className="page-container">
+        {loading && <p className="muted">Carregando...</p>}
+        {error && <p className="error-text">{error}</p>}
         {!loading && !error && (
           <>
-            <div style={S.tableWrap}>
-              <table style={S.table}>
+            <div className="table-wrap">
+              <table className="data-table">
                 <thead>
                   <tr>
-                    <th style={S.th}>Nome</th>
-                    <th style={S.th}>Apelido / Sigla</th>
-                    <th style={S.th}>Cidade</th>
-                    <th style={S.th}>Presidente</th>
-                    <th style={S.th}>Local</th>
-                    <th style={S.th}>Fundação</th>
+                    <th >Nome</th>
+                    <th >Apelido / Sigla</th>
+                    <th >Cidade</th>
+                    <th >Presidente</th>
+                    <th >Local</th>
+                    <th >Fundação</th>
                   </tr>
                 </thead>
                 <tbody>
                   {slice.length === 0 ? (
                     <tr>
-                      <td colSpan={6} style={S.empty}>Nenhum clube cadastrado.</td>
+                      <td colSpan={6} className="muted">Nenhum clube cadastrado.</td>
                     </tr>
                   ) : (
                     slice.map(c => (
-                      <tr key={c.id} style={S.trRow}>
-                        <td style={S.td}>
+                      <tr key={c.id} >
+                        <td >
                           <Link
                             to={`/admin/clubes/${c.id}/editar`}
                             state={{ club: c }}
-                            style={S.rowLink}
+                            className="row-link"
                           >
                             {c.name}
                           </Link>
                         </td>
-                        <td style={S.tdMuted}>
+                        <td className="td-muted">
                           {c.nickname && <span>{c.nickname}</span>}
-                          {c.acronym && <span style={S.acronymBadge}>{c.acronym}</span>}
+                          {c.acronym && <span className="badge">{c.acronym}</span>}
                           {!c.nickname && !c.acronym && "—"}
                         </td>
-                        <td style={S.td}>{c.city_name || "—"}</td>
-                        <td style={S.tdMuted}>{c.president ?? "—"}</td>
-                        <td style={S.tdMuted}>{c.venue_name ?? "—"}</td>
-                        <td style={S.tdMuted}>{c.founded_at ? c.founded_at.slice(0, 10) : "—"}</td>
+                        <td >{c.city_name || "—"}</td>
+                        <td className="td-muted">{c.president ?? "—"}</td>
+                        <td className="td-muted">{c.venue_name ?? "—"}</td>
+                        <td className="td-muted">{c.founded_at ? c.founded_at.slice(0, 10) : "—"}</td>
                       </tr>
                     ))
                   )}
@@ -108,12 +108,12 @@ export function AdminClubsPage({ listClubs }: Props) {
               </table>
             </div>
 
-            <div style={S.footer}>
-              <span style={S.count}>
+            <div >
+              <span className="page-info">
                 {filtered.length} {filtered.length === 1 ? "clube" : "clubes"}{q ? " encontrado" : ""}
               </span>
               {totalPages > 1 && (
-                <div style={S.pagination}>
+                <div className="pagination">
                   <button
                     style={{ ...S.pgBtn, ...(page === 1 ? S.pgBtnDisabled : {}) }}
                     disabled={page === 1}
@@ -121,7 +121,7 @@ export function AdminClubsPage({ listClubs }: Props) {
                   >
                     ‹ Anterior
                   </button>
-                  <span style={S.pgInfo}>{page} / {totalPages}</span>
+                  <span className="page-info">{page} / {totalPages}</span>
                   <button
                     style={{ ...S.pgBtn, ...(page === totalPages ? S.pgBtnDisabled : {}) }}
                     disabled={page === totalPages}

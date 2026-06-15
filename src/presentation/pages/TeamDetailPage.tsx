@@ -212,7 +212,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                   </Link>
                   <button
                     onClick={() => { setAddMode("choice"); setSearchQuery(""); setSearchResults([]); setSelectedAthleteId(""); setAddError(null); }}
-                    style={{ background: "#1e3a2a", color: "#a6e3a1", border: "1px solid #2a5a3a", borderRadius: 8, padding: "0.35rem 0.85rem", fontWeight: 600, fontSize: "0.8rem", cursor: "pointer" }}
+                    style={{ background: "#1e3a2a", color: "var(--c-positive)", border: "1px solid #2a5a3a", borderRadius: 8, padding: "0.35rem 0.85rem", fontWeight: 600, fontSize: "0.8rem", cursor: "pointer" }}
                   >
                     + Adicionar atleta
                   </button>
@@ -243,11 +243,11 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                         onMouseEnter={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = "#252537"; }}
                         onMouseLeave={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = "transparent"; }}
                       >
-                        <td style={{ ...styles.rosterTd, textAlign: "center", color: "#cba6f7", fontWeight: 700, fontSize: "0.8rem" }}>
+                        <td style={{ ...styles.rosterTd, textAlign: "center", color: "var(--c-action)", fontWeight: 700, fontSize: "0.8rem" }}>
                           {a.jersey_number != null ? `${a.jersey_number}` : "—"}
                         </td>
                         <td style={styles.rosterTd}>
-                          <span style={{ fontSize: "0.88rem", color: "#cdd6f4", fontWeight: 600 }}>
+                          <span style={{ fontSize: "0.88rem", color: "var(--c-text)", fontWeight: 600 }}>
                             {a.athlete_nickname ?? a.athlete_name ?? "—"}
                           </span>
                           {a.athlete_nickname && a.athlete_name && a.athlete_nickname !== a.athlete_name && (
@@ -270,7 +270,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                           <Link
                             to={`/atletas/${a.athlete_id}`}
                             onClick={(e) => e.stopPropagation()}
-                            style={{ color: "#89b4fa", fontSize: "0.95rem", lineHeight: 1, textDecoration: "none", padding: "0.2rem 0.35rem", borderRadius: 5, display: "inline-block" }}
+                            style={{ color: "var(--c-link)", fontSize: "0.95rem", lineHeight: 1, textDecoration: "none", padding: "0.2rem 0.35rem", borderRadius: 5, display: "inline-block" }}
                             title="Ver atleta"
                           >
                             👁
@@ -287,9 +287,9 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
           {/* Add athlete modal */}
           {addMode !== null && (
             <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}>
-              <div style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 14, padding: "1.5rem", width: "min(90vw, 420px)", display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+              <div style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 14, padding: "1.5rem", width: "min(90vw, 420px)", display: "flex", flexDirection: "column", gap: "0.9rem" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontWeight: 700, fontSize: "1rem", color: "#cdd6f4" }}>Adicionar atleta ao elenco</span>
+                  <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--c-text)" }}>Adicionar atleta ao elenco</span>
                   <button onClick={() => setAddMode(null)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.2rem", cursor: "pointer", lineHeight: 1 }}>✕</button>
                 </div>
 
@@ -301,14 +301,14 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                     </p>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                       <button
-                        style={{ background: "#cba6f7", color: "#18265b", border: "none", borderRadius: 8, padding: "0.75rem 1rem", fontWeight: 700, fontSize: "0.9rem", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 2 }}
+                        style={{ background: "var(--c-action)", color: "var(--c-brand)", border: "none", borderRadius: 8, padding: "0.75rem 1rem", fontWeight: 700, fontSize: "0.9rem", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 2 }}
                         onClick={() => setAddMode("existing")}
                       >
                         <span>Atleta existente</span>
                         <span style={{ fontSize: "0.78rem", fontWeight: 400, opacity: 0.85 }}>Buscar por nome, CPF ou e-mail</span>
                       </button>
                       <button
-                        style={{ background: "#a6e3a1", color: "#18265b", border: "none", borderRadius: 8, padding: "0.75rem 1rem", fontWeight: 700, fontSize: "0.9rem", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 2 }}
+                        style={{ background: "var(--c-positive)", color: "var(--c-brand)", border: "none", borderRadius: 8, padding: "0.75rem 1rem", fontWeight: 700, fontSize: "0.9rem", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 2 }}
                         onClick={() => { setAddMode(null); navigate("/admin/atletas/novo", { state: { teamId: id, teamName: team?.name ?? "" } }); }}
                       >
                         <span>Criar novo atleta</span>
@@ -346,7 +346,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                           } catch { setSearchResults([]); }
                         }, 300);
                       }}
-                      style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: "0.5rem 0.8rem", fontSize: "0.9rem", outline: "none" }}
+                      style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 8, color: "var(--c-text)", padding: "0.5rem 0.8rem", fontSize: "0.9rem", outline: "none" }}
                     />
 
                     {searchResults.length > 0 && !selectedAthleteId && (
@@ -355,7 +355,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                           <div
                             key={a.id}
                             onClick={() => { setSelectedAthleteId(a.id); setSearchQuery(a.nickname ?? a.name); setSearchResults([]); }}
-                            style={{ padding: "0.6rem 0.8rem", cursor: "pointer", borderBottom: "1px solid #313244", color: "#cdd6f4", fontSize: "0.88rem", background: "#18265b" }}
+                            style={{ padding: "0.6rem 0.8rem", cursor: "pointer", borderBottom: "1px solid #313244", color: "var(--c-text)", fontSize: "0.88rem", background: "var(--c-brand)" }}
                             onMouseEnter={(e) => (e.currentTarget.style.background = "#313244")}
                             onMouseLeave={(e) => (e.currentTarget.style.background = "#18265b")}
                           >
@@ -372,11 +372,11 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                         type="date"
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
-                        style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 8, color: "#cdd6f4", padding: "0.45rem 0.7rem", fontSize: "0.9rem", outline: "none" }}
+                        style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 8, color: "var(--c-text)", padding: "0.45rem 0.7rem", fontSize: "0.9rem", outline: "none" }}
                       />
                     </label>
 
-                    {addError && <p style={{ color: "#f38ba8", fontSize: "0.82rem", margin: 0 }}>{addError}</p>}
+                    {addError && <p style={{ color: "var(--c-negative)", fontSize: "0.82rem", margin: 0 }}>{addError}</p>}
 
                     <div style={{ display: "flex", gap: "0.5rem", justifyContent: "space-between", alignItems: "center" }}>
                       <button
@@ -402,7 +402,7 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                             setAddLoading(false);
                           }
                         }}
-                        style={{ background: selectedAthleteId ? "#a6e3a1" : "#313244", color: selectedAthleteId ? "#18265b" : "#ffffff", border: "none", borderRadius: 8, padding: "0.6rem 1.2rem", fontWeight: 700, fontSize: "0.9rem", cursor: selectedAthleteId ? "pointer" : "not-allowed", opacity: addLoading ? 0.6 : 1 }}
+                        style={{ background: selectedAthleteId ? "var(--c-positive)" : "var(--c-border)", color: selectedAthleteId ? "var(--c-brand)" : "#ffffff", border: "none", borderRadius: 8, padding: "0.6rem 1.2rem", fontWeight: 700, fontSize: "0.9rem", cursor: selectedAthleteId ? "pointer" : "not-allowed", opacity: addLoading ? 0.6 : 1 }}
                       >
                         {addLoading ? "Adicionando..." : "Adicionar"}
                       </button>
@@ -429,10 +429,10 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                 >
                   <div
                     onClick={(e) => e.stopPropagation()}
-                    style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", minWidth: 220, maxWidth: 320, width: "100%", maxHeight: "80vh", overflowY: "auto" }}
+                    style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 16, padding: "1.5rem", minWidth: 220, maxWidth: 320, width: "100%", maxHeight: "80vh", overflowY: "auto" }}
                   >
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                      <span style={{ fontSize: "1rem", fontWeight: 700, color: "#cdd6f4" }}>📅 Temporadas</span>
+                      <span style={{ fontSize: "1rem", fontWeight: 700, color: "var(--c-text)" }}>📅 Temporadas</span>
                       <button onClick={() => setYearModalOpen(false)} style={{ background: "none", border: "none", color: "#ffffff", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}>×</button>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
@@ -443,10 +443,10 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                           <button
                             key={s}
                             onClick={() => handleYearSelect(s)}
-                            style={{ background: isCurrent ? "#313244" : "transparent", border: isCurrent ? "1px solid #89b4fa" : "1px solid #313244", borderRadius: 8, padding: "0.6rem 0.9rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}
+                            style={{ background: isCurrent ? "var(--c-border)" : "transparent", border: isCurrent ? "1px solid #89b4fa" : "1px solid #313244", borderRadius: 8, padding: "0.6rem 0.9rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}
                           >
-                            <span style={{ fontSize: "0.95rem", fontWeight: 700, color: isCurrent ? "#89b4fa" : "#cdd6f4" }}>{s}</span>
-                            {isCurrent && <span style={{ fontSize: "0.65rem", color: "#89b4fa", fontWeight: 700, flexShrink: 0 }}>atual</span>}
+                            <span style={{ fontSize: "0.95rem", fontWeight: 700, color: isCurrent ? "var(--c-link)" : "var(--c-text)" }}>{s}</span>
+                            {isCurrent && <span style={{ fontSize: "0.65rem", color: "var(--c-link)", fontWeight: 700, flexShrink: 0 }}>atual</span>}
                           </button>
                         );
                       })}
@@ -463,11 +463,11 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                     onClick={() => setYearModalOpen(true)}
                     style={{ background: "rgba(137,180,250,0.07)", border: "1.5px solid rgba(137,180,250,0.3)", borderRadius: 12, padding: "0.4rem 0.75rem", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.15rem" }}
                   >
-                    <span style={{ fontSize: "2.5rem", fontWeight: 900, color: "#89b4fa", opacity: 0.85, lineHeight: 1, letterSpacing: "-0.03em", userSelect: "none" as const }}>{selectedSeason}</span>
-                    <span style={{ fontSize: "0.6rem", fontWeight: 700, color: "#89b4fa", letterSpacing: "0.1em", textTransform: "uppercase" as const, opacity: 0.65 }}>temporadas ▾</span>
+                    <span style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--c-link)", opacity: 0.85, lineHeight: 1, letterSpacing: "-0.03em", userSelect: "none" as const }}>{selectedSeason}</span>
+                    <span style={{ fontSize: "0.6rem", fontWeight: 700, color: "var(--c-link)", letterSpacing: "0.1em", textTransform: "uppercase" as const, opacity: 0.65 }}>temporadas ▾</span>
                   </button>
                 ) : (
-                  <span style={{ fontSize: "2.5rem", fontWeight: 900, color: "#89b4fa", opacity: 0.7, lineHeight: 1, letterSpacing: "-0.03em" }}>{selectedSeason}</span>
+                  <span style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--c-link)", opacity: 0.7, lineHeight: 1, letterSpacing: "-0.03em" }}>{selectedSeason}</span>
                 )}
               </div>
 

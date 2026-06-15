@@ -136,33 +136,33 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/times" style={S.back}>← Times</Link>
-          <h1 style={S.title}>Novo time</h1>
-          <p style={S.subtitle}>Cadastrar nova equipe</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/times" className="back-link">← Times</Link>
+          <h1 className="page-title">Novo time</h1>
+          <p className="page-subtitle">Cadastrar nova equipe</p>
         </div>
       </header>
 
-      <main style={S.page}>
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
+      <main className="page-container">
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
 
           {error && (
-            <div style={S.errorBanner}>
+            <div className="form-error">
               <span>⚠ {error}</span>
-              <button type="button" style={S.errClose} onClick={() => setError(null)}>×</button>
+              <button type="button" className="error-banner__close" onClick={() => setError(null)}>×</button>
             </div>
           )}
 
           {/* ── 1. Liga vinculada ─────────────────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Liga vinculada</legend>
-            <p style={S.fieldHint}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Liga vinculada</legend>
+            <p className="muted">
               Selecione a liga para filtrar os clubes disponíveis. Ao salvar, o clube será registrado nesta liga.
             </p>
-            <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="league">Liga</label>
+            <div className="form-field-group">
+              <label className="form-label" htmlFor="league">Liga</label>
               <select
                 id="league"
                 style={{ ...S.input, ...S.select, maxWidth: "420px", ...(leagueIsLocked ? S.inputLocked : {}) }}
@@ -176,24 +176,24 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
                 ))}
               </select>
               {leagueIsLocked && (
-                <span style={S.fieldNote}>Liga pré-definida pela sua conta de administrador.</span>
+                <span className="muted">Liga pré-definida pela sua conta de administrador.</span>
               )}
             </div>
           </fieldset>
 
           {/* ── 2. Clube vinculado ─────────────────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Clube vinculado</legend>
-            <p style={S.fieldHint}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Clube vinculado</legend>
+            <p className="muted">
               {leagueId
                 ? "Mostrando clubes afiliados à liga selecionada."
                 : "Selecione uma liga para filtrar os clubes. Ou deixe sem clube para um time independente."}
             </p>
-            <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="club">Clube</label>
+            <div className="form-field-group">
+              <label className="form-label" htmlFor="club">Clube</label>
               <select
                 id="club"
-                style={{ ...S.input, ...S.select, maxWidth: "420px" }}
+                className="form-select" style={{ maxWidth: "420px" }}
                 value={clubId}
                 onChange={(e) => {
                   const newClubId = e.target.value;
@@ -217,7 +217,7 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
               </select>
               {clubId && (
                 <>
-                  <label style={S.checkLabel}>
+                  <label className="form-checkbox-label">
                     <input
                       type="checkbox"
                       checked={useClubName}
@@ -229,13 +229,13 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
                           setName(club?.nickname ?? club?.name ?? "");
                         }
                       }}
-                      style={{ accentColor: "#89b4fa", marginRight: "0.4rem" }}
+                      style={{ accentColor: "var(--c-link)", marginRight: "0.4rem" }}
                     />
                     Usar o mesmo nome do clube
                   </label>
                   <button
                     type="button"
-                    style={S.clearBtn}
+                    className="btn btn-secondary"
                     onClick={() => { setClubId(""); setUseClubName(false); }}
                   >
                     Remover vínculo
@@ -246,14 +246,14 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
           </fieldset>
 
           {/* ── 3. Categoria, Cidade e Esporte ────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Detalhes</legend>
-            <div style={S.grid3}>
-              <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="category">Categoria</label>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Detalhes</legend>
+            <div className="form-field-group--3">
+              <div className="form-field-group">
+                <label className="form-label" htmlFor="category">Categoria</label>
                 <select
                   id="category"
-                  style={{ ...S.input, ...S.select }}
+                  className="form-select"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
@@ -263,13 +263,13 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
                   ))}
                 </select>
               </div>
-              <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="city">
-                  Cidade <span style={S.required}>*</span>
+              <div className="form-field-group">
+                <label className="form-label" htmlFor="city">
+                  Cidade <span style={{ color: "var(--c-negative)" }}>*</span>
                 </label>
                 <select
                   id="city"
-                  style={{ ...S.input, ...S.select }}
+                  className="form-select"
                   value={cityId}
                   onChange={(e) => setCityId(e.target.value)}
                   required
@@ -281,13 +281,13 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
                   ))}
                 </select>
               </div>
-              <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="sport">
-                  Esporte <span style={S.required}>*</span>
+              <div className="form-field-group">
+                <label className="form-label" htmlFor="sport">
+                  Esporte <span style={{ color: "var(--c-negative)" }}>*</span>
                 </label>
                 <select
                   id="sport"
-                  style={{ ...S.input, ...S.select }}
+                  className="form-select"
                   value={sportId}
                   onChange={(e) => setSportId(e.target.value)}
                   required
@@ -303,11 +303,11 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
           </fieldset>
 
           {/* ── 4. Nome do time ───────────────────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Nome do time</legend>
-            <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="name">
-                Nome do time <span style={S.required}>*</span>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Nome do time</legend>
+            <div className="form-field-group">
+              <label className="form-label" htmlFor="name">
+                Nome do time <span style={{ color: "var(--c-negative)" }}>*</span>
               </label>
               <input
                 id="name"
@@ -323,7 +323,7 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
           </fieldset>
 
           {/* ── Actions ────────────────────────────────────────── */}
-          <div style={S.actions}>
+          <div className="form-actions">
             <button
               type="submit"
               style={{ ...S.btnSave, ...(submitting ? S.btnDisabled : {}) }}
@@ -331,7 +331,7 @@ export function AdminTeamCreatePage({ createTeam }: Props) {
             >
               {submitting ? "Salvando…" : "Salvar time"}
             </button>
-            <Link to="/admin/times" style={S.btnCancel}>Cancelar</Link>
+            <Link to="/admin/times" className="btn btn-secondary">Cancelar</Link>
           </div>
         </form>
       </main>

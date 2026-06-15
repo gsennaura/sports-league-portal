@@ -1,0 +1,183 @@
+/* ═══════════════════════════════════════════════════════════════════
+   LAYOUT.CSS — Estrutura de páginas do sports-league-portal
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Contêiner de página ────────────────────────────────────────── */
+
+/* S.page em ~35 arquivos */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Variante narrow para formulários admin */
+.page-container--narrow {
+  max-width: 900px;
+}
+
+.page-container--xs {
+  max-width: 800px;
+}
+
+/* ── Page card (portal público) ─────────────────────────────────── */
+
+/* PublicLayout em App.tsx */
+.page-card {
+  background-color: var(--c-card-bg);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  min-height: calc(100vh - 8rem);
+}
+
+/* ── Contexto branco: override de cores para acessibilidade ──────── */
+/* Garante que conteúdo no fundo branco tenha contraste WCAG AA       */
+.page-card .page-container {
+  color: #1e293b;  /* texto base escuro no branco */
+}
+
+.page-card .back-link {
+  color: var(--c-brand);
+  font-weight: 600;
+}
+
+.page-card .back-link:hover {
+  color: #2a3a7a;
+  text-decoration: underline;
+}
+
+/* ── Hero section ───────────────────────────────────────────────── */
+
+/* S.hero — IDÊNTICO em ~20 arquivos */
+.hero {
+  background-color: var(--c-brand);
+  border-bottom: 1px solid var(--c-border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* S.heroAccent — barra gradiente no topo */
+.hero__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--c-action), var(--c-link));
+}
+
+/* S.heroInner */
+.hero__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+/* S.heroRow */
+.hero__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ── Section divider (linha com label) ──────────────────────────── */
+
+/* Componente SectionDivider do HomePage + 165 borderBottom inline */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 2px solid #c7d2fe;
+  padding-bottom: 0.8rem;
+}
+
+.section-divider__bar {
+  width: 5px;
+  height: 1.5rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+  background: var(--c-action);
+}
+
+.section-divider__label {
+  font-size: 1rem;
+  font-weight: var(--fw-black);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-brand);
+  white-space: nowrap;
+}
+
+.section-divider__sub {
+  font-size: 0.78rem;
+  font-weight: var(--fw-medium);
+  color: #64748b;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.section-divider__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #c7d2fe 0%, transparent 100%);
+  border-radius: 1px;
+}
+
+.section-divider__cta {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: var(--c-brand);
+  padding: 0.25rem 0.75rem;
+  border: 1.5px solid var(--c-brand);
+  border-radius: 20px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.section-divider__cta:hover {
+  background: var(--c-brand);
+  color: #ffffff;
+}
+
+/* ── Data grid (grade de cards) ─────────────────────────────────── */
+
+/* S.grid / S.championshipGrid em múltiplos arquivos */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+.data-grid--compact {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+/* ── Responsividade ─────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .page-container,
+  .page-container--narrow,
+  .page-container--xs {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .hero__inner {
+    padding: 1rem 1rem 0.85rem;
+  }
+
+  .page-card {
+    border-radius: var(--radius-lg);
+    margin: 0.5rem auto 0;
+  }
+}

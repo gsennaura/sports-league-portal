@@ -316,8 +316,8 @@ export function AdminTeamBulkRegistrationPage({
 
   if (!isAdmin) {
     return (
-      <div style={S.page}><div style={S.inner}>
-        <p style={{ color: "#f38ba8" }}>Acesso restrito a administradores.</p>
+      <div className="page-container"><div className="hero__inner">
+        <p style={{ color: "var(--c-negative)" }}>Acesso restrito a administradores.</p>
       </div></div>
     );
   }
@@ -335,29 +335,29 @@ export function AdminTeamBulkRegistrationPage({
 
   return (
     <>
-    <div style={S.page}>
-      <div style={S.inner}>
-      <Link to={`/admin/times/${teamId}/editar`} style={S.back}>
+    <div className="page-container">
+      <div className="hero__inner">
+      <Link to={`/admin/times/${teamId}/editar`} className="back-link">
         ← Voltar para o time
       </Link>
 
       {teamLoading ? (
-        <div style={S.loader}>Carregando...</div>
+        <div className="muted">Carregando...</div>
       ) : (
         <>
-          <h1 style={S.title}>Inscrição em Lote — {teamName}</h1>
-          <p style={S.subtitle}>Inscreva ou desinscreva atletas do elenco em uma edição de campeonato.</p>
+          <h1 className="page-title">Inscrição em Lote — {teamName}</h1>
+          <p className="page-subtitle">Inscreva ou desinscreva atletas do elenco em uma edição de campeonato.</p>
         </>
       )}
 
       {/* Championship Selection — Liga → Campeonato */}
-      <div style={S.card}>
+      <div className="card">
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
           {/* Liga */}
           <div style={{ flex: "1 1 220px" }}>
-            <label style={S.label}>Liga</label>
+            <label className="form-label">Liga</label>
             <select
-              style={S.select}
+              className="form-select"
               value={selectedLeagueId}
               onChange={(e) => {
                 setSelectedLeagueId(e.target.value);
@@ -373,7 +373,7 @@ export function AdminTeamBulkRegistrationPage({
 
           {/* Campeonato */}
           <div style={{ flex: "1 1 280px" }}>
-            <label style={S.label}>
+            <label className="form-label">
               Campeonato
               {teamCategory && (
                 <span style={{ color: "#ffffff", fontWeight: 400, marginLeft: "6px" }}>
@@ -385,7 +385,7 @@ export function AdminTeamBulkRegistrationPage({
               <p style={{ color: "#ffffff", fontSize: "14px", margin: 0 }}>Carregando campeonatos...</p>
             ) : (
               <select
-                style={{ ...S.select, opacity: !selectedLeagueId ? 0.5 : 1 }}
+                className="form-select" style={{ opacity: !selectedLeagueId ? 0.5 : 1 }}
                 value={selectedEditionId}
                 onChange={(e) => setSelectedEditionId(e.target.value)}
                 disabled={!selectedLeagueId}
@@ -407,34 +407,34 @@ export function AdminTeamBulkRegistrationPage({
 
       {/* Athletes Table */}
       {selectedEditionId && (
-        <div style={S.card}>
+        <div className="card">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-            <span style={{ fontSize: "15px", fontWeight: 600, color: "#cdd6f4" }}>
+            <span style={{ fontSize: "15px", fontWeight: 600, color: "var(--c-text)" }}>
               Atletas do Elenco
             </span>
             {rows.filter((r) => r.status !== "ineligible").length > 0 && (
-              <button style={S.selectAll} onClick={toggleSelectAll}>
+              <button className="form-checkbox-label" onClick={toggleSelectAll}>
                 Selecionar/Restaurar padrão
               </button>
             )}
           </div>
 
           {editionLoading ? (
-            <div style={S.loader}>Carregando dados da edição...</div>
+            <div className="muted">Carregando dados da edição...</div>
           ) : rows.length === 0 ? (
-            <div style={S.empty}>
+            <div className="muted">
               Nenhum atleta ativo encontrado neste time ou o time não participa desta edição.
             </div>
           ) : (
-            <table style={S.table}>
+            <table className="data-table">
               <thead>
                 <tr>
-                  <th style={{ ...S.th, width: "40px" }}></th>
-                  <th style={S.th}>Atleta</th>
-                  <th style={S.th}>Posição</th>
-                  <th style={{ ...S.th, width: "60px" }}>#</th>
-                  <th style={S.th}>Nº Reg.</th>
-                  <th style={S.th}>Situação</th>
+                  <th style={{ width: "40px" }}></th>
+                  <th >Atleta</th>
+                  <th >Posição</th>
+                  <th style={{ width: "60px" }}>#</th>
+                  <th >Nº Reg.</th>
+                  <th >Situação</th>
                 </tr>
               </thead>
               <tbody>
@@ -453,23 +453,23 @@ export function AdminTeamBulkRegistrationPage({
                       }}
                       onClick={() => !isIneligible && toggleAthlete(row.athleteId)}
                     >
-                      <td style={S.td}>
+                      <td >
                         <input
                           type="checkbox"
-                          style={S.checkbox}
+                          className="form-checkbox"
                           checked={isChecked}
                           disabled={isIneligible}
                           onChange={() => !isIneligible && toggleAthlete(row.athleteId)}
                           onClick={(e) => e.stopPropagation()}
                         />
                       </td>
-                      <td style={{ ...S.td, fontWeight: 500 }}>{row.name}</td>
-                      <td style={{ ...S.td, color: "#ffffff" }}>{row.position ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#ffffff" }}>{row.jerseyNumber ?? "—"}</td>
-                      <td style={{ ...S.td, color: "#ffffff", fontFamily: "monospace", fontSize: "12px" }}>
+                      <td style={{ fontWeight: 500 }}>{row.name}</td>
+                      <td style={{ color: "#ffffff" }}>{row.position ?? "—"}</td>
+                      <td style={{ color: "#ffffff" }}>{row.jerseyNumber ?? "—"}</td>
+                      <td style={{ color: "#ffffff", fontFamily: "monospace", fontSize: "12px" }}>
                         {row.registration?.registration_number ?? "—"}
                       </td>
-                      <td style={S.td}>
+                      <td >
                         {row.status === "registered" && row.registration ? (
                           <span style={badgeStyle(pendingUnregister ? "withdrawn" : row.registration.status)}>
                             {pendingUnregister
@@ -492,7 +492,7 @@ export function AdminTeamBulkRegistrationPage({
                             Não elegível
                           </span>
                         ) : (
-                          <span style={{ color: "#a6e3a1", fontSize: "12px" }}>
+                          <span style={{ color: "var(--c-positive)", fontSize: "12px" }}>
                             {isChecked ? "Será inscrito →" : "Elegível"}
                           </span>
                         )}
@@ -533,8 +533,8 @@ export function AdminTeamBulkRegistrationPage({
 
       {/* Results */}
       {results && (
-        <div style={S.card}>
-          <p style={{ fontSize: "15px", fontWeight: 600, color: "#cdd6f4", margin: "0 0 12px" }}>
+        <div className="card">
+          <p style={{ fontSize: "15px", fontWeight: 600, color: "var(--c-text)", margin: "0 0 12px" }}>
             Resultado
           </p>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
@@ -544,11 +544,11 @@ export function AdminTeamBulkRegistrationPage({
                 style={{ padding: "6px 0", borderBottom: "1px solid #313244", fontSize: "14px" }}
               >
                 {r.ok ? (
-                  <span style={S.resultOk}>
+                  <span className="badge badge--success">
                     ✓ {r.name} — {r.action === "register" ? "inscrito com sucesso" : "desinscrito com sucesso"}
                   </span>
                 ) : (
-                  <span style={S.resultFail}>✗ {r.name} — {r.error}</span>
+                  <span className="badge badge--danger">✗ {r.name} — {r.error}</span>
                 )}
               </li>
             ))}
@@ -564,17 +564,17 @@ export function AdminTeamBulkRegistrationPage({
         onClick={() => setConfirmOpen(false)}
       >
         <div
-          style={{ background: "#18265b", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "460px" }}
+          style={{ background: "var(--c-brand)", border: "1px solid #313244", borderRadius: "12px", padding: "1.75rem", width: "100%", maxWidth: "460px" }}
           onClick={(e) => e.stopPropagation()}
         >
-          <h3 style={{ margin: "0 0 1rem", color: "#cdd6f4", fontSize: "1.1rem" }}>Confirmar alterações</h3>
+          <h3 style={{ margin: "0 0 1rem", color: "var(--c-text)", fontSize: "1.1rem" }}>Confirmar alterações</h3>
 
           {toRegisterRows.length > 0 && (
             <div style={{ marginBottom: "0.875rem" }}>
-              <p style={{ margin: "0 0 0.4rem", color: "#a6e3a1", fontWeight: 600, fontSize: "0.9rem" }}>
+              <p style={{ margin: "0 0 0.4rem", color: "var(--c-positive)", fontWeight: 600, fontSize: "0.9rem" }}>
                 ✓ {toRegisterRows.length} atleta(s) serão inscritos:
               </p>
-              <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "#cdd6f4", fontSize: "0.88rem" }}>
+              <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "var(--c-text)", fontSize: "0.88rem" }}>
                 {toRegisterRows.map((r) => <li key={r.athleteId}>{r.name}</li>)}
               </ul>
             </div>
@@ -582,10 +582,10 @@ export function AdminTeamBulkRegistrationPage({
 
           {toUnregisterRows.length > 0 && (
             <div style={{ marginBottom: "0.875rem" }}>
-              <p style={{ margin: "0 0 0.4rem", color: "#f38ba8", fontWeight: 600, fontSize: "0.9rem" }}>
+              <p style={{ margin: "0 0 0.4rem", color: "var(--c-negative)", fontWeight: 600, fontSize: "0.9rem" }}>
                 ✗ {toUnregisterRows.length} atleta(s) serão desinscritos:
               </p>
-              <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "#cdd6f4", fontSize: "0.88rem" }}>
+              <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "var(--c-text)", fontSize: "0.88rem" }}>
                 {toUnregisterRows.map((r) => <li key={r.athleteId}>{r.name}</li>)}
               </ul>
             </div>
@@ -593,13 +593,13 @@ export function AdminTeamBulkRegistrationPage({
 
           <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end", marginTop: "1.25rem" }}>
             <button
-              style={{ padding: "0.45rem 1rem", borderRadius: "6px", border: "1px solid #45475a", background: "none", color: "#cdd6f4", cursor: "pointer" }}
+              style={{ padding: "0.45rem 1rem", borderRadius: "6px", border: "1px solid #45475a", background: "none", color: "var(--c-text)", cursor: "pointer" }}
               onClick={() => setConfirmOpen(false)}
             >
               Cancelar
             </button>
             <button
-              style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "#89b4fa", color: "#18265b", fontWeight: 700, cursor: "pointer" }}
+              style={{ padding: "0.45rem 1.1rem", borderRadius: "6px", border: "none", background: "var(--c-link)", color: "var(--c-brand)", fontWeight: 700, cursor: "pointer" }}
               onClick={() => { setConfirmOpen(false); void handleSubmit(); }}
             >
               Confirmar

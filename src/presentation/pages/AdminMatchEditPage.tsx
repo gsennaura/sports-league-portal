@@ -191,65 +191,65 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
     }
   }
 
-  if (loading) return <main style={S.page}><p style={S.muted}>Carregando...</p></main>;
+  if (loading) return <main className="page-container"><p className="muted">Carregando...</p></main>;
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <button onClick={() => navigate(-1)} style={S.back}>← Voltar</button>
-          <h1 style={S.title}>Editar Partida</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
+          <h1 className="page-title">Editar Partida</h1>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {match && (
-          <div style={S.matchInfo}>
-            <span style={S.teamName}>{match.home_team_name}</span>
-            <span style={S.vs}>×</span>
-            <span style={S.teamName}>{match.away_team_name}</span>
-            <div style={S.matchMeta}>
+          <div className="muted">
+            <span className="team-name">{match.home_team_name}</span>
+            <span className="score-sep">×</span>
+            <span className="team-name">{match.away_team_name}</span>
+            <div className="muted">
               {match.championship_name} {match.championship_year}
               {match.phase_name ? ` · ${match.phase_name}` : ""}
             </div>
-            <div style={S.matchNote}>Os times participantes não podem ser alterados.</div>
+            <div className="muted">Os times participantes não podem ser alterados.</div>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
 
           {/* ── Placar ─────────────────────────────────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Placar</legend>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Placar</legend>
 
-            <div style={S.scoreRow}>
-              <div style={S.scoreField}>
-                <label style={S.label} htmlFor="home-score">
+            <div className="score-grid">
+              <div className="score-slot">
+                <label className="form-label" htmlFor="home-score">
                   {match?.home_team_name ?? "Mandante"}
                 </label>
                 <input
                   id="home-score"
                   type="number"
                   min={0}
-                  style={S.scoreInput}
+                  className="form-input"
                   value={homeScore}
                   onChange={(e) => setHomeScore(e.target.value)}
                   placeholder="—"
                 />
               </div>
 
-              <span style={S.scoreSep}>–</span>
+              <span className="score-sep">–</span>
 
-              <div style={S.scoreField}>
-                <label style={S.label} htmlFor="away-score">
+              <div className="score-slot">
+                <label className="form-label" htmlFor="away-score">
                   {match?.away_team_name ?? "Visitante"}
                 </label>
                 <input
                   id="away-score"
                   type="number"
                   min={0}
-                  style={S.scoreInput}
+                  className="form-input"
                   value={awayScore}
                   onChange={(e) => setAwayScore(e.target.value)}
                   placeholder="—"
@@ -257,7 +257,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
               </div>
             </div>
 
-            <label style={S.checkRow}>
+            <label className="form-checkbox-label">
               <input
                 type="checkbox"
                 checked={hasPenalties}
@@ -268,26 +268,26 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
 
             {hasPenalties && (
               <div style={{ ...S.scoreRow, marginTop: "0.75rem" }}>
-                <div style={S.scoreField}>
-                  <label style={S.label} htmlFor="home-pen">Pênaltis mandante</label>
+                <div className="score-slot">
+                  <label className="form-label" htmlFor="home-pen">Pênaltis mandante</label>
                   <input
                     id="home-pen"
                     type="number"
                     min={0}
-                    style={S.scoreInput}
+                    className="form-input"
                     value={homePen}
                     onChange={(e) => setHomePen(e.target.value)}
                     placeholder="0"
                   />
                 </div>
-                <span style={S.scoreSep}>–</span>
-                <div style={S.scoreField}>
-                  <label style={S.label} htmlFor="away-pen">Pênaltis visitante</label>
+                <span className="score-sep">–</span>
+                <div className="score-slot">
+                  <label className="form-label" htmlFor="away-pen">Pênaltis visitante</label>
                   <input
                     id="away-pen"
                     type="number"
                     min={0}
-                    style={S.scoreInput}
+                    className="form-input"
                     value={awayPen}
                     onChange={(e) => setAwayPen(e.target.value)}
                     placeholder="0"
@@ -299,27 +299,27 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
 
           {/* ── Data e Rodada ──────────────────────────────────────── */}
           <fieldset style={{ ...S.fieldset, marginTop: "1.25rem" }}>
-            <legend style={S.legend}>Data e Rodada</legend>
+            <legend className="form-legend">Data e Rodada</legend>
 
-            <div style={S.fieldRow}>
-              <div style={S.fieldGroup}>
-                <label style={S.label} htmlFor="match-date">Data e hora</label>
+            <div className="form-field-group">
+              <div className="form-field-group">
+                <label className="form-label" htmlFor="match-date">Data e hora</label>
                 <input
                   id="match-date"
                   type="datetime-local"
-                  style={S.textInput}
+                  className="form-input"
                   value={matchDate}
                   onChange={(e) => setMatchDate(e.target.value)}
                 />
               </div>
 
               <div style={{ ...S.fieldGroup, maxWidth: "120px" }}>
-                <label style={S.label} htmlFor="round-number">Rodada</label>
+                <label className="form-label" htmlFor="round-number">Rodada</label>
                 <input
                   id="round-number"
                   type="number"
                   min={1}
-                  style={S.textInput}
+                  className="form-input"
                   value={roundNumber}
                   onChange={(e) => setRoundNumber(e.target.value)}
                   placeholder="1"
@@ -330,13 +330,13 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
 
           {/* ── Estádio ────────────────────────────────────────────── */}
           <fieldset style={{ ...S.fieldset, marginTop: "1.25rem" }}>
-            <legend style={S.legend}>Estádio</legend>
+            <legend className="form-legend">Estádio</legend>
 
-            <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="venue-id">Local da partida</label>
+            <div className="form-field-group">
+              <label className="form-label" htmlFor="venue-id">Local da partida</label>
               <select
                 id="venue-id"
-                style={S.selectInput}
+                className="form-select"
                 value={venueId}
                 onChange={(e) => setVenueId(e.target.value)}
               >
@@ -345,7 +345,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
                   <option key={v.id} value={v.id}>{v.name}</option>
                 ))}
               </select>
-              <span style={S.hint}>
+              <span className="muted">
                 Se não selecionado, usa o estádio do time mandante.
               </span>
             </div>
@@ -353,13 +353,13 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
 
           {/* ── Status da Partida ──────────────────────────────── */}
           <fieldset style={{ ...S.fieldset, marginTop: "1.25rem" }}>
-            <legend style={S.legend}>Status da Partida</legend>
+            <legend className="form-legend">Status da Partida</legend>
 
-            <div style={S.fieldGroup}>
-              <label style={S.label} htmlFor="match-status">Status</label>
+            <div className="form-field-group">
+              <label className="form-label" htmlFor="match-status">Status</label>
               <select
                 id="match-status"
-                style={S.selectInput}
+                className="form-select"
                 value={matchStatus}
                 onChange={(e) => setMatchStatus(e.target.value)}
               >
@@ -370,14 +370,14 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
             </div>
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✓ Partida salva! Redirecionando…</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✓ Partida salva! Redirecionando…</p>}
 
-          <div style={S.actions}>
-            <button type="button" style={S.btnCancel} onClick={() => navigate(-1)}>
+          <div className="form-actions">
+            <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
               Cancelar
             </button>
-            <button type="submit" style={S.btnSave} disabled={submitting}>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando…" : "Salvar partida"}
             </button>
           </div>
@@ -393,13 +393,13 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginBottom: "1rem" }}>
               {matchReferees.map((mr) => (
-                <div key={mr.id} style={S.refRow}>
+                <div key={mr.id} className="form-field-group">
                   <div style={{ flex: 1 }}>
-                    <span style={{ color: "#cdd6f4", fontWeight: 600, fontSize: "0.9rem" }}>
+                    <span style={{ color: "var(--c-text)", fontWeight: 600, fontSize: "0.9rem" }}>
                       {mr.referee_name ?? mr.referee_id}
                     </span>
                     {mr.referee_nickname && (
-                      <span style={{ color: "#cba6f7", fontSize: "0.8rem", marginLeft: "0.4rem" }}>
+                      <span style={{ color: "var(--c-action)", fontSize: "0.8rem", marginLeft: "0.4rem" }}>
                         "{mr.referee_nickname}"
                       </span>
                     )}
@@ -416,7 +416,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
                     </span>
                   </div>
                   <button
-                    style={S.refRemoveBtn}
+                    className="btn btn-danger"
                     onClick={() => handleRemoveReferee(mr.id)}
                   >
                     ✕
@@ -427,7 +427,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
           )}
 
           {/* Add referee */}
-          <div style={S.refAddRow}>
+          <div className="form-field-group">
             <select
               style={{ ...S.selectInput, flex: 2 }}
               value={selRefereeId}
@@ -453,7 +453,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
             </select>
             <button
               type="button"
-              style={S.btnAddRef}
+              className="btn btn-success"
               onClick={handleAddReferee}
               disabled={!selRefereeId || addingRef}
             >
@@ -468,10 +468,10 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
       {/* ── Modal: encerrar partida? ───────────────────────────────── */}
       {showFinishModal && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}>
-          <div style={{ background: "#18265b", border: "1px solid #45475a", borderRadius: 14, padding: "1.75rem", width: "min(90vw, 400px)", display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <span style={{ fontWeight: 700, fontSize: "1.05rem", color: "#cdd6f4" }}>Encerrar partida?</span>
+          <div style={{ background: "var(--c-brand)", border: "1px solid #45475a", borderRadius: 14, padding: "1.75rem", width: "min(90vw, 400px)", display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <span style={{ fontWeight: 700, fontSize: "1.05rem", color: "var(--c-text)" }}>Encerrar partida?</span>
             <p style={{ color: "#ffffff", fontSize: "0.88rem", margin: 0 }}>
-              Deseja marcar esta partida como <strong style={{ color: "#f38ba8" }}>encerrada</strong> ao salvar?
+              Deseja marcar esta partida como <strong style={{ color: "var(--c-negative)" }}>encerrada</strong> ao salvar?
             </p>
             <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end", marginTop: "0.25rem" }}>
               <button
@@ -481,7 +481,7 @@ export function AdminMatchEditPage({ getMatchDetail, updateMatch, listVenues, li
                 Não, manter status atual
               </button>
               <button
-                style={{ background: "#f38ba8", border: "none", borderRadius: 8, padding: "0.5rem 1.1rem", color: "#18265b", fontSize: "0.875rem", fontWeight: 700, cursor: "pointer" }}
+                style={{ background: "var(--c-negative)", border: "none", borderRadius: 8, padding: "0.5rem 1.1rem", color: "var(--c-brand)", fontSize: "0.875rem", fontWeight: 700, cursor: "pointer" }}
                 onClick={() => { setShowFinishModal(false); setPendingFinish(true); void doSave(true); }}
               >
                 Sim, encerrar

@@ -109,51 +109,51 @@ export function AdminAthleteTeamsPage({ getAthleteTeamHistory, addAthleteToTeam,
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/atletas" style={S.back}>← Atletas</Link>
-          <div style={S.heroRow}>
-            <h1 style={S.title}>Histórico de Times</h1>
-            <button style={S.btnAdd} onClick={() => { setShowAdd(true); setAddError(null); }}>+ Adicionar ao time</button>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/atletas" className="back-link">← Atletas</Link>
+          <div className="hero__row">
+            <h1 className="page-title">Histórico de Times</h1>
+            <button className="btn btn-success" onClick={() => { setShowAdd(true); setAddError(null); }}>+ Adicionar ao time</button>
           </div>
         </div>
       </header>
 
-      <main style={S.page}>
-        {loading && <p style={S.hint}>Carregando…</p>}
-        {error && <p style={S.errorTxt}>{error}</p>}
+      <main className="page-container">
+        {loading && <p className="muted">Carregando…</p>}
+        {error && <p className="error-text">{error}</p>}
 
         {!loading && !error && (
-          <div style={S.tableWrap}>
-            <table style={S.table}>
+          <div className="table-wrap">
+            <table className="data-table">
               <thead>
                 <tr>
-                  <th style={S.th}>Status</th>
-                  <th style={S.th}>Time</th>
-                  <th style={S.th}>Entrada</th>
-                  <th style={S.th}>Saída</th>
-                  <th style={S.th}>Camisa</th>
-                  <th style={S.th}>Ações</th>
+                  <th >Status</th>
+                  <th >Time</th>
+                  <th >Entrada</th>
+                  <th >Saída</th>
+                  <th >Camisa</th>
+                  <th >Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {history.length === 0 ? (
-                  <tr><td colSpan={6} style={S.empty}>Nenhum vínculo encontrado.</td></tr>
+                  <tr><td colSpan={6} className="muted">Nenhum vínculo encontrado.</td></tr>
                 ) : (
                   history.map((h) => (
-                    <tr key={h.id} style={S.trRow}>
-                      <td style={S.td}><div style={activeDotStyle(h.is_active)} /></td>
-                      <td style={S.td}>{teamName(h.team_id)}</td>
-                      <td style={S.tdMuted}>{fmtDate(h.start_date)}</td>
-                      <td style={S.tdMuted}>
-                        {h.is_active ? <span style={S.activeBadge}>Ativo</span> : fmtDate(h.end_date)}
+                    <tr key={h.id} >
+                      <td ><div style={activeDotStyle(h.is_active)} /></td>
+                      <td >{teamName(h.team_id)}</td>
+                      <td className="td-muted">{fmtDate(h.start_date)}</td>
+                      <td className="td-muted">
+                        {h.is_active ? <span className="badge badge--success">Ativo</span> : fmtDate(h.end_date)}
                       </td>
-                      <td style={S.tdMuted}>{h.jersey_number ?? "—"}</td>
-                      <td style={S.td}>
+                      <td className="td-muted">{h.jersey_number ?? "—"}</td>
+                      <td >
                         {h.is_active && (
                           <button
-                            style={S.btnExit}
+                            className="btn btn-secondary"
                             onClick={() => { setRemoveEntry(h); setRemoveDate(""); setRemoveError(null); setShowRemove(true); }}
                           >
                             Registrar saída
@@ -171,41 +171,41 @@ export function AdminAthleteTeamsPage({ getAthleteTeamHistory, addAthleteToTeam,
 
       {/* ── Add Modal ─────────────────────────────────────────── */}
       {showAdd && (
-        <div style={S.overlay}>
-          <div style={S.modal}>
-            <h2 style={S.modalTitle}>Adicionar ao Time</h2>
-            <form onSubmit={handleAdd} style={S.modalForm}>
-              <div style={S.fGroup}>
-                <label style={S.fLabel}>Time *</label>
-                <select style={{ ...S.input, ...S.select }} value={addTeamId} onChange={(e) => setAddTeamId(e.target.value)} required>
+        <div className="modal-overlay">
+          <div className="modal-card">
+            <h2 className="modal-title">Adicionar ao Time</h2>
+            <form onSubmit={handleAdd} className="modal-body">
+              <div className="form-field-group">
+                <label className="form-label">Time *</label>
+                <select className="form-select" value={addTeamId} onChange={(e) => setAddTeamId(e.target.value)} required>
                   <option value="">Selecionar time…</option>
                   {teams.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
                 </select>
               </div>
-              <div style={S.grid2m}>
-                <div style={S.fGroup}>
-                  <label style={S.fLabel}>Data entrada *</label>
-                  <input type="date" style={S.input} value={addStart} onChange={(e) => setAddStart(e.target.value)} required />
+              <div className="form-field-group--2">
+                <div className="form-field-group">
+                  <label className="form-label">Data entrada *</label>
+                  <input type="date" className="form-input" value={addStart} onChange={(e) => setAddStart(e.target.value)} required />
                 </div>
-                <div style={S.fGroup}>
-                  <label style={S.fLabel}>Data saída</label>
-                  <input type="date" style={S.input} value={addEnd} onChange={(e) => setAddEnd(e.target.value)} />
-                </div>
-              </div>
-              <div style={S.grid2m}>
-                <div style={S.fGroup}>
-                  <label style={S.fLabel}>Nº camisa</label>
-                  <input type="number" style={S.input} value={addJersey} onChange={(e) => setAddJersey(e.target.value)} min={1} max={99} />
-                </div>
-                <div style={S.fGroup}>
-                  <label style={S.fLabel}>Observação</label>
-                  <input style={S.input} value={addNotes} onChange={(e) => setAddNotes(e.target.value)} placeholder="Ex: emprestado" />
+                <div className="form-field-group">
+                  <label className="form-label">Data saída</label>
+                  <input type="date" className="form-input" value={addEnd} onChange={(e) => setAddEnd(e.target.value)} />
                 </div>
               </div>
-              {addError && <p style={S.mError}>{addError}</p>}
-              <div style={S.modalActions}>
-                <button type="button" style={S.btnMCancel} onClick={() => setShowAdd(false)}>Cancelar</button>
-                <button type="submit" style={S.btnMConfirm} disabled={addLoading}>{addLoading ? "Salvando…" : "Adicionar"}</button>
+              <div className="form-field-group--2">
+                <div className="form-field-group">
+                  <label className="form-label">Nº camisa</label>
+                  <input type="number" className="form-input" value={addJersey} onChange={(e) => setAddJersey(e.target.value)} min={1} max={99} />
+                </div>
+                <div className="form-field-group">
+                  <label className="form-label">Observação</label>
+                  <input className="form-input" value={addNotes} onChange={(e) => setAddNotes(e.target.value)} placeholder="Ex: emprestado" />
+                </div>
+              </div>
+              {addError && <p className="error-text">{addError}</p>}
+              <div className="modal-actions">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowAdd(false)}>Cancelar</button>
+                <button type="submit" className="btn btn-success" disabled={addLoading}>{addLoading ? "Salvando…" : "Adicionar"}</button>
               </div>
             </form>
           </div>
@@ -214,19 +214,19 @@ export function AdminAthleteTeamsPage({ getAthleteTeamHistory, addAthleteToTeam,
 
       {/* ── Remove Modal ──────────────────────────────────────── */}
       {showRemove && removeEntry && (
-        <div style={S.overlay}>
-          <div style={S.modal}>
-            <h2 style={S.modalTitle}>Registrar Saída</h2>
-            <p style={S.modalSub}>Time: <strong style={{ color: "#cdd6f4" }}>{teamName(removeEntry.team_id)}</strong></p>
-            <form onSubmit={handleRemove} style={S.modalForm}>
-              <div style={S.fGroup}>
-                <label style={S.fLabel}>Data de saída *</label>
-                <input type="date" style={S.input} value={removeDate} onChange={(e) => setRemoveDate(e.target.value)} required />
+        <div className="modal-overlay">
+          <div className="modal-card">
+            <h2 className="modal-title">Registrar Saída</h2>
+            <p className="muted">Time: <strong style={{ color: "var(--c-text)" }}>{teamName(removeEntry.team_id)}</strong></p>
+            <form onSubmit={handleRemove} className="modal-body">
+              <div className="form-field-group">
+                <label className="form-label">Data de saída *</label>
+                <input type="date" className="form-input" value={removeDate} onChange={(e) => setRemoveDate(e.target.value)} required />
               </div>
-              {removeError && <p style={S.mError}>{removeError}</p>}
-              <div style={S.modalActions}>
-                <button type="button" style={S.btnMCancel} onClick={() => setShowRemove(false)}>Cancelar</button>
-                <button type="submit" style={S.btnMConfirm} disabled={removeLoading}>{removeLoading ? "Salvando…" : "Confirmar saída"}</button>
+              {removeError && <p className="error-text">{removeError}</p>}
+              <div className="modal-actions">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowRemove(false)}>Cancelar</button>
+                <button type="submit" className="btn btn-success" disabled={removeLoading}>{removeLoading ? "Salvando…" : "Confirmar saída"}</button>
               </div>
             </form>
           </div>
@@ -236,39 +236,3 @@ export function AdminAthleteTeamsPage({ getAthleteTeamHistory, addAthleteToTeam,
   );
 }
 
-const S: Record<string, React.CSSProperties> = {
-  hero: { backgroundColor: "#18265b", borderBottom: "1px solid #313244", position: "relative", overflow: "hidden" },
-  heroAccent: { position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #a6e3a1, #89b4fa)" },
-  heroInner: { maxWidth: "1000px", margin: "0 auto", padding: "1.5rem 1.5rem 1.25rem" },
-  heroRow: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" },
-  back: { display: "inline-block", color: "#89b4fa", textDecoration: "none", fontSize: "0.85rem", marginBottom: "0.75rem" },
-  title: { fontSize: "1.5rem", fontWeight: 700, color: "#cdd6f4", margin: 0 },
-  btnAdd: { backgroundColor: "#a6e3a1", border: "none", borderRadius: "6px", color: "#11111b", fontWeight: 700, fontSize: "0.875rem", padding: "0.5rem 1.1rem", cursor: "pointer", whiteSpace: "nowrap" },
-  page: { maxWidth: "1000px", margin: "0 auto", padding: "2rem 1.5rem 4rem" },
-  hint: { color: "#ffffff" },
-  errorTxt: { color: "#f38ba8" },
-  tableWrap: { overflowX: "auto", borderRadius: "8px", border: "1px solid #313244" },
-  table: { width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" },
-  th: { backgroundColor: "#18265b", color: "#cdd6f4", fontWeight: 600, fontSize: "0.84rem", textAlign: "left", padding: "0.75rem 1rem", borderBottom: "1px solid #313244" },
-  trRow: { borderBottom: "1px solid #18265b" },
-  td: { padding: "0.65rem 1rem", color: "#cdd6f4", verticalAlign: "middle" },
-  tdMuted: { padding: "0.65rem 1rem", color: "#ffffff", fontSize: "0.85rem", verticalAlign: "middle" },
-  activeBadge: { fontSize: "0.72rem", fontWeight: 700, backgroundColor: "#a6e3a1", color: "#18265b", borderRadius: "4px", padding: "0.1rem 0.45rem" },
-  btnExit: { fontSize: "0.78rem", backgroundColor: "#45475a", border: "none", borderRadius: "5px", color: "#cdd6f4", padding: "0.2rem 0.7rem", cursor: "pointer" },
-  empty: { padding: "1.5rem", color: "#ffffff", textAlign: "center" },
-  // Modal
-  overlay: { position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 },
-  modal: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "10px", padding: "1.75rem 2rem", width: "100%", maxWidth: "440px", boxSizing: "border-box" },
-  modalTitle: { fontSize: "1.1rem", fontWeight: 700, color: "#cdd6f4", margin: "0 0 1rem" },
-  modalSub: { fontSize: "0.875rem", color: "#ffffff", margin: "0 0 1rem" },
-  modalForm: { display: "flex", flexDirection: "column", gap: "1rem" },
-  fGroup: { display: "flex", flexDirection: "column", gap: "0.3rem" },
-  fLabel: { fontSize: "0.83rem", fontWeight: 600, color: "#cdd6f4", textTransform: "uppercase", letterSpacing: "0.06em" },
-  input: { backgroundColor: "#18265b", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.9rem", padding: "0.55rem 0.75rem", outline: "none", width: "100%", boxSizing: "border-box" },
-  select: { cursor: "pointer", appearance: "auto" },
-  grid2m: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" },
-  mError: { color: "#f38ba8", fontSize: "0.85rem", margin: 0 },
-  modalActions: { display: "flex", justifyContent: "flex-end", gap: "0.6rem", paddingTop: "0.25rem" },
-  btnMCancel: { backgroundColor: "transparent", border: "1px solid #313244", borderRadius: "6px", color: "#cdd6f4", fontSize: "0.875rem", padding: "0.5rem 1rem", cursor: "pointer" },
-  btnMConfirm: { backgroundColor: "#89b4fa", border: "none", borderRadius: "6px", color: "#11111b", fontWeight: 700, fontSize: "0.875rem", padding: "0.5rem 1.1rem", cursor: "pointer" },
-};

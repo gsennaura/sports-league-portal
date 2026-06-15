@@ -6,9 +6,12 @@ import { authHeaders } from "../authHeaders";
 export class ApiRefereeRepository implements RefereeRepository {
   constructor(private readonly baseUrl: string) {}
 
-  async listAll(name?: string): Promise<Referee[]> {
-    const params = name ? `?name=${encodeURIComponent(name)}` : "";
-    const resp = await fetch(`${this.baseUrl}/referees${params}`);
+  async listAll(name?: string, leagueId?: string): Promise<Referee[]> {
+    const params = new URLSearchParams();
+    if (name) params.set("name", name);
+    if (leagueId) params.set("league_id", leagueId);
+    const qs = params.toString() ? `?${params.toString()}` : "";
+    const resp = await fetch(`${this.baseUrl}/referees${qs}`);
     if (!resp.ok) throw new Error(`Falha ao buscar árbitros: ${resp.status}`);
     return resp.json() as Promise<Referee[]>;
   }

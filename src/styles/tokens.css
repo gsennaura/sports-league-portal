@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TOKENS.CSS — Design tokens do sports-league-portal
+   ═══════════════════════════════════════════════════════════════════
+   Para mudar o tema, altere apenas as 6 variáveis da seção
+   "6 CORES BASE" abaixo. Todo o restante do site acompanha.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─────────────────────────────────────────────────────────────────
+     6 CORES BASE — thematic (troque aqui para criar um novo tema)
+     ───────────────────────────────────────────────────────────────── */
+  --c-brand:    #18265b;  /* superfícies: nav, hero, inputs, admin bg  */
+  --c-text:     #ffffff;  /* texto primário sobre fundos escuros        */
+  --c-border:   #313244;  /* bordas, separadores, tabelas               */
+  --c-action:   #cba6f7;  /* CTA, btnSubmit, badges de destaque         */
+  --c-positive: #a6e3a1;  /* sucesso, confirmação, ação positiva        */
+  --c-negative: #f38ba8;  /* erro, perigo, ação destrutiva              */
+
+  /* ─────────────────────────────────────────────────────────────────
+     TOKENS DERIVADOS — calculados a partir das 6 bases
+     ───────────────────────────────────────────────────────────────── */
+
+  /* Fundo e superfícies */
+  --c-bg:          #11111b;
+  --c-brand-hover: #2a3a7a;
+  --c-surface-2:   #1a1a2e;
+  --c-card-bg:     #ffffff;
+
+  /* Texto */
+  --c-text-muted:   #45475a;
+  --c-text-inverse: #11111b;
+
+  /* Interatividade e semântica extra */
+  --c-link:    #89b4fa;
+  --c-warning: #f9e2af;
+
+  /* ─────────────────────────────────────────────────────────────────
+     ALPHA TOKENS — color-mix pré-calculados dos mais usados
+     (todos responsivos à troca de tema)
+     ───────────────────────────────────────────────────────────────── */
+  --c-negative-06: color-mix(in srgb, var(--c-negative)  6%, transparent);
+  --c-negative-10: color-mix(in srgb, var(--c-negative) 10%, transparent);
+  --c-negative-12: color-mix(in srgb, var(--c-negative) 12%, transparent);
+  --c-negative-15: color-mix(in srgb, var(--c-negative) 15%, transparent);
+  --c-negative-25: color-mix(in srgb, var(--c-negative) 25%, transparent);
+  --c-negative-30: color-mix(in srgb, var(--c-negative) 30%, transparent);
+  --c-negative-35: color-mix(in srgb, var(--c-negative) 35%, transparent);
+  --c-negative-50: color-mix(in srgb, var(--c-negative) 50%, transparent);
+
+  --c-positive-06: color-mix(in srgb, var(--c-positive)  6%, transparent);
+  --c-positive-10: color-mix(in srgb, var(--c-positive) 10%, transparent);
+  --c-positive-12: color-mix(in srgb, var(--c-positive) 12%, transparent);
+  --c-positive-15: color-mix(in srgb, var(--c-positive) 15%, transparent);
+  --c-positive-25: color-mix(in srgb, var(--c-positive) 25%, transparent);
+  --c-positive-30: color-mix(in srgb, var(--c-positive) 30%, transparent);
+  --c-positive-35: color-mix(in srgb, var(--c-positive) 35%, transparent);
+  --c-positive-40: color-mix(in srgb, var(--c-positive) 40%, transparent);
+
+  --c-link-06:  color-mix(in srgb, var(--c-link)  6%, transparent);
+  --c-link-07:  color-mix(in srgb, var(--c-link)  7%, transparent);
+  --c-link-10:  color-mix(in srgb, var(--c-link) 10%, transparent);
+  --c-link-25:  color-mix(in srgb, var(--c-link) 25%, transparent);
+  --c-link-30:  color-mix(in srgb, var(--c-link) 30%, transparent);
+
+  --c-action-08: color-mix(in srgb, var(--c-action)  8%, transparent);
+  --c-action-10: color-mix(in srgb, var(--c-action) 10%, transparent);
+  --c-action-12: color-mix(in srgb, var(--c-action) 12%, transparent);
+
+  --c-warning-08: color-mix(in srgb, var(--c-warning)  8%, transparent);
+  --c-warning-10: color-mix(in srgb, var(--c-warning) 10%, transparent);
+  --c-warning-15: color-mix(in srgb, var(--c-warning) 15%, transparent);
+  --c-warning-25: color-mix(in srgb, var(--c-warning) 25%, transparent);
+  --c-warning-40: color-mix(in srgb, var(--c-warning) 40%, transparent);
+
+  --c-black-35: color-mix(in srgb, black 35%, transparent);
+  --c-black-40: color-mix(in srgb, black 40%, transparent);
+  --c-black-50: color-mix(in srgb, black 50%, transparent);
+  --c-black-55: color-mix(in srgb, black 55%, transparent);
+  --c-black-60: color-mix(in srgb, black 60%, transparent);
+  --c-black-65: color-mix(in srgb, black 65%, transparent);
+  --c-black-70: color-mix(in srgb, black 70%, transparent);
+  --c-black-75: color-mix(in srgb, black 75%, transparent);
+  --c-black-80: color-mix(in srgb, black 80%, transparent);
+
+  --c-white-08: color-mix(in srgb, white 8%, transparent);
+
+  /* ─────────────────────────────────────────────────────────────────
+     ESCALA TIPOGRÁFICA
+     ───────────────────────────────────────────────────────────────── */
+  --text-xs:   0.72rem;  /* badges tiny, timestamps                    */
+  --text-sm:   0.82rem;  /* hints, muted, meta, th de tabela           */
+  --text-base: 0.9rem;   /* corpo, inputs, botões                      */
+  --text-md:   1rem;     /* parágrafos normais                         */
+  --text-lg:   1.25rem;  /* sub-headers, títulos de card               */
+  --text-xl:   1.5rem;   /* títulos de página (admin)                  */
+  --text-2xl:  2.2rem;   /* títulos grandes (portal público, heroes)   */
+
+  --fw-normal:  400;
+  --fw-medium:  500;
+  --fw-bold:    700;
+  --fw-black:   900;
+
+  /* ─────────────────────────────────────────────────────────────────
+     BORDER RADIUS
+     ───────────────────────────────────────────────────────────────── */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   10px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* ─────────────────────────────────────────────────────────────────
+     SOMBRAS
+     ───────────────────────────────────────────────────────────────── */
+  --shadow-card: 0 8px 56px rgba(0, 0, 0, 0.5);
+  --shadow-sm:   0 2px 8px rgba(0, 0, 0, 0.15);
+}

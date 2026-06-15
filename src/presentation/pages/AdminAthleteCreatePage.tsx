@@ -46,11 +46,11 @@ function maskPhone(v: string): string {
 function Field({ label, htmlFor, children }: { label: string; htmlFor: string; children: React.ReactNode }) {
   const parts = label.split("*");
   const labelNode = parts.length > 1
-    ? <>{parts[0]}<span style={{ color: "#f38ba8" }}>*</span>{parts.slice(1).join("*")}</>
+    ? <>{parts[0]}<span style={{ color: "var(--c-negative)" }}>*</span>{parts.slice(1).join("*")}</>
     : label;
   return (
-    <div style={S.fieldGroup}>
-      <label htmlFor={htmlFor} style={S.label}>{labelNode}</label>
+    <div className="form-field-group">
+      <label htmlFor={htmlFor} className="form-label">{labelNode}</label>
       {children}
     </div>
   );
@@ -220,52 +220,52 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/atletas" style={S.back}>← Atletas</Link>
-          <h1 style={S.title}>Novo Atleta</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/atletas" className="back-link">← Atletas</Link>
+          <h1 className="page-title">Novo Atleta</h1>
         </div>
       </header>
 
-      <main style={S.page}>
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
+      <main className="page-container">
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
 
           {/* ── Informações do usuário ────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Informações do Usuário</legend>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Informações do Usuário</legend>
 
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="Nome completo *" htmlFor="name">
-                <input id="name" style={S.input} value={name} onChange={(e) => setName(e.target.value)} required />
+                <input id="name" className="form-input" value={name} onChange={(e) => setName(e.target.value)} required />
               </Field>
               <Field label="Data de nascimento" htmlFor="birth_date">
-                <input id="birth_date" type="date" style={S.input} value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                <input id="birth_date" type="date" className="form-input" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
               </Field>
             </div>
 
-            <div style={S.grid3}>
+            <div className="form-field-group--3">
               <Field label="CPF" htmlFor="cpf">
-                <input id="cpf" style={S.input} value={cpf}
+                <input id="cpf" className="form-input" value={cpf}
                   onChange={(e) => setCpf(maskCpf(e.target.value))}
                   placeholder="000.000.000-00" inputMode="numeric" />
               </Field>
               <Field label="RG" htmlFor="rg">
-                <input id="rg" style={S.input} value={rg} onChange={(e) => setRg(e.target.value)} />
+                <input id="rg" className="form-input" value={rg} onChange={(e) => setRg(e.target.value)} />
               </Field>
               <Field label="Telefone" htmlFor="phone">
-                <input id="phone" style={S.input} value={phone}
+                <input id="phone" className="form-input" value={phone}
                   onChange={(e) => setPhone(maskPhone(e.target.value))}
                   placeholder="(11) 99999-9999" inputMode="tel" />
               </Field>
             </div>
 
-            <div style={S.grid2}>
+            <div className="form-field-group--2">
               <Field label="E-mail" htmlFor="email">
                 <input
                   id="email"
                   type="email"
-                  style={S.input}
+                  className="form-input"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="atleta@email.com"
@@ -274,11 +274,11 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
               <Field label="Foto" htmlFor="photo-upload">
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                   {photoPreview
-                    ? <img src={photoPreview} alt="preview" style={S.photoThumb} />
-                    : <div style={S.photoPlaceholder}>?</div>
+                    ? <img src={photoPreview} alt="preview" className="avatar" />
+                    : <div className="avatar-placeholder">?</div>
                   }
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-                    <label htmlFor="photo-upload" style={S.btnUpload}>
+                    <label htmlFor="photo-upload" className="btn btn-secondary">
                       {photoPreview ? "Trocar foto" : "Escolher foto"}
                     </label>
                     {photoFile && (
@@ -302,30 +302,30 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
             </div>
 
             <div style={{ marginTop: "0.85rem" }}>
-              <p style={S.hintBox}>
+              <p className="muted">
                 Ao informar o e-mail, uma conta de atleta será criada automaticamente com a senha padrão{" "}
-                <code style={{ color: "#a6e3a1" }}>AtletaML@2026</code>.
+                <code style={{ color: "var(--c-positive)" }}>AtletaML@2026</code>.
                 O atleta pode alterar a senha após o primeiro acesso.
               </p>
             </div>
           </fieldset>
 
           {/* ── Dados esportivos ──────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Dados Esportivos</legend>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Dados Esportivos</legend>
 
-            <div style={S.grid3}>
+            <div className="form-field-group--3">
               <Field label="Apelido" htmlFor="nickname">
-                <input id="nickname" style={S.input} value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="Ex: Nenê, Tigrão" />
+                <input id="nickname" className="form-input" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="Ex: Nenê, Tigrão" />
               </Field>
               <Field label="Posição" htmlFor="position">
-                <select id="position" style={{ ...S.input, ...S.select }} value={position} onChange={(e) => setPosition(e.target.value)}>
+                <select id="position" className="form-select" value={position} onChange={(e) => setPosition(e.target.value)}>
                   <option value="">Não informado</option>
                   {POSITION_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
                 </select>
               </Field>
               <Field label="Pé dominante" htmlFor="foot">
-                <select id="foot" style={{ ...S.input, ...S.select }} value={preferredFoot} onChange={(e) => setPreferredFoot(e.target.value)}>
+                <select id="foot" className="form-select" value={preferredFoot} onChange={(e) => setPreferredFoot(e.target.value)}>
                   <option value="">Não informado</option>
                   {FOOT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                 </select>
@@ -334,45 +334,45 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
 
             <div style={{ ...S.grid2, maxWidth: "420px" }}>
               <Field label="Altura (cm)" htmlFor="height">
-                <input id="height" type="number" style={S.input} value={heightCm} onChange={(e) => setHeightCm(e.target.value)} min={100} max={250} />
+                <input id="height" type="number" className="form-input" value={heightCm} onChange={(e) => setHeightCm(e.target.value)} min={100} max={250} />
               </Field>
               <Field label="Peso (kg)" htmlFor="weight">
-                <input id="weight" type="number" step="0.1" style={S.input} value={weightKg} onChange={(e) => setWeightKg(e.target.value)} min={30} max={200} />
+                <input id="weight" type="number" step="0.1" className="form-input" value={weightKg} onChange={(e) => setWeightKg(e.target.value)} min={30} max={200} />
               </Field>
             </div>
 
             <div style={{ marginTop: "1rem" }}>
               <Field label="Observações" htmlFor="notes">
-                <textarea id="notes" style={S.textarea} value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} placeholder="Observações livres sobre o atleta…" />
+                <textarea id="notes" className="form-input" value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} placeholder="Observações livres sobre o atleta…" />
               </Field>
             </div>
           </fieldset>
 
           {/* ── Vínculo com time ──────────────────── */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Vínculo com Time <span style={S.opt}>(opcional — vai para aprovação)</span></legend>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Vínculo com Time <span className="muted">(opcional — vai para aprovação)</span></legend>
 
             {teamsLoading && <p style={{ color: "#ffffff", fontSize: "0.85rem", marginTop: "0.5rem" }}>Carregando esportes e times…</p>}
 
             {!teamsLoading && (
               <>
-                <div style={S.grid2}>
+                <div className="form-field-group--2">
                   <Field label="Liga" htmlFor="league">
-                    <select id="league" style={{ ...S.input, ...S.select }} value={selectedLeague} onChange={(e) => handleLeagueChange(e.target.value)}>
+                    <select id="league" className="form-select" value={selectedLeague} onChange={(e) => handleLeagueChange(e.target.value)}>
                       <option value="">Todas as ligas</option>
                       {visibleLeagues.map((lg) => <option key={lg.id} value={lg.id}>{lg.name}</option>)}
                     </select>
                   </Field>
                   <Field label="Esporte" htmlFor="sport">
-                    <select id="sport" style={{ ...S.input, ...S.select }} value={selectedSport} onChange={(e) => handleSportChange(e.target.value)}>
+                    <select id="sport" className="form-select" value={selectedSport} onChange={(e) => handleSportChange(e.target.value)}>
                       <option value="">Todos os esportes</option>
                       {sports.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
                     </select>
                   </Field>
                 </div>
-                <div style={S.grid2}>
+                <div className="form-field-group--2">
                   <Field label="Categoria" htmlFor="category">
-                    <select id="category" style={{ ...S.input, ...S.select }} value={selectedCategory} onChange={(e) => handleCategoryChange(e.target.value)} disabled={availableCategories.length === 0}>
+                    <select id="category" className="form-select" value={selectedCategory} onChange={(e) => handleCategoryChange(e.target.value)} disabled={availableCategories.length === 0}>
                       <option value="">Todas as categorias</option>
                       {availableCategories.map((c) => (
                         <option key={c} value={c}>{CATEGORY_LABEL[c] ?? c}</option>
@@ -380,14 +380,14 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
                     </select>
                   </Field>
                   <Field label="Time" htmlFor="team">
-                    <select id="team" style={{ ...S.input, ...S.select }} value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)} disabled={!selectedLeague || !selectedSport || !selectedCategory || filteredTeams.length === 0}>
+                    <select id="team" className="form-select" value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)} disabled={!selectedLeague || !selectedSport || !selectedCategory || filteredTeams.length === 0}>
                       <option value="">Nenhum time</option>
                       {filteredTeams.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
                     </select>
                   </Field>
                 </div>
                 {selectedTeam && (
-                  <p style={S.pendingNotice}>
+                  <p className="form-warning">
                     ✓ O atleta será cadastrado com status <strong>pendente de aprovação</strong>. O vínculo aparecerá na fila de aprovações.
                   </p>
                 )}
@@ -395,15 +395,15 @@ export function AdminAthleteCreatePage({ createAthlete }: Props) {
             )}
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
+          {error && <p className="form-error">{error}</p>}
 
           <p style={{ fontSize: "0.8rem", color: "#ffffff", margin: 0 }}>
-            Campos marcados com <span style={{ color: "#f38ba8", fontWeight: 700 }}>*</span> são obrigatórios.
+            Campos marcados com <span style={{ color: "var(--c-negative)", fontWeight: 700 }}>*</span> são obrigatórios.
           </p>
 
-          <div style={S.actions}>
-            <Link to="/admin/atletas" style={S.btnCancel}>Cancelar</Link>
-            <button type="submit" style={S.btnSubmit} disabled={submitting}>
+          <div className="form-actions">
+            <Link to="/admin/atletas" className="btn btn-secondary">Cancelar</Link>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando…" : "Criar Atleta"}
             </button>
           </div>

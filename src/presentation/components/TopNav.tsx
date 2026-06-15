@@ -14,18 +14,11 @@ const BASE_NAV_ITEMS: NavItem[] = [
   { label: "Documentos", href: "/documentos" },
   { label: "Emendas",    href: "/emendas" },
   { label: "Ao Vivo",    href: "/ao-vivo" },
-  {
-    label: "Competições",
-    children: [
-      { label: "Ligas", href: "/ligas" },
-      { label: "Campeonatos", href: "/campeonatos" },
-    ],
-  },
+  { label: "Competições", href: "/campeonatos" },
   {
     label: "Explorar",
     children: [
       { label: "Clubes",   href: "/clubes" },
-      { label: "Atletas",  href: "/atletas" },
       { label: "Árbitros", href: "/arbitros" },
       { label: "Locais",   href: "/locais" },
     ],

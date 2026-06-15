@@ -96,25 +96,25 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
     }
   }
 
-  if (loading) return <main style={S.page}><p style={S.muted}>Carregando...</p></main>;
+  if (loading) return <main className="page-container"><p className="muted">Carregando...</p></main>;
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <button onClick={() => navigate(-1)} style={S.back}>← Voltar</button>
-          <h1 style={S.title}>Resultado da Partida</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
+          <h1 className="page-title">Resultado da Partida</h1>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         {match && (
-          <div style={S.matchInfo}>
-            <span style={S.teamName}>{match.home_team_name}</span>
-            <span style={S.vs}>×</span>
-            <span style={S.teamName}>{match.away_team_name}</span>
-            <div style={S.matchMeta}>
+          <div className="muted">
+            <span className="team-name">{match.home_team_name}</span>
+            <span className="score-sep">×</span>
+            <span className="team-name">{match.away_team_name}</span>
+            <div className="muted">
               {match.championship_name} {match.championship_year}
               {match.phase_name ? ` · ${match.phase_name}` : ""}
               {match.match_date ? ` · ${fmtDate(match.match_date)}` : ""}
@@ -122,20 +122,20 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Placar</legend>
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Placar</legend>
 
-            <div style={S.scoreRow}>
-              <div style={S.scoreField}>
-                <label style={S.label} htmlFor="home-score">
+            <div className="score-grid">
+              <div className="score-slot">
+                <label className="form-label" htmlFor="home-score">
                   {match?.home_team_name ?? "Mandante"}
                 </label>
                 <input
                   id="home-score"
                   type="number"
                   min={0}
-                  style={S.scoreInput}
+                  className="form-input"
                   value={homeScore}
                   onChange={(e) => setHomeScore(e.target.value)}
                   placeholder="0"
@@ -144,17 +144,17 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
                 />
               </div>
 
-              <span style={S.scoreSep}>–</span>
+              <span className="score-sep">–</span>
 
-              <div style={S.scoreField}>
-                <label style={S.label} htmlFor="away-score">
+              <div className="score-slot">
+                <label className="form-label" htmlFor="away-score">
                   {match?.away_team_name ?? "Visitante"}
                 </label>
                 <input
                   id="away-score"
                   type="number"
                   min={0}
-                  style={S.scoreInput}
+                  className="form-input"
                   value={awayScore}
                   onChange={(e) => setAwayScore(e.target.value)}
                   placeholder="0"
@@ -163,7 +163,7 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
               </div>
             </div>
 
-            <label style={S.checkRow}>
+            <label className="form-checkbox-label">
               <input
                 type="checkbox"
                 checked={hasPenalties}
@@ -174,26 +174,26 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
 
             {hasPenalties && (
               <div style={{ ...S.scoreRow, marginTop: "0.75rem" }}>
-                <div style={S.scoreField}>
-                  <label style={S.label} htmlFor="home-pen">Pênaltis mandante</label>
+                <div className="score-slot">
+                  <label className="form-label" htmlFor="home-pen">Pênaltis mandante</label>
                   <input
                     id="home-pen"
                     type="number"
                     min={0}
-                    style={S.scoreInput}
+                    className="form-input"
                     value={homePen}
                     onChange={(e) => setHomePen(e.target.value)}
                     placeholder="0"
                   />
                 </div>
-                <span style={S.scoreSep}>–</span>
-                <div style={S.scoreField}>
-                  <label style={S.label} htmlFor="away-pen">Pênaltis visitante</label>
+                <span className="score-sep">–</span>
+                <div className="score-slot">
+                  <label className="form-label" htmlFor="away-pen">Pênaltis visitante</label>
                   <input
                     id="away-pen"
                     type="number"
                     min={0}
-                    style={S.scoreInput}
+                    className="form-input"
                     value={awayPen}
                     onChange={(e) => setAwayPen(e.target.value)}
                     placeholder="0"
@@ -203,14 +203,14 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
             )}
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✓ Resultado salvo!</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✓ Resultado salvo!</p>}
 
-          <div style={S.actions}>
-            <button type="button" style={S.btnCancel} onClick={() => navigate(-1)}>
+          <div className="form-actions">
+            <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
               Cancelar
             </button>
-            <button type="submit" style={S.btnSave} disabled={submitting}>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando…" : "Salvar resultado"}
             </button>
           </div>
@@ -218,32 +218,32 @@ export function AdminMatchResultPage({ updateMatchResult, getMatchDetail }: Prop
       </main>
 
       {showFinishModal && (
-        <div style={S.modalOverlay}>
-          <div style={S.modalCard}>
-            <h3 style={S.modalTitle}>Encerrar partida?</h3>
-            <p style={S.modalBody}>
-              Deseja também marcar esta partida como <strong style={{ color: "#a6e3a1" }}>encerrada</strong>?
+        <div className="modal-overlay">
+          <div className="modal-card">
+            <h3 className="modal-title">Encerrar partida?</h3>
+            <p className="modal-body">
+              Deseja também marcar esta partida como <strong style={{ color: "var(--c-positive)" }}>encerrada</strong>?
               <br />
               <span style={{ fontSize: "0.82rem", color: "#ffffff" }}>
                 Se não, o placar será salvo mas o status permanece inalterado.
               </span>
             </p>
-            <div style={S.modalActions}>
+            <div className="modal-actions">
               <button
-                style={S.btnModalCancel}
+                className="btn btn-secondary"
                 onClick={() => setShowFinishModal(false)}
               >
                 Cancelar
               </button>
               <button
-                style={S.btnModalSaveOnly}
+                className="btn btn-secondary"
                 onClick={() => handleSave(false)}
                 disabled={submitting}
               >
                 Só salvar placar
               </button>
               <button
-                style={S.btnModalFinish}
+                className="btn btn-primary"
                 onClick={() => handleSave(true)}
                 disabled={submitting}
               >

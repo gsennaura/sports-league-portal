@@ -111,23 +111,23 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
 
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin/campeonatos" style={S.back}>← Campeonatos</Link>
-          <h1 style={S.title}>Novo Campeonato</h1>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin/campeonatos" className="back-link">← Campeonatos</Link>
+          <h1 className="page-title">Novo Campeonato</h1>
         </div>
       </header>
-      <main style={S.page}>
-        <form onSubmit={handleSubmit} style={S.form} noValidate>
+      <main className="page-container">
+        <form onSubmit={handleSubmit} className="form-body" noValidate>
 
           {/* Liga vinculada — primeiro campo */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Liga *</legend>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Liga *</legend>
             <div style={{ maxWidth: "420px" }}>
               <Field label="Liga" htmlFor="league">
                 {optionsLoading ? (
-                  <div style={{ ...S.input, color: "#cdd6f4" }}>Carregando...</div>
+                  <div className="form-input" style={{ color: "var(--c-text)" }}>Carregando...</div>
                 ) : (
                   <select
                     id="league"
@@ -146,13 +146,13 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
           </fieldset>
 
           {/* Identificação */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Identificação</legend>
-            <div style={S.grid2}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Identificação</legend>
+            <div className="form-field-group--2">
               <Field label="Nome do campeonato *" htmlFor="name">
                 <input
                   id="name"
-                  style={S.input}
+                  className="form-input"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   placeholder="Ex: Campeonato Amador 1ª Divisão"
@@ -162,7 +162,7 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
               <Field label="Apelido / nome curto" htmlFor="nickname">
                 <input
                   id="nickname"
-                  style={S.input}
+                  className="form-input"
                   value={nickname}
                   onChange={e => setNickname(e.target.value)}
                   placeholder="Ex: Amador 2025"
@@ -172,16 +172,16 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
           </fieldset>
 
           {/* Classificação */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Classificação</legend>
-            <div style={S.grid3}>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Classificação</legend>
+            <div className="form-field-group--3">
               <Field label="Esporte *" htmlFor="sport">
                 {optionsLoading ? (
-                  <div style={{ ...S.input, color: "#cdd6f4" }}>Carregando...</div>
+                  <div className="form-input" style={{ color: "var(--c-text)" }}>Carregando...</div>
                 ) : (
                   <select
                     id="sport"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={sportId}
                     onChange={e => setSportId(e.target.value)}
                     required
@@ -194,7 +194,7 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
               <Field label="Nível" htmlFor="level">
                 <select
                   id="level"
-                  style={{ ...S.input, ...S.select }}
+                  className="form-select"
                   value={level}
                   onChange={e => setLevel(e.target.value)}
                 >
@@ -205,7 +205,7 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
               <Field label="Divisão" htmlFor="division">
                 <select
                   id="division"
-                  style={{ ...S.input, ...S.select }}
+                  className="form-select"
                   value={division}
                   onChange={e => setDivision(e.target.value)}
                 >
@@ -216,7 +216,7 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
               <Field label="Abrangência" htmlFor="scope">
                 <select
                   id="scope"
-                  style={{ ...S.input, ...S.select }}
+                  className="form-select"
                   value={scope}
                   onChange={e => setScope(e.target.value)}
                 >
@@ -227,16 +227,16 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
           </fieldset>
 
           {/* Localização */}
-          <fieldset style={S.fieldset}>
-            <legend style={S.legend}>Localização</legend>
+          <fieldset className="form-fieldset">
+            <legend className="form-legend">Localização</legend>
             <div style={{ maxWidth: "420px", marginTop: "1rem" }}>
               <Field label="Cidade *" htmlFor="city">
                 {optionsLoading ? (
-                  <div style={{ ...S.input, color: "#cdd6f4" }}>Carregando...</div>
+                  <div className="form-input" style={{ color: "var(--c-text)" }}>Carregando...</div>
                 ) : (
                   <select
                     id="city"
-                    style={{ ...S.input, ...S.select }}
+                    className="form-select"
                     value={cityId}
                     onChange={e => setCityId(e.target.value)}
                     required
@@ -249,12 +249,12 @@ export function AdminChampionshipCreatePage({ createChampionship }: Props) {
             </div>
           </fieldset>
 
-          {error && <p style={S.errorMsg}>{error}</p>}
-          {success && <p style={S.successMsg}>✔ Campeonato criado! Redirecionando para edições...</p>}
+          {error && <p className="form-error">{error}</p>}
+          {success && <p className="form-success">✔ Campeonato criado! Redirecionando para edições...</p>}
 
-          <div style={S.actions}>
-            <Link to="/admin/campeonatos" style={S.btnCancel}>Cancelar</Link>
-            <button type="submit" style={S.btnSubmit} disabled={submitting}>
+          <div className="form-actions">
+            <Link to="/admin/campeonatos" className="btn btn-secondary">Cancelar</Link>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? "Salvando..." : "Cadastrar campeonato"}
             </button>
           </div>
@@ -269,7 +269,7 @@ function Field({ label, htmlFor, children, style }: {
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", ...style }}>
-      <label htmlFor={htmlFor} style={S.label}>{label}</label>
+      <label htmlFor={htmlFor} className="form-label">{label}</label>
       {children}
     </div>
   );

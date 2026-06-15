@@ -56,31 +56,31 @@ const CARDS: ImportCard[] = [
 export function AdminImportHubPage() {
   return (
     <>
-      <header style={S.hero}>
-        <div style={S.heroAccent} />
-        <div style={S.heroInner}>
-          <Link to="/admin" style={S.back}>← Admin</Link>
-          <h1 style={S.title}>Central de Importações</h1>
-          <p style={S.subtitle}>Todas as operações de importação em lote em um só lugar.</p>
+      <header className="hero">
+        <div className="hero__accent" />
+        <div className="hero__inner">
+          <Link to="/admin" className="back-link">← Admin</Link>
+          <h1 className="page-title">Central de Importações</h1>
+          <p className="page-subtitle">Todas as operações de importação em lote em um só lugar.</p>
         </div>
       </header>
 
-      <main style={S.page}>
+      <main className="page-container">
         <section>
-          <div style={S.grid}>
+          <div className="form-field-group">
             {CARDS.map((card) => (
               <div key={card.title} style={{ ...S.card, opacity: card.status === "coming_soon" ? 0.55 : 1 }}>
                 <div style={{ ...S.cardAccent, backgroundColor: card.color }} />
-                <div style={S.cardBody}>
-                  <span style={S.cardIcon}>{card.icon}</span>
+                <div >
+                  <span >{card.icon}</span>
                   <div>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-                      <h2 style={S.cardTitle}>{card.title}</h2>
+                      <h2 className="section-heading">{card.title}</h2>
                       {card.status === "coming_soon" && (
-                        <span style={S.badgeSoon}>Em breve</span>
+                        <span className="badge">Em breve</span>
                       )}
                     </div>
-                    <p style={S.cardDesc}>{card.description}</p>
+                    <p className="muted">{card.description}</p>
                   </div>
                 </div>
                 {card.status === "available" ? (
@@ -88,7 +88,7 @@ export function AdminImportHubPage() {
                     Acessar →
                   </Link>
                 ) : (
-                  <span style={S.cardBtnDisabled}>Indisponível</span>
+                  <span className="btn btn-secondary">Indisponível</span>
                 )}
               </div>
             ))}
@@ -96,11 +96,11 @@ export function AdminImportHubPage() {
         </section>
 
         <section style={{ marginTop: "2.5rem" }}>
-          <div style={S.sectionHeader}>
-            <h2 style={S.sectionTitle}>Histórico de Importações</h2>
-            <Link to="/admin/importar/historico" style={S.linkBtn}>Ver histórico →</Link>
+          <div className="section-row">
+            <h2 className="section-heading">Histórico de Importações</h2>
+            <Link to="/admin/importar/historico" className="row-link">Ver histórico →</Link>
           </div>
-          <p style={S.hint}>
+          <p className="muted">
             Registro de todas as operações de importação em lote: quem importou, quando, quantos registros e erros.
           </p>
         </section>
