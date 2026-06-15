@@ -36,16 +36,25 @@ function ChampionshipsSection({
 }) {
   if (loading) return <PageLoader />;
   if (error) return <p className="error-text">{error}</p>;
+
+  // One card per championship series (deduplicate by id, keep most recent edition)
   const filtered = championships.filter((c) => !LEAGUE_ID || c.league_id === LEAGUE_ID);
-  if (filtered.length === 0) return <p className="muted">Nenhum campeonato encontrado.</p>;
+  const byId = new Map<string, Championship>();
+  for (const c of filtered) {
+    const existing = byId.get(c.id);
+    if (!existing || (c.year ?? 0) > (existing.year ?? 0)) byId.set(c.id, c);
+  }
+  const unique = [...byId.values()];
+
+  if (unique.length === 0) return <p className="muted">Nenhum campeonato encontrado.</p>;
   return (
     <div className="champ-grid">
-      {filtered.map((c) => (
+      {unique.map((c) => (
         <Link key={c.id} to={`/campeonatos/${c.id}`} className="champ-card">
           <div className="champ-card__accent" />
           <div className="champ-card__body">
             <span className="champ-card__name">{c.name}</span>
-            <span className="champ-card__meta">{c.year} · {c.city_name}</span>
+            <span className="champ-card__meta">{c.city_name}</span>
             {c.champion_team_name && (
               <span className="champ-card__champion">🏆 {c.champion_team_name}</span>
             )}

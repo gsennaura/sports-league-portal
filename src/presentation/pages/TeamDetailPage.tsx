@@ -162,43 +162,58 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
     }
   };
   return (
-    <main style={styles.page}>
-      <Link to="/clubes" style={styles.back}>← Clubes</Link>
-
-      {loading && <PageLoader />}
-      {error && <p style={styles.error}>{error}</p>}
-
-      {!loading && !error && (
-        <>
-          <div style={styles.titleRow}>
-            {team?.club_logo_url && (
-              <Shield url={team.club_logo_url} size={56} />
-            )}
-            <h1 style={styles.title}>{team?.name || "Time"}</h1>
-          </div>
-
-          {team && (
-            <div style={styles.infoCard}>
-              <InfoRow label="Cidade" value={team.city_name} />
-              {team.venue_name && <InfoRow label="Estádio / Arena" value={team.venue_name} />}
-              {team.president && <InfoRow label="Presidente" value={team.president} />}
-              {team.founded_at && <InfoRow label="Fundação" value={formatDate(team.founded_at)} />}
-              {team.category && (
-                <div style={styles.infoRow}>
-                  <span style={styles.infoLabel}>Categoria</span>
-                  <span style={styles.infoValue}>{categoryLabel[team.category] ?? team.category}</span>
-                </div>
-              )}
-              {team.club_id && team.club_name && (
-                <div style={styles.infoRow}>
-                  <span style={styles.infoLabel}>Clube</span>
-                  <Link to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`} style={styles.clubLink}>{team.club_name}</Link>
-                </div>
-              )}
-            </div>
+    <>
+      {/* ─── Hero ──────────────────────────────────────────────── */}
+      <header className="hero">
+        <div className="hero__bar" />
+        <div className="hero__inner">
+          {team?.club_id && team?.club_name ? (
+            <Link to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`} className="back-link">
+              ← {team.club_name}
+            </Link>
+          ) : (
+            <Link to="/clubes" className="back-link">← Clubes</Link>
           )}
+          {loading && !team && <PageLoader />}
+          {team && (
+            <>
+              <div className="hero__row">
+                <div style={{ position: "relative", flexShrink: 0 }}>
+                  <Shield url={team.club_logo_url} size={72} />
+                </div>
+                <div>
+                  <h1 className="hero__title">{team.name}</h1>
+                  <p className="muted" style={{ marginTop: "0.3rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" as const }}>
+                    {team.sport_name && <span className="badge">{team.sport_name}</span>}
+                    {team.category && <span className="badge badge-info">{categoryLabel[team.category] ?? team.category}</span>}
+                  </p>
+                </div>
+              </div>
+              <p className="hero__sub">
+                {[
+                  team.city_name && `📍 ${team.city_name}`,
+                  team.venue_name && `🏟 ${team.venue_name}`,
+                  team.president && `👤 ${team.president}`,
+                  team.founded_at && `📅 ${formatDate(team.founded_at)}`,
+                ].filter(Boolean).join("  ·  ")}
+              </p>
+              {team.club_id && team.club_name && (
+                <Link to={`/clubes/${toSlugPath(team.club_name, team.club_id)}`} style={{ color: "#89b4fa", fontSize: "0.85rem", textDecoration: "none", marginTop: "0.5rem", display: "inline-block" }}>
+                  🏛 Ver página do clube
+                </Link>
+              )}
+            </>
+          )}
+        </div>
+      </header>
 
-          {/* Elenco */}
+      {/* ─── Main ──────────────────────────────────────────────── */}
+      <main style={styles.page}>
+        {error && <p style={styles.error}>{error}</p>}
+
+        {!loading && !error && (
+          <>
+            {/* Elenco */}
           <section style={styles.rosterSection}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
               <h2 style={{ ...styles.seasonTitle, margin: 0 }}>Elenco ({athletes.length})</h2>
@@ -240,30 +255,30 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                         key={a.id}
                         style={styles.rosterTr}
                         onClick={() => { window.location.href = `/atletas/${a.athlete_id}`; }}
-                        onMouseEnter={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = "#252537"; }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = "#eef2ff"; }}
                         onMouseLeave={(e) => { (e.currentTarget as HTMLTableRowElement).style.background = "transparent"; }}
                       >
-                        <td style={{ ...styles.rosterTd, textAlign: "center", color: "var(--c-action)", fontWeight: 700, fontSize: "0.8rem" }}>
+                        <td style={{ ...styles.rosterTd, textAlign: "center", color: "#18265b", fontWeight: 700, fontSize: "0.8rem" }}>
                           {a.jersey_number != null ? `${a.jersey_number}` : "—"}
                         </td>
                         <td style={styles.rosterTd}>
-                          <span style={{ fontSize: "0.88rem", color: "var(--c-text)", fontWeight: 600 }}>
+                          <span style={{ fontSize: "0.88rem", color: "#1e293b", fontWeight: 600 }}>
                             {a.athlete_nickname ?? a.athlete_name ?? "—"}
                           </span>
                           {a.athlete_nickname && a.athlete_name && a.athlete_nickname !== a.athlete_name && (
-                            <span style={{ fontSize: "0.74rem", color: "#ffffff", marginLeft: "0.4rem" }}>
+                            <span style={{ fontSize: "0.74rem", color: "#64748b", marginLeft: "0.4rem" }}>
                               {a.athlete_name}
                             </span>
                           )}
                         </td>
-                        <td style={{ ...styles.rosterTd, fontSize: "0.78rem", color: "#ffffff" }}>
+                        <td style={{ ...styles.rosterTd, fontSize: "0.78rem", color: "#64748b" }}>
                           {a.athlete_position ?? "—"}
                         </td>
                         <td style={{ ...styles.rosterTd, textAlign: "center" as const }}>
                           <div style={{ display: "flex", gap: "0.3rem", justifyContent: "center", flexWrap: "wrap" as const }}>
-                            {s && s.goals > 0 && <StatBadge color="#a6e3a1" bg="#1a2e1a" label="⚽" value={s.goals} />}
-                            {s && s.yellow_cards > 0 && <StatBadge color="#18265b" bg="#f9e2af" label="🟨" value={s.yellow_cards} />}
-                            {s && s.red_cards > 0 && <StatBadge color="#fff" bg="#e04060" label="🟥" value={s.red_cards} />}
+                            {s && s.goals > 0 && <StatBadge color="#15803d" bg="#dcfce7" label="⚽" value={s.goals} />}
+                            {s && s.yellow_cards > 0 && <StatBadge color="#92400e" bg="#fef9c3" label="🟨" value={s.yellow_cards} />}
+                            {s && s.red_cards > 0 && <StatBadge color="#fff" bg="#dc2626" label="🟥" value={s.red_cards} />}
                           </div>
                         </td>
                         <td style={{ ...styles.rosterTd, textAlign: "center" }}>
@@ -461,13 +476,13 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
                 {matchYears.length > 1 ? (
                   <button
                     onClick={() => setYearModalOpen(true)}
-                    style={{ background: "rgba(137,180,250,0.07)", border: "1.5px solid rgba(137,180,250,0.3)", borderRadius: 12, padding: "0.4rem 0.75rem", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.15rem" }}
+                    style={{ background: "#f0f4ff", border: "1.5px solid #c7d2fe", borderRadius: 12, padding: "0.4rem 0.75rem", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.15rem" }}
                   >
-                    <span style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--c-link)", opacity: 0.85, lineHeight: 1, letterSpacing: "-0.03em", userSelect: "none" as const }}>{selectedSeason}</span>
-                    <span style={{ fontSize: "0.6rem", fontWeight: 700, color: "var(--c-link)", letterSpacing: "0.1em", textTransform: "uppercase" as const, opacity: 0.65 }}>temporadas ▾</span>
+                    <span style={{ fontSize: "2.5rem", fontWeight: 900, color: "#18265b", lineHeight: 1, letterSpacing: "-0.03em", userSelect: "none" as const }}>{selectedSeason}</span>
+                    <span style={{ fontSize: "0.6rem", fontWeight: 700, color: "#475569", letterSpacing: "0.1em", textTransform: "uppercase" as const }}>temporadas ▾</span>
                   </button>
                 ) : (
-                  <span style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--c-link)", opacity: 0.7, lineHeight: 1, letterSpacing: "-0.03em" }}>{selectedSeason}</span>
+                  <span style={{ fontSize: "2.5rem", fontWeight: 900, color: "#18265b", lineHeight: 1, letterSpacing: "-0.03em" }}>{selectedSeason}</span>
                 )}
               </div>
 
@@ -497,16 +512,8 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
           )}
         </>
       )}
-    </main>
-  );
-}
-
-function InfoRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div style={styles.infoRow}>
-      <span style={styles.infoLabel}>{label}</span>
-      <span style={styles.infoValue}>{value}</span>
-    </div>
+      </main>
+    </>
   );
 }
 
@@ -545,7 +552,7 @@ function MatchRow({ match: m, teamId }: { match: TeamMatch; teamId: string }) {
     return `${h}h${min}`;
   })();
 
-  const outcomeColor = outcome === "win" ? "#a6e3a1" : outcome === "loss" ? "#f38ba8" : "#f9e2af";
+  const outcomeColor = outcome === "win" ? "#16a34a" : outcome === "loss" ? "#dc2626" : "#d97706";
   const outcomeLetter = outcome === "win" ? "V" : outcome === "loss" ? "D" : outcome === "draw" ? "E" : "–";
 
   return (
@@ -658,13 +665,13 @@ function groupByChampionship(matches: TeamMatch[]): [string, TeamMatch[]][] {
 
 const styles: Record<string, React.CSSProperties> = {
   page: {
-    maxWidth: "860px",
+    maxWidth: "1100px",
     margin: "0 auto",
-    padding: "3rem 1.5rem",
+    padding: "2.5rem 2rem 4rem",
   },
   back: {
     display: "inline-block",
-    color: "#89b4fa",
+    color: "#18265b",
     textDecoration: "none",
     fontSize: "0.9rem",
     marginBottom: "2rem",
@@ -678,12 +685,12 @@ const styles: Record<string, React.CSSProperties> = {
   title: {
     fontSize: "1.75rem",
     fontWeight: 700,
-    color: "#cdd6f4",
+    color: "#1e293b",
     margin: 0,
   },
   infoCard: {
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
+    backgroundColor: "#f1f5ff",
+    border: "1.5px solid #dde4f5",
     borderRadius: "8px",
     padding: "1rem 1.25rem",
     marginBottom: "2rem",
@@ -699,50 +706,51 @@ const styles: Record<string, React.CSSProperties> = {
   infoLabel: {
     fontSize: "0.65rem",
     fontWeight: 700,
-    color: "#cdd6f4",
+    color: "#64748b",
     textTransform: "uppercase" as const,
     letterSpacing: "0.07em",
   },
   infoValue: {
     fontSize: "0.9rem",
-    color: "#cdd6f4",
+    color: "#1e293b",
   },
   clubLink: {
     fontSize: "0.9rem",
-    color: "#89b4fa",
+    color: "#18265b",
     textDecoration: "none",
     fontWeight: 600,
   },
-  status: { color: "#cdd6f4" },
-  error: { color: "#f38ba8" },
-  empty: { color: "#cdd6f4", textAlign: "center", padding: "2rem 0" },
+  status: { color: "#1e293b" },
+  error: { color: "#dc2626" },
+  empty: { color: "#64748b", textAlign: "center", padding: "2rem 0" },
   season: {
     marginBottom: "3rem",
   },
   seasonTitle: {
-    fontSize: "1.125rem",
-    fontWeight: 700,
-    color: "#f9e2af",
+    fontSize: "1rem",
+    fontWeight: 800,
+    color: "#18265b",
     marginBottom: "1rem",
-    borderBottom: "1px solid #313244",
+    borderBottom: "2px solid #dde4f5",
     paddingBottom: "0.5rem",
+    letterSpacing: "0.01em",
   },
   champBlock: {
-    marginBottom: "1rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
+    marginBottom: "0.75rem",
+    backgroundColor: "#f8faff",
+    border: "1.5px solid #dde4f5",
+    borderRadius: "10px",
     overflow: "hidden",
   },
   champHeader: {
     fontSize: "0.7rem",
-    fontWeight: 700,
-    color: "#a6e3a1",
+    fontWeight: 800,
+    color: "#18265b",
     textTransform: "uppercase" as const,
-    letterSpacing: "0.08em",
+    letterSpacing: "0.1em",
     padding: "0.5rem 1rem",
-    backgroundColor: "#18265b",
-    borderBottom: "1px solid #313244",
+    backgroundColor: "#eef2ff",
+    borderBottom: "1px solid #dde4f5",
   },
   matchLink: {
     textDecoration: "none",
@@ -750,8 +758,8 @@ const styles: Record<string, React.CSSProperties> = {
     display: "block",
   },
   matchCard: {
-    borderBottom: "1px solid #18265b",
-    padding: "0.4rem 0",
+    borderBottom: "1px solid #eef2ff",
+    padding: "0.45rem 0",
   },
   matchCardRow: {
     display: "grid",
@@ -770,11 +778,11 @@ const styles: Record<string, React.CSSProperties> = {
   mDateLabel: {
     fontSize: "0.75rem",
     fontWeight: 700,
-    color: "#cdd6f4",
+    color: "#475569",
   },
   mTimeLabel: {
     fontSize: "0.65rem",
-    color: "#ffffff",
+    color: "#64748b",
     fontWeight: 600,
   },
   mTeamsCol: {
@@ -818,24 +826,25 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: "space-between",
     marginBottom: "1.5rem",
     paddingBottom: "0.75rem",
-    borderBottom: "2px solid #313244",
+    borderBottom: "2px solid #dde4f5",
   },
   seasonHeaderTitle: {
     fontSize: "1rem",
-    fontWeight: 700,
-    color: "#cdd6f4",
+    fontWeight: 800,
+    color: "#18265b",
     letterSpacing: "0.02em",
   },  mScoreSlot: {
-    fontSize: "0.8rem",
-    fontWeight: 700,
-    color: "#f5c2e7",
+    fontSize: "0.9rem",
+    fontWeight: 800,
+    color: "#1e293b",
     width: "1.6rem",
     textAlign: "right" as const,
     flexShrink: 0,
   },
   mTeamName: {
     fontSize: "0.85rem",
-    color: "#cdd6f4",
+    fontWeight: 600,
+    color: "#1e293b",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap" as const,
@@ -849,7 +858,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   mPhaseLabel: {
     fontSize: "0.65rem",
-    color: "#ffffff",
+    color: "#64748b",
     whiteSpace: "nowrap" as const,
     textAlign: "right" as const,
   },
@@ -866,9 +875,9 @@ const styles: Record<string, React.CSSProperties> = {
     textAlign: "center" as const,
   },
   summary: {
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
+    backgroundColor: "#f1f5ff",
+    border: "1.5px solid #dde4f5",
+    borderRadius: "10px",
     padding: "1rem 1.25rem",
     marginTop: "0.75rem",
   },
@@ -876,7 +885,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: "block",
     fontSize: "0.7rem",
     fontWeight: 700,
-    color: "#cdd6f4",
+    color: "#475569",
     textTransform: "uppercase" as const,
     letterSpacing: "0.08em",
     marginBottom: "0.75rem",
@@ -894,15 +903,15 @@ const styles: Record<string, React.CSSProperties> = {
   },
   statLabel: {
     fontSize: "0.65rem",
-    color: "#cdd6f4",
+    color: "#64748b",
     fontWeight: 600,
     textTransform: "uppercase" as const,
     letterSpacing: "0.06em",
   },
   statValue: {
     fontSize: "1.125rem",
-    fontWeight: 600,
-    color: "#cdd6f4",
+    fontWeight: 700,
+    color: "#1e293b",
     marginTop: "2px",
   },
   rosterSection: {
@@ -912,28 +921,28 @@ const styles: Record<string, React.CSSProperties> = {
     width: "100%",
     borderCollapse: "collapse" as const,
     marginTop: "0.75rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
+    backgroundColor: "#ffffff",
+    border: "1.5px solid #dde4f5",
+    borderRadius: "10px",
     overflow: "hidden",
   },
   rosterThead: {
-    backgroundColor: "#18265b",
+    backgroundColor: "#eef2ff",
   },
   rosterTh: {
     fontSize: "0.65rem",
     fontWeight: 700,
-    color: "#ffffff",
+    color: "#475569",
     textTransform: "uppercase" as const,
     letterSpacing: "0.07em",
     padding: "0.5rem 0.75rem",
     textAlign: "left" as const,
-    borderBottom: "1px solid #313244",
+    borderBottom: "1.5px solid #dde4f5",
   },
   rosterTr: {
     cursor: "pointer",
     transition: "background 0.12s",
-    borderBottom: "1px solid #252537",
+    borderBottom: "1px solid #eef2ff",
   },
   rosterTd: {
     padding: "0.45rem 0.75rem",

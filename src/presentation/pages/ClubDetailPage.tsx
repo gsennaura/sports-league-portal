@@ -94,50 +94,53 @@ function MatchRow({ match, teamIds }: { match: ClubMatch; teamIds: Set<string> }
   const dateLabel = datePart
     ? new Date(`${datePart}T12:00:00`).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })
     : null;
-  const timeLabel = (() => {
-    const timePart = match.match_date?.includes("T") ? match.match_date.split("T")[1] : null;
-    if (!timePart) return null;
-    const [h, min] = timePart.split(":");
-    return `${h}h${min}`;
-  })();
+
+  const scoreColor: Record<string, string> = { V: "#16a34a", D: "#dc2626", E: "#d97706", A: "#94a3b8" };
 
   return (
-    <Link to={`/partidas/${match.match_id}`} className="row-link">
-      <div className="card">
-        <div className="match-team-row">
-          {/* Col 1 — status badge */}
-          <div >
-            <StatusBadge status={status} />
+    <Link to={`/partidas/${match.match_id}`} style={{ textDecoration: "none", display: "block" }}>
+      <div style={{
+        background: "#f8faff",
+        border: "1.5px solid #dde4f5",
+        borderRadius: 10,
+        padding: "0.65rem 0.9rem",
+        marginBottom: "0.45rem",
+        transition: "border-color 0.15s, box-shadow 0.15s",
+      }}>
+        <div style={{ display: "grid", gridTemplateColumns: "22px 2.8rem 1fr auto", alignItems: "center", gap: "0.65rem" }}>
+
+          {/* Status badge */}
+          <StatusBadge status={status} />
+
+          {/* Data */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+            {dateLabel && <span style={{ fontSize: "0.72rem", fontWeight: 700, color: "#475569", lineHeight: 1.2 }}>{dateLabel}</span>}
           </div>
 
-          {/* Col 2 — data e hora */}
-          <div >
-            {dateLabel && <span className="muted">{dateLabel}</span>}
-            {timeLabel && <span className="muted">{timeLabel}</span>}
-          </div>
-
-          {/* Col 3 — times + placar */}
-          <div >
-            <div className="match-team-row">
-              <span className="score-slot">
-                {hasScore ? `${match.home_score}${hasPenalty ? ` (${match.home_penalty_score})` : ""}` : ""}
+          {/* Times + placar */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.18rem", minWidth: 0 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "3rem 18px 1fr", alignItems: "center", gap: "0.35rem" }}>
+              <span style={{ fontSize: "0.9rem", fontWeight: 800, color: hasScore ? scoreColor[status] : "#94a3b8", textAlign: "right" as const, lineHeight: 1 }}>
+                {hasScore ? `${match.home_score}${hasPenalty ? ` (${match.home_penalty_score})` : ""}` : "–"}
               </span>
               <Shield url={match.home_club_logo_url} />
-              <span className="team-name">{match.home_team_name}</span>
+              <span style={{ fontSize: "0.85rem", fontWeight: 600, color: "#1e293b", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" as const }}>{match.home_team_name}</span>
             </div>
-            <div className="match-team-row">
-              <span className="score-slot">
-                {hasScore ? `${match.away_score}${hasPenalty ? ` (${match.away_penalty_score})` : ""}` : ""}
+            <div style={{ display: "grid", gridTemplateColumns: "3rem 18px 1fr", alignItems: "center", gap: "0.35rem" }}>
+              <span style={{ fontSize: "0.9rem", fontWeight: 800, color: hasScore ? scoreColor[status === "V" ? "D" : status === "D" ? "V" : status] : "#94a3b8", textAlign: "right" as const, lineHeight: 1 }}>
+                {hasScore ? `${match.away_score}${hasPenalty ? ` (${match.away_penalty_score})` : ""}` : "–"}
               </span>
               <Shield url={match.away_club_logo_url} />
-              <span className="team-name">{match.away_team_name}</span>
+              <span style={{ fontSize: "0.85rem", fontWeight: 600, color: "#1e293b", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" as const }}>{match.away_team_name}</span>
             </div>
           </div>
 
-          {/* Col 4 — estádio */}
+          {/* Estádio */}
           {match.venue_name && (
-            <div >
-              <span className="muted">{match.venue_name}</span>
+            <div style={{ maxWidth: "6rem" }}>
+              <span style={{ fontSize: "0.67rem", color: "#94a3b8", lineHeight: 1.3, display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" as const, textAlign: "right" as const }}>
+                {match.venue_name}
+              </span>
             </div>
           )}
         </div>
@@ -244,7 +247,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
   return (
     <>
       {/* ─── Hero ──────────────────────────────────────────────── */}
-      <header className="hero">
+      <header className="hero" style={{ background: "linear-gradient(135deg, #0e1547 0%, #18265b 50%, #1a2f6e 100%)", boxShadow: "0 4px 40px rgba(0,0,0,0.45)" }}>
         <div className="hero__bar" />
         <div className="hero__inner">
           <Link to="/clubes" className="back-link">← Clubes</Link>
@@ -252,12 +255,12 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
           {club && (
             <>
               <div className="hero__row">
-                <div style={{ position: "relative", flexShrink: 0 }}>
+                <div style={{ position: "relative", flexShrink: 0, width: 88, height: 88, borderRadius: 14, background: "rgba(255,255,255,0.07)", border: "1.5px solid rgba(255,255,255,0.18)", padding: 8, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 20px rgba(0,0,0,0.35), 0 0 0 3px rgba(137,180,250,0.12)" }}>
                   <img
                     src={currentLogoUrl ?? club.logo_url ?? NO_SHIELD}
                     alt={`Escudo ${club.nickname ?? club.name}`}
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_SHIELD; }}
-                    
+                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
                   />
                   {isAdmin && clubRepository && (
                     <>
@@ -295,12 +298,12 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                     </>
                   )}
                 </div>
-                <div>
-                  <h1 className="hero__title">{club.name}</h1>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h1 className="hero__title" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.4)" }}>{club.name}</h1>
                   {(club.nickname || club.acronym) && (
-                    <p className="muted">
-                      {club.nickname && <span>{club.nickname}</span>}
-                      {club.acronym && <span className="badge">{club.acronym}</span>}
+                    <p style={{ marginTop: "0.35rem", display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center" }}>
+                      {club.nickname && <span style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.95rem" }}>{club.nickname}</span>}
+                      {club.acronym && <span style={{ background: "rgba(203,166,247,0.18)", color: "#cba6f7", border: "1px solid rgba(203,166,247,0.35)", borderRadius: 4, fontSize: "0.75rem", fontWeight: 700, padding: "0.1rem 0.5rem", letterSpacing: "0.06em" }}>{club.acronym}</span>}
                     </p>
                   )}
                 </div>
@@ -361,28 +364,31 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
             {/* ─── Tab: Times ──────────────────────────────────── */}
             {activeTab === "times" && (
               <div>
-                <div className="form-warning">
-                  <span >👕</span>
-                  <div>
-                    <div className="section-heading">O que são times?</div>
-                    <div className="muted">
-                      Cada time representa um grupo de atletas que compete em uma modalidade e categoria específica.
-                      Um clube pode ter vários times — por exemplo, futebol amador, sub-17 ou master —
-                      cada um disputando suas próprias competições.
-                    </div>
-                  </div>
-                </div>
                 {teams.length === 0 ? (
                   <p className="muted">Nenhum time cadastrado.</p>
                 ) : (
-                  <div className="form-field-group">
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {teams.map((t) => {
                       const sport = t.sport_name ?? "Esporte";
                       const cat = t.category ? (categoryLabel[t.category] ?? t.category) : null;
                       return (
-                        <Link key={t.id} to={`/times/${toSlugPath(t.name, t.id)}`} className="card">
-                          <span className="muted">{sport}</span>
-                          {cat && <span className="muted">{cat}</span>}
+                        <Link key={t.id} to={`/times/${toSlugPath(t.name, t.id)}`} style={S.teamCard}>
+                          <div style={S.teamCardLogo}>
+                            <img
+                              src={currentLogoUrl ?? club?.logo_url ?? NO_SHIELD}
+                              onError={(e) => { (e.currentTarget as HTMLImageElement).src = NO_SHIELD; }}
+                              style={{ width: 40, height: 40, objectFit: "contain" as const }}
+                              alt=""
+                            />
+                          </div>
+                          <div style={S.teamCardBody}>
+                            <span style={S.teamCardName}>{t.name}</span>
+                            <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" as const, marginTop: "0.25rem" }}>
+                              <span style={{ background: "#e2e8f0", color: "#334155", borderRadius: 4, fontSize: "0.72rem", fontWeight: 700, padding: "0.15rem 0.5rem", letterSpacing: "0.03em" }}>{sport}</span>
+                              {cat && <span style={{ background: "#dbeafe", color: "#1e40af", border: "1px solid #bfdbfe", borderRadius: 4, fontSize: "0.72rem", fontWeight: 700, padding: "0.15rem 0.5rem", letterSpacing: "0.03em" }}>{cat}</span>}
+                            </div>
+                          </div>
+                          <span style={S.teamCardArrow}>›</span>
                         </Link>
                       );
                     })}
@@ -440,9 +446,9 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                       ? "Sem categoria"
                       : (categoryLabel[catKey] ?? catKey);
                     return (
-                      <div key={catKey} className="page-section">
-                        <div className="toolbar">
-                          <span className="row-link">{catLabel}</span>
+                      <div key={catKey} style={{ marginBottom: "1.75rem" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.6rem", paddingBottom: "0.4rem", borderBottom: "2px solid #dde4f5" }}>
+                          <span style={{ fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: "#18265b" }}>{catLabel}</span>
                         </div>
                         {catMatches.map((m) => <MatchRow key={m.match_id} match={m} teamIds={teamIds} />)}
                       </div>
@@ -450,15 +456,15 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
                   })
                 )}
                 {matchesLoaded && matches.length > 0 && (
-                  <p style={{ fontSize: "0.72rem", color: "#ffffff", marginTop: "0.5rem", textAlign: "right" as const }}>
-                    <span style={{ fontWeight: 600, color: "var(--c-positive)" }}>V</span>
+                  <p style={{ fontSize: "0.72rem", color: "#64748b", marginTop: "0.5rem", textAlign: "right" as const }}>
+                    <span style={{ fontWeight: 700, color: "#16a34a" }}>V</span>
                     {" / "}
-                    <span style={{ fontWeight: 600, color: "var(--c-negative)" }}>D</span>
+                    <span style={{ fontWeight: 700, color: "#dc2626" }}>D</span>
                     {" / "}
-                    <span style={{ fontWeight: 600, color: "var(--c-warning)" }}>E</span>
+                    <span style={{ fontWeight: 700, color: "#d97706" }}>E</span>
                     {" / "}
-                    <span style={{ color: "#45475a" }}>A</span>
-                    {" · por categoria"}
+                    <span style={{ color: "#94a3b8" }}>A</span>
+                    {" · resultado por categoria"}
                   </p>
                 )}
               </div>
@@ -581,18 +587,53 @@ const S: Record<string, React.CSSProperties> = {
   // Teams grid
   teamsGrid: {
     display: "flex",
-    flexWrap: "wrap" as const,
+    flexDirection: "column" as const,
     gap: "0.5rem",
   },
   teamCard: {
-    display: "inline-flex",
+    display: "flex",
     alignItems: "center",
-    gap: "0.35rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "6px",
-    padding: "0.4rem 0.85rem",
+    gap: "0.85rem",
+    backgroundColor: "#f1f5ff",
+    border: "1.5px solid #c7d2fe",
+    borderRadius: "10px",
+    padding: "0.75rem 1rem",
     textDecoration: "none",
+    transition: "border-color 0.15s, box-shadow 0.15s",
+    boxShadow: "0 1px 4px rgba(24,38,91,0.07)",
+  },
+  teamCardLogo: {
+    width: 52,
+    height: 52,
+    flexShrink: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "8px",
+    background: "#ffffff",
+    border: "1.5px solid #c7d2fe",
+    padding: "4px",
+    overflow: "hidden" as const,
+    boxShadow: "0 1px 4px rgba(24,38,91,0.1)",
+  },
+  teamCardBody: {
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column" as const,
+  },
+  teamCardName: {
+    fontSize: "1rem",
+    fontWeight: 700,
+    color: "#1e293b",
+    whiteSpace: "nowrap" as const,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  teamCardArrow: {
+    fontSize: "1.4rem",
+    color: "#94a3b8",
+    flexShrink: 0,
   },
   teamCardSport: {
     fontSize: "0.85rem",
@@ -754,7 +795,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: "0.65rem 1.25rem",
     fontSize: "0.85rem",
     fontWeight: 600,
-    color: "#ffffff",
+    color: "#475569",
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
@@ -765,11 +806,11 @@ const S: Record<string, React.CSSProperties> = {
   tabActive: {
     background: "none",
     border: "none",
-    borderBottom: "2px solid #89b4fa",
+    borderBottom: "2px solid #18265b",
     padding: "0.65rem 1.25rem",
     fontSize: "0.85rem",
     fontWeight: 700,
-    color: "#cdd6f4",
+    color: "#18265b",
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
