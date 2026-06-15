@@ -207,17 +207,23 @@ textarea.form-input {
 /* Contexto branco (page-card) */
 .page-card .search-input {
   background: #ffffff;
-  border: 1.5px solid #cbd5e1;
+  border: 2px solid var(--c-brand);
   color: #1e293b;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.4rem;
+  max-width: 520px;
+  box-shadow: 0 2px 12px rgba(24, 38, 91, 0.1);
 }
 
 .page-card .search-input:focus {
   border-color: var(--c-brand);
-  box-shadow: 0 0 0 3px rgba(24, 38, 91, 0.1);
+  box-shadow: 0 0 0 4px rgba(24, 38, 91, 0.12);
 }
 
 .page-card .search-input::placeholder {
   color: #94a3b8;
+  font-weight: 400;
 }
 
 /* ── Responsividade ─────────────────────────────────────────────── */
