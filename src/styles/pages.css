@@ -152,8 +152,8 @@
 
 .champ-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
 }
 
 .champ-card {
@@ -164,11 +164,14 @@
   border: 1px solid var(--c-border);
   text-decoration: none;
   overflow: hidden;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(24, 38, 91, 0.15);
 }
 
 .champ-card:hover {
   border-color: var(--c-action);
+  box-shadow: 0 4px 18px rgba(24, 38, 91, 0.28);
+  transform: translateY(-2px);
 }
 
 .champ-card__accent {
@@ -219,12 +222,17 @@
 
 .champ-card__arrow {
   font-size: 1.4rem;
-  color: var(--c-text-muted);
+  color: rgba(255, 255, 255, 0.45);
   padding: 0 0.9rem;
   flex-shrink: 0;
   line-height: 1;
   display: flex;
   align-items: center;
+  transition: color 0.15s;
+}
+
+.champ-card:hover .champ-card__arrow {
+  color: var(--c-action);
 }
 
 .champ-card__badges {
@@ -237,9 +245,9 @@
 .champ-card__edition-count {
   font-size: 0.65rem;
   font-weight: 600;
-  color: var(--c-text);
-  background: var(--c-surface-2);
-  border: 1px solid var(--c-border);
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   padding: 0.15rem 0.45rem;
   white-space: nowrap;
@@ -282,9 +290,9 @@
 }
 
 .champ-badge--default {
-  color: var(--c-text-muted);
-  background: var(--c-surface-2);
-  border-color: var(--c-border);
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .champ-badge--scope {

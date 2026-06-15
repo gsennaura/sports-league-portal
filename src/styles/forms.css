@@ -204,6 +204,22 @@ textarea.form-input {
   color: var(--c-text-muted);
 }
 
+/* Contexto branco (page-card) */
+.page-card .search-input {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  color: #1e293b;
+}
+
+.page-card .search-input:focus {
+  border-color: var(--c-brand);
+  box-shadow: 0 0 0 3px rgba(24, 38, 91, 0.1);
+}
+
+.page-card .search-input::placeholder {
+  color: #94a3b8;
+}
+
 /* ── Responsividade ─────────────────────────────────────────────── */
 
 @media (max-width: 600px) {
