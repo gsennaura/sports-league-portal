@@ -517,15 +517,6 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
   );
 }
 
-function InfoRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div style={styles.infoRow}>
-      <span style={styles.infoLabel}>{label}</span>
-      <span style={styles.infoValue}>{value}</span>
-    </div>
-  );
-}
-
 function formatDate(iso: string): string {
   const d = iso.slice(0, 10).split("-");
   if (d.length === 3) return `${d[2]}/${d[1]}/${d[0]}`;
