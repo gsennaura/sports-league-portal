@@ -670,11 +670,35 @@
 }
 
 .stats-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.stats-row > :last-child { text-align: right; }
+.stats-row > :nth-child(2) { text-align: center; }
+
+.stats-team-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--c-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stats-pct {
+  font-size: 0.68rem;
+  color: var(--c-text);
+}
+
+.stats-summary {
+  font-size: 0.75rem;
+  color: var(--c-text);
+  text-align: center;
+  margin-top: 0.5rem;
 }
 
 .stats-count {
@@ -688,10 +712,14 @@
 }
 
 .stat-bar__header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 2.5rem;
+  align-items: center;
   margin-bottom: 0.2rem;
 }
+
+.stat-bar__header > :nth-child(2) { text-align: center; }
+.stat-bar__header > :last-child   { text-align: right; }
 
 .stat-bar__track {
   height: 6px;
