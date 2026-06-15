@@ -301,6 +301,195 @@
   border-color: var(--c-border);
 }
 
+/* ─── Clubs page ─────────────────────────────────────────────────── */
+
+.hero__eyebrow {
+  display: block;
+  color: var(--c-link);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.hero__sub {
+  margin: 0.2rem 0 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+/* Filter panel */
+.clubs-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(24, 38, 91, 0.07);
+}
+
+.clubs-filter__input {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  background: #ffffff;
+  border: 2px solid var(--c-brand);
+  border-radius: 999px;
+  color: #1e293b;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: 0 2px 12px rgba(24, 38, 91, 0.1);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.clubs-filter__input:focus {
+  border-color: var(--c-brand);
+  box-shadow: 0 0 0 4px rgba(24, 38, 91, 0.12);
+}
+
+.clubs-filter__input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.clubs-filter__selects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.5rem;
+}
+
+.clubs-filter__select {
+  padding: 0.55rem 0.75rem;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  color: #1e293b;
+  font-size: 0.88rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.clubs-filter__select:focus { border-color: var(--c-brand); }
+
+.clubs-filter__buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.clubs-filter__btn-search {
+  padding: 0.6rem 1.75rem;
+  background: var(--c-brand);
+  border: none;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.15s;
+}
+
+.clubs-filter__btn-search:hover  { background: #1a2e70; }
+.clubs-filter__btn-search:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.clubs-filter__btn-reset {
+  padding: 0.6rem 1.25rem;
+  background: transparent;
+  border: 1.5px solid #94a3b8;
+  border-radius: 999px;
+  color: #64748b;
+  font-size: 0.88rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.clubs-filter__btn-reset:hover {
+  border-color: var(--c-brand);
+  color: var(--c-brand);
+}
+
+/* Results header */
+.clubs-results-header {
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.clubs-results-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.03em;
+}
+
+/* Grid and cards */
+.clubs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.club-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  background: var(--c-brand);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(24, 38, 91, 0.15);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+
+.club-card:hover {
+  border-color: var(--c-action);
+  box-shadow: 0 4px 18px rgba(24, 38, 91, 0.28);
+  transform: translateY(-2px);
+}
+
+.club-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.club-card__name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.club-card__meta {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.1rem;
+}
+
+/* See-more hint */
+.clubs-see-more {
+  padding: 1rem 1.25rem;
+  background: #f1f5fb;
+  border: 1px solid #dbe4f0;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
 /* ─── Partners / sponsors ────────────────────────────────────────── */
 
 .apoio-grid {

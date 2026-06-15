@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { toSlugPath } from "@utils/slug";
 import type { ListClubs } from "@application/use_cases/ListClubs";
@@ -54,13 +54,13 @@ function ClubShield({ url, name }: { url: string | null; name: string }) {
 
 function ClubCard({ club }: { club: Club }) {
   return (
-    <Link to={`/clubes/${toSlugPath(club.name, club.id)}`} style={styles.clubCard}>
-      <div style={styles.clubHeader}>
+    <Link to={`/clubes/${toSlugPath(club.name, club.id)}`} className="club-card">
+      <div className="club-card__header">
         <ClubShield url={club.logo_url} name={club.nickname ?? club.name} />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={styles.clubName}>{club.name}</div>
-          {club.city_name && club.city_name !== "\u2013" && (
-            <div style={styles.clubMeta}>{club.city_name}</div>
+          <div className="club-card__name">{club.name}</div>
+          {club.city_name && club.city_name !== "–" && (
+            <div className="club-card__meta">{club.city_name}</div>
           )}
         </div>
       </div>
@@ -201,12 +201,12 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
     <>
       {/* Hero */}
       <header className="hero">
-        <div style={styles.heroAccentBar} />
+        <div className="hero__accent" />
         <div className="hero__inner">
-          <Link to="/" style={styles.heroBack}>← Página Principal</Link>
-          <span style={styles.heroEyebrow}>⚽ Gestão Esportiva</span>
-          <h1 style={styles.heroTitle}>Clubes</h1>
-          <p style={styles.heroSub}>Conheça os clubes cadastrados.</p>
+          <Link to="/" className="back-link">← Página Principal</Link>
+          <span className="hero__eyebrow">⚽ Gestão Esportiva</span>
+          <h1 className="page-title">Clubes</h1>
+          <p className="hero__sub">Conheça os clubes cadastrados.</p>
         </div>
       </header>
 
@@ -214,7 +214,7 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
       <main className="page-container">
 
         {/* ── Filter panel ────────────────────────────────────────────────── */}
-        <div style={styles.filterPanel}>
+        <div className="clubs-filter">
           {/* Name row */}
           <input
             type="text"
@@ -222,43 +222,43 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
             onChange={(e) => setInputName(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && void handleSearch()}
             placeholder="Buscar pelo nome do clube..."
-            style={styles.filterInput}
+            className="clubs-filter__input"
           />
 
           {/* Selects row */}
-          <div style={styles.filterSelects}>
-            <select value={inputCity} onChange={(e) => setInputCity(e.target.value)} style={styles.filterSelect}>
+          <div className="clubs-filter__selects">
+            <select value={inputCity} onChange={(e) => setInputCity(e.target.value)} className="clubs-filter__select">
               <option value="">Cidade</option>
               {cityOptions.map((city) => <option key={city} value={city}>{city}</option>)}
             </select>
 
-            <select value={inputSport} onChange={(e) => setInputSport(e.target.value)} style={styles.filterSelect}>
+            <select value={inputSport} onChange={(e) => setInputSport(e.target.value)} className="clubs-filter__select">
               <option value="">Esporte</option>
               {sportOptions.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
 
-            <select value={inputCategory} onChange={(e) => setInputCategory(e.target.value)} style={styles.filterSelect}>
+            <select value={inputCategory} onChange={(e) => setInputCategory(e.target.value)} className="clubs-filter__select">
               <option value="">Categoria</option>
               {catOptions.map((c) => <option key={c} value={c}>{categoryLabel[c] ?? c}</option>)}
             </select>
 
-            <select value={inputLeague} onChange={(e) => setInputLeague(e.target.value)} style={styles.filterSelect}>
+            <select value={inputLeague} onChange={(e) => setInputLeague(e.target.value)} className="clubs-filter__select">
               <option value="">Liga</option>
               {leagues.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
             </select>
           </div>
 
           {/* Buttons row */}
-          <div style={styles.filterButtons}>
+          <div className="clubs-filter__buttons">
             <button
               onClick={() => void handleSearch()}
               disabled={searching}
-              style={{ ...styles.searchButton, opacity: searching ? 0.6 : 1 }}
+              className="clubs-filter__btn-search"
             >
               {searching ? "Buscando…" : "Buscar"}
             </button>
             {hasSearched && (
-              <button onClick={handleReset} style={styles.resetButton}>
+              <button onClick={handleReset} className="clubs-filter__btn-reset">
                 Limpar filtros
               </button>
             )}
@@ -266,21 +266,21 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
         </div>
 
         {/* ── Status messages ───────────────────────────────────────────── */}
-        {loading && <p style={styles.status}>Carregando...</p>}
+        {loading && <p className="page-status">Carregando...</p>}
         {error && <p className="error-text">{error}</p>}
 
         {!loading && !error && (
           <>
             {/* Results count */}
-            <div style={styles.resultsHeader}>
+            <div className="clubs-results-header">
               {hasSearched ? (
-                <span style={styles.resultsLabel}>
+                <span className="clubs-results-label">
                   {filteredClubs.length === 0
                     ? "Nenhum clube encontrado."
                     : `${filteredClubs.length} clube${filteredClubs.length !== 1 ? "s" : ""} encontrado${filteredClubs.length !== 1 ? "s" : ""}`}
                 </span>
               ) : (
-                <span style={styles.resultsLabel}>
+                <span className="clubs-results-label">
                   Mostrando {Math.min(20, clubs.length)} de {clubs.length} clubes
                 </span>
               )}
@@ -288,7 +288,7 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
 
             {/* Club grid */}
             {displayClubs.length > 0 && (
-              <div style={styles.clubsGrid}>
+              <div className="clubs-grid">
                 {displayClubs.map((club) => (
                   <ClubCard key={club.id} club={club} />
                 ))}
@@ -297,7 +297,7 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
 
             {/* "Ver mais" hint */}
             {!hasSearched && clubs.length > 20 && (
-              <div style={styles.seeMoreHint}>
+              <div className="clubs-see-more">
                 Para ver mais clubes, utilize o filtro acima.
               </div>
             )}
@@ -307,159 +307,3 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
     </>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  heroAccentBar: {
-    height: "4px",
-    background: "linear-gradient(90deg, #89b4fa 0%, #cba6f7 50%, #a6e3a1 100%)",
-  },
-  heroBack: {
-    color: "#89b4fa",
-    textDecoration: "none",
-    fontSize: "0.85rem",
-    marginBottom: "0.25rem",
-    alignSelf: "flex-start" as const,
-  },
-  heroEyebrow: {
-    color: "#89b4fa",
-    fontSize: "0.82rem",
-    fontWeight: 600,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase" as const,
-  },
-  heroTitle: {
-    margin: 0,
-    fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-    fontWeight: 800,
-    color: "#cdd6f4",
-    lineHeight: 1.15,
-    letterSpacing: "-0.02em",
-  },
-  heroSub: {
-    margin: 0,
-    marginTop: "0.15rem",
-    fontSize: "1rem",
-    color: "#cdd6f4",
-    lineHeight: 1.6,
-  },
-
-  // Filter panel
-  filterPanel: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.6rem",
-    marginBottom: "2rem",
-    padding: "1.25rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "10px",
-  },
-  filterInput: {
-    width: "100%",
-    padding: "0.6rem 0.9rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "6px",
-    color: "#cdd6f4",
-    fontSize: "0.9rem",
-    outline: "none",
-    boxSizing: "border-box" as const,
-  },
-  filterSelects: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-    gap: "0.5rem",
-  },
-  filterSelect: {
-    padding: "0.55rem 0.75rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "6px",
-    color: "#cdd6f4",
-    fontSize: "0.85rem",
-    outline: "none",
-  },
-  filterButtons: {
-    display: "flex",
-    gap: "0.5rem",
-    alignItems: "center",
-  },
-  searchButton: {
-    padding: "0.55rem 1.5rem",
-    backgroundColor: "#89b4fa",
-    border: "none",
-    borderRadius: "6px",
-    color: "#18265b",
-    fontSize: "0.9rem",
-    fontWeight: 700,
-    cursor: "pointer",
-    letterSpacing: "0.02em",
-  },
-  resetButton: {
-    padding: "0.55rem 1rem",
-    backgroundColor: "transparent",
-    border: "1px solid #45475a",
-    borderRadius: "6px",
-    color: "#ffffff",
-    fontSize: "0.85rem",
-    cursor: "pointer",
-  },
-
-  // Results area
-  resultsHeader: {
-    marginBottom: "1rem",
-    paddingBottom: "0.5rem",
-    borderBottom: "1px solid #313244",
-  },
-  resultsLabel: {
-    fontSize: "0.8rem",
-    color: "#ffffff",
-    letterSpacing: "0.03em",
-  },
-  clubsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-    gap: "0.6rem",
-  },
-  seeMoreHint: {
-    marginTop: "1.5rem",
-    padding: "1rem 1.25rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    color: "#ffffff",
-    fontSize: "0.85rem",
-    textAlign: "center" as const,
-    letterSpacing: "0.01em",
-  },
-
-  // Club card
-  clubCard: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.5rem",
-    padding: "0.85rem 1rem",
-    backgroundColor: "#18265b",
-    border: "1px solid #313244",
-    borderRadius: "8px",
-    textDecoration: "none",
-    transition: "border-color 0.15s",
-  },
-  clubHeader: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.6rem",
-  },
-  clubName: {
-    fontSize: "0.9rem",
-    fontWeight: 600,
-    color: "#cdd6f4",
-  },
-  clubMeta: {
-    fontSize: "0.72rem",
-    color: "#ffffff",
-    marginTop: "0.1rem",
-  },
-
-  status: { color: "#cdd6f4" },
-};
