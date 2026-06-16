@@ -15,7 +15,7 @@ import type { MatchEvent, MatchEventType, MatchEventPeriod, MatchEventPayload } 
 import { EVENT_ICONS, ALL_PERIODS, PERIOD_LABELS } from "@domain/entities/MatchEvent";
 import type { MatchReferee } from "@domain/entities/MatchReferee";
 import { ROLE_LABELS } from "@domain/entities/MatchReferee";
-import { useAuth } from "@presentation/context/AuthContext";
+
 import { MatchTimeline } from "@presentation/components/MatchTimeline";
 
 const NO_SHIELD = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main/clubs/no_club_shield.png";
@@ -65,7 +65,7 @@ function computeForm(matches: TeamMatch[], teamId: string): FormResult[] {
 export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes, getTeamMatches, addMatchEvent, annulMatchEvent }: MatchDetailPageProps) {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { isAdmin } = useAuth();
+  const isAdmin = false;
   const [match, setMatch] = useState<MatchDetail | null>(null);
   const [liveEvents, setLiveEvents] = useState<MatchEvent[]>([]);
   const [h2h, setH2h] = useState<HeadToHeadMatch[]>([]);
@@ -121,22 +121,37 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
       {/* ─── Header ─────────────────────────────────────────────────────────────────── */}
       <header className="match-header">
         <div className="match-header__nav">
-          <button onClick={() => navigate(-1)} className="back-link">← Voltar</button>
-          {isAdmin && id && (
-            <Link to={`/admin/partidas/${id}/editar`} className="btn-edit">
-              ✏️ Editar partida
-            </Link>
-          )}
+          <button onClick={() => navigate(-1)} className="match-back-btn">
+            <span className="match-back-btn__arrow">←</span> Voltar
+          </button>
         </div>
         {match && (
           <div className="match-header__context">
             <span className="match-header__champ">
-              {match.championship_name} · {match.championship_year}
-              {match.division_name ? ` · ${match.division_name}` : ""}
+              {match.championship_name}
+              {(match.championship_year || match.division_name) && (
+                <span className="champ-year">
+                  {match.championship_year ? ` ${match.championship_year}` : ""}
+                  {match.division_name ? ` · ${match.division_name}` : ""}
+                </span>
+              )}
             </span>
-            <span className="match-header__phase">
-              {[match.phase_name, `Rodada ${match.round_number}`].join(" · ")}
-            </span>
+            <div className="match-header__badges">
+              {match.phase_name && (
+                <span className="match-header__badge">{match.phase_name}</span>
+              )}
+              {match.round_number != null && (
+                <span className="match-header__badge match-header__badge--round">
+                  Rodada {match.round_number}
+                </span>
+              )}
+            </div>
+            {match.match_date && (
+              <span className="match-header__date">
+                <span className="match-header__date-icon">📅</span>
+                {formatDateTime(match.match_date)}
+              </span>
+            )}
           </div>
         )}
       </header>
@@ -148,10 +163,6 @@ export function MatchDetailPage({ getMatchDetail, getHeadToHead, getTeamAthletes
 
         {!loading && match && (
           <>
-            {match.match_date && (
-              <div className="match-date-badge">📅 {formatDateTime(match.match_date)}</div>
-            )}
-
             <div className="score-card">
               <div className="score-grid">
                 {/* Home team */}

@@ -12,7 +12,7 @@ import type { ListChampionships } from "@application/use_cases/ListChampionships
 import type { AthleteDetail, AthleteStats, AthleteTeamHistory, AthleteChampionshipRegistration, GoalMatchItem } from "@domain/entities/Athlete";
 import type { Championship } from "@domain/entities/Championship";
 import type { AthleteRepository } from "@domain/repositories/AthleteRepository";
-import { useAuth } from "@presentation/context/AuthContext";
+
 
 const NO_PHOTO =
   "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/main/athletes/no_athlete_photo.png";
@@ -284,7 +284,7 @@ export function AthleteDetailPage({
 }: AthleteDetailPageProps) {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { isAdmin } = useAuth();
+  const isAdmin = false;
   const [detail, setDetail] = useState<AthleteDetail | null>(null);
   const [stats, setStats] = useState<AthleteStats | null>(null);
   const [loading, setLoading] = useState(true);

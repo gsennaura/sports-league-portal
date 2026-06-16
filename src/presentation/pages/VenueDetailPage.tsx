@@ -6,7 +6,7 @@ import type { GetVenueMatches } from "@application/use_cases/GetVenueMatches";
 import type { Venue } from "@domain/entities/Venue";
 import type { ClubMatch } from "@domain/entities/ClubMatch";
 import type { VenueRepository } from "@domain/repositories/VenueRepository";
-import { useAuth } from "@presentation/context/AuthContext";
+
 import { API_BASE } from "@infrastructure/apiBase";
 
 const _RAW_BASE = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main";
@@ -131,7 +131,7 @@ function StatItem({ label, value, color }: { label: string; value: number; color
 export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
   const { slug } = useParams<{ slug: string }>();
   const id = slug ? extractId(slug) : undefined;
-  const { isAdmin } = useAuth();
+  const isAdmin = false;
 
   const [venue, setVenue] = useState<Venue | null>(null);
   const [cityName, setCityName] = useState<string>("");
@@ -258,7 +258,6 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
 
               {/* Right: info */}
               <div className="venue-hero-info">
-                <span className="hero__eyebrow">🏟 Local</span>
                 <h1 className="hero__title">{venue.name}</h1>
                 {venue.nickname && (
                   <p className="muted">"{venue.nickname}"</p>
@@ -293,33 +292,33 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
               <div className="venue-stats-strip">
                 <StatItem label="Jogos" value={stats.total} />
                 <div className="venue-stats-strip__divider" />
-                <StatItem label="Mandante" value={stats.homeWins} color="#89b4fa" />
-                <StatItem label="Empates" value={stats.draws} color="#f9e2af" />
-                <StatItem label="Visitante" value={stats.awayWins} color="#cba6f7" />
+                <StatItem label="Mandante" value={stats.homeWins} />
+                <StatItem label="Empates" value={stats.draws} />
+                <StatItem label="Visitante" value={stats.awayWins} />
                 <div className="venue-stats-strip__divider" />
-                <StatItem label="Gols" value={stats.goals} color="#a6e3a1" />
+                <StatItem label="Gols" value={stats.goals} />
               </div>
             )}
 
             {/* Championships played here */}
             {championships.length > 0 && (
-              <section className="page-section">
-                <h2 className="section-heading">Campeonatos neste local</h2>
-                <div className="champ-grid">
+              <section className="page-section" style={{ marginBottom: "1.75rem" }}>
+                <h2 className="section-heading" style={{ marginBottom: "0.75rem" }}>Campeonatos neste local</h2>
+                <div className="champ-pills">
                   {championships.map((c) => (
-                    <div key={c.id} className="champ-card">
-                      <span className="team-name">{c.name}</span>
-                      <span className="muted">{c.count} partida{c.count !== 1 ? "s" : ""}</span>
+                    <div key={c.id} className="champ-pill">
+                      <span className="champ-pill__name">{c.name}</span>
+                      <span className="champ-pill__count">{c.count}</span>
                     </div>
                   ))}
                 </div>
               </section>
             )}
 
-            <h2 className="section-heading">
+            <h2 className="section-heading" style={{ marginBottom: "1rem", marginTop: "0.5rem" }}>
               Partidas neste local
               {matches.length > 0 && (
-                <span className="muted">{matches.length}</span>
+                <span style={{ marginLeft: "0.5rem", background: "#18265b", color: "#fff", borderRadius: "1rem", padding: "0.1rem 0.5rem", fontSize: "0.72rem", fontWeight: 700 }}>{matches.length}</span>
               )}
             </h2>
 
@@ -328,9 +327,11 @@ export function VenueDetailPage({ getVenueMatches, venueRepository }: Props) {
             ) : (
               <>
                 {dateKeys.map((dateKey) => (
-                  <div key={dateKey} className="page-section">
-                    <p className="section-heading">{formatDateHeading(dateKey)}</p>
-                    <div className="data-list">
+                  <div key={dateKey} style={{ marginBottom: "1.5rem" }}>
+                    <div className="venue-date-heading">
+                      <span className="venue-date-heading__text">{formatDateHeading(dateKey)}</span>
+                    </div>
+                    <div className="data-list" style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                       {byDate.get(dateKey)!.map((m) => (
                         <MatchRow key={m.match_id} match={m} />
                       ))}

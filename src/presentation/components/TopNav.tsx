@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "@presentation/context/AuthContext";
+import { NavLink } from "react-router-dom";
 
 type NavChildLink = { label: string; href: string };
 type NavChildSep  = { sep: true; label: string };
@@ -25,79 +24,12 @@ const BASE_NAV_ITEMS: NavItem[] = [
   },
 ];
 
-const ADMIN_NAV_ITEM: NavItem = {
-  label: "Admin",
-  children: [
-    { sep: true, label: "Cadastros" },
-    { label: "Cidades",     href: "/admin/cidades" },
-    { label: "Locais",      href: "/admin/locais" },
-    { label: "Clubes",      href: "/admin/clubes" },
-    { label: "Times",       href: "/admin/times" },
-    { label: "Ligas",       href: "/admin/ligas" },
-    { label: "Campeonatos", href: "/admin/campeonatos" },
-    { sep: true, label: "Pessoas" },
-    { label: "Atletas",        href: "/admin/atletas" },
-    { label: "Árbitros",       href: "/admin/arbitros" },
-    { label: "Dirigentes",     href: "/admin/dirigentes" },
-    { label: "Admins de Liga", href: "/admin/league-admins" },
-    { label: "Usuários",       href: "/admin/usuarios" },
-    { sep: true, label: "Operações" },
-    { label: "Inscrições",          href: "/admin/inscricoes" },
-    { label: "Importações",         href: "/admin/importar" },
-    { label: "⏳ Pendências Vínculo", href: "/admin/pendencias-vinculo" },
-  ],
-};
-
 export function TopNav() {
-  const { user, isAdmin, isAthlete, isDirigente, isLeagueAdmin, leagueAdminProfiles, logout } = useAuth();
+  const navItems = BASE_NAV_ITEMS;
 
-  const initials = user
-    ? (user.name
-        ? user.name.split(" ").slice(0, 2).map((s) => s[0]).join("").toUpperCase()
-        : user.email.slice(0, 2).toUpperCase())
-    : "";
-  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 640);
-
-  // Build "Minha Conta" menu dynamically — stacks items based on active roles
-  const userMenuChildren: { label: string; href: string }[] = [
-    ...(isAthlete ? [
-      { label: "Meu Perfil",        href: "/meu-perfil" },
-      { label: "Solicitar Vínculo", href: "/solicitar-vinculo" },
-    ] : []),
-    ...(isDirigente ? [
-      { label: "Meu Time", href: "/meu-time" },
-    ] : []),
-    ...(isLeagueAdmin ? [
-      { label: "⏳ Pendências Vínculo", href: "/admin/pendencias-vinculo" },
-      ...leagueAdminProfiles
-        .filter(p => p.is_active)
-        .map(p => ({
-          label: leagueAdminProfiles.filter(x => x.is_active).length === 1 ? "Clubes Filiados" : `Clubes (Liga ${p.league_id.slice(-4)})`,
-          href: `/admin/ligas/${p.league_id}/clubes`,
-        })),
-      { label: "Campeonatos",           href: "/admin/campeonatos" },
-      { label: "Times",                 href: "/admin/times" },
-      { label: "Atletas",               href: "/admin/atletas" },
-      { label: "Inscrições",            href: "/admin/inscricoes" },
-      { label: "Partidas",              href: "/admin/partidas" },
-    ] : []),
-  ];
-  const userMenuItem: NavItem | null =
-    userMenuChildren.length > 0
-      ? { label: "Minha Conta", children: userMenuChildren }
-      : null;
-
-  const isLoggedIn = isAdmin || isAthlete || isDirigente || isLeagueAdmin;
-
-  const navItems = isAdmin
-    ? [...BASE_NAV_ITEMS, ADMIN_NAV_ITEM]
-    : [
-        ...BASE_NAV_ITEMS,
-        ...(userMenuItem ? [userMenuItem] : []),
-      ];
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
@@ -178,14 +110,14 @@ export function TopNav() {
 
         {/* Auth button — desktop */}
         {!isMobile && (
-          isLoggedIn
-            ? <div style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "0.5rem" }}>
-                <div style={S.avatar} title={user?.name ?? user?.email}>{initials}</div>
-                <button style={S.authBtn} onClick={() => { logout(); navigate("/"); }}>Sair</button>
-              </div>
-            : <div style={{ display: "flex", gap: 8 }}>
-                <NavLink to="/login" style={S.authBtn} onClick={closeAll}>Entrar</NavLink>
-              </div>
+          <a
+            href="https://minhaliga.net/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={S.authBtn}
+          >
+            Entrar
+          </a>
         )}
 
         {/* Hamburger */}
@@ -205,17 +137,6 @@ export function TopNav() {
       {/* Mobile menu */}
       {menuOpen && (
         <div style={S.mobileMenu}>
-          {/* User identity strip */}
-          {isLoggedIn && user && (
-            <div style={S.mobileUserStrip}>
-              <div style={S.avatarSm}>{initials}</div>
-              <div style={{ display: "flex", flexDirection: "column" as const, gap: "1px" }}>
-                {user.name && <span style={S.mobileUserName}>{user.name}</span>}
-                <span style={S.mobileUserEmail}>{user.email}</span>
-              </div>
-            </div>
-          )}
-
           {navItems.map((item) =>
             item.children ? (
               <div key={item.label}>
@@ -255,10 +176,15 @@ export function TopNav() {
             )
           )}
           {/* Auth button — mobile */}
-          {isLoggedIn
-            ? <button style={{ ...S.mobileLink, background: "none", border: "none", cursor: "pointer", textAlign: "left" as const }} onClick={() => { logout(); navigate("/"); closeAll(); }}>Sair</button>
-            : <NavLink to="/login" style={S.mobileLink} onClick={closeAll}>Entrar</NavLink>
-          }
+          <a
+            href="https://minhaliga.net/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={S.mobileLink}
+            onClick={closeAll}
+          >
+            Entrar
+          </a>
         </div>
       )}
     </nav>

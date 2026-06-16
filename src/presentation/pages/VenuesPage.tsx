@@ -79,8 +79,7 @@ export function VenuesPage({ listVenues, leagueId }: VenuesPageProps) {
         <div className="hero__bar" />
         <div className="hero__inner">
           <Link to="/" className="back-link">← Página Principal</Link>
-          <span className="hero__eyebrow">🏟 Infraestrutura Esportiva</span>
-          <h1 className="hero__title">Locais</h1>
+<h1 className="hero__title">Locais</h1>
           <p className="hero__sub">
             Estádios, campos e ginásios cadastrados na plataforma.
           </p>

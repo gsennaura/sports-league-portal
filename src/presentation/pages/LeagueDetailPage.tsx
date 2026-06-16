@@ -11,7 +11,7 @@ import { MatchesByDay, SectionHeader } from "@presentation/components/MatchesByD
 import type { League } from "@domain/entities/League";
 import type { Championship } from "@domain/entities/Championship";
 import type { LeagueRepository } from "@domain/repositories/LeagueRepository";
-import { useAuth } from "@presentation/context/AuthContext";
+
 import { API_BASE } from "@infrastructure/apiBase";
 
 const _RAW_BASE = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main";
@@ -150,7 +150,7 @@ function SeriesCard({ series }: { series: ChampSeries }) {
 
 export function LeagueDetailPage({ getLeague, listChampionships, getUpcomingMatches, getRecentMatches, leagueRepository }: LeagueDetailPageProps) {
   const { id } = useParams<{ id: string }>();
-  const { isAdmin } = useAuth();
+  const isAdmin = false;
   const [league, setLeague] = useState<League | null>(null);
   const [championships, setChampionships] = useState<Championship[]>([]);
   const [clubs, setClubs] = useState<ClubInLeague[]>([]);

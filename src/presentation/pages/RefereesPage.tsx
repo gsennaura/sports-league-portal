@@ -82,8 +82,7 @@ export function RefereesPage({ listReferees, leagueId }: RefereesPageProps) {
         <div className="hero__bar" />
         <div className="hero__inner">
           <Link to="/" className="back-link">← Página Principal</Link>
-          <span className="hero__eyebrow">⚖️ Gestão Esportiva</span>
-          <h1 className="hero__title">Árbitros</h1>
+<h1 className="hero__title">Árbitros</h1>
           <p className="hero__sub">
             Conheça os árbitros cadastrados. Use a busca para filtrar pelo nome.
           </p>

@@ -8,7 +8,7 @@ import type { GetEditionTopScorers } from "@application/use_cases/GetEditionTopS
 import type { ChampionshipDetail, GroupDetail, MatchEntry, SiblingEdition, StandingEntry, TopScorerItem } from "@domain/entities/ChampionshipDetail";
 import { useChampionshipDetail } from "@presentation/hooks/useChampionshipDetail";
 import { PageLoader } from "@presentation/components/PageLoader";
-import { useAuth } from "@presentation/context/AuthContext";
+
 
 const NO_SHIELD = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main/clubs/no_club_shield.png";
 
@@ -218,7 +218,7 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
   const { detail: fetchedDetail, loading, error, refetch } = useChampionshipDetail(getChampionshipDetail, id!, editionId);
   const [detail, setDetail] = useState<ChampionshipDetail | null>(null);
   useEffect(() => { if (fetchedDetail) setDetail(fetchedDetail); }, [fetchedDetail]);
-  const { isAdmin } = useAuth();
+  const isAdmin = false;
   const [phaseIdx, setPhaseIdx] = useState(0);
   const [phaseLoading, setPhaseLoading] = useState(false);
   const [scorers, setScorers] = useState<TopScorerItem[] | null>(null);

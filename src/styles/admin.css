@@ -484,3 +484,84 @@
   cursor: pointer;
   accent-color: var(--c-action);
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   CONTEXTO BRANCO — overrides para admin dentro de page-card
+   Usa !important para sobrepor inline styles dos S objects legados
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Tabelas ──────────────────────────────────────────────────────── */
+
+.page-card .table-wrap {
+  border-color: #dde4f5;
+}
+
+.page-card .data-table th {
+  background: #eef2ff !important;
+  color: #475569 !important;
+  border-bottom: 2px solid #dde4f5 !important;
+}
+
+.page-card .data-table td {
+  color: #1e293b !important;
+  border-bottom-color: #e8eeff !important;
+}
+
+.page-card .data-table td.muted,
+.page-card .td-muted {
+  color: #64748b !important;
+}
+
+.page-card .data-table tr:hover td {
+  background: #f0f4ff !important;
+}
+
+/* ── Textos genéricos no page-container ──────────────────────────── */
+
+.page-card .page-container {
+  color: #1e293b;
+}
+
+.page-card .page-container .muted {
+  color: #475569 !important;
+}
+
+.page-card .page-container .section-heading {
+  color: #18265b;
+}
+
+.page-card .page-container .page-subtitle {
+  color: #475569;
+}
+
+/* ── Back link ───────────────────────────────────────────────────── */
+
+.page-card .back-link {
+  color: #18265b;
+  font-weight: 600;
+}
+
+/* ── Paginação e seletores inline ────────────────────────────────── */
+
+.page-card .page-container select {
+  background: #ffffff !important;
+  border: 1.5px solid #c7d2fe !important;
+  color: #1e293b !important;
+}
+
+/* ── row-link no contexto branco ─────────────────────────────────── */
+
+.page-card .row-link {
+  color: #18265b;
+}
+
+/* ── Conteúdo hero — mantém branco para legibilidade no fundo escuro */
+
+.page-card .hero .page-title,
+.page-card .hero h1 {
+  color: var(--c-text) !important;
+}
+
+.page-card .hero .page-subtitle {
+  color: var(--c-text-muted) !important;
+}

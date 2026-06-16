@@ -36,6 +36,11 @@
   min-height: calc(100vh - 8rem);
 }
 
+/* AdminLayout em App.tsx — mais largo para tabelas de gestão */
+.page-card--admin {
+  max-width: 1280px;
+}
+
 /* ── Contexto branco: override de cores para acessibilidade ──────── */
 /* Garante que conteúdo no fundo branco tenha contraste WCAG AA       */
 .page-card .page-container {

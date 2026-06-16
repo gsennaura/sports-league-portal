@@ -11,7 +11,7 @@ import type { SearchAthletes } from "@application/use_cases/SearchAthletes";
 import type { Team } from "@domain/entities/Team";
 import type { TeamMatch } from "@domain/entities/TeamMatch";
 import type { AthleteTeamHistory, Athlete, TeamAthleteStat } from "@domain/entities/Athlete";
-import { useAuth } from "@presentation/context/AuthContext";
+
 
 const NO_SHIELD = "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main/clubs/no_club_shield.png";
 
@@ -82,7 +82,7 @@ function StatBadge({ label, value, bg, color }: { label: string; value: number; 
 export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetail, getTeamAthletes, getTeamAthleteStats, addAthleteToTeam, searchAthletes }: TeamDetailPageProps) {
   const { slug } = useParams<{ slug: string }>();
   const id = slug?.slice(-36) ?? "";
-  const { isAdmin } = useAuth();
+  const isAdmin = false;
   const navigate = useNavigate();
   const [team, setTeam] = useState<Team | null>(null);
   const [matches, setMatches] = useState<TeamMatch[]>([]);
@@ -177,16 +177,16 @@ export function TeamDetailPage({ getTeamMatches, getTeamMatchYears, getTeamDetai
           {loading && !team && <PageLoader />}
           {team && (
             <>
-              <div className="hero__row">
+              <div className="hero__row" style={{ justifyContent: "flex-start" }}>
                 <div style={{ position: "relative", flexShrink: 0 }}>
                   <Shield url={team.club_logo_url} size={72} />
                 </div>
-                <div>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <h1 className="hero__title">{team.name}</h1>
-                  <p className="muted" style={{ marginTop: "0.3rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" as const }}>
+                  <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" as const, marginTop: "0.3rem" }}>
                     {team.sport_name && <span className="badge">{team.sport_name}</span>}
                     {team.category && <span className="badge badge-info">{categoryLabel[team.category] ?? team.category}</span>}
-                  </p>
+                  </div>
                 </div>
               </div>
               <p className="hero__sub">
