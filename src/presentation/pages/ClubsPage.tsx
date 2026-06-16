@@ -177,8 +177,7 @@ export function ClubsPage({ listClubs }: ClubsPageProps) {
         <div className="hero__accent" />
         <div className="hero__inner">
           <Link to="/" className="back-link">← Página Principal</Link>
-          <span className="hero__eyebrow">⚽ Gestão Esportiva</span>
-          <h1 className="page-title">Clubes</h1>
+<h1 className="page-title">Clubes</h1>
           <p className="hero__sub">Conheça os clubes cadastrados.</p>
         </div>
       </header>

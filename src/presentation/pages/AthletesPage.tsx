@@ -82,8 +82,7 @@ export function AthletesPage({ searchAthletes, getRandomAthletes }: AthletesPage
         <div className="hero__bar" />
         <div className="hero__inner">
           <Link to="/" className="back-link">← Página Principal</Link>
-          <span className="hero__eyebrow">🏃 Gestão Esportiva</span>
-          <h1 className="hero__title">Atletas</h1>
+<h1 className="hero__title">Atletas</h1>
           <p className="hero__sub">
             Busque atletas pelo nome para ver seu perfil e histórico de carreira.
           </p>

@@ -244,3 +244,37 @@ textarea.form-input {
     justify-content: center;
   }
 }
+
+/* ── Form inputs em contexto branco (page-card) ─────────────────── */
+
+.page-card .form-input,
+.page-card .form-select {
+  background: #ffffff;
+  border: 1.5px solid #c7d2fe;
+  color: #1e293b;
+}
+
+.page-card .form-input:focus,
+.page-card .form-select:focus {
+  border-color: #18265b;
+  box-shadow: 0 0 0 3px rgba(24, 38, 91, 0.1);
+}
+
+.page-card .form-input::placeholder {
+  color: #94a3b8;
+}
+
+.page-card .form-input:disabled,
+.page-card .form-select:disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+.page-card .form-field > label,
+.page-card .form-fieldset legend {
+  color: #334155;
+}
+
+.page-card .form-field-error {
+  color: #b91c1c;
+}

@@ -11,7 +11,7 @@ import type { Team } from "@domain/entities/Team";
 import type { ClubMatch } from "@domain/entities/ClubMatch";
 import type { ClubTitle } from "@domain/entities/ClubTitle";
 import type { ClubRepository } from "@domain/repositories/ClubRepository";
-import { useAuth } from "@presentation/context/AuthContext";
+
 
 interface ClubDetailPageProps {
   getClub: GetClub;
@@ -154,7 +154,7 @@ function MatchRow({ match, teamIds }: { match: ClubMatch; teamIds: Set<string> }
 export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClubTeams, clubRepository }: ClubDetailPageProps) {
   const { slug } = useParams<{ slug: string }>();
   const id = slug?.slice(-36) ?? "";
-  const { isAdmin } = useAuth();
+  const isAdmin = false;
   const [club, setClub] = useState<Club | null>(null);
   const [teams, setTeams] = useState<Team[]>([]);
   const [matches, setMatches] = useState<ClubMatch[]>([]);
@@ -333,7 +333,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
         {!loading && club && (
           <div>
             {/* ─── Tab bar ─────────────────────────────────────── */}
-            <nav className="tab-bar">
+            <nav className="tab-bar tab-bar--pills">
               <button
                 style={activeTab === "times" ? S.tabActive : S.tab}
                 onClick={() => handleTabChange("times")}
@@ -363,7 +363,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
 
             {/* ─── Tab: Times ──────────────────────────────────── */}
             {activeTab === "times" && (
-              <div>
+              <div className="tab-panel">
                 {teams.length === 0 ? (
                   <p className="muted">Nenhum time cadastrado.</p>
                 ) : (
@@ -399,7 +399,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
 
             {/* ─── Tab: Títulos ────────────────────────────────── */}
             {activeTab === "titulos" && (
-              <div>
+              <div className="tab-panel">
                 {!titlesLoaded ? (
                   <PageLoader />
                 ) : titles.length === 0 ? (
@@ -431,7 +431,7 @@ export function ClubDetailPage({ getClub, getClubMatches, getClubTitles, getClub
 
             {/* ─── Tab: Últimas Partidas ───────────────────────── */}
             {activeTab === "partidas" && (
-              <div>
+              <div className="tab-panel">
                 {!matchesLoaded ? (
                   <PageLoader />
                 ) : matches.length === 0 ? (
@@ -789,33 +789,32 @@ const S: Record<string, React.CSSProperties> = {
     marginBottom: "2rem",
   },
   tab: {
-    background: "none",
-    border: "none",
-    borderBottom: "2px solid transparent",
-    padding: "0.65rem 1.25rem",
-    fontSize: "0.85rem",
+    background: "#f1f5f9",
+    border: "1.5px solid #e2e8f0",
+    borderRadius: "2rem",
+    padding: "0.5rem 1.25rem",
+    fontSize: "0.88rem",
     fontWeight: 600,
     color: "#475569",
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.4rem",
-    marginBottom: "-2px",
+    gap: "0.45rem",
+    transition: "all 0.15s",
     letterSpacing: "0.01em",
   },
   tabActive: {
-    background: "none",
-    border: "none",
-    borderBottom: "2px solid #18265b",
-    padding: "0.65rem 1.25rem",
-    fontSize: "0.85rem",
+    background: "#18265b",
+    border: "1.5px solid #18265b",
+    borderRadius: "2rem",
+    padding: "0.5rem 1.25rem",
+    fontSize: "0.88rem",
     fontWeight: 700,
-    color: "#18265b",
+    color: "#ffffff",
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.4rem",
-    marginBottom: "-2px",
+    gap: "0.45rem",
     letterSpacing: "0.01em",
   },
   tabBadge: {

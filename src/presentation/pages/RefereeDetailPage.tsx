@@ -6,7 +6,7 @@ import type { GetRefereeMatches } from "@application/use_cases/GetRefereeMatches
 import type { Referee } from "@domain/entities/Referee";
 import type { RefereeMatch } from "@domain/entities/RefereeMatch";
 import { ROLE_LABELS } from "@domain/entities/MatchReferee";
-import { useAuth } from "@presentation/context/AuthContext";
+
 
 const NO_PHOTO =
   "https://raw.githubusercontent.com/gsennaura/sports-manager-assets/refs/heads/main/referees/no_referee_photo.png";
@@ -33,7 +33,7 @@ function formatScore(m: RefereeMatch): string {
 
 export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: RefereeDetailPageProps) {
   const { id } = useParams<{ id: string }>();
-  const { isAdmin } = useAuth();
+  const isAdmin = false;
   const [referee, setReferee] = useState<Referee | null>(null);
   const [matches, setMatches] = useState<RefereeMatch[]>([]);
   const [loading, setLoading] = useState(true);
@@ -109,8 +109,7 @@ export function RefereeDetailPage({ getRefereeDetail, getRefereeMatches }: Refer
               className="ref-profile__photo"
             />
             <div className="ref-profile__info">
-              <span className="hero__eyebrow">⚖️ Árbitro</span>
-              <h1 className="page-title">{referee.name}</h1>
+<h1 className="page-title">{referee.name}</h1>
               {referee.nickname && (
                 <p className="hero__sub" style={{ fontStyle: "italic" }}>"{referee.nickname}"</p>
               )}

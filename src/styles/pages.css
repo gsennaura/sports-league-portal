@@ -1802,9 +1802,9 @@
 /* ─── Match Detail Page ──────────────────────────────────────────── */
 
 .match-header {
-  background: var(--c-brand);
-  border-bottom: 1px solid var(--c-border);
-  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #0e1547 0%, #18265b 60%, #1a2f6e 100%);
+  border-bottom: 3px solid rgba(203,166,247,0.35);
+  padding: 1.25rem 2rem 1.5rem;
   position: relative;
   overflow: hidden;
 }
@@ -1813,32 +1813,122 @@
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--c-action), var(--c-link));
+  height: 4px;
+  background: linear-gradient(90deg, var(--c-action), var(--c-link), var(--c-action));
+  background-size: 200% 100%;
 }
 
 .match-header__nav {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Back button — pill with arrow */
+.match-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.10);
+  border: 1.5px solid rgba(255,255,255,0.22);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.35rem 0.9rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.match-back-btn:hover {
+  background: rgba(255,255,255,0.20);
+  border-color: rgba(255,255,255,0.45);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.match-back-btn__arrow {
+  font-size: 0.95rem;
+  line-height: 1;
 }
 
 .match-header__context {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
 }
 
+/* Championship name — large and prominent */
 .match-header__champ {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--c-action);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
 }
 
-.match-header__phase {
+.match-header__champ span.champ-year {
+  font-weight: 500;
+  font-size: 0.9em;
+  opacity: 0.8;
+  margin-left: 0.35rem;
+}
+
+/* Phase + round as pill badges side by side */
+.match-header__badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.match-header__badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(203,166,247,0.18);
+  border: 1.5px solid rgba(203,166,247,0.45);
+  color: #e2d9f3;
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.match-header__badge--round {
+  background: rgba(137,180,250,0.18);
+  border-color: rgba(137,180,250,0.45);
+  color: #bdd5fd;
+}
+
+/* Match date — large pill below the badges */
+.match-header__date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 0.5rem 1.4rem;
+  border-radius: 2rem;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  margin-top: 0.15rem;
+}
+
+.match-header__date-icon {
+  font-size: 1.05rem;
+  opacity: 0.85;
 }
 
 /* Section panels */
@@ -2355,24 +2445,25 @@
 }
 
 .venue-page-btn {
-  background: var(--c-brand);
+  background: #18265b;
   color: #ffffff;
-  border: 1px solid var(--c-border);
-  border-radius: 8px;
-  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.45rem 1.25rem;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   font-family: inherit;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, opacity 0.15s;
+  letter-spacing: 0.02em;
 }
 
 .venue-page-btn:hover:not(:disabled) {
-  background: #1a2e70;
+  background: #1a2f6e;
 }
 
 .venue-page-btn:disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: default;
 }
 
@@ -2464,4 +2555,207 @@
 .card .muted,
 .data-list .muted {
   color: rgba(255, 255, 255, 0.75);
+}
+
+.page-card .card .muted,
+.page-card .data-list .muted {
+  color: #64748b;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   TAB BAR — pills variant (ClubDetailPage, TeamDetailPage)
+   ══════════════════════════════════════════════════════════════════ */
+
+.tab-bar.tab-bar--pills {
+  border-bottom: none;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 0.25rem 0;
+  flex-wrap: wrap;
+}
+
+.tab-bar.tab-bar--pills .badge {
+  background: rgba(0, 0, 0, 0.12);
+  color: inherit;
+  border-radius: 1rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.7rem;
+}
+
+/* ── Tab panel — card de conteúdo da aba ───────────────────────── */
+
+.tab-panel {
+  background: #f8faff;
+  border: 1.5px solid #e0e8ff;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   VENUE DETAIL — white context overrides
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Stats strip */
+.page-card .venue-stats-strip {
+  background: #f0f4ff;
+  border-color: #c7d2fe;
+}
+
+.page-card .venue-stats-strip__value {
+  color: #18265b;
+}
+
+.page-card .venue-stats-strip__label {
+  color: #475569;
+}
+
+.page-card .venue-stats-strip__divider {
+  background: #c7d2fe;
+}
+
+/* Match card */
+.page-card .card {
+  background: #ffffff;
+  border-color: #e0e8ff;
+}
+
+.page-card .card:hover {
+  border-color: #a5b4fc;
+  box-shadow: 0 2px 8px rgba(24, 38, 91, 0.08);
+}
+
+.page-card .venue-match-card {
+  border-bottom-color: #eef2ff;
+}
+
+.page-card .venue-match-date-col .date-label {
+  color: #18265b;
+  font-size: 0.82rem;
+}
+
+.page-card .venue-match-date-col .time-label {
+  color: #64748b;
+}
+
+.page-card .venue-match-champ-col .champ-label {
+  color: #334155;
+  font-weight: 600;
+}
+
+.page-card .venue-match-champ-col .phase-label {
+  color: #64748b;
+}
+
+.page-card .venue-match-score {
+  color: #16a34a;
+  font-weight: 800;
+}
+
+.page-card .team-name {
+  color: #1e293b;
+}
+
+/* ── Championship pills (venue page) ───────────────────────────── */
+
+.champ-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.champ-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #f0f4ff;
+  border: 1.5px solid #c7d2fe;
+  border-radius: 2rem;
+  padding: 0.45rem 1rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.champ-pill:hover {
+  background: #e8eeff;
+  border-color: #a5b4fc;
+}
+
+.champ-pill__name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #18265b;
+  line-height: 1.2;
+}
+
+.champ-pill__count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #18265b;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 0.1rem 0.45rem;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+/* ── Date group heading (venue match groups) ────────────────────── */
+
+.venue-date-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  background: #eef2ff;
+  border-left: 4px solid #18265b;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 0.6rem;
+}
+
+.venue-date-heading__text {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #18265b;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HERO CONTEXT — text & link color fixes
+   (hero has dark blue bg; these override page-card light overrides)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* back-link inside hero must be white, not brand-blue on brand-blue */
+.hero .back-link,
+.page-card .hero .back-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 600;
+}
+.hero .back-link:hover,
+.page-card .hero .back-link:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
+
+/* muted inside hero should be soft white, not #45475a on dark blue */
+.hero .muted {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* badge inside hero: translucent white pill */
+.hero .badge {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+}
+
+/* venue hero title: slightly smaller scale than championship names */
+.venue-hero-info .hero__title {
+  font-size: clamp(1.3rem, 3vw, 1.85rem);
+  line-height: 1.2;
+}
+
+/* venue hero sub-info text (nickname, badges strip) */
+.venue-hero-info .hero__sub {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
 }
