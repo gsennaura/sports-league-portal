@@ -148,7 +148,7 @@ export class ApiChampionshipRepository implements ChampionshipRepository {
 
     if (!phasesResp.ok) throw new Error(`Falha ao buscar fases: ${phasesResp.status}`);
 
-    const phases = await phasesResp.json() as Array<{ id: string; name: string; phase_type: string; order: number; status: string }>;
+    const phases = await phasesResp.json() as Array<{ id: string; name: string; phase_type: string; order: number; status: string; is_cross_group: boolean }>;
 
     // Build standings index + pre-aggregate overall standings
     type ApiStandingEntry = {
@@ -225,7 +225,7 @@ export class ApiChampionshipRepository implements ChampionshipRepository {
     const activePhaseLogoMap = new Map<string, string | null>();
     const phasesWithGroups: PhaseDetail[] = await Promise.all(
       phases.map(async (phase) => {
-        const base = { id: phase.id, name: phase.name, phase_type: phase.phase_type, phase_order: phase.order ?? 0, status: phase.status ?? "em_andamento" };
+        const base = { id: phase.id, name: phase.name, phase_type: phase.phase_type, phase_order: phase.order ?? 0, status: phase.status ?? "em_andamento", is_cross_group: phase.is_cross_group ?? false };
         if (activePhase?.id !== phase.id) {
           return { ...base, groups: [], groups_loaded: false };
         }

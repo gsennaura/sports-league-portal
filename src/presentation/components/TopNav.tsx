@@ -110,14 +110,12 @@ export function TopNav() {
 
         {/* Auth button — desktop */}
         {!isMobile && (
-          <a
-            href="https://minhaliga.net/login"
-            target="_blank"
-            rel="noopener noreferrer"
+          <NavLink
+            to="/login"
             style={S.authBtn}
           >
             Entrar
-          </a>
+          </NavLink>
         )}
 
         {/* Hamburger */}
@@ -176,15 +174,13 @@ export function TopNav() {
             )
           )}
           {/* Auth button — mobile */}
-          <a
-            href="https://minhaliga.net/login"
-            target="_blank"
-            rel="noopener noreferrer"
+          <NavLink
+            to="/login"
             style={S.mobileLink}
             onClick={closeAll}
           >
             Entrar
-          </a>
+          </NavLink>
         </div>
       )}
     </nav>

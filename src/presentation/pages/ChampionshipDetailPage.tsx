@@ -641,13 +641,15 @@ export function ChampionshipDetailPage({ getChampionshipDetail, updateChampionsh
               <div className="groups-grid">
                 {phaseLoading
                   ? <PageLoader />
-                  : currentPhase.phase_type === "knockout"
-                    ? currentPhase.groups.map((group) => (
-                        <KnockoutGroupCard key={group.id} group={group} />
-                      ))
-                    : currentPhase.groups.map((group) => (
-                        <GroupCard key={group.id} group={group} />
-                      ))}
+                  : currentPhase.is_cross_group
+                    ? <CrossGroupPhaseCard phase={currentPhase} />
+                    : currentPhase.phase_type === "knockout"
+                      ? currentPhase.groups.map((group) => (
+                          <KnockoutGroupCard key={group.id} group={group} />
+                        ))
+                      : currentPhase.groups.map((group) => (
+                          <GroupCard key={group.id} group={group} />
+                        ))}
               </div>
             </>
           )}
@@ -694,6 +696,46 @@ function Palmares({ siblings, currentYear }: { siblings: SiblingEdition[]; curre
         })}
       </div>
     </section>
+  );
+}
+
+function CrossGroupPhaseCard({ phase }: { phase: import("@domain/entities/ChampionshipDetail").PhaseDetail }) {
+  const allTeams = new Map<string, import("@domain/entities/ChampionshipDetail").GroupDetail["teams"][number]>();
+  const matchMap = new Map<string, import("@domain/entities/ChampionshipDetail").MatchEntry>();
+  for (const group of phase.groups) {
+    for (const t of group.teams) allTeams.set(t.id, t);
+    for (const m of group.matches) matchMap.set(m.id, m);
+  }
+  const allMatches = [...matchMap.values()];
+  const groupsWithStandings = phase.groups.filter((g) => g.standings.length > 0);
+
+  return (
+    <div style={{ width: "100%" }}>
+      {/* Todos os jogos da fase agrupados por rodada */}
+      <div className="group-card">
+        <div className="group-card__header">
+          <h3 className="group-card__title">Jogos</h3>
+          <span className="knockout-badge" style={{ background: "rgba(137,180,250,0.15)", color: "#89b4fa", borderColor: "#2a3a6a" }}>
+            Formato cruzado
+          </span>
+        </div>
+        <MatchRoundList matches={allMatches} teams={[...allTeams.values()]} />
+      </div>
+
+      {/* Classificação por grupo lado a lado */}
+      {groupsWithStandings.length > 0 && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "1rem", marginTop: "1rem" }}>
+          {groupsWithStandings.map((group) => (
+            <div key={group.id} className="group-card">
+              <div className="group-card__header">
+                <h3 className="group-card__title">{group.name}</h3>
+              </div>
+              <StandingsTable standings={group.standings} teams={[...allTeams.values()]} />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
