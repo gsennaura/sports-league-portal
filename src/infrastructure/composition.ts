@@ -165,26 +165,54 @@ export { refereeRepository };
 
 import { ApiPartnerRepository } from "./repositories/ApiPartnerRepository";
 import { ListPartners } from "@application/use_cases/ListPartners";
+import { CreatePartner } from "@application/use_cases/CreatePartner";
+import { UpdatePartner } from "@application/use_cases/UpdatePartner";
+import { DeletePartner } from "@application/use_cases/DeletePartner";
 
 const partnerRepository = new ApiPartnerRepository(API_BASE);
 export const listPartners = new ListPartners(partnerRepository);
+export const createPartner = new CreatePartner(partnerRepository);
+export const updatePartner = new UpdatePartner(partnerRepository);
+export const deletePartner = new DeletePartner(partnerRepository);
+export { partnerRepository };
 
 import { ApiNewsRepository } from "./repositories/ApiNewsRepository";
 import { ListNews } from "@application/use_cases/ListNews";
 import { GetNewsDetail } from "@application/use_cases/GetNewsDetail";
+import { CreateNews } from "@application/use_cases/CreateNews";
+import { UpdateNews } from "@application/use_cases/UpdateNews";
+import { DeleteNews } from "@application/use_cases/DeleteNews";
 
 const newsRepository = new ApiNewsRepository(API_BASE);
 export const listNews = new ListNews(newsRepository);
 export const getNewsDetail = new GetNewsDetail(newsRepository);
+export const createNews = new CreateNews(newsRepository);
+export const updateNews = new UpdateNews(newsRepository);
+export const deleteNews = new DeleteNews(newsRepository);
+export { newsRepository };
 
 import { ApiDocumentRepository } from "./repositories/ApiDocumentRepository";
 import { ListDocuments } from "@application/use_cases/ListDocuments";
+import { CreateDocument } from "@application/use_cases/CreateDocument";
+import { UpdateDocument } from "@application/use_cases/UpdateDocument";
+import { DeleteDocument } from "@application/use_cases/DeleteDocument";
 
 const documentRepository = new ApiDocumentRepository(API_BASE);
 export const listDocuments = new ListDocuments(documentRepository);
+export const createDocument = new CreateDocument(documentRepository);
+export const updateDocument = new UpdateDocument(documentRepository);
+export const deleteDocument = new DeleteDocument(documentRepository);
+export { documentRepository };
 
 import { ApiEmendaRepository } from "./repositories/ApiEmendaRepository";
 import { ListEmendas } from "@application/use_cases/ListEmendas";
+import { CreateEmenda } from "@application/use_cases/CreateEmenda";
+import { UpdateEmenda } from "@application/use_cases/UpdateEmenda";
+import { DeleteEmenda } from "@application/use_cases/DeleteEmenda";
 
 const emendaRepository = new ApiEmendaRepository(API_BASE);
 export const listEmendas = new ListEmendas(emendaRepository);
+export const createEmenda = new CreateEmenda(emendaRepository);
+export const updateEmenda = new UpdateEmenda(emendaRepository);
+export const deleteEmenda = new DeleteEmenda(emendaRepository);
+export { emendaRepository };

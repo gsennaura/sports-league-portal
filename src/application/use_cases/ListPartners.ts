@@ -3,8 +3,7 @@ import type { PartnerRepository } from "@domain/repositories/PartnerRepository";
 
 export class ListPartners {
   constructor(private readonly repository: PartnerRepository) {}
-
-  execute(leagueId?: string): Promise<Partner[]> {
-    return this.repository.listAll(leagueId);
+  execute(leagueId?: string, activeOnly = true): Promise<Partner[]> {
+    return this.repository.listAll(leagueId, activeOnly);
   }
 }

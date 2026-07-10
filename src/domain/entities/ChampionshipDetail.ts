@@ -55,6 +55,7 @@ export interface PhaseDetail {
   phase_type: string;
   phase_order: number;
   status: string;
+  is_cross_group: boolean;
   groups: GroupDetail[];
   groups_loaded: boolean;
 }
